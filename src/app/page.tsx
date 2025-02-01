@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Grid, Typography, Card, CardContent, Chip, IconButton, Stack, Avatar } from '@mui/material';
-import { GitHub, LinkedIn, Email, Code, Storage, Cloud, Psychology, Speed, Security, Circle } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, Code, Storage, Cloud, Psychology, Speed, Security } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Typewriter from '@/components/Typewriter';
@@ -305,7 +305,7 @@ export default function Home() {
                         {experiences[0].location} • {experiences[0].type}
                       </Typography>
                       <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                        • C# ve .NET Core kullanarak API'ler geliştirdim<br />
+                        • C# ve .NET Core kullanarak API&apos;ler geliştirdim<br />
                         • JavaScript ve DevExtreme ile kullanıcı arayüzleri oluşturdum<br />
                         • Ödeme kolaylaştırıcı entegrasyonu, kampanya modülü ve doğrudan operatör faturalandırma (DCB) modülü gibi çeşitli projelerde çalıştım<br />
                         • MSSQL ile veritabanı yönetimi yaptım<br />
@@ -364,12 +364,12 @@ export default function Home() {
                         {experiences[1].location} • {experiences[1].type}
                       </Typography>
                       <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                        • Aselsan'da dış kaynaklı Kıdemli Yazılım Danışmanı olarak çalıştım<br />
+                        • Aselsan&apos;da dış kaynaklı Kıdemli Yazılım Danışmanı olarak çalıştım<br />
                         • Java 8+, Spring ve Hibernate kullanarak mikroservisler geliştirdim<br />
                         • Kafka kullanarak servisler arası event-driven iletişimi uyguladım<br />
                         • React kullanarak single-page uygulamalar geliştirdim<br />
                         • PostgreSQL ile veritabanı yönetimi yaptım<br />
-                        • Servisleri Kubernetes'e deploy ettim
+                        • Servisleri Kubernetes&apos;e deploy ettim
                       </Typography>
                       <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
                         <Chip size="small" label="Java" variant="outlined" />
@@ -428,7 +428,7 @@ export default function Home() {
                         • Java, Spring Boot ve Hibernate kullanarak mikroservisler geliştirdim<br />
                         • Camunda ve BPMN 2.0 notasyonu kullanarak İş Yönetimi Mikroservisinden sorumlu oldum<br />
                         • Oracle DB, MongoDB ve Redis ile veri depolama ve önbellekleme yaptım<br />
-                        • Jenkins kullanarak mikroservisleri OpenShift'e deploy ettim
+                        • Jenkins kullanarak mikroservisleri OpenShift&apos;e deploy ettim
                       </Typography>
                       <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
                         <Chip size="small" label="Java" variant="outlined" />
@@ -484,11 +484,11 @@ export default function Home() {
                       </Typography>
                       <Typography variant="body1" sx={{ color: 'text.secondary' }}>
                         • Java ve Spring Boot kullanarak mikroservisler geliştirdim<br />
-                        • Şikayetvar'ın altyapısını yeniden geliştirme projesine katıldım<br />
+                        • Şikayetvar&apos;ın altyapısını yeniden geliştirme projesine katıldım<br />
                         • Elasticsearch kullanarak otomatik tamamlama mikroservisi geliştirdim<br />
                         • RESTful iletişim ile servisler geliştirdim<br />
                         • MySQL ile veritabanı yönetimi yaptım<br />
-                        • Jenkins kullanarak mikroservisleri Google Cloud'a deploy ettim
+                        • Jenkins kullanarak mikroservisleri Google Cloud&apos;a deploy ettim
                       </Typography>
                       <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
                         <Chip size="small" label="Java" variant="outlined" />
@@ -517,7 +517,7 @@ export default function Home() {
                 <Psychology sx={{ color: 'primary.main' }} /> Yetenekler
               </Typography>
               <Grid container spacing={3}>
-                {skills.map((category, index) => (
+                {skills.map((category) => (
                   <Grid item xs={12} md={4} key={category.name}>
                     <Card sx={{ height: '100%', background: 'rgba(36, 36, 36, 0.5)' }}>
                       <CardContent>

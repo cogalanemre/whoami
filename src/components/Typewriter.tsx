@@ -5,7 +5,6 @@ import { Typography, TypographyProps } from '@mui/material';
 
 interface TypewriterProps extends Omit<TypographyProps, 'children'> {
   texts: string[];
-  delay?: number;
   typingDelay?: number;
   pauseDelay?: number;
 }
@@ -21,7 +20,7 @@ const getRandomDelay = (baseDelay: number) => {
   return baseDelay + Math.random() * 100 - 50; // baseDelay ± 50ms
 };
 
-export default function Typewriter({ texts, delay = 100, typingDelay = 100, pauseDelay = 2000, ...props }: TypewriterProps) {
+export default function Typewriter({ texts, typingDelay = 100, pauseDelay = 2000, ...props }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
