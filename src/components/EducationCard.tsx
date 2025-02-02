@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Stack, Avatar, Box } from '@mui/material';
+import { Card, CardContent, Typography, Avatar, Box } from '@mui/material';
 import { Education } from '@/data/education';
 import { formatDate } from '@/utils/dateUtils';
 import { School } from '@mui/icons-material';
