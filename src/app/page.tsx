@@ -128,7 +128,7 @@ export default function Home() {
                 left: '20px',
                 width: '2px',
                 height: '100%',
-                background: 'linear-gradient(180deg, #81C9C9 0%, rgba(129, 201, 201, 0.2) 100%)',
+                background: 'linear-gradient(180deg, #64FFDA 0%, rgba(100, 255, 218, 0.2) 100%)',
               }
             }}>
               <Stack spacing={6}>

@@ -4,9 +4,9 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#81C9C9',
-      light: '#A3D9D9',
-      dark: '#5F9999',
+      main: '#64FFDA',
+      light: '#9FFFEA',
+      dark: '#00E5B5',
     },
     secondary: {
       main: '#FFB74D',
@@ -27,7 +27,7 @@ const theme = createTheme({
     h1: {
       fontSize: '3rem',
       fontWeight: 700,
-      background: 'linear-gradient(45deg, #81C9C9 30%, #FFB74D 90%)',
+      background: 'linear-gradient(45deg, #64FFDA 30%, #FFB74D 90%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       letterSpacing: '-0.02em',
@@ -36,13 +36,13 @@ const theme = createTheme({
       fontSize: '2rem',
       fontWeight: 600,
       letterSpacing: '-0.01em',
-      color: '#81C9C9',
+      color: '#64FFDA',
     },
     h3: {
       fontSize: '1.75rem',
       fontWeight: 500,
       letterSpacing: '-0.01em',
-      color: '#81C9C9',
+      color: '#64FFDA',
     },
   },
   components: {
@@ -70,10 +70,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
-          background: 'rgba(129, 201, 201, 0.1)',
-          border: '1px solid rgba(129, 201, 201, 0.2)',
+          background: 'rgba(100, 255, 218, 0.1)',
+          border: '1px solid rgba(100, 255, 218, 0.2)',
           '&:hover': {
-            background: 'rgba(129, 201, 201, 0.2)',
+            background: 'rgba(100, 255, 218, 0.2)',
           },
         },
       },
@@ -83,7 +83,7 @@ const theme = createTheme({
         root: {
           background: 'rgba(26, 26, 26, 0.85)',
           backdropFilter: 'blur(10px)',
-          borderBottom: '1px solid rgba(129, 201, 201, 0.1)',
+          borderBottom: '1px solid rgba(100, 255, 218, 0.1)',
         },
       },
     },
