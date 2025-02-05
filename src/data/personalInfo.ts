@@ -18,8 +18,8 @@ export const personalInfo: PersonalInfo = {
   ],
   bio: 'Küçüklüğümden beri meraklı olan kişiliğimi bir türlü dizginleyemedim. Kafama takılan şeyi araştırmak ve onu çözdükten sonraki mutluluk sanırım beni uzun yıllar bu mesleğe bağlayacak olan en büyük etken',
   social: {
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
+    github: 'https://github.com/cogalanemre',
+    linkedin: 'https://www.linkedin.com/in/cogalanemre',
     email: 'mailto:your.email@example.com'
   }
 }; 
