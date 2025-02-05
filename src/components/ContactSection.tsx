@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, Paper, TextField, Button, Snackbar, Alert, CircularProgress } from '@mui/material';
 import { LocationOn, Phone, Email, Send } from '@mui/icons-material';
 import { personalInfo } from '@/data/personalInfo';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
 export const ContactSection = () => {

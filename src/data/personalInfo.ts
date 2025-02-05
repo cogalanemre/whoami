@@ -11,10 +11,6 @@ export interface PersonalInfo {
     address: string;
     phone: string;
     email: string;
-    location: {
-      lat: number;
-      lng: number;
-    };
   };
 }
 
@@ -34,10 +30,6 @@ export const personalInfo: PersonalInfo = {
   contact: {
     address: 'Etimesgut, Ankara, Türkiye',
     phone: '+90 551 853 5776',
-    email: 'comengcogalan@gmail.com',
-    location: {
-      lat: 39.9582,
-      lng: 32.6757
-    }
+    email: 'comengcogalan@gmail.com'
   }
 }; 
