@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Grid, Typography, IconButton, Stack, Avatar } from '@mui/material';
-import { GitHub, LinkedIn, Email, Speed, School, Article } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, Speed, School, Article, ContactMail } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ExperienceCard } from '@/components/ExperienceCard';
@@ -14,6 +14,7 @@ import { personalInfo } from '@/data/personalInfo';
 import { calculateTotalExperience } from '@/utils/dateUtils';
 import { fetchBlogPosts } from '@/utils/fetchBlogPosts';
 import { BlogPost } from '@/data/blog';
+import { ContactSection } from '@/components/ContactSection';
 
 const MotionBox = motion(Box);
 
@@ -240,6 +241,17 @@ export default function Home() {
                 </Grid>
               )}
             </Grid>
+          </Box>
+        </Grid>
+
+        {/* Contact Section */}
+        <Grid item xs={12}>
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 6 }}>
+              <ContactMail sx={{ color: 'primary.main' }} /> 
+              İletişim
+            </Typography>
+            <ContactSection />
           </Box>
         </Grid>
       </Grid>

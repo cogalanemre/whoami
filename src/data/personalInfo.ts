@@ -7,6 +7,15 @@ export interface PersonalInfo {
     linkedin?: string;
     email?: string;
   };
+  contact: {
+    address: string;
+    phone: string;
+    email: string;
+    location: {
+      lat: number;
+      lng: number;
+    };
+  };
 }
 
 export const personalInfo: PersonalInfo = {
@@ -20,6 +29,15 @@ export const personalInfo: PersonalInfo = {
   social: {
     github: 'https://github.com/cogalanemre',
     linkedin: 'https://www.linkedin.com/in/cogalanemre',
-    email: 'mailto:your.email@example.com'
+    email: 'mailto:comengcogalan@gmail.com'
+  },
+  contact: {
+    address: 'Etimesgut, Ankara, Türkiye',
+    phone: '+90 551 853 5776',
+    email: 'comengcogalan@gmail.com',
+    location: {
+      lat: 39.9582,
+      lng: 32.6757
+    }
   }
 }; 
