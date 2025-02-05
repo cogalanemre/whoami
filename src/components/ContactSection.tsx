@@ -140,10 +140,10 @@ export const ContactSection = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.2)',
+                      borderColor: 'rgba(255, 215, 0, 0.2)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.4)',
+                      borderColor: 'rgba(255, 215, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
                       borderColor: 'primary.main',
@@ -164,10 +164,10 @@ export const ContactSection = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.2)',
+                      borderColor: 'rgba(255, 215, 0, 0.2)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.4)',
+                      borderColor: 'rgba(255, 215, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
                       borderColor: 'primary.main',
@@ -187,10 +187,10 @@ export const ContactSection = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.2)',
+                      borderColor: 'rgba(255, 215, 0, 0.2)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.4)',
+                      borderColor: 'rgba(255, 215, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
                       borderColor: 'primary.main',
@@ -212,10 +212,10 @@ export const ContactSection = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.2)',
+                      borderColor: 'rgba(255, 215, 0, 0.2)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(100, 255, 218, 0.4)',
+                      borderColor: 'rgba(255, 215, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
                       borderColor: 'primary.main',
@@ -235,7 +235,7 @@ export const ContactSection = () => {
                   mt: 2,
                   borderRadius: 2,
                   '&:hover': {
-                    backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                    backgroundColor: 'rgba(255, 215, 0, 0.1)',
                   }
                 }}
               >
