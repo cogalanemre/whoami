@@ -1,24 +1,44 @@
 'use client';
 
 import { Box, Grid, Typography, IconButton, Stack, Avatar } from '@mui/material';
-import { GitHub, LinkedIn, Email, Speed, School } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, Speed, School, Article } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ExperienceCard } from '@/components/ExperienceCard';
 import { EducationCard } from '@/components/EducationCard';
+import { BlogCard } from '@/components/BlogCard';
 import Typewriter from '@/components/Typewriter';
 import { experiences } from '@/data/experiences';
 import { education } from '@/data/education';
 import { personalInfo } from '@/data/personalInfo';
 import { calculateTotalExperience } from '@/utils/dateUtils';
+import { fetchBlogPosts } from '@/utils/fetchBlogPosts';
+import { BlogPost } from '@/data/blog';
 
 const MotionBox = motion(Box);
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setCurrentDate(new Date());
+  }, []);
+
+  useEffect(() => {
+    const loadBlogPosts = async () => {
+      try {
+        const posts = await fetchBlogPosts();
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error('Blog yazıları yüklenirken hata oluştu:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlogPosts();
   }, []);
 
   if (!currentDate) {
@@ -193,6 +213,33 @@ export default function Home() {
                 ))}
               </Stack>
             </Box>
+          </Box>
+        </Grid>
+
+        {/* Blog Section */}
+        <Grid item xs={12}>
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 6 }}>
+              <Article sx={{ color: 'primary.main' }} /> 
+              Blog Yazılarım
+            </Typography>
+            <Grid container spacing={3}>
+              {loading ? (
+                <Grid item xs={12}>
+                  <Typography>Yazılar yükleniyor...</Typography>
+                </Grid>
+              ) : blogPosts.length > 0 ? (
+                blogPosts.map(post => (
+                  <Grid item xs={12} sm={6} md={4} key={post.link}>
+                    <BlogCard post={post} />
+                  </Grid>
+                ))
+              ) : (
+                <Grid item xs={12}>
+                  <Typography>Henüz blog yazısı bulunmuyor.</Typography>
+                </Grid>
+              )}
+            </Grid>
           </Box>
         </Grid>
       </Grid>
