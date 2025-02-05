@@ -7,6 +7,11 @@ export interface PersonalInfo {
     linkedin?: string;
     email?: string;
   };
+  contact: {
+    address: string;
+    phone: string;
+    email: string;
+  };
 }
 
 export const personalInfo: PersonalInfo = {
@@ -18,8 +23,13 @@ export const personalInfo: PersonalInfo = {
   ],
   bio: 'Küçüklüğümden beri meraklı olan kişiliğimi bir türlü dizginleyemedim. Kafama takılan şeyi araştırmak ve onu çözdükten sonraki mutluluk sanırım beni uzun yıllar bu mesleğe bağlayacak olan en büyük etken',
   social: {
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
-    email: 'mailto:your.email@example.com'
+    github: 'https://github.com/cogalanemre',
+    linkedin: 'https://www.linkedin.com/in/cogalanemre',
+    email: 'mailto:comengcogalan@gmail.com'
+  },
+  contact: {
+    address: 'Etimesgut, Ankara, Türkiye',
+    phone: '+90 551 853 5776',
+    email: 'comengcogalan@gmail.com'
   }
 }; 
