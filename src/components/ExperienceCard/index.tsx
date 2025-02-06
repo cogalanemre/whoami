@@ -10,7 +10,7 @@ import type { ExperienceCardProps } from './types';
 import { StyledExperienceBox, StyledCard } from './styles';
 import Avatar from '@mui/material/Avatar';
 
-const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) => {
+const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
   const {
     company,
     title,
