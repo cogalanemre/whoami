@@ -1,8 +1,6 @@
 export const calculateDuration = (startDate: Date, endDate: Date | undefined | null): string => {
-  if (!endDate) return '';
-  
   const start = new Date(startDate);
-  const end = new Date(endDate);
+  const end = endDate ? new Date(endDate) : new Date();
   
   end.setDate(end.getDate() + 1);
   

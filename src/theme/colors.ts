@@ -1,17 +1,18 @@
 export const colors = {
   primary: {
-    main: '#FFE44D',
-    light: '#FFF4B0',
-    dark: '#FFD700',
-    hover: 'rgba(255, 228, 77, 0.1)',
-    border: 'rgba(255, 228, 77, 0.2)',
-    borderHover: 'rgba(255, 228, 77, 0.3)',
+    main: '#7EB2DD',
+    light: '#A7C8E8',
+    dark: '#5C94C4',
+    hover: 'rgba(126, 178, 221, 0.1)',
+    border: 'rgba(126, 178, 221, 0.2)',
+    borderHover: 'rgba(126, 178, 221, 0.3)',
+    timeline: 'rgba(126, 178, 221, 0.4)',
     gradient: {
-      start: '#FFE44D',
-      end: '#FFD700',
+      start: '#7EB2DD',
+      end: '#5C94C4',
       timeline: {
-        start: '#FFE44D',
-        end: 'rgba(255, 228, 77, 0.2)'
+        start: '#7EB2DD',
+        end: 'rgba(126, 178, 221, 0.2)'
       }
     }
   },

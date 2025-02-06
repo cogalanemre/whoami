@@ -15,6 +15,7 @@ import { calculateTotalExperience } from '@/utils/dateUtils';
 import { fetchBlogPosts } from '@/utils/fetchBlogPosts';
 import { BlogPost } from '@/data/blog';
 import { ContactSection } from '@/components/ContactSection';
+import { colors } from '@/theme/colors';
 
 const MotionBox = motion(Box);
 
@@ -172,7 +173,7 @@ export default function Home() {
                   left: '20px',
                   width: '2px',
                   height: '100%',
-                  background: 'linear-gradient(180deg, #FFD700 0%, rgba(255, 215, 0, 0.2) 100%)',
+                  background: colors.primary.timeline,
                 }
               }}>
                 <Stack spacing={6}>
@@ -203,7 +204,7 @@ export default function Home() {
                   left: '10px',
                   width: '2px',
                   height: '100%',
-                  background: 'linear-gradient(180deg, #FFD700 0%, rgba(255, 215, 0, 0.2) 100%)',
+                  background: colors.primary.timeline,
                 }
               }}>
                 <Stack spacing={4}>
