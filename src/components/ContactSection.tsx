@@ -85,8 +85,15 @@ export const ContactSection = () => {
             sx={{ 
               p: 3, 
               height: '100%',
-              background: 'rgba(36, 36, 36, 0.5)',
-              backdropFilter: 'blur(10px)'
+              background: colors.background.card,
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: `1px solid ${colors.primary.border}`,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                border: `1px solid ${colors.primary.borderHover}`,
+                transform: 'translateY(-4px)',
+              }
             }}
           >
             <Typography variant="h5" gutterBottom color="primary" sx={{ mb: 4 }}>
@@ -121,8 +128,15 @@ export const ContactSection = () => {
             sx={{ 
               p: 3,
               height: '100%',
-              background: 'rgba(36, 36, 36, 0.5)',
-              backdropFilter: 'blur(10px)'
+              background: colors.background.card,
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: `1px solid ${colors.primary.border}`,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                border: `1px solid ${colors.primary.borderHover}`,
+                transform: 'translateY(-4px)',
+              }
             }}
           >
             <Typography variant="h5" gutterBottom color="primary" sx={{ mb: 4 }}>
