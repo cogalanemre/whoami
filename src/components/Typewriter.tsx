@@ -1,13 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Typography, TypographyProps } from '@mui/material';
+import { Typography } from '@mui/material';
 import { colors } from '@/theme/colors';
 
-interface TypewriterProps extends Omit<TypographyProps, 'children'> {
+interface TypewriterProps {
   texts: string[];
-  typingDelay?: number;
-  pauseDelay?: number;
+  delay?: number;
 }
 
 const cursorKeyframes = `
@@ -21,7 +20,7 @@ const getRandomDelay = (baseDelay: number) => {
   return baseDelay + Math.random() * 100 - 50; // baseDelay ± 50ms
 };
 
-export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000, ...props }: TypewriterProps) {
+export default function Typewriter({ texts, delay = 100 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -55,7 +54,7 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
       timeout = setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
-      }, pauseDelay);
+      }, delay);
       return () => clearTimeout(timeout);
     }
 
@@ -68,18 +67,18 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
         return;
       }
 
-      timeout = setTimeout(deleteCharacter, typingDelay / 2);
+      timeout = setTimeout(deleteCharacter, delay / 2);
     } else {
       if (currentIndex === currentText.length) {
         setIsPaused(true);
         return;
       }
 
-      timeout = setTimeout(typeNextCharacter, getRandomDelay(typingDelay));
+      timeout = setTimeout(typeNextCharacter, getRandomDelay(delay));
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, typingDelay, typeNextCharacter, deleteCharacter]);
+  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, delay, typeNextCharacter, deleteCharacter]);
 
   useEffect(() => {
     if (!isDeleting && displayText === '') {
@@ -89,9 +88,7 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
 
   return (
     <Typography 
-      {...props} 
       sx={{ 
-        ...props.sx,
         '&::after': {
           content: '"_"',
           animation: 'blink 1s step-end infinite',

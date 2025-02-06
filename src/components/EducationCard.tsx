@@ -7,7 +7,7 @@ interface EducationCardProps {
   education: Education;
 }
 
-export const EducationCard = ({ education }: EducationCardProps) => {
+export default function EducationCard({ education }: EducationCardProps) {
   return (
     <Box sx={{ 
       display: 'flex', 
@@ -64,4 +64,4 @@ export const EducationCard = ({ education }: EducationCardProps) => {
       </Card>
     </Box>
   );
-}; 
+} 

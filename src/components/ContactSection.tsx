@@ -3,10 +3,15 @@ import { LocationOn, Phone, Email, Send } from '@mui/icons-material';
 import { personalInfo } from '@/data/personalInfo';
 import { colors } from '@/theme/colors';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { ContactFormData } from '@/types';
 
-export const ContactSection = () => {
-  const [loading, setLoading] = useState(false);
+interface ContactSectionProps {
+  onSubmit: (data: ContactFormData) => Promise<void>;
+  isLoading?: boolean;
+}
+
+export default function ContactSection({ onSubmit, isLoading }: ContactSectionProps) {
+  const [loading, setLoading] = useState(isLoading);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,21 +30,7 @@ export const ContactSection = () => {
     setLoading(true);
 
     try {
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        from_phone: formData.phone || 'Belirtilmedi',
-        message: formData.message,
-        to_name: personalInfo.name,
-        to_email: personalInfo.contact.email
-      };
-
-      await emailjs.send(
-        'service_0v280wa',
-        'template_d6vbew4',
-        templateParams,
-        'VbqA_ubqPCM6yAkLQ'
-      );
+      await onSubmit(formData);
 
       setSnackbar({
         open: true,
@@ -273,4 +264,4 @@ export const ContactSection = () => {
       </Snackbar>
     </Box>
   );
-}; 
+} 

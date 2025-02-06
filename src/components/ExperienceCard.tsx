@@ -4,10 +4,9 @@ import { formatDate, calculateDuration } from '@/utils/dateUtils';
 
 interface ExperienceCardProps {
   experience: Experience;
-  currentDate: Date;
 }
 
-export const ExperienceCard = ({ experience, currentDate }: ExperienceCardProps) => {
+export default function ExperienceCard({ experience }: ExperienceCardProps) {
   return (
     <Box sx={{ 
       display: 'flex', 
@@ -44,7 +43,7 @@ export const ExperienceCard = ({ experience, currentDate }: ExperienceCardProps)
             {experience.title}
           </Typography>
           <Typography variant="subtitle1" color="primary">
-            {experience.company} • {formatDate(experience.startDate)} - {experience.isCurrentJob ? 'Günümüz' : formatDate(experience.endDate)} ({calculateDuration(experience.startDate, experience.isCurrentJob ? currentDate : experience.endDate)})
+            {experience.company} • {formatDate(experience.startDate)} - {experience.isCurrentJob ? 'Günümüz' : formatDate(experience.endDate)} ({calculateDuration(experience.startDate, experience.isCurrentJob ? new Date() : experience.endDate)})
           </Typography>
           <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 1 }}>
             {experience.location} • {experience.type}
@@ -63,4 +62,4 @@ export const ExperienceCard = ({ experience, currentDate }: ExperienceCardProps)
       </Card>
     </Box>
   );
-}; 
+} 
