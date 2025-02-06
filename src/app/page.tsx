@@ -1,21 +1,32 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { Box, Grid, Typography, IconButton, Stack, Avatar, Container } from '@mui/material';
-import { GitHub, LinkedIn, Email, Speed, School, Article, ContactMail } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, BusinessCenter, School, Article, ContactMail } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { ExperienceCard } from '@/components/ExperienceCard';
-import { EducationCard } from '@/components/EducationCard';
-import { BlogCard } from '@/components/BlogCard';
-import Typewriter from '@/components/Typewriter';
+import { useState, useEffect, useMemo } from 'react';
+import ExperienceCard from '@/components/ExperienceCard';
+import EducationCard from '@/components/EducationCard';
+import BlogCard from '@/components/BlogCard';
+import { personalInfo } from '@/data/personalInfo';
 import { experiences } from '@/data/experiences';
 import { education } from '@/data/education';
-import { personalInfo } from '@/data/personalInfo';
 import { calculateTotalExperience } from '@/utils/dateUtils';
 import { fetchBlogPosts } from '@/utils/fetchBlogPosts';
 import { BlogPost } from '@/data/blog';
-import { ContactSection } from '@/components/ContactSection';
 import { colors } from '@/theme/colors';
+import type { ContactFormData } from '@/types';
+
+// Lazy load components
+const Typewriter = dynamic(() => import('@/components/Typewriter'), {
+  loading: () => <Typography variant="h2" color="primary">Yükleniyor...</Typography>,
+  ssr: false
+});
+
+const ContactSection = dynamic(() => import('@/components/ContactSection'), {
+  loading: () => <Typography>İletişim formu yükleniyor...</Typography>,
+  ssr: false
+});
 
 const MotionBox = motion(Box);
 
@@ -43,6 +54,73 @@ export default function Home() {
     loadBlogPosts();
   }, []);
 
+  // Memoize expensive calculations
+  const totalExperience = useMemo(() => 
+    calculateTotalExperience(experiences), 
+    []
+  );
+
+  const socialButtons = useMemo(() => (
+    <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
+      {personalInfo.social.github && (
+        <IconButton 
+          color="primary" 
+          size="large" 
+          href={personalInfo.social.github}
+          target="_blank"
+          sx={{ 
+            border: '2px solid',
+            borderColor: 'primary.main',
+            '&:hover': { 
+              backgroundColor: 'rgba(100, 255, 218, 0.1)',
+              transform: 'translateY(-2px)',
+              transition: 'all 0.2s ease-in-out'
+            }
+          }}
+        >
+          <GitHub />
+        </IconButton>
+      )}
+      {personalInfo.social.linkedin && (
+        <IconButton 
+          color="primary" 
+          size="large"
+          href={personalInfo.social.linkedin}
+          target="_blank"
+          sx={{ 
+            border: '2px solid',
+            borderColor: 'primary.main',
+            '&:hover': { 
+              backgroundColor: 'rgba(100, 255, 218, 0.1)',
+              transform: 'translateY(-2px)',
+              transition: 'all 0.2s ease-in-out'
+            }
+          }}
+        >
+          <LinkedIn />
+        </IconButton>
+      )}
+      {personalInfo.social.email && (
+        <IconButton 
+          color="primary" 
+          size="large"
+          href={personalInfo.social.email}
+          sx={{ 
+            border: '2px solid',
+            borderColor: 'primary.main',
+            '&:hover': { 
+              backgroundColor: 'rgba(100, 255, 218, 0.1)',
+              transform: 'translateY(-2px)',
+              transition: 'all 0.2s ease-in-out'
+            }
+          }}
+        >
+          <Email />
+        </IconButton>
+      )}
+    </Stack>
+  ), []);
+
   if (!currentDate) {
     return null;
   }
@@ -58,89 +136,51 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Stack direction={{ xs: 'column', md: 'row' }} spacing={6} alignItems="center">
+              <Stack direction={{ xs: 'column', md: 'row' }} spacing={6} alignItems="flex-start">
                 <Avatar
                   sx={{
-                    width: 300,
-                    height: 300,
+                    width: { xs: 200, sm: 250, md: 300 },
+                    height: { xs: 200, sm: 250, md: 300 },
+                    mx: { xs: 'auto', md: 0 },
+                    mb: { xs: 4, md: 0 },
                     bgcolor: 'transparent'
                   }}
                   alt={personalInfo.name}
                   src="/profile.png"
                 />
-                <Box>
-                  <Typography variant="h1" gutterBottom>
+                <Box sx={{ pt: 1, width: '100%' }}>
+                  <Typography variant="h1" gutterBottom sx={{ 
+                    mb: 2,
+                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                    textAlign: { xs: 'center', md: 'left' }
+                  }}>
                     Merhaba, Ben {personalInfo.name} 👋
                   </Typography>
-                  <Typewriter
-                    variant="h2"
-                    color="primary"
-                    gutterBottom
-                    texts={personalInfo.titles}
-                    typingDelay={150}
-                    pauseDelay={3000}
-                  />
-                  <Typography variant="body1" paragraph sx={{ fontSize: '1.2rem', maxWidth: '800px', color: 'text.secondary' }}>
+                  <Box sx={{ 
+                    minHeight: '60px', 
+                    mb: 2,
+                    textAlign: { xs: 'center', md: 'left' }
+                  }}>
+                    <Typewriter
+                      texts={personalInfo.titles}
+                      delay={150}
+                    />
+                  </Box>
+                  <Typography variant="body1" paragraph sx={{ 
+                    fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
+                    maxWidth: '800px', 
+                    color: 'text.secondary', 
+                    mb: 3,
+                    textAlign: { xs: 'center', md: 'left' }
+                  }}>
                     {personalInfo.bio}
                   </Typography>
-                  <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
-                    {personalInfo.social.github && (
-                      <IconButton 
-                        color="primary" 
-                        size="large" 
-                        href={personalInfo.social.github}
-                        target="_blank"
-                        sx={{ 
-                          border: '2px solid',
-                          borderColor: 'primary.main',
-                          '&:hover': { 
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                            transform: 'translateY(-2px)',
-                            transition: 'all 0.2s ease-in-out'
-                          }
-                        }}
-                      >
-                        <GitHub />
-                      </IconButton>
-                    )}
-                    {personalInfo.social.linkedin && (
-                      <IconButton 
-                        color="primary" 
-                        size="large"
-                        href={personalInfo.social.linkedin}
-                        target="_blank"
-                        sx={{ 
-                          border: '2px solid',
-                          borderColor: 'primary.main',
-                          '&:hover': { 
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                            transform: 'translateY(-2px)',
-                            transition: 'all 0.2s ease-in-out'
-                          }
-                        }}
-                      >
-                        <LinkedIn />
-                      </IconButton>
-                    )}
-                    {personalInfo.social.email && (
-                      <IconButton 
-                        color="primary" 
-                        size="large"
-                        href={personalInfo.social.email}
-                        sx={{ 
-                          border: '2px solid',
-                          borderColor: 'primary.main',
-                          '&:hover': { 
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                            transform: 'translateY(-2px)',
-                            transition: 'all 0.2s ease-in-out'
-                          }
-                        }}
-                      >
-                        <Email />
-                      </IconButton>
-                    )}
-                  </Stack>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: { xs: 'center', md: 'flex-start' }
+                  }}>
+                    {socialButtons}
+                  </Box>
                 </Box>
               </Stack>
             </MotionBox>
@@ -149,9 +189,15 @@ export default function Home() {
           {/* Experience Section */}
           <Grid item xs={12}>
             <Box sx={{ mt: 4 }}>
-              <Typography variant="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 6 }}>
-                <Speed sx={{ color: 'primary.main' }} /> 
-                Deneyim 
+              <Typography variant="h3" gutterBottom sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 1, 
+                mb: 6,
+                fontSize: { xs: '1.5rem', sm: '1.75rem', md: '1.75rem' }
+              }}>
+                <BusinessCenter sx={{ color: 'primary.main' }} /> 
+                İş Tecrübesi 
                 <Typography 
                   component="span" 
                   variant="h6" 
@@ -162,7 +208,7 @@ export default function Home() {
                     fontStyle: 'italic'
                   }}
                 >
-                  ({calculateTotalExperience(experiences)})
+                  ({totalExperience})
                 </Typography>
               </Typography>
               <Box sx={{ 
@@ -181,7 +227,6 @@ export default function Home() {
                     <ExperienceCard
                       key={index}
                       experience={experience}
-                      currentDate={currentDate}
                     />
                   ))}
                 </Stack>
@@ -226,20 +271,20 @@ export default function Home() {
                 <Article sx={{ color: 'primary.main' }} /> 
                 Blog Yazılarım
               </Typography>
-              <Grid container spacing={3}>
+              <Grid container spacing={{ xs: 2, sm: 3 }}>
                 {loading ? (
                   <Grid item xs={12}>
-                    <Typography>Yazılar yükleniyor...</Typography>
+                    <Typography align="center">Yazılar yükleniyor...</Typography>
                   </Grid>
                 ) : blogPosts.length > 0 ? (
-                  blogPosts.map(post => (
+                  blogPosts.map((post) => (
                     <Grid item xs={12} sm={6} md={4} key={post.link}>
                       <BlogCard post={post} />
                     </Grid>
                   ))
                 ) : (
                   <Grid item xs={12}>
-                    <Typography>Henüz blog yazısı bulunmuyor.</Typography>
+                    <Typography align="center">Henüz blog yazısı bulunmuyor.</Typography>
                   </Grid>
                 )}
               </Grid>
@@ -253,7 +298,9 @@ export default function Home() {
                 <ContactMail sx={{ color: 'primary.main' }} /> 
                 İletişim
               </Typography>
-              <ContactSection />
+              <ContactSection onSubmit={async (data: ContactFormData) => {
+                console.log('Form data:', data);
+              }} />
             </Box>
           </Grid>
         </Grid>

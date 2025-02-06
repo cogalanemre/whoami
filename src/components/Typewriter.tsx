@@ -1,13 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Typography, TypographyProps } from '@mui/material';
+import { Typography } from '@mui/material';
 import { colors } from '@/theme/colors';
 
-interface TypewriterProps extends Omit<TypographyProps, 'children'> {
+interface TypewriterProps {
   texts: string[];
-  typingDelay?: number;
-  pauseDelay?: number;
+  delay?: number;
 }
 
 const cursorKeyframes = `
@@ -18,15 +17,17 @@ const cursorKeyframes = `
 `;
 
 const getRandomDelay = (baseDelay: number) => {
-  return baseDelay + Math.random() * 100 - 50; // baseDelay ± 50ms
+  return baseDelay + Math.random() * 30 - 15; // baseDelay ± 15ms - daha az rastgelelik
 };
 
-export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000, ...props }: TypewriterProps) {
+export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [blinkCount, setBlinkCount] = useState(0);
+  const BLINK_TIMES = 3; // Kaç kere yanıp sönecek
 
   useEffect(() => {
     const styleSheet = document.createElement('style');
@@ -52,10 +53,17 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
     let timeout: NodeJS.Timeout;
 
     if (isPaused) {
-      timeout = setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(true);
-      }, pauseDelay);
+      if (blinkCount < BLINK_TIMES) {
+        timeout = setTimeout(() => {
+          setBlinkCount(prev => prev + 1);
+        }, 500); // Yanıp sönme süresini kısalttım
+      } else {
+        timeout = setTimeout(() => {
+          setIsPaused(false);
+          setIsDeleting(true);
+          setBlinkCount(0);
+        }, 300); // Bekleme süresini kısalttım
+      }
       return () => clearTimeout(timeout);
     }
 
@@ -68,18 +76,18 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
         return;
       }
 
-      timeout = setTimeout(deleteCharacter, typingDelay / 2);
+      timeout = setTimeout(deleteCharacter, delay / 3); // Silme hızını artırdım
     } else {
       if (currentIndex === currentText.length) {
         setIsPaused(true);
         return;
       }
 
-      timeout = setTimeout(typeNextCharacter, getRandomDelay(typingDelay));
+      timeout = setTimeout(typeNextCharacter, getRandomDelay(delay));
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, typingDelay, typeNextCharacter, deleteCharacter]);
+  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, delay, typeNextCharacter, deleteCharacter, blinkCount]);
 
   useEffect(() => {
     if (!isDeleting && displayText === '') {
@@ -89,18 +97,27 @@ export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000
 
   return (
     <Typography 
-      {...props} 
+      variant="h2"
       sx={{ 
-        ...props.sx,
+        fontSize: '2rem',
+        fontWeight: 500,
+        color: 'text.primary',
         '&::after': {
           content: '"_"',
-          animation: 'blink 1s step-end infinite',
+          animation: isPaused ? 'blink 1s step-end infinite' : 'none',
           color: colors.primary.main,
+          opacity: isPaused ? undefined : 1,
+          fontWeight: 100, // İnce dikey çizgi için
+          marginLeft: '2px', // Biraz boşluk ekleyelim
+          position: 'relative',
+          top: '2px' // Dikey çizgiyi biraz yukarı alalım
         },
         '@keyframes blink': {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0 },
         },
+        mb: 2,
+        mt: 1
       }}
     >
       {displayText}

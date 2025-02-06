@@ -7,7 +7,7 @@ interface BlogCardProps {
   post: BlogPost;
 }
 
-export const BlogCard = ({ post }: BlogCardProps) => {
+export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Card
       sx={{
@@ -145,4 +145,4 @@ export const BlogCard = ({ post }: BlogCardProps) => {
       </CardContent>
     </Card>
   );
-}; 
+} 
