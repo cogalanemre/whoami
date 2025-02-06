@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Box, Grid, Typography, IconButton, Stack, Avatar, Container } from '@mui/material';
-import { GitHub, LinkedIn, Email, Speed, School, Article, ContactMail } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, BusinessCenter, School, Article, ContactMail } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import ExperienceCard from '@/components/ExperienceCard';
@@ -136,7 +136,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Stack direction={{ xs: 'column', md: 'row' }} spacing={6} alignItems="center">
+              <Stack direction={{ xs: 'column', md: 'row' }} spacing={6} alignItems="flex-start">
                 <Avatar
                   sx={{
                     width: 300,
@@ -146,15 +146,17 @@ export default function Home() {
                   alt={personalInfo.name}
                   src="/profile.png"
                 />
-                <Box>
-                  <Typography variant="h1" gutterBottom>
+                <Box sx={{ pt: 1 }}>
+                  <Typography variant="h1" gutterBottom sx={{ mb: 2 }}>
                     Merhaba, Ben {personalInfo.name} 👋
                   </Typography>
-                  <Typewriter
-                    texts={personalInfo.titles}
-                    delay={150}
-                  />
-                  <Typography variant="body1" paragraph sx={{ fontSize: '1.2rem', maxWidth: '800px', color: 'text.secondary' }}>
+                  <Box sx={{ minHeight: '60px', mb: 2 }}>
+                    <Typewriter
+                      texts={personalInfo.titles}
+                      delay={150}
+                    />
+                  </Box>
+                  <Typography variant="body1" paragraph sx={{ fontSize: '1.2rem', maxWidth: '800px', color: 'text.secondary', mb: 3 }}>
                     {personalInfo.bio}
                   </Typography>
                   {socialButtons}
@@ -167,8 +169,8 @@ export default function Home() {
           <Grid item xs={12}>
             <Box sx={{ mt: 4 }}>
               <Typography variant="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 6 }}>
-                <Speed sx={{ color: 'primary.main' }} /> 
-                Deneyim 
+                <BusinessCenter sx={{ color: 'primary.main' }} /> 
+                İş Tecrübesi 
                 <Typography 
                   component="span" 
                   variant="h6" 

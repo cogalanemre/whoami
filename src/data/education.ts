@@ -25,7 +25,7 @@ export const education: Education[] = [
     type: 'prep'
   },
   {
-    school: 'Çankırı Gazi Anadolu Lisesi',
+    school: 'Gazi Anadolu Lisesi',
     location: 'Çankırı, Türkiye',
     startDate: new Date('2009-09-01'),
     endDate: new Date('2013-06-30'),
