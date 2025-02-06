@@ -1,23 +1,35 @@
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import { ANIMATION_DURATION } from '@/constants';
 import type { StyledExperienceCardProps } from './types';
 
-export const StyledCard = styled(Card, {
-  shouldForwardProp: (prop) => prop !== 'isCurrentJob' && prop !== 'index',
-})<StyledExperienceCardProps>(({ theme, isCurrentJob, index }) => ({
+export const StyledExperienceBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'flex-start',
   position: 'relative',
-  padding: theme.spacing(3),
-  marginBottom: theme.spacing(4),
-  backgroundColor: theme.palette.background.paper,
+  gap: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    gap: theme.spacing(3)
+  }
+}));
+
+export const StyledCard = styled(Card, {
+  shouldForwardProp: (prop) => prop !== 'isCurrentJob',
+})<StyledExperienceCardProps>(({ theme, isCurrentJob }) => ({
+  flex: 1,
+  marginLeft: theme.spacing(6),
+  padding: theme.spacing(2),
+  background: 'rgba(36, 36, 36, 0.5)',
   transition: `all ${ANIMATION_DURATION.NORMAL}s ease-in-out`,
-  opacity: 0,
-  transform: 'translateY(20px)',
-  animation: `fadeInUp ${ANIMATION_DURATION.NORMAL}s ease-in-out ${index * 0.1}s forwards`,
-  
-  '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: theme.shadows[10],
+
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(10),
+    padding: theme.spacing(3),
+  },
+
+  [theme.breakpoints.up('md')]: {
+    marginLeft: theme.spacing(12),
   },
 
   ...(isCurrentJob && {

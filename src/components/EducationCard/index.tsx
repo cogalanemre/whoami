@@ -26,17 +26,24 @@ const EducationCard: React.FC<EducationCardProps> = ({ education, index }) => {
 
   return (
     <StyledCard index={index}>
-      <Typography variant="h6" component="h3" gutterBottom>
+      <Typography variant="h6" component="h3" gutterBottom sx={{
+        fontSize: { xs: '1.1rem', sm: '1.25rem' },
+        textAlign: { xs: 'center', sm: 'left' }
+      }}>
         {school}
       </Typography>
       
       {department && (
-        <Typography variant="subtitle1" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom sx={{
+          textAlign: { xs: 'center', sm: 'left' }
+        }}>
           {department}
         </Typography>
       )}
 
-      <Typography variant="subtitle2" color="textSecondary" gutterBottom>
+      <Typography variant="subtitle2" color="textSecondary" gutterBottom sx={{
+        textAlign: { xs: 'center', sm: 'left' }
+      }}>
         {formattedStartDate} - {formattedEndDate} | {location}
       </Typography>
     </StyledCard>

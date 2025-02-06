@@ -7,5 +7,4 @@ export interface ExperienceCardProps {
 
 export interface StyledExperienceCardProps {
   isCurrentJob?: boolean;
-  index: number;
 } 
