@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Typography, TypographyProps } from '@mui/material';
+import { colors } from '@/theme/colors';
 
 interface TypewriterProps extends Omit<TypographyProps, 'children'> {
   texts: string[];
@@ -20,7 +21,7 @@ const getRandomDelay = (baseDelay: number) => {
   return baseDelay + Math.random() * 100 - 50; // baseDelay ± 50ms
 };
 
-export default function Typewriter({ texts, typingDelay = 100, pauseDelay = 2000, ...props }: TypewriterProps) {
+export default function Typewriter({ texts, typingDelay = 150, pauseDelay = 2000, ...props }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -67,7 +68,7 @@ export default function Typewriter({ texts, typingDelay = 100, pauseDelay = 2000
         return;
       }
 
-      timeout = setTimeout(deleteCharacter, typingDelay / 3); // Silme hızını 3 kat daha hızlı yaptık
+      timeout = setTimeout(deleteCharacter, typingDelay / 2);
     } else {
       if (currentIndex === currentText.length) {
         setIsPaused(true);
@@ -78,7 +79,7 @@ export default function Typewriter({ texts, typingDelay = 100, pauseDelay = 2000
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, pauseDelay, texts, typingDelay, typeNextCharacter, deleteCharacter]);
+  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, typingDelay, typeNextCharacter, deleteCharacter]);
 
   useEffect(() => {
     if (!isDeleting && displayText === '') {
@@ -87,17 +88,22 @@ export default function Typewriter({ texts, typingDelay = 100, pauseDelay = 2000
   }, [isDeleting, displayText]);
 
   return (
-    <Typography {...props}>
+    <Typography 
+      {...props} 
+      sx={{ 
+        ...props.sx,
+        '&::after': {
+          content: '"_"',
+          animation: 'blink 1s step-end infinite',
+          color: colors.primary.main,
+        },
+        '@keyframes blink': {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0 },
+        },
+      }}
+    >
       {displayText}
-      &nbsp;
-      <span style={{
-        opacity: isPaused ? 0 : 1,
-        animation: 'blink 0.75s step-end infinite', // İmleç yanıp sönme hızını artırdık
-        color: '#81C9C9',
-        fontWeight: 'bold',
-        transform: 'scale(1.2)', // İmleci biraz daha büyük yaptık
-        display: 'inline-block'
-      }}>|</span>
     </Typography>
   );
 } 

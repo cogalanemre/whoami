@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '@/theme/theme';
 
-export default function ClientLayout({
+export default function Template({
   children,
 }: {
   children: React.ReactNode;

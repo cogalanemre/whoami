@@ -1,8 +1,6 @@
 export const calculateDuration = (startDate: Date, endDate: Date | undefined | null): string => {
-  if (!endDate) return '';
-  
   const start = new Date(startDate);
-  const end = new Date(endDate);
+  const end = endDate ? new Date(endDate) : new Date();
   
   end.setDate(end.getDate() + 1);
   
@@ -29,7 +27,7 @@ export const calculateDuration = (startDate: Date, endDate: Date | undefined | n
 
 export const formatDate = (date: Date | undefined | null): string => {
   if (!date) return '';
-  const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Kasım', 'Aralık'];
+  const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
   return `${months[date.getMonth()]} ${date.getFullYear()}`;
 };
 

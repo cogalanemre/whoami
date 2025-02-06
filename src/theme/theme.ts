@@ -1,33 +1,34 @@
 import { createTheme } from '@mui/material/styles';
+import { colors } from './colors';
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#64FFDA',
-      light: '#9FFFEA',
-      dark: '#00E5B5',
+      main: colors.primary.main,
+      light: colors.primary.light,
+      dark: colors.primary.dark,
     },
     secondary: {
-      main: '#FFB74D',
-      light: '#FFE97D',
-      dark: '#C88719',
+      main: colors.primary.main,
+      light: colors.primary.light,
+      dark: colors.primary.dark,
     },
     background: {
-      default: '#1A1A1A',
-      paper: '#242424',
+      default: colors.background.default,
+      paper: colors.background.paper,
     },
     text: {
-      primary: '#E6F1FF',
-      secondary: '#A7A7A7',
+      primary: colors.text.primary,
+      secondary: colors.text.secondary,
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Poppins", "Inter", sans-serif',
     h1: {
       fontSize: '3rem',
       fontWeight: 700,
-      background: 'linear-gradient(45deg, #64FFDA 30%, #FFB74D 90%)',
+      background: `linear-gradient(45deg, ${colors.primary.gradient.start} 30%, ${colors.primary.gradient.end} 90%)`,
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       letterSpacing: '-0.02em',
@@ -36,54 +37,100 @@ const theme = createTheme({
       fontSize: '2rem',
       fontWeight: 600,
       letterSpacing: '-0.01em',
-      color: '#64FFDA',
+      color: colors.primary.main,
     },
     h3: {
       fontSize: '1.75rem',
       fontWeight: 500,
       letterSpacing: '-0.01em',
-      color: '#64FFDA',
+      color: colors.primary.main,
+    },
+    h5: {
+      fontSize: '1.25rem',
+      fontWeight: 600,
+      letterSpacing: '0.02em',
+    },
+    body1: {
+      fontSize: '1rem',
+      lineHeight: 1.7,
+      letterSpacing: '0.01em',
+    },
+    body2: {
+      fontSize: '0.875rem',
+      lineHeight: 1.6,
+      letterSpacing: '0.01em',
     },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 8,
           textTransform: 'none',
-          padding: '10px 20px',
+          padding: '8px 16px',
+          fontWeight: 500,
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          background: 'linear-gradient(145deg, #242424, #2A2A2A)',
-          boxShadow: '10px 10px 20px #161616, -10px -10px 20px #2E2E2E',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          borderRadius: 12,
+          background: colors.background.card,
           backdropFilter: 'blur(10px)',
+          border: `1px solid ${colors.primary.border}`,
+          boxShadow: 'none',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            border: `1px solid ${colors.primary.borderHover}`,
+            transform: 'translateY(-4px)',
+          },
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          background: 'rgba(100, 255, 218, 0.1)',
-          border: '1px solid rgba(100, 255, 218, 0.2)',
+          borderRadius: 6,
+          background: colors.primary.hover,
+          border: `1px solid ${colors.primary.border}`,
           '&:hover': {
-            background: 'rgba(100, 255, 218, 0.2)',
+            background: colors.primary.hover,
+          },
+        },
+        label: {
+          color: colors.primary.main,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: `radial-gradient(circle at 1px 1px, ${colors.primary.border} 1px, transparent 0)`,
+          backgroundSize: '24px 24px',
+          boxShadow: 'none',
+          border: `1px solid ${colors.primary.border}`,
+          '&:hover': {
+            border: `1px solid ${colors.primary.borderHover}`,
           },
         },
       },
     },
-    MuiAppBar: {
+    MuiTextField: {
       styleOverrides: {
         root: {
-          background: 'rgba(26, 26, 26, 0.85)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: '1px solid rgba(100, 255, 218, 0.1)',
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 8,
+            '& fieldset': {
+              borderColor: colors.primary.border,
+            },
+            '&:hover fieldset': {
+              borderColor: colors.primary.borderHover,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: colors.primary.main,
+            },
+          },
         },
       },
     },
