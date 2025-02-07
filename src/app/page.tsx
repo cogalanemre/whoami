@@ -18,7 +18,6 @@ import {
   School,
   Article,
   ContactMail,
-  WavingHand,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -229,13 +228,17 @@ export default function Home() {
                     pt: 1,
                     width: "100%",
                     textAlign: { xs: "center", md: "left" },
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
                   }}
                 >
                   <Typography
                     variant="h1"
                     gutterBottom
                     sx={{
-                      mb: 2,
+                      mb: 1,
                       fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
                       textAlign: { xs: "center", md: "left" },
                       fontWeight: "normal",
@@ -245,47 +248,41 @@ export default function Home() {
                       justifyContent: { xs: "center", md: "flex-start" },
                     }}
                   >
-                    Merhaba, Ben {personalInfo.name}
-                    <WavingHand
-                      sx={{
-                        color: "primary.main",
-                        fontSize: "inherit",
-                      }}
-                    />
+                    {personalInfo.name}
                   </Typography>
                   <Box
                     sx={{
                       minHeight: "60px",
-                      mb: 2,
                       textAlign: { xs: "center", md: "left" },
+                      mb: 1,
                     }}
                   >
                     <Typewriter texts={personalInfo.titles} delay={150} />
                   </Box>
-                  <Typography
-                    variant="body1"
-                    paragraph
-                    sx={{
-                      fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
-                      maxWidth: "800px",
-                      color: "text.secondary",
-                      mb: 3,
-                      textAlign: { xs: "center", md: "left" },
-                    }}
-                  >
-                    {personalInfo.bio}
-                  </Typography>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: { xs: "center", md: "flex-start" },
+                      position: "absolute",
+                      bottom: { xs: -60, md: -70 },
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "100%",
                     }}
-                  >
-                    {socialButtons}
-                  </Box>
+                  ></Box>
                 </Box>
               </Stack>
             </MotionBox>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: { xs: -4, md: -6 },
+                mb: { xs: 4, md: 6 },
+              }}
+            >
+              {socialButtons}
+            </Box>
           </Grid>
 
           {/* Experience Section */}
