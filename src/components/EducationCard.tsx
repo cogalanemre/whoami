@@ -1,7 +1,6 @@
-import { Card, CardContent, Typography, Avatar, Box } from '@mui/material';
-import { Education } from '@/data/education';
-import { formatDate } from '@/utils/dateUtils';
-import { School } from '@mui/icons-material';
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Education } from "@/data/education";
+import { formatDate } from "@/utils/dateUtils";
 
 interface EducationCardProps {
   education: Education;
@@ -9,59 +8,86 @@ interface EducationCardProps {
 
 export default function EducationCard({ education }: EducationCardProps) {
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      alignItems: 'flex-start',
-      position: 'relative',
-      gap: 3
-    }}>
-      <Avatar
-        sx={{
-          width: 60,
-          height: 60,
-          position: 'absolute',
-          left: -20,
-          top: 10,
-          bgcolor: '#1A1A1A',
-          border: '2px solid',
-          borderColor: 'primary.main',
-          color: 'primary.main',
-          zIndex: 1,
-        }}
-      >
-        <School />
-      </Avatar>
-      <Card sx={{ 
-        flex: 1,
-        ml: 8,
-        background: 'rgba(36, 36, 36, 0.5)',
-      }}>
-        <CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 1 }}>
-            <Typography variant="h6" color="primary" sx={{ fontWeight: 600 }}>
-              {education.school}
+    <Card
+      sx={{
+        background: "rgba(36, 36, 36, 0.5)",
+        transition: "all 0.3s ease-in-out",
+        borderRadius: 2,
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+        },
+      }}
+    >
+      <CardContent sx={{ p: 3 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: 1,
+            mb: 2,
+            pb: 2,
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <Typography variant="h6" color="primary" sx={{ fontWeight: 600 }}>
+            {education.school}
+          </Typography>
+          {education.department && (
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.9rem",
+                fontStyle: "italic",
+              }}
+            >
+              ({education.department})
             </Typography>
-            {education.department && (
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  color: 'text.secondary',
-                  fontSize: '0.9rem',
-                  fontStyle: 'italic'
-                }}
-              >
-                ({education.department})
-              </Typography>
-            )}
-          </Box>
-          <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 1 }}>
-            {education.location}
-          </Typography>
-          <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-            {formatDate(education.startDate)} - {formatDate(education.endDate)}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
+          )}
+        </Box>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            color: "text.secondary",
+            mb: 1,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Box
+            sx={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              bgcolor: "primary.main",
+              opacity: 0.7,
+            }}
+          />
+          {education.location}
+        </Typography>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            color: "text.secondary",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Box
+            sx={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              bgcolor: "primary.main",
+              opacity: 0.7,
+            }}
+          />
+          {formatDate(education.startDate)} - {formatDate(education.endDate)}
+        </Typography>
+      </CardContent>
+    </Card>
   );
-} 
+}
