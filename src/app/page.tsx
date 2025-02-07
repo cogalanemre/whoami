@@ -251,19 +251,7 @@ export default function Home() {
                   ({totalExperience})
                 </Typography>
               </Typography>
-              <Box
-                sx={{
-                  position: "relative",
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    left: "20px",
-                    width: "2px",
-                    height: "100%",
-                    background: colors.primary.timeline,
-                  },
-                }}
-              >
+              <Box>
                 <Stack spacing={6}>
                   {experiences.map((experience, index) => (
                     <ExperienceCard key={index} experience={experience} />
@@ -284,19 +272,7 @@ export default function Home() {
                 <School sx={{ color: "primary.main" }} />
                 Eğitim
               </Typography>
-              <Box
-                sx={{
-                  position: "relative",
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    left: "10px",
-                    width: "2px",
-                    height: "100%",
-                    background: colors.primary.timeline,
-                  },
-                }}
-              >
+              <Box>
                 <Stack spacing={4}>
                   {education.map((edu, index) => (
                     <EducationCard key={index} education={edu} />
