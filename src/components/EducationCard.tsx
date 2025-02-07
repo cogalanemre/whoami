@@ -12,7 +12,6 @@ export default function EducationCard({ education }: EducationCardProps) {
     <Card
       sx={{
         background: "rgba(36, 36, 36, 0.5)",
-        ml: { xs: 0, md: 4 },
         transition: "all 0.3s ease-in-out",
         borderRadius: 2,
         "&:hover": {

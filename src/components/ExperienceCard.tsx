@@ -21,7 +21,6 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
       sx={{
         background: "rgba(36, 36, 36, 0.5)",
         position: "relative",
-        ml: { xs: 0, md: 4 },
         transition: "all 0.3s ease-in-out",
         "&:hover": {
           transform: "translateY(-4px)",
