@@ -18,6 +18,7 @@ import {
   School,
   Article,
   ContactMail,
+  WavingHand,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -171,6 +172,7 @@ export default function Home() {
                     mx: { xs: "auto", md: 0 },
                     mb: { xs: 4, md: 0 },
                     bgcolor: "transparent",
+                    alignSelf: { xs: "center", md: "flex-start" },
                   }}
                   alt={personalInfo.name}
                   src="/profile.png"
@@ -183,9 +185,20 @@ export default function Home() {
                       mb: 2,
                       fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
                       textAlign: { xs: "center", md: "left" },
+                      fontWeight: "normal",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      justifyContent: { xs: "center", md: "flex-start" },
                     }}
                   >
-                    Merhaba, Ben {personalInfo.name} 👋
+                    Merhaba, Ben {personalInfo.name}
+                    <WavingHand
+                      sx={{
+                        color: "primary.main",
+                        fontSize: "inherit",
+                      }}
+                    />
                   </Typography>
                   <Box
                     sx={{

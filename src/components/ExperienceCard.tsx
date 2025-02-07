@@ -20,7 +20,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
       sx={{
         background: "rgba(36, 36, 36, 0.5)",
         position: "relative",
-        ml: 4,
+        ml: { xs: 0, md: 4 },
       }}
     >
       <CardContent>
@@ -34,6 +34,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               bgcolor: "transparent",
               border: "2px solid",
               borderColor: "primary.main",
+              display: { xs: "none", md: "block" },
               "& img": {
                 objectFit: "cover",
                 borderRadius: "50%",

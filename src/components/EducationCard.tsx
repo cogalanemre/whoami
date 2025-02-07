@@ -12,7 +12,7 @@ export default function EducationCard({ education }: EducationCardProps) {
     <Card
       sx={{
         background: "rgba(36, 36, 36, 0.5)",
-        ml: 4,
+        ml: { xs: 0, md: 4 },
       }}
     >
       <CardContent>
