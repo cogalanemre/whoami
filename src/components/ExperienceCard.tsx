@@ -6,6 +6,7 @@ import {
   Chip,
   Avatar,
   Box,
+  Divider,
 } from "@mui/material";
 import { Experience } from "@/data/experiences";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
@@ -21,10 +22,25 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         background: "rgba(36, 36, 36, 0.5)",
         position: "relative",
         ml: { xs: 0, md: 4 },
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+          "& .MuiAvatar-root": {
+            transform: "scale(1.05)",
+            transition: "transform 0.3s ease-in-out",
+          },
+        },
       }}
     >
-      <CardContent>
-        <Box sx={{ display: "flex", gap: 4, alignItems: "flex-start", mb: 2 }}>
+      <Box
+        sx={{
+          background: "rgba(0, 0, 0, 0.2)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          p: 3,
+        }}
+      >
+        <Box sx={{ display: "flex", gap: 4, alignItems: "flex-start" }}>
           <Avatar
             src={experience.logo}
             alt={experience.company}
@@ -57,15 +73,15 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               )}
               )
             </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{ color: "text.secondary", mb: 1 }}
-            >
+            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
               {experience.location} • {experience.type}
             </Typography>
           </Box>
         </Box>
-        <Typography variant="body1" sx={{ color: "text.secondary" }}>
+      </Box>
+
+      <CardContent sx={{ p: 3 }}>
+        <Typography variant="body1" sx={{ color: "text.secondary", mb: 3 }}>
           {experience.description.map((desc, index) => (
             <span key={index}>
               • {desc}
@@ -73,14 +89,33 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
             </span>
           ))}
         </Typography>
-        <Stack direction="row" spacing={1} sx={{ mt: 2 }} flexWrap="wrap">
+
+        <Divider
+          sx={{
+            my: 2,
+            borderColor: "rgba(255, 255, 255, 0.1)",
+            "&::before, &::after": {
+              borderColor: "rgba(255, 255, 255, 0.1)",
+            },
+          }}
+        />
+
+        <Stack direction="row" spacing={1} flexWrap="wrap">
           {experience.skills.map((skill, index) => (
             <Chip
               key={index}
               size="small"
               label={skill}
               variant="outlined"
-              sx={{ mb: 1 }}
+              sx={{
+                mb: 1,
+                bgcolor: "rgba(0, 0, 0, 0.2)",
+                borderColor: "primary.main",
+                color: "primary.main",
+                "&:hover": {
+                  bgcolor: "rgba(100, 255, 218, 0.1)",
+                },
+              }}
             />
           ))}
         </Stack>

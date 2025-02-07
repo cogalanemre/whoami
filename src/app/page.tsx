@@ -151,8 +151,14 @@ export default function Home() {
 
   return (
     <Container maxWidth="lg">
-      <Box component="main" sx={{ py: 4, px: { xs: 2, sm: 4 } }}>
-        <Grid container spacing={4}>
+      <Box
+        component="main"
+        sx={{
+          py: { xs: 4, md: 6 },
+          px: { xs: 2, sm: 4 },
+        }}
+      >
+        <Grid container spacing={{ xs: 6, md: 8 }}>
           {/* Hero Section */}
           <Grid item xs={12}>
             <MotionBox
@@ -162,8 +168,23 @@ export default function Home() {
             >
               <Stack
                 direction={{ xs: "column", md: "row" }}
-                spacing={6}
+                spacing={{ xs: 4, md: 8 }}
                 alignItems="flex-start"
+                sx={{
+                  position: "relative",
+                  pb: { xs: 8, md: 12 },
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: 0,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "60%",
+                    height: "1px",
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.3), transparent)",
+                  },
+                }}
               >
                 <Avatar
                   sx={{
@@ -173,6 +194,12 @@ export default function Home() {
                     mb: { xs: 4, md: 0 },
                     bgcolor: "transparent",
                     alignSelf: { xs: "center", md: "flex-start" },
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                      boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+                    },
                   }}
                   alt={personalInfo.name}
                   src="/profile.png"
@@ -237,7 +264,12 @@ export default function Home() {
 
           {/* Experience Section */}
           <Grid item xs={12}>
-            <Box sx={{ mt: 4 }}>
+            <Box
+              sx={{
+                mt: 4,
+                position: "relative",
+              }}
+            >
               <Typography
                 variant="h3"
                 gutterBottom

@@ -23,10 +23,14 @@ export default function BlogCard({ post }: BlogCardProps) {
         background: "rgba(36, 36, 36, 0.5)",
         overflow: "hidden",
         height: "100%",
+        transition: "all 0.3s ease-in-out",
+        borderRadius: 2,
         "&:hover": {
           transform: "translateY(-4px)",
-          transition: "all 0.2s ease-in-out",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+          "& .blog-image": {
+            transform: "scale(1.05)",
+          },
         },
       }}
     >
@@ -37,10 +41,12 @@ export default function BlogCard({ post }: BlogCardProps) {
             width: "100%",
             paddingTop: "56.25%", // 16:9 aspect ratio
             backgroundColor: "rgba(0, 0, 0, 0.1)",
+            overflow: "hidden",
           }}
         >
           <CardMedia
             component="img"
+            className="blog-image"
             sx={{
               position: "absolute",
               top: 0,
@@ -49,6 +55,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center",
+              transition: "transform 0.3s ease-in-out",
             }}
             image={post.thumbnail}
             alt={post.title}
@@ -60,8 +67,8 @@ export default function BlogCard({ post }: BlogCardProps) {
               left: 0,
               right: 0,
               background:
-                "linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))",
-              height: "50%",
+                "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))",
+              height: "70%",
               pointerEvents: "none",
             }}
           />
