@@ -1,7 +1,6 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { Education } from "@/data/education";
 import { formatDate } from "@/utils/dateUtils";
-import { School } from "@mui/icons-material";
 
 interface EducationCardProps {
   education: Education;

@@ -31,7 +31,6 @@ import { education } from "@/data/education";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
-import { colors } from "@/theme/colors";
 import type { ContactFormData } from "@/types";
 
 // Lazy load components
