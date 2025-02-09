@@ -9,6 +9,7 @@ import {
   Stack,
   Avatar,
   Container,
+  useTheme,
 } from "@mui/material";
 import {
   GitHub,
@@ -18,7 +19,8 @@ import {
   School,
   Article,
   ContactMail,
-  WavingHand,
+  DarkMode,
+  LightMode,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -32,14 +34,11 @@ import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
 import type { ContactFormData } from "@/types";
+import { useThemeContext } from "@/context/ThemeContext";
 
 // Lazy load components
 const Typewriter = dynamic(() => import("@/components/Typewriter"), {
-  loading: () => (
-    <Typography variant="h2" color="primary">
-      Yükleniyor...
-    </Typography>
-  ),
+  loading: () => <Typography variant="h2"></Typography>,
   ssr: false,
 });
 
@@ -54,6 +53,8 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isDarkMode, toggleTheme } = useThemeContext();
+  const theme = useTheme();
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -94,10 +95,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
@@ -115,10 +114,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
@@ -135,10 +132,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
@@ -159,6 +154,77 @@ export default function Home() {
       maxWidth="lg"
       sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
     >
+      <Box
+        onClick={toggleTheme}
+        sx={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          width: "70px",
+          height: "30px",
+          borderRadius: "15px",
+          backgroundColor: theme.palette.background.paper,
+          border: "2px solid",
+          borderColor: "primary.main",
+          display: "flex",
+          alignItems: "center",
+          padding: "2px",
+          cursor: "pointer",
+          zIndex: 1000,
+          transition: "all 0.3s ease-in-out",
+          justifyContent: "space-between",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "0.7rem",
+            color: isDarkMode ? "primary.main" : "text.secondary",
+            ml: 0.8,
+            userSelect: "none",
+            opacity: isDarkMode ? 1 : 0,
+            transition: "opacity 0.3s ease-in-out",
+          }}
+        >
+          Koyu
+        </Typography>
+        <Box
+          sx={{
+            width: "26px",
+            height: "26px",
+            borderRadius: "50%",
+            backgroundColor: "primary.main",
+            transform: isDarkMode ? "translateX(23px)" : "translateX(-20px)",
+            transition: "transform 0.3s ease-in-out",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: theme.palette.background.paper,
+            position: "absolute",
+            left: "18px",
+          }}
+        >
+          {isDarkMode ? (
+            <LightMode sx={{ fontSize: 16 }} />
+          ) : (
+            <DarkMode sx={{ fontSize: 16 }} />
+          )}
+        </Box>
+        <Typography
+          sx={{
+            fontSize: "0.8rem",
+            color: !isDarkMode ? "primary.main" : "text.secondary",
+            mr: 0.8,
+            userSelect: "none",
+            opacity: !isDarkMode ? 1 : 0,
+            transition: "opacity 0.3s ease-in-out",
+          }}
+        >
+          Açık
+        </Typography>
+      </Box>
       <Box
         component="main"
         sx={{
@@ -202,7 +268,7 @@ export default function Home() {
                     width: "80%",
                     height: "2px",
                     background: (theme) =>
-                      `linear-gradient(90deg, transparent, ${theme.palette.primary.main}66, transparent)`,
+                      `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
                   },
                 }}
               >
@@ -214,11 +280,9 @@ export default function Home() {
                     mb: { xs: 4, md: 0 },
                     bgcolor: "transparent",
                     alignSelf: "center",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
                     transition: "all 0.3s ease-in-out",
                     "&:hover": {
                       transform: "scale(1.02)",
-                      boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
                     },
                   }}
                   alt={personalInfo.name}
@@ -229,13 +293,17 @@ export default function Home() {
                     pt: 1,
                     width: "100%",
                     textAlign: { xs: "center", md: "left" },
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
                   }}
                 >
                   <Typography
                     variant="h1"
                     gutterBottom
                     sx={{
-                      mb: 2,
+                      mb: 1,
                       fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
                       textAlign: { xs: "center", md: "left" },
                       fontWeight: "normal",
@@ -243,49 +311,44 @@ export default function Home() {
                       alignItems: "center",
                       gap: 2,
                       justifyContent: { xs: "center", md: "flex-start" },
+                      color: "primary.main",
                     }}
                   >
-                    Merhaba, Ben {personalInfo.name}
-                    <WavingHand
-                      sx={{
-                        color: "primary.main",
-                        fontSize: "inherit",
-                      }}
-                    />
+                    {personalInfo.name}
                   </Typography>
                   <Box
                     sx={{
                       minHeight: "60px",
-                      mb: 2,
                       textAlign: { xs: "center", md: "left" },
+                      mb: 1,
                     }}
                   >
                     <Typewriter texts={personalInfo.titles} delay={150} />
                   </Box>
-                  <Typography
-                    variant="body1"
-                    paragraph
-                    sx={{
-                      fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
-                      maxWidth: "800px",
-                      color: "text.secondary",
-                      mb: 3,
-                      textAlign: { xs: "center", md: "left" },
-                    }}
-                  >
-                    {personalInfo.bio}
-                  </Typography>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: { xs: "center", md: "flex-start" },
+                      position: "absolute",
+                      bottom: { xs: -60, md: -70 },
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "100%",
                     }}
-                  >
-                    {socialButtons}
-                  </Box>
+                  ></Box>
                 </Box>
               </Stack>
             </MotionBox>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: { xs: -4, md: -6 },
+                mb: { xs: 4, md: 6 },
+              }}
+            >
+              {socialButtons}
+            </Box>
           </Grid>
 
           {/* Experience Section */}
@@ -302,7 +365,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -322,7 +385,7 @@ export default function Home() {
                 <BusinessCenter
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 İş Tecrübesi
@@ -332,7 +395,6 @@ export default function Home() {
                   sx={{
                     ml: 2,
                     color: "primary.main",
-                    opacity: 0.8,
                     fontStyle: "italic",
                   }}
                 >
@@ -365,7 +427,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -385,7 +447,7 @@ export default function Home() {
                 <School
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 Eğitim
@@ -416,7 +478,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -436,7 +498,7 @@ export default function Home() {
                 <Article
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 Blog Yazılarım
@@ -482,7 +544,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -502,7 +564,7 @@ export default function Home() {
                 <ContactMail
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 İletişim

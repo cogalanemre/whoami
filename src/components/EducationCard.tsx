@@ -1,16 +1,22 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { Education } from "@/data/education";
 import { formatDate } from "@/utils/dateUtils";
+import { useTheme } from "@mui/material/styles";
+import { colors } from "@/theme/colors";
 
 interface EducationCardProps {
   education: Education;
 }
 
 export default function EducationCard({ education }: EducationCardProps) {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+  const currentColors = isDarkMode ? colors.dark : colors.light;
+
   return (
     <Card
       sx={{
-        background: "rgba(36, 36, 36, 0.5)",
+        background: currentColors.surface,
         transition: "all 0.3s ease-in-out",
         borderRadius: 2,
         "&:hover": {
@@ -27,17 +33,20 @@ export default function EducationCard({ education }: EducationCardProps) {
             gap: 1,
             mb: 2,
             pb: 2,
-            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            borderBottom: `1px solid ${currentColors.surface}`,
           }}
         >
-          <Typography variant="h6" color="primary" sx={{ fontWeight: 600 }}>
+          <Typography
+            variant="h6"
+            sx={{ color: currentColors.primary, fontWeight: 600 }}
+          >
             {education.school}
           </Typography>
           {education.department && (
             <Typography
               variant="body2"
               sx={{
-                color: "text.secondary",
+                color: currentColors.secondary,
                 fontSize: "0.9rem",
                 fontStyle: "italic",
               }}
@@ -49,7 +58,7 @@ export default function EducationCard({ education }: EducationCardProps) {
         <Typography
           variant="subtitle2"
           sx={{
-            color: "text.secondary",
+            color: currentColors.secondary,
             mb: 1,
             display: "flex",
             alignItems: "center",
@@ -61,7 +70,7 @@ export default function EducationCard({ education }: EducationCardProps) {
               width: 6,
               height: 6,
               borderRadius: "50%",
-              bgcolor: "primary.main",
+              bgcolor: currentColors.primary,
               opacity: 0.7,
             }}
           />
@@ -70,7 +79,7 @@ export default function EducationCard({ education }: EducationCardProps) {
         <Typography
           variant="subtitle2"
           sx={{
-            color: "text.secondary",
+            color: currentColors.secondary,
             display: "flex",
             alignItems: "center",
             gap: 1,
@@ -81,7 +90,7 @@ export default function EducationCard({ education }: EducationCardProps) {
               width: 6,
               height: 6,
               borderRadius: "50%",
-              bgcolor: "primary.main",
+              bgcolor: currentColors.primary,
               opacity: 0.7,
             }}
           />

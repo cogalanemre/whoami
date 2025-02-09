@@ -10,16 +10,23 @@ import {
 } from "@mui/material";
 import { Experience } from "@/data/experiences";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
+import { useTheme } from "@mui/material/styles";
+import { colors } from "@/theme/colors";
+import { LocationOn, AccessTime } from "@mui/icons-material";
 
 interface ExperienceCardProps {
   experience: Experience;
 }
 
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+  const currentColors = isDarkMode ? colors.dark : colors.light;
+
   return (
     <Card
       sx={{
-        background: "rgba(36, 36, 36, 0.5)",
+        background: currentColors.surface,
         position: "relative",
         transition: "all 0.3s ease-in-out",
         "&:hover": {
@@ -34,8 +41,8 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
     >
       <Box
         sx={{
-          background: "rgba(0, 0, 0, 0.2)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          background: currentColors.background,
+          borderBottom: `1px solid ${currentColors.surface}`,
           p: 3,
         }}
       >
@@ -48,7 +55,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               height: 80,
               bgcolor: "transparent",
               border: "2px solid",
-              borderColor: "primary.main",
+              borderColor: currentColors.primary,
               display: { xs: "none", md: "block" },
               "& img": {
                 objectFit: "cover",
@@ -57,30 +64,69 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
             }}
           />
           <Box sx={{ flex: 1 }}>
-            <Typography variant="h6" gutterBottom>
+            <Typography
+              variant="h6"
+              sx={{ color: currentColors.primary, mb: 1, fontWeight: "bold" }}
+            >
               {experience.title}
             </Typography>
-            <Typography variant="subtitle1" color="primary">
-              {experience.company} • {formatDate(experience.startDate)} -{" "}
-              {experience.isCurrentJob
-                ? "Günümüz"
-                : formatDate(experience.endDate)}{" "}
-              (
-              {calculateDuration(
-                experience.startDate,
-                experience.isCurrentJob ? new Date() : experience.endDate
-              )}
-              )
-            </Typography>
-            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
-              {experience.location} • {experience.type}
-            </Typography>
+            <Stack direction="row" spacing={3} alignItems="center">
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  color: currentColors.secondary,
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                }}
+              >
+                {experience.company}
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                <LocationOn
+                  sx={{ color: currentColors.primary, fontSize: 18 }}
+                />
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: currentColors.secondary }}
+                >
+                  {experience.location} • {experience.type}
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <AccessTime
+                  sx={{ color: currentColors.primary, fontSize: 18 }}
+                />
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: currentColors.secondary }}
+                >
+                  {formatDate(experience.startDate)} -{" "}
+                  {experience.isCurrentJob
+                    ? "Günümüz"
+                    : formatDate(experience.endDate)}{" "}
+                  <span style={{ fontStyle: "italic" }}>
+                    (
+                    {calculateDuration(
+                      experience.startDate,
+                      experience.isCurrentJob ? new Date() : experience.endDate
+                    )}
+                    )
+                  </span>{" "}
+                  • Tam Zamanlı
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Box>
       </Box>
 
       <CardContent sx={{ p: 3 }}>
-        <Typography variant="body1" sx={{ color: "text.secondary", mb: 3 }}>
+        <Typography
+          variant="body1"
+          sx={{ color: currentColors.secondary, mb: 3 }}
+        >
           {experience.description.map((desc, index) => (
             <span key={index}>
               • {desc}
@@ -92,10 +138,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         <Divider
           sx={{
             my: 2,
-            borderColor: "rgba(255, 255, 255, 0.1)",
-            "&::before, &::after": {
-              borderColor: "rgba(255, 255, 255, 0.1)",
-            },
+            borderColor: currentColors.background,
           }}
         />
 
@@ -108,11 +151,11 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               variant="outlined"
               sx={{
                 mb: 1,
-                bgcolor: "rgba(0, 0, 0, 0.2)",
-                borderColor: "primary.main",
-                color: "primary.main",
+                bgcolor: currentColors.background,
+                borderColor: currentColors.primary,
+                color: currentColors.primary,
                 "&:hover": {
-                  bgcolor: "rgba(100, 255, 218, 0.1)",
+                  bgcolor: currentColors.surface,
                 },
               }}
             />

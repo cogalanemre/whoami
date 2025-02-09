@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Poppins } from 'next/font/google';
-import ClientLayout from './client-layout';
+import { Poppins } from "next/font/google";
+import ClientLayout from "./client-layout";
+import { metadata } from "./metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,15 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Emre - Bilgisayar Mühendisi",
-  description: "Kişisel CV Sitesi",
-};
+export { metadata };
 
 export default function RootLayout({
   children,
@@ -31,7 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${geistSans.variable} ${geistMono.variable} ${poppins.className}`}>
+    <html
+      lang="tr"
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.className}`}
+    >
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
       </body>

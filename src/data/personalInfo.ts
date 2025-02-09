@@ -15,7 +15,7 @@ export interface PersonalInfo {
 }
 
 export const personalInfo: PersonalInfo = {
-  name: 'Emre',
+  name: 'Emre ÇOĞALAN',
   titles: [
     "Computer Engineer",
     "Full Stack Developer",

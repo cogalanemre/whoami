@@ -1,8 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { Typography } from '@mui/material';
-import { colors } from '@/theme/colors';
+import { useState, useEffect, useCallback } from "react";
+import { Typography, useTheme } from "@mui/material";
 
 interface TypewriterProps {
   texts: string[];
@@ -21,7 +20,8 @@ const getRandomDelay = (baseDelay: number) => {
 };
 
 export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
-  const [displayText, setDisplayText] = useState('');
+  const theme = useTheme();
+  const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -30,7 +30,7 @@ export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
   const BLINK_TIMES = 3; // Kaç kere yanıp sönecek
 
   useEffect(() => {
-    const styleSheet = document.createElement('style');
+    const styleSheet = document.createElement("style");
     styleSheet.textContent = cursorKeyframes;
     document.head.appendChild(styleSheet);
 
@@ -55,7 +55,7 @@ export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
     if (isPaused) {
       if (blinkCount < BLINK_TIMES) {
         timeout = setTimeout(() => {
-          setBlinkCount(prev => prev + 1);
+          setBlinkCount((prev) => prev + 1);
         }, 500); // Yanıp sönme süresini kısalttım
       } else {
         timeout = setTimeout(() => {
@@ -70,7 +70,7 @@ export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
     const currentText = texts[currentTextIndex];
 
     if (isDeleting) {
-      if (displayText === '') {
+      if (displayText === "") {
         setIsDeleting(false);
         setCurrentTextIndex((prev) => (prev + 1) % texts.length);
         return;
@@ -87,40 +87,51 @@ export default function Typewriter({ texts, delay = 80 }: TypewriterProps) {
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, currentTextIndex, displayText, isDeleting, isPaused, texts, delay, typeNextCharacter, deleteCharacter, blinkCount]);
+  }, [
+    currentIndex,
+    currentTextIndex,
+    displayText,
+    isDeleting,
+    isPaused,
+    texts,
+    delay,
+    typeNextCharacter,
+    deleteCharacter,
+    blinkCount,
+  ]);
 
   useEffect(() => {
-    if (!isDeleting && displayText === '') {
+    if (!isDeleting && displayText === "") {
       setCurrentIndex(0);
     }
   }, [isDeleting, displayText]);
 
   return (
-    <Typography 
+    <Typography
       variant="h2"
-      sx={{ 
-        fontSize: '2rem',
+      sx={{
+        fontSize: "2rem",
         fontWeight: 500,
-        color: 'text.primary',
-        '&::after': {
+        color: "text.primary",
+        "&::after": {
           content: '"_"',
-          animation: isPaused ? 'blink 1s step-end infinite' : 'none',
-          color: colors.primary.main,
+          animation: isPaused ? "blink 1s step-end infinite" : "none",
+          color: theme.palette.primary.main,
           opacity: isPaused ? undefined : 1,
           fontWeight: 100, // İnce dikey çizgi için
-          marginLeft: '2px', // Biraz boşluk ekleyelim
-          position: 'relative',
-          top: '2px' // Dikey çizgiyi biraz yukarı alalım
+          marginLeft: "2px", // Biraz boşluk ekleyelim
+          position: "relative",
+          top: "2px", // Dikey çizgiyi biraz yukarı alalım
         },
-        '@keyframes blink': {
-          '0%, 100%': { opacity: 1 },
-          '50%': { opacity: 0 },
+        "@keyframes blink": {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
         },
         mb: 2,
-        mt: 1
+        mt: 1,
       }}
     >
       {displayText}
     </Typography>
   );
-} 
+}
