@@ -129,7 +129,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         >
           {experience.description.map((desc, index) => (
             <span key={index}>
-              • {desc}
+              <span style={{ color: currentColors.primary }}>•</span> {desc}
               <br />
             </span>
           ))}
