@@ -196,7 +196,7 @@ export default function Home() {
             height: "26px",
             borderRadius: "50%",
             backgroundColor: "primary.main",
-            transform: isDarkMode ? "translateX(24px)" : "translateX(-20px)",
+            transform: isDarkMode ? "translateX(23px)" : "translateX(-20px)",
             transition: "transform 0.3s ease-in-out",
             display: "flex",
             alignItems: "center",

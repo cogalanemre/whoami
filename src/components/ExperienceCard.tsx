@@ -12,6 +12,7 @@ import { Experience } from "@/data/experiences";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
+import { LocationOn, AccessTime } from "@mui/icons-material";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -65,31 +66,58 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
           <Box sx={{ flex: 1 }}>
             <Typography
               variant="h6"
-              sx={{ color: currentColors.primary, mb: 1 }}
+              sx={{ color: currentColors.primary, mb: 1, fontWeight: "bold" }}
             >
               {experience.title}
             </Typography>
-            <Typography
-              variant="subtitle1"
-              sx={{ color: currentColors.secondary }}
-            >
-              {experience.company} • {formatDate(experience.startDate)} -{" "}
-              {experience.isCurrentJob
-                ? "Günümüz"
-                : formatDate(experience.endDate)}{" "}
-              (
-              {calculateDuration(
-                experience.startDate,
-                experience.isCurrentJob ? new Date() : experience.endDate
-              )}
-              )
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{ color: currentColors.secondary }}
-            >
-              {experience.location} • {experience.type}
-            </Typography>
+            <Stack direction="row" spacing={3} alignItems="center">
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  color: currentColors.secondary,
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                }}
+              >
+                {experience.company}
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                <LocationOn
+                  sx={{ color: currentColors.primary, fontSize: 18 }}
+                />
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: currentColors.secondary }}
+                >
+                  {experience.location} • {experience.type}
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <AccessTime
+                  sx={{ color: currentColors.primary, fontSize: 18 }}
+                />
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: currentColors.secondary }}
+                >
+                  {formatDate(experience.startDate)} -{" "}
+                  {experience.isCurrentJob
+                    ? "Günümüz"
+                    : formatDate(experience.endDate)}{" "}
+                  <span style={{ fontStyle: "italic" }}>
+                    (
+                    {calculateDuration(
+                      experience.startDate,
+                      experience.isCurrentJob ? new Date() : experience.endDate
+                    )}
+                    )
+                  </span>{" "}
+                  • Tam Zamanlı
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Box>
       </Box>
