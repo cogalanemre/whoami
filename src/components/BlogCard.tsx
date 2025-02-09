@@ -11,6 +11,14 @@ import { BlogPost } from "@/data/blog";
 import { formatDate } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
+import {
+  cardStyles,
+  cardContentStyles,
+  truncatedTextStyles,
+  linkButtonStyles,
+  infoIconStyles,
+  flexRowCenterStyles,
+} from "@/theme/commonStyles";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -22,21 +30,7 @@ export default function BlogCard({ post }: BlogCardProps) {
   const currentColors = isDarkMode ? colors.dark : colors.light;
 
   return (
-    <Card
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        background: currentColors.surface,
-        overflow: "hidden",
-        height: "100%",
-        transition: "all 0.3s ease-in-out",
-        borderRadius: 2,
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-        },
-      }}
-    >
+    <Card sx={cardStyles(currentColors)}>
       {post.thumbnail && (
         <Box
           sx={{
@@ -77,17 +71,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           />
         </Box>
       )}
-      <CardContent
-        sx={{
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          "&:last-child": {
-            paddingBottom: 2,
-          },
-        }}
-      >
+      <CardContent sx={cardContentStyles}>
         <Typography
           variant="h6"
           sx={{
@@ -96,11 +80,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             fontSize: "1.1rem",
             lineHeight: 1.3,
             mb: 1,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
+            ...truncatedTextStyles,
             "&:hover": { color: currentColors.secondary },
           }}
           component="a"
@@ -111,8 +91,8 @@ export default function BlogCard({ post }: BlogCardProps) {
           {post.title}
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mb: 1 }}>
-          <AccessTime sx={{ fontSize: "1rem", color: currentColors.primary }} />
+        <Box sx={flexRowCenterStyles}>
+          <AccessTime sx={infoIconStyles(currentColors)} />
           <Typography
             variant="caption"
             color={currentColors.secondary}
@@ -128,11 +108,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           sx={{
             mb: 2,
             fontSize: "0.9rem",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
+            ...truncatedTextStyles,
           }}
         >
           {post.description}
@@ -154,14 +130,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
           <Button
             variant="text"
-            sx={{
-              color: currentColors.primary,
-              "&:hover": {
-                backgroundColor: "transparent",
-                transform: "translateX(4px)",
-                transition: "all 0.2s ease-in-out",
-              },
-            }}
+            sx={linkButtonStyles(currentColors)}
             size="small"
             endIcon={<ArrowForward />}
             href={post.link}
