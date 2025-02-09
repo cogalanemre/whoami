@@ -53,7 +53,7 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const { isDarkMode, toggleTheme, currentColors } = useThemeContext();
+  const { isDarkMode, toggleTheme } = useThemeContext();
   const theme = useTheme();
 
   useEffect(() => {
