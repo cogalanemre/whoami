@@ -4,12 +4,7 @@ import { formatDate } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
 import { LocationOn, CalendarToday } from "@mui/icons-material";
-import {
-  cardStyles,
-  cardContentStyles,
-  infoIconStyles,
-  flexRowCenterStyles,
-} from "@/theme/commonStyles";
+import { cardStyles, cardContentStyles } from "@/theme/commonStyles";
 import InfoWithIcon from "./InfoWithIcon";
 
 interface EducationCardProps {

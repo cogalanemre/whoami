@@ -40,7 +40,7 @@ export const iconButtonStyles = (currentColors: ThemeColors): SxProps => ({
   },
 });
 
-export const sectionTitleStyles = (currentColors: ThemeColors): SxProps => ({
+export const sectionTitleStyles = (): SxProps => ({
   display: "flex",
   alignItems: "center",
   gap: 2,

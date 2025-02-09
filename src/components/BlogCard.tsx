@@ -16,8 +16,6 @@ import {
   cardContentStyles,
   truncatedTextStyles,
   linkButtonStyles,
-  infoIconStyles,
-  flexRowCenterStyles,
 } from "@/theme/commonStyles";
 import InfoWithIcon from "./InfoWithIcon";
 
