@@ -10,6 +10,7 @@ import {
   infoIconStyles,
   flexRowCenterStyles,
 } from "@/theme/commonStyles";
+import InfoWithIcon from "./InfoWithIcon";
 
 interface EducationCardProps {
   education: Education;
@@ -77,23 +78,18 @@ export default function EducationCard({ education }: EducationCardProps) {
               p: 0,
             }}
           >
-            <Typography
-              variant="subtitle2"
-              component="div"
-              sx={flexRowCenterStyles}
-            >
-              <CalendarToday sx={infoIconStyles(currentColors)} />
-              {formatDate(education.startDate)} -{" "}
-              {formatDate(education.endDate)}
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              component="div"
-              sx={flexRowCenterStyles}
-            >
-              <LocationOn sx={infoIconStyles(currentColors)} />
-              {education.location}
-            </Typography>
+            <InfoWithIcon
+              icon={CalendarToday}
+              text={`${formatDate(education.startDate)} - ${formatDate(
+                education.endDate
+              )}`}
+              currentColors={currentColors}
+            />
+            <InfoWithIcon
+              icon={LocationOn}
+              text={education.location}
+              currentColors={currentColors}
+            />
           </Box>
         </Box>
       </CardContent>

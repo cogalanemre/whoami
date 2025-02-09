@@ -19,6 +19,7 @@ import {
   infoIconStyles,
   flexRowCenterStyles,
 } from "@/theme/commonStyles";
+import InfoWithIcon from "./InfoWithIcon";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -91,16 +92,11 @@ export default function BlogCard({ post }: BlogCardProps) {
           {post.title}
         </Typography>
 
-        <Box sx={flexRowCenterStyles}>
-          <AccessTime sx={infoIconStyles(currentColors)} />
-          <Typography
-            variant="caption"
-            color={currentColors.secondary}
-            sx={{ fontSize: "0.85rem" }}
-          >
-            {post.readingTime}
-          </Typography>
-        </Box>
+        <InfoWithIcon
+          icon={AccessTime}
+          text={post.readingTime}
+          currentColors={currentColors}
+        />
 
         <Typography
           variant="body2"

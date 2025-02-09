@@ -76,6 +76,6 @@ export const infoIconStyles = (currentColors: ThemeColors): SxProps => ({
 export const flexRowCenterStyles: SxProps = {
   display: "flex",
   alignItems: "center",
-  gap: 0.5,
+  gap: 1,
   mb: 1,
 }; 
