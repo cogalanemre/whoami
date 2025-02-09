@@ -9,6 +9,7 @@ import {
   Stack,
   Avatar,
   Container,
+  useTheme,
 } from "@mui/material";
 import {
   GitHub,
@@ -18,6 +19,8 @@ import {
   School,
   Article,
   ContactMail,
+  DarkMode,
+  LightMode,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -31,14 +34,11 @@ import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
 import type { ContactFormData } from "@/types";
+import { useThemeContext } from "@/context/ThemeContext";
 
 // Lazy load components
 const Typewriter = dynamic(() => import("@/components/Typewriter"), {
-  loading: () => (
-    <Typography variant="h2" color="primary">
-      Yükleniyor...
-    </Typography>
-  ),
+  loading: () => <Typography variant="h2"></Typography>,
   ssr: false,
 });
 
@@ -53,6 +53,8 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isDarkMode, toggleTheme } = useThemeContext();
+  const theme = useTheme();
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -158,6 +160,24 @@ export default function Home() {
       maxWidth="lg"
       sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
     >
+      <IconButton
+        onClick={toggleTheme}
+        sx={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          border: "2px solid",
+          borderColor: "primary.main",
+          backdropFilter: "blur(4px)",
+          zIndex: 1000,
+          color: "primary.main",
+          "&:hover": {
+            backgroundColor: "rgba(100, 255, 218, 0.1)",
+          },
+        }}
+      >
+        {isDarkMode ? <LightMode /> : <DarkMode />}
+      </IconButton>
       <Box
         component="main"
         sx={{
@@ -201,7 +221,7 @@ export default function Home() {
                     width: "80%",
                     height: "2px",
                     background: (theme) =>
-                      `linear-gradient(90deg, transparent, ${theme.palette.primary.main}66, transparent)`,
+                      `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
                   },
                 }}
               >
@@ -213,11 +233,9 @@ export default function Home() {
                     mb: { xs: 4, md: 0 },
                     bgcolor: "transparent",
                     alignSelf: "center",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
                     transition: "all 0.3s ease-in-out",
                     "&:hover": {
                       transform: "scale(1.02)",
-                      boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
                     },
                   }}
                   alt={personalInfo.name}
@@ -246,6 +264,7 @@ export default function Home() {
                       alignItems: "center",
                       gap: 2,
                       justifyContent: { xs: "center", md: "flex-start" },
+                      color: "primary.main",
                     }}
                   >
                     {personalInfo.name}
@@ -299,7 +318,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -319,7 +338,7 @@ export default function Home() {
                 <BusinessCenter
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 İş Tecrübesi
@@ -329,7 +348,6 @@ export default function Home() {
                   sx={{
                     ml: 2,
                     color: "primary.main",
-                    opacity: 0.8,
                     fontStyle: "italic",
                   }}
                 >
@@ -362,7 +380,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -382,7 +400,7 @@ export default function Home() {
                 <School
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 Eğitim
@@ -413,7 +431,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -433,7 +451,7 @@ export default function Home() {
                 <Article
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 Blog Yazılarım
@@ -479,7 +497,7 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 2,
                   mb: 6,
                   fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
                   position: "relative",
@@ -499,7 +517,7 @@ export default function Home() {
                 <ContactMail
                   sx={{
                     color: "primary.main",
-                    filter: "drop-shadow(0 0 8px rgba(100, 255, 218, 0.3))",
+                    fontSize: "2rem",
                   }}
                 />
                 İletişim

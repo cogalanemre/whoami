@@ -9,18 +9,24 @@ import {
 import { AccessTime, ArrowForward } from "@mui/icons-material";
 import { BlogPost } from "@/data/blog";
 import { formatDate } from "@/utils/dateUtils";
+import { useTheme } from "@mui/material/styles";
+import { colors } from "@/theme/colors";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+  const currentColors = isDarkMode ? colors.dark : colors.light;
+
   return (
     <Card
       sx={{
         display: "flex",
         flexDirection: "column",
-        background: "rgba(36, 36, 36, 0.5)",
+        background: currentColors.surface,
         overflow: "hidden",
         height: "100%",
         transition: "all 0.3s ease-in-out",
@@ -39,8 +45,8 @@ export default function BlogCard({ post }: BlogCardProps) {
           sx={{
             position: "relative",
             width: "100%",
-            paddingTop: "56.25%", // 16:9 aspect ratio
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
+            paddingTop: "56.25%",
+            backgroundColor: currentColors.background,
             overflow: "hidden",
           }}
         >
@@ -84,9 +90,8 @@ export default function BlogCard({ post }: BlogCardProps) {
       >
         <Typography
           variant="h6"
-          color="primary"
-          gutterBottom
           sx={{
+            color: currentColors.primary,
             fontWeight: 600,
             fontSize: "1.1rem",
             lineHeight: 1.3,
@@ -96,7 +101,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            "&:hover": { color: "primary.light" },
+            "&:hover": { color: currentColors.secondary },
           }}
           component="a"
           href={post.link}
@@ -107,15 +112,17 @@ export default function BlogCard({ post }: BlogCardProps) {
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mb: 1 }}>
-          <AccessTime sx={{ fontSize: "0.9rem", color: "text.secondary" }} />
-          <Typography variant="caption" color="text.secondary">
+          <AccessTime
+            sx={{ fontSize: "0.9rem", color: currentColors.secondary }}
+          />
+          <Typography variant="caption" color={currentColors.secondary}>
             {post.readingTime}
           </Typography>
         </Box>
 
         <Typography
           variant="body2"
-          color="text.secondary"
+          color={currentColors.secondary}
           sx={{
             mb: 2,
             fontSize: "0.9rem",
@@ -136,28 +143,28 @@ export default function BlogCard({ post }: BlogCardProps) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderTop: `1px solid ${currentColors.surface}`,
           }}
         >
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" color={currentColors.secondary}>
             {formatDate(post.pubDate)}
           </Typography>
 
           <Button
             variant="text"
-            color="primary"
-            size="small"
-            endIcon={<ArrowForward />}
-            href={post.link}
-            target="_blank"
-            rel="noopener noreferrer"
             sx={{
+              color: currentColors.primary,
               "&:hover": {
                 backgroundColor: "transparent",
                 transform: "translateX(4px)",
                 transition: "all 0.2s ease-in-out",
               },
             }}
+            size="small"
+            endIcon={<ArrowForward />}
+            href={post.link}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Devamını oku
           </Button>

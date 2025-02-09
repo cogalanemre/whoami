@@ -1,28 +1,14 @@
 export const colors = {
-  primary: {
-    main: '#7EB2DD',
-    light: '#A7C8E8',
-    dark: '#5C94C4',
-    hover: 'rgba(126, 178, 221, 0.1)',
-    border: 'rgba(126, 178, 221, 0.2)',
-    borderHover: 'rgba(126, 178, 221, 0.3)',
-    timeline: 'rgba(126, 178, 221, 0.4)',
-    gradient: {
-      start: '#7EB2DD',
-      end: '#5C94C4',
-      timeline: {
-        start: '#7EB2DD',
-        end: 'rgba(126, 178, 221, 0.2)'
-      }
-    }
+  light: {
+    background: '#F0F5F9',   // Koyu mavi - sayfa arkaplanı
+    surface: '#C9D6DF'  ,    // Orta mavi - kartlar ve bileşenler için
+    secondary: '#52616B',    // En açık renk - başlıklar ve önemli metinler için
+    primary: '#1E2022',      // Açık mavi - ana vurgu rengi
   },
-  background: {
-    default: '#0A0A0A',
-    paper: 'rgba(20, 20, 20, 0.8)',
-    card: 'rgba(36, 36, 36, 0.5)'
-  },
-  text: {
-    primary: '#FFFFFF',
-    secondary: '#B3B3B3'
+  dark: {
+    background: '#121212',   // Koyu Gri
+    surface: '#1E1E1E'  ,    // Gri
+    secondary: '#E0E0E0',    // Beyaz
+    primary: '#7eb2dd',      // Mavi
   }
 }; 
