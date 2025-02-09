@@ -3,6 +3,7 @@ import { Education } from "@/data/education";
 import { formatDate } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
+import { LocationOn, CalendarToday } from "@mui/icons-material";
 
 interface EducationCardProps {
   education: Education;
@@ -29,73 +30,122 @@ export default function EducationCard({ education }: EducationCardProps) {
         <Box
           sx={{
             display: "flex",
-            alignItems: "baseline",
-            gap: 1,
-            mb: 2,
-            pb: 2,
-            borderBottom: `1px solid ${currentColors.surface}`,
+            flexDirection: "column",
+            gap: 0.5,
+            m: 0,
+            p: 0,
           }}
         >
-          <Typography
-            variant="h6"
-            sx={{ color: currentColors.primary, fontWeight: 600 }}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 0.5,
+              m: 0,
+              p: 0,
+            }}
           >
-            {education.school}
-          </Typography>
-          {education.department && (
-            <Typography
-              variant="body2"
+            <Box
               sx={{
-                color: currentColors.secondary,
-                fontSize: "0.9rem",
-                fontStyle: "italic",
+                display: "flex",
+                alignItems: "baseline",
+                gap: 1,
+                borderBottom: `1px solid ${currentColors.surface}`,
+                pb: 0.5,
+                m: 0,
               }}
             >
-              ({education.department})
-            </Typography>
-          )}
+              <Typography
+                variant="h6"
+                sx={{
+                  color: currentColors.primary,
+                  fontWeight: 600,
+                  m: 0,
+                  p: 0,
+                }}
+              >
+                {education.school}
+              </Typography>
+              {education.department && (
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: currentColors.secondary,
+                    fontSize: "0.9rem",
+                    fontStyle: "italic",
+                    m: 0,
+                    p: 0,
+                  }}
+                >
+                  ({education.department})
+                </Typography>
+              )}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 3,
+                alignItems: "center",
+                m: 0,
+                p: 0,
+                "& .MuiSvgIcon-root": {
+                  marginRight: 0,
+                  marginLeft: 0,
+                },
+                "& > *:first-of-type": {
+                  marginLeft: 0,
+                  paddingLeft: 0,
+                },
+              }}
+            >
+              <Typography
+                variant="subtitle2"
+                component="div"
+                sx={{
+                  color: currentColors.secondary,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  m: 0,
+                  p: 0,
+                }}
+              >
+                <CalendarToday
+                  sx={{
+                    color: currentColors.primary,
+                    fontSize: 18,
+                    m: 0,
+                    p: 0,
+                  }}
+                />
+                {formatDate(education.startDate)} -{" "}
+                {formatDate(education.endDate)}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                component="div"
+                sx={{
+                  color: currentColors.secondary,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  m: 0,
+                  p: 0,
+                }}
+              >
+                <LocationOn
+                  sx={{
+                    color: currentColors.primary,
+                    fontSize: 18,
+                    m: 0,
+                    p: 0,
+                  }}
+                />
+                {education.location}
+              </Typography>
+            </Box>
+          </Box>
         </Box>
-        <Typography
-          variant="subtitle2"
-          sx={{
-            color: currentColors.secondary,
-            mb: 1,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <Box
-            sx={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              bgcolor: currentColors.primary,
-              opacity: 0.7,
-            }}
-          />
-          {education.location}
-        </Typography>
-        <Typography
-          variant="subtitle2"
-          sx={{
-            color: currentColors.secondary,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <Box
-            sx={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              bgcolor: currentColors.primary,
-              opacity: 0.7,
-            }}
-          />
-          {formatDate(education.startDate)} - {formatDate(education.endDate)}
-        </Typography>
       </CardContent>
     </Card>
   );

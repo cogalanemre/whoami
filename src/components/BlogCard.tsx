@@ -34,9 +34,6 @@ export default function BlogCard({ post }: BlogCardProps) {
         "&:hover": {
           transform: "translateY(-4px)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-          "& .blog-image": {
-            transform: "scale(1.05)",
-          },
         },
       }}
     >
@@ -86,6 +83,9 @@ export default function BlogCard({ post }: BlogCardProps) {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
+          "&:last-child": {
+            paddingBottom: 2,
+          },
         }}
       >
         <Typography
@@ -112,10 +112,12 @@ export default function BlogCard({ post }: BlogCardProps) {
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mb: 1 }}>
-          <AccessTime
-            sx={{ fontSize: "0.9rem", color: currentColors.secondary }}
-          />
-          <Typography variant="caption" color={currentColors.secondary}>
+          <AccessTime sx={{ fontSize: "1rem", color: currentColors.primary }} />
+          <Typography
+            variant="caption"
+            color={currentColors.secondary}
+            sx={{ fontSize: "0.85rem" }}
+          >
             {post.readingTime}
           </Typography>
         </Box>
@@ -143,7 +145,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: `1px solid ${currentColors.surface}`,
+            borderTop: `1px solid ${currentColors.background}`,
           }}
         >
           <Typography variant="caption" color={currentColors.secondary}>
