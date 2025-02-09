@@ -101,12 +101,18 @@ export default function ContactSection({
       },
       "& .MuiInputLabel-root": {
         color: currentColors.secondary,
+        "&.Mui-focused": {
+          color: currentColors.primary,
+        },
       },
       "& .MuiInput-input": {
         color: currentColors.secondary,
         "&::placeholder": {
           color: currentColors.secondary,
           opacity: 0.7,
+        },
+        "&:hover": {
+          color: currentColors.primary,
         },
       },
     },
@@ -175,6 +181,7 @@ export default function ContactSection({
               "&:hover": {
                 borderColor: currentColors.primary,
                 transform: "translateY(-4px)",
+                boxShadow: `0 4px 20px ${currentColors.primary}20`,
               },
             }}
           >
@@ -250,8 +257,8 @@ export default function ContactSection({
                   borderColor: currentColors.primary,
                   color: currentColors.primary,
                   "&:hover": {
-                    borderColor: currentColors.secondary,
-                    backgroundColor: `${currentColors.surface}50`,
+                    borderColor: currentColors.primary,
+                    backgroundColor: `${currentColors.primary}10`,
                   },
                 }}
               >

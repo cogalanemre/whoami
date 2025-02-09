@@ -54,6 +54,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
             boxShadow: "none",
             backgroundColor: currentColors.surface,
             border: `1px solid ${currentColors.surface}`,
+            borderRadius: "12px",
             "&:hover": {
               borderColor: currentColors.primary,
             },
@@ -65,6 +66,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
           root: {
             backgroundImage: "none",
             backgroundColor: currentColors.surface,
+            borderRadius: "12px",
           },
         },
       },

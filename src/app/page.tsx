@@ -95,10 +95,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
@@ -116,10 +114,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
@@ -136,10 +132,8 @@ export default function Home() {
               borderColor: "primary.main",
               backdropFilter: "blur(4px)",
               "&:hover": {
-                backgroundColor: "rgba(100, 255, 218, 0.1)",
-                transform: "translateY(-2px) scale(1.05)",
+                transform: "translateY(-2px)",
                 transition: "all 0.2s ease-in-out",
-                boxShadow: "0 4px 20px rgba(100, 255, 218, 0.2)",
               },
             }}
           >
