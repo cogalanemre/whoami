@@ -1,4 +1,14 @@
-export const colors = {
+export interface ThemeColors {
+  background: string;
+  surface: string;
+  secondary: string;
+  primary: string;
+}
+
+export const colors: {
+  light: ThemeColors;
+  dark: ThemeColors;
+} = {
   light: {
     background: '#F5F5F5',   // Koyu mavi - sayfa arkaplanı
     surface: '#FFFFFF'  ,    // Orta mavi - kartlar ve bileşenler için

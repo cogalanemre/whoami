@@ -13,6 +13,7 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
 import { LocationOn, AccessTime } from "@mui/icons-material";
+import InfoWithIcon from "./InfoWithIcon";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -83,40 +84,25 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               >
                 {experience.company}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                <LocationOn
-                  sx={{ color: currentColors.primary, fontSize: 18 }}
-                />
-                <Typography
-                  variant="subtitle2"
-                  sx={{ color: currentColors.secondary }}
-                >
-                  {experience.location} • {experience.type}
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <AccessTime
-                  sx={{ color: currentColors.primary, fontSize: 18 }}
-                />
-                <Typography
-                  variant="subtitle2"
-                  sx={{ color: currentColors.secondary }}
-                >
-                  {formatDate(experience.startDate)} -{" "}
-                  {experience.isCurrentJob
+              <InfoWithIcon
+                icon={LocationOn}
+                text={`${experience.location} • ${experience.type}`}
+                currentColors={currentColors}
+                fontSize="0.875rem"
+              />
+              <InfoWithIcon
+                icon={AccessTime}
+                text={`${formatDate(experience.startDate)} - ${
+                  experience.isCurrentJob
                     ? "Günümüz"
-                    : formatDate(experience.endDate)}{" "}
-                  <span style={{ fontStyle: "italic" }}>
-                    (
-                    {calculateDuration(
-                      experience.startDate,
-                      experience.isCurrentJob ? new Date() : experience.endDate
-                    )}
-                    )
-                  </span>{" "}
-                  • Tam Zamanlı
-                </Typography>
-              </Box>
+                    : formatDate(experience.endDate)
+                } (${calculateDuration(
+                  experience.startDate,
+                  experience.isCurrentJob ? new Date() : experience.endDate
+                )}) • Tam Zamanlı`}
+                currentColors={currentColors}
+                fontSize="0.875rem"
+              />
             </Stack>
           </Box>
         </Box>
@@ -129,7 +115,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         >
           {experience.description.map((desc, index) => (
             <span key={index}>
-              • {desc}
+              <span style={{ color: currentColors.primary }}>•</span> {desc}
               <br />
             </span>
           ))}
