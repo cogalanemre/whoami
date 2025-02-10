@@ -18,6 +18,7 @@ import {
   linkButtonStyles,
 } from "@/theme/commonStyles";
 import InfoWithIcon from "./InfoWithIcon";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -27,6 +28,15 @@ export default function BlogCard({ post }: BlogCardProps) {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
+  const { t, locale } = useTranslation();
+  const commonTranslations = t("common");
+
+  const formatReadingTime = (readingTime: BlogPost["readingTime"]): string => {
+    const minutes = readingTime?.minutes || 1;
+    return locale === "tr"
+      ? `${minutes} dakika`
+      : `${minutes} minute${minutes > 1 ? "s" : ""}`;
+  };
 
   return (
     <Card sx={cardStyles(currentColors)}>
@@ -80,6 +90,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             lineHeight: 1.3,
             mb: 1,
             ...truncatedTextStyles,
+            textDecoration: "none",
             "&:hover": { color: currentColors.secondary },
           }}
           component="a"
@@ -92,7 +103,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
         <InfoWithIcon
           icon={AccessTime}
-          text={post.readingTime}
+          text={formatReadingTime(post.readingTime)}
           currentColors={currentColors}
         />
 
@@ -119,7 +130,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           }}
         >
           <Typography variant="caption" color={currentColors.secondary}>
-            {formatDate(post.pubDate)}
+            {formatDate(post.pubDate, locale)}
           </Typography>
 
           <Button
@@ -131,7 +142,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Devamını oku
+            {commonTranslations.blog.readMore}
           </Button>
         </Box>
       </CardContent>

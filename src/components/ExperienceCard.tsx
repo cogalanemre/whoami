@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
 import { LocationOn, AccessTime } from "@mui/icons-material";
 import InfoWithIcon from "./InfoWithIcon";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -23,6 +24,9 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
+  const { t, locale } = useTranslation();
+  const experienceTranslations = t("experiences")[experience.id];
+  const commonTranslations = t("common");
 
   return (
     <Card
@@ -69,7 +73,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               variant="h6"
               sx={{ color: currentColors.primary, mb: 1, fontWeight: "bold" }}
             >
-              {experience.title}
+              {experienceTranslations.title}
             </Typography>
             <Stack direction="row" spacing={3} alignItems="center">
               <Typography
@@ -86,20 +90,21 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               </Typography>
               <InfoWithIcon
                 icon={LocationOn}
-                text={`${experience.location} • ${experience.type}`}
+                text={`${experienceTranslations.location} • ${experienceTranslations.type}`}
                 currentColors={currentColors}
                 fontSize="0.875rem"
               />
               <InfoWithIcon
                 icon={AccessTime}
-                text={`${formatDate(experience.startDate)} - ${
+                text={`${formatDate(experience.startDate, locale)} - ${
                   experience.isCurrentJob
-                    ? "Günümüz"
-                    : formatDate(experience.endDate)
+                    ? commonTranslations.experience.current
+                    : formatDate(experience.endDate, locale)
                 } (${calculateDuration(
                   experience.startDate,
-                  experience.isCurrentJob ? new Date() : experience.endDate
-                )}) • Tam Zamanlı`}
+                  experience.isCurrentJob ? new Date() : experience.endDate,
+                  locale
+                )}) • ${commonTranslations.experience.fullTime}`}
                 currentColors={currentColors}
                 fontSize="0.875rem"
               />
@@ -113,7 +118,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
           variant="body1"
           sx={{ color: currentColors.secondary, mb: 3 }}
         >
-          {experience.description.map((desc, index) => (
+          {experienceTranslations.description.map((desc, index) => (
             <span key={index}>
               <span style={{ color: currentColors.primary }}>•</span> {desc}
               <br />

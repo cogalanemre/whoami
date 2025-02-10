@@ -15,6 +15,7 @@ import { personalInfo } from "@/data/personalInfo";
 import { useState } from "react";
 import { ContactFormData } from "@/types";
 import { colors } from "@/theme/colors";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -28,6 +29,9 @@ export default function ContactSection({
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
+  const { t } = useTranslation();
+  const commonTranslations = t("common");
+  const personalTranslations = t("personal");
 
   const [loading, setLoading] = useState(isLoading);
   const [formData, setFormData] = useState({
@@ -52,7 +56,7 @@ export default function ContactSection({
 
       setSnackbar({
         open: true,
-        message: "Mesajınız başarıyla gönderildi!",
+        message: commonTranslations.contact.success,
         severity: "success",
       });
 
@@ -66,8 +70,7 @@ export default function ContactSection({
       console.error("E-posta gönderirken hata oluştu:", error);
       setSnackbar({
         open: true,
-        message:
-          "Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+        message: commonTranslations.contact.error,
         severity: "error",
       });
     } finally {
@@ -142,13 +145,13 @@ export default function ContactSection({
               gutterBottom
               sx={{ color: currentColors.primary, mb: 4 }}
             >
-              İletişim Bilgileri
+              {commonTranslations.contact.info}
             </Typography>
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
               <LocationOn sx={{ color: currentColors.primary }} />
               <Typography color={currentColors.secondary}>
-                {personalInfo.contact.address}
+                {personalTranslations.contact.address}
               </Typography>
             </Box>
 
@@ -190,7 +193,7 @@ export default function ContactSection({
               gutterBottom
               sx={{ color: currentColors.primary, mb: 4 }}
             >
-              Mesaj Gönder
+              {commonTranslations.contact.sendMessage}
             </Typography>
 
             <Box
@@ -199,7 +202,7 @@ export default function ContactSection({
               sx={{ display: "flex", flexDirection: "column", gap: 2 }}
             >
               <TextField
-                label="Ad Soyad"
+                label={commonTranslations.contact.form.name}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -210,7 +213,7 @@ export default function ContactSection({
               />
 
               <TextField
-                label="E-posta"
+                label={commonTranslations.contact.form.email}
                 name="email"
                 type="email"
                 value={formData.email}
@@ -222,18 +225,18 @@ export default function ContactSection({
               />
 
               <TextField
-                label="Telefon"
+                label={commonTranslations.contact.form.phone}
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="Opsiyonel"
+                placeholder={commonTranslations.contact.form.phoneOptional}
                 fullWidth
                 variant="standard"
                 {...inputProps}
               />
 
               <TextField
-                label="Mesajınız"
+                label={commonTranslations.contact.form.message}
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
@@ -262,7 +265,9 @@ export default function ContactSection({
                   },
                 }}
               >
-                {loading ? "Gönderiliyor..." : "Gönder"}
+                {loading
+                  ? commonTranslations.contact.form.sending
+                  : commonTranslations.contact.form.send}
               </Button>
             </Box>
           </Paper>

@@ -57,7 +57,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const { isDarkMode, toggleTheme } = useThemeContext();
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+  const personalTranslations = t("personal");
+  const commonTranslations = t("common");
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -80,8 +82,8 @@ export default function Home() {
 
   // Memoize expensive calculations
   const totalExperience = useMemo(
-    () => calculateTotalExperience(experiences),
-    []
+    () => calculateTotalExperience(experiences, locale),
+    [locale]
   );
 
   const socialButtons = useMemo(
@@ -192,7 +194,7 @@ export default function Home() {
             transition: "opacity 0.3s ease-in-out",
           }}
         >
-          {t("theme.dark")}
+          {commonTranslations.theme.dark}
         </Typography>
         <Box
           sx={{
@@ -226,7 +228,7 @@ export default function Home() {
             transition: "opacity 0.3s ease-in-out",
           }}
         >
-          {t("theme.light")}
+          {commonTranslations.theme.light}
         </Typography>
       </Box>
       <Box
@@ -327,7 +329,10 @@ export default function Home() {
                       mb: 1,
                     }}
                   >
-                    <Typewriter texts={personalInfo.titles} delay={150} />
+                    <Typewriter
+                      texts={personalTranslations.titles}
+                      delay={150}
+                    />
                   </Box>
                   <Box
                     sx={{
@@ -392,7 +397,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                {t("sections.experience")}
+                {commonTranslations.sections.experience}
                 <Typography
                   component="span"
                   variant="h6"
@@ -454,7 +459,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                {t("sections.education")}
+                {commonTranslations.sections.education}
               </Typography>
               <Box>
                 <Stack spacing={4}>
@@ -505,14 +510,14 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                {t("sections.blog")}
+                {commonTranslations.sections.blog}
               </Typography>
               <Box>
                 <Grid container spacing={{ xs: 2, sm: 3 }}>
                   {loading ? (
                     <Grid item xs={12}>
                       <Typography align="center">
-                        {t("blog.loading")}
+                        {commonTranslations.blog.loading}
                       </Typography>
                     </Grid>
                   ) : blogPosts.length > 0 ? (
@@ -530,7 +535,7 @@ export default function Home() {
                   ) : (
                     <Grid item xs={12}>
                       <Typography align="center">
-                        {t("blog.noPosts")}
+                        {commonTranslations.blog.noPosts}
                       </Typography>
                     </Grid>
                   )}
@@ -571,7 +576,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                {t("sections.contact")}
+                {commonTranslations.sections.contact}
               </Typography>
               <Box>
                 <ContactSection
