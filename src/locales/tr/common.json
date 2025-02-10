@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "experience": "İş Tecrübesi",
+    "education": "Eğitim",
+    "blog": "Blog Yazılarım",
+    "contact": "İletişim"
+  },
+  "contact": {
+    "info": "İletişim Bilgileri",
+    "sendMessage": "Mesaj Gönder",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "phoneOptional": "Opsiyonel",
+      "message": "Mesajınız",
+      "send": "Gönder",
+      "sending": "Gönderiliyor..."
+    },
+    "success": "Mesajınız başarıyla gönderildi!",
+    "error": "Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+  },
+  "blog": {
+    "readMore": "Devamını oku",
+    "loading": "Yazılar yükleniyor...",
+    "noPosts": "Henüz blog yazısı bulunmuyor."
+  },
+  "theme": {
+    "dark": "Koyu",
+    "light": "Açık"
+  },
+  "experience": {
+    "current": "Günümüz",
+    "fullTime": "Tam Zamanlı"
+  }
+} 

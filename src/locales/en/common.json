@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "experience": "Work Experience",
+    "education": "Education",
+    "blog": "My Blog Posts",
+    "contact": "Contact"
+  },
+  "contact": {
+    "info": "Contact Information",
+    "sendMessage": "Send Message",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "phoneOptional": "Optional",
+      "message": "Your Message",
+      "send": "Send",
+      "sending": "Sending..."
+    },
+    "success": "Your message has been sent successfully!",
+    "error": "An error occurred while sending your message. Please try again later."
+  },
+  "blog": {
+    "readMore": "Read more",
+    "loading": "Loading posts...",
+    "noPosts": "No blog posts available yet."
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "experience": {
+    "current": "Present",
+    "fullTime": "Full Time"
+  }
+} 

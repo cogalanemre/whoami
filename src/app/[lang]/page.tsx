@@ -35,6 +35,8 @@ import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
 import type { ContactFormData } from "@/types";
 import { useThemeContext } from "@/context/ThemeContext";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 // Lazy load components
 const Typewriter = dynamic(() => import("@/components/Typewriter"), {
@@ -43,7 +45,7 @@ const Typewriter = dynamic(() => import("@/components/Typewriter"), {
 });
 
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
-  loading: () => <Typography>İletişim formu yükleniyor...</Typography>,
+  loading: () => <Typography>Loading contact form...</Typography>,
   ssr: false,
 });
 
@@ -55,6 +57,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const { isDarkMode, toggleTheme } = useThemeContext();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -154,6 +157,7 @@ export default function Home() {
       maxWidth="lg"
       sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
     >
+      <LanguageSwitcher />
       <Box
         onClick={toggleTheme}
         sx={{
@@ -188,7 +192,7 @@ export default function Home() {
             transition: "opacity 0.3s ease-in-out",
           }}
         >
-          Koyu
+          {t("theme.dark")}
         </Typography>
         <Box
           sx={{
@@ -222,7 +226,7 @@ export default function Home() {
             transition: "opacity 0.3s ease-in-out",
           }}
         >
-          Açık
+          {t("theme.light")}
         </Typography>
       </Box>
       <Box
@@ -388,7 +392,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                İş Tecrübesi
+                {t("sections.experience")}
                 <Typography
                   component="span"
                   variant="h6"
@@ -450,7 +454,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                Eğitim
+                {t("sections.education")}
               </Typography>
               <Box>
                 <Stack spacing={4}>
@@ -501,14 +505,14 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                Blog Yazılarım
+                {t("sections.blog")}
               </Typography>
               <Box>
                 <Grid container spacing={{ xs: 2, sm: 3 }}>
                   {loading ? (
                     <Grid item xs={12}>
                       <Typography align="center">
-                        Yazılar yükleniyor...
+                        {t("blog.loading")}
                       </Typography>
                     </Grid>
                   ) : blogPosts.length > 0 ? (
@@ -526,7 +530,7 @@ export default function Home() {
                   ) : (
                     <Grid item xs={12}>
                       <Typography align="center">
-                        Henüz blog yazısı bulunmuyor.
+                        {t("blog.noPosts")}
                       </Typography>
                     </Grid>
                   )}
@@ -567,7 +571,7 @@ export default function Home() {
                     fontSize: "2rem",
                   }}
                 />
-                İletişim
+                {t("sections.contact")}
               </Typography>
               <Box>
                 <ContactSection
