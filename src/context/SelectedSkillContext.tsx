@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface SelectedSkillContextType {
   selectedSkill: string | null;
@@ -11,6 +17,27 @@ const SelectedSkillContext = createContext<
 
 export function SelectedSkillProvider({ children }: { children: ReactNode }) {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+
+      // Eğer tıklanan element bir kart veya chip değilse seçimi kaldır
+      if (
+        !target.closest(".MuiPaper-root") && // Kartlar için
+        !target.closest(".MuiChip-root") && // Chip'ler için
+        selectedSkill !== null
+      ) {
+        setSelectedSkill(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [selectedSkill]);
 
   return (
     <SelectedSkillContext.Provider value={{ selectedSkill, setSelectedSkill }}>
