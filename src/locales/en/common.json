@@ -33,5 +33,9 @@
   "experience": {
     "current": "Present",
     "fullTime": "Full Time"
+  },
+  "skills": {
+    "showAll": "Show All Skills",
+    "showLess": "Show Less"
   }
 } 

@@ -16,7 +16,7 @@ import { LocationOn, AccessTime } from "@mui/icons-material";
 import InfoWithIcon from "./InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -31,6 +31,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
     const experienceTranslations = t("experiences")[experience.id];
     const commonTranslations = t("common");
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
+    const [showAllSkills, setShowAllSkills] = useState(false);
 
     const isHighlighted =
       selectedSkill && experience.skills.includes(selectedSkill);
@@ -62,8 +63,10 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
       >
         <Box
           sx={{
-            background: currentColors.background,
-            borderBottom: `1px solid ${currentColors.surface}`,
+            background: isDarkMode
+              ? "rgba(255, 255, 255, 0.03)"
+              : "rgba(0, 0, 0, 0.03)",
+            backdropFilter: "blur(4px)",
             p: 3,
           }}
         >
@@ -87,11 +90,20 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="h6"
-                sx={{ color: currentColors.primary, mb: 1, fontWeight: "bold" }}
+                sx={{
+                  color: currentColors.primary,
+                  mb: 1,
+                  fontWeight: "bold",
+                  textAlign: { xs: "center", md: "left" },
+                }}
               >
                 {experienceTranslations.title}
               </Typography>
-              <Stack direction="row" spacing={3} alignItems="center">
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                spacing={{ xs: 1, md: 3 }}
+                alignItems={{ xs: "flex-start", md: "center" }}
+              >
                 <Typography
                   variant="subtitle1"
                   sx={{
@@ -149,7 +161,15 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             }}
           />
 
-          <Stack direction="row" spacing={1} flexWrap="wrap">
+          <Stack
+            direction="row"
+            spacing={1}
+            flexWrap="wrap"
+            justifyContent={{ xs: "center", md: "flex-start" }}
+            sx={{
+              gap: 1,
+            }}
+          >
             {experience.skills.map((skill, index) => (
               <Chip
                 key={index}
@@ -160,7 +180,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                   setSelectedSkill(selectedSkill === skill ? null : skill)
                 }
                 sx={{
-                  mb: 1,
                   bgcolor:
                     selectedSkill === skill
                       ? currentColors.primary

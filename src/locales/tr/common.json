@@ -33,5 +33,9 @@
   "experience": {
     "current": "Günümüz",
     "fullTime": "Tam Zamanlı"
+  },
+  "skills": {
+    "showAll": "Tüm Yetenekleri Göster",
+    "showLess": "Daha Az Göster"
   }
 } 
