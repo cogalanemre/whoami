@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-  Button,
-} from "@mui/material";
+import { Card, CardContent, Typography, Box, Button } from "@mui/material";
+import Image from "next/image";
 import { AccessTime, ArrowForward } from "@mui/icons-material";
 import { BlogPost } from "@/data/blog";
 import { formatDate } from "@/utils/dateUtils";
@@ -17,14 +11,15 @@ import {
   truncatedTextStyles,
   linkButtonStyles,
 } from "@/theme/commonStyles";
-import InfoWithIcon from "./InfoWithIcon";
+import InfoWithIcon from "@/components/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
+import { memo } from "react";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
+function BlogCard({ post }: BlogCardProps) {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
@@ -39,7 +34,12 @@ export default function BlogCard({ post }: BlogCardProps) {
   };
 
   return (
-    <Card sx={cardStyles(currentColors)}>
+    <Card
+      sx={cardStyles(currentColors)}
+      component="article"
+      role="article"
+      aria-label={post.title}
+    >
       {post.thumbnail && (
         <Box
           sx={{
@@ -50,21 +50,16 @@ export default function BlogCard({ post }: BlogCardProps) {
             overflow: "hidden",
           }}
         >
-          <CardMedia
-            component="img"
-            className="blog-image"
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
+          <Image
+            src={post.thumbnail}
+            alt={`${post.title} için kapak görseli`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{
               objectFit: "cover",
               objectPosition: "center",
-              transition: "transform 0.3s ease-in-out",
             }}
-            image={post.thumbnail}
-            alt={post.title}
+            priority
           />
           <Box
             sx={{
@@ -77,12 +72,17 @@ export default function BlogCard({ post }: BlogCardProps) {
               height: "70%",
               pointerEvents: "none",
             }}
+            aria-hidden="true"
           />
         </Box>
       )}
       <CardContent sx={cardContentStyles}>
         <Typography
           variant="h6"
+          component="a"
+          href={post.link}
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{
             color: currentColors.primary,
             fontWeight: 600,
@@ -93,10 +93,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             textDecoration: "none",
             "&:hover": { color: currentColors.secondary },
           }}
-          component="a"
-          href={post.link}
-          target="_blank"
-          rel="noopener noreferrer"
+          aria-label={`${post.title} - Blog yazısını oku`}
         >
           {post.title}
         </Typography>
@@ -105,6 +102,9 @@ export default function BlogCard({ post }: BlogCardProps) {
           icon={AccessTime}
           text={formatReadingTime(post.readingTime)}
           currentColors={currentColors}
+          aria-label={`Tahmini okuma süresi: ${formatReadingTime(
+            post.readingTime
+          )}`}
         />
 
         <Typography
@@ -129,7 +129,11 @@ export default function BlogCard({ post }: BlogCardProps) {
             borderTop: `1px solid ${currentColors.background}`,
           }}
         >
-          <Typography variant="caption" color={currentColors.secondary}>
+          <Typography
+            variant="caption"
+            color={currentColors.secondary}
+            aria-label={`Yayın tarihi: ${formatDate(post.pubDate, locale)}`}
+          >
             {formatDate(post.pubDate, locale)}
           </Typography>
 
@@ -137,10 +141,11 @@ export default function BlogCard({ post }: BlogCardProps) {
             variant="text"
             sx={linkButtonStyles(currentColors)}
             size="small"
-            endIcon={<ArrowForward />}
+            endIcon={<ArrowForward aria-hidden="true" />}
             href={post.link}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${post.title} - ${commonTranslations.blog.readMore}`}
           >
             {commonTranslations.blog.readMore}
           </Button>
@@ -149,3 +154,5 @@ export default function BlogCard({ post }: BlogCardProps) {
     </Card>
   );
 }
+
+export default memo(BlogCard);

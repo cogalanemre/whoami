@@ -56,7 +56,7 @@ export const SECURITY_CONFIG = {
   },
   CORS_OPTIONS: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ['https://yourdomain.com'] 
+      ? ['https://cogalanemre.com'] 
       : ['http://localhost:3000'],
     methods: ['GET', 'POST'],
     credentials: true,
