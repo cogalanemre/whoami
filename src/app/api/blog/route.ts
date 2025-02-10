@@ -25,17 +25,17 @@ interface RSSFeed {
   };
 }
 
-function extractReadingTime(content: string): string {
+interface ReadingTime {
+  minutes: number;
+}
+
+function extractReadingTime(content: string): ReadingTime {
   // İçeriğin uzunluğuna göre tahmini okuma süresi hesapla
   // Ortalama okuma hızı: 200 kelime/dakika
   const wordCount = content.split(/\s+/).length;
   const minutes = Math.ceil(wordCount / 200);
   
-  if (minutes < 1) {
-    return '1 dakika';
-  }
-  
-  return `${minutes} dakika`;
+  return { minutes: Math.max(1, minutes) };
 }
 
 function extractFirstParagraph(content: string): string {

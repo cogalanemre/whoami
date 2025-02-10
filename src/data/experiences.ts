@@ -1,21 +1,12 @@
-export interface Experience {
-  company: string;
-  title: string;
-  startDate: Date;
-  endDate?: Date;
-  isCurrentJob?: boolean;
-  location: string;
-  type: string;
-  logo: string;
-  description: string[];
-  skills: string[];
-}
+import { Experience } from '@/types';
 
 export const experiences: Experience[] = [
   {
+    id: 'dgpays',
     company: 'DGPays',
-    title: 'Senior Software Engineering',
+    title: 'Senior Software Engineer',
     startDate: new Date('2023-01-01'),
+    endDate: undefined,
     isCurrentJob: true,
     location: 'Ataşehir, İstanbul, Türkiye',
     type: 'Hibrit',
@@ -30,6 +21,7 @@ export const experiences: Experience[] = [
     skills: ['Jenkins', 'CI/CD', 'PL/SQL', 'JavaScript', 'GitLab']
   },
   {
+    id: 'obss',
     company: 'OBSS',
     title: 'Senior Software Consultant',
     startDate: new Date('2022-01-01'),
@@ -48,8 +40,9 @@ export const experiences: Experience[] = [
     skills: ['Java', 'Spring', 'React', 'Kubernetes', 'Kafka']
   },
   {
+    id: 'streamDelta',
     company: 'StreamDelta',
-    title: 'Software Engineering',
+    title: 'Software Engineer',
     startDate: new Date('2021-07-01'),
     endDate: new Date('2021-12-31'),
     location: 'İstanbul, Türkiye',
@@ -65,8 +58,9 @@ export const experiences: Experience[] = [
     skills: ['Java', 'Spring Boot', 'Camunda', 'MongoDB', 'Redis']
   },
   {
+    id: 'sikayetvar',
     company: 'Sikayetvar.com',
-    title: 'Software Engineering',
+    title: 'Software Engineer',
     startDate: new Date('2018-09-01'),
     endDate: new Date('2020-12-31'),
     location: 'Ankara, Türkiye',
