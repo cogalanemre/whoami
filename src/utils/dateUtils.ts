@@ -5,7 +5,7 @@ const MONTHS = {
 };
 
 // Tip tanımlamaları
-type DateInput = Date | string | undefined | null;
+export type DateInput = Date | string | undefined | null;
 type Locale = keyof typeof MONTHS;
 
 /**

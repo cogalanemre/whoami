@@ -1,5 +1,4 @@
-// Ortak tipler
-export type DateInput = Date | string | undefined | null;
+import type { DateInput } from '@/utils/dateUtils';
 
 // Deneyim tipleri
 export interface Experience {

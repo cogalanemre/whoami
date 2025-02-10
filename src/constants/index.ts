@@ -1,6 +1,3 @@
-// Tarih formatları
-export const TURKISH_MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'] as const;
-
 // Animasyon sabitleri
 export const ANIMATION_DURATION = {
   FAST: 0.2,
@@ -26,13 +23,6 @@ export const COMPONENT_SIZES = {
     MEDIUM: 8,
     LARGE: 12,
   },
-  TIMELINE: {
-    WIDTH: 2,
-    LEFT_OFFSET: {
-      EXPERIENCE: 20,
-      EDUCATION: 10,
-    },
-  },
 } as const;
 
 // Form sabitleri
@@ -50,10 +40,6 @@ export const API_CONFIG = {
 
 // Güvenlik sabitleri
 export const SECURITY_CONFIG = {
-  XSS_OPTIONS: {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'p', 'br'],
-    ALLOWED_ATTR: ['href', 'target', 'rel'],
-  },
   CORS_OPTIONS: {
     origin: process.env.NODE_ENV === 'production' 
       ? ['https://cogalanemre.com'] 
