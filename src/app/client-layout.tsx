@@ -6,6 +6,7 @@ import {
   ThemeProvider as CustomThemeProvider,
   useThemeContext,
 } from "@/context/ThemeContext";
+import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
 import { colors } from "@/theme/colors";
 
 export default function ClientLayout({
@@ -15,7 +16,9 @@ export default function ClientLayout({
 }) {
   return (
     <CustomThemeProvider>
-      <ThemeWrapper>{children}</ThemeWrapper>
+      <ThemeWrapper>
+        <SelectedSkillProvider>{children}</SelectedSkillProvider>
+      </ThemeWrapper>
     </CustomThemeProvider>
   );
 }

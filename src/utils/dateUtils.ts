@@ -38,7 +38,7 @@ const calculateMonthsBetween = (startDate: Date, endDate: Date): number => {
 /**
  * Ay sayısını yıl ve ay olarak formatlar
  */
-const formatDuration = (totalMonths: number, locale: Locale = 'tr'): string => {
+export const formatDuration = (totalMonths: number, locale: Locale = 'tr'): string => {
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
   
@@ -87,4 +87,49 @@ export const calculateTotalExperience = (
   }, 0);
 
   return formatDuration(totalMonths, locale);
+};
+
+/**
+ * Yeteneklere göre toplam deneyim süresini hesaplar
+ */
+export const calculateSkillDuration = (
+  experiences: Array<{ 
+    startDate: DateInput; 
+    endDate?: DateInput; 
+    isCurrentJob?: boolean;
+    skills: string[];
+  }>,
+): Map<string, number> => {
+  const skillDurations = new Map<string, number>();
+
+  experiences.forEach((exp) => {
+    const start = normalizeDate(exp.startDate);
+    const end = exp.isCurrentJob ? new Date() : normalizeDate(exp.endDate);
+    const months = calculateMonthsBetween(start, end);
+
+    exp.skills.forEach((skill) => {
+      const currentDuration = skillDurations.get(skill) || 0;
+      skillDurations.set(skill, currentDuration + months);
+    });
+  });
+
+  // Sürelere göre sırala
+  return new Map([...skillDurations.entries()].sort((a, b) => b[1] - a[1]));
+};
+
+/**
+ * Toplam deneyim süresini ay cinsinden hesaplar
+ */
+export const calculateTotalMonths = (
+  experiences: Array<{ 
+    startDate: DateInput; 
+    endDate?: DateInput; 
+    isCurrentJob?: boolean; 
+  }>,
+): number => {
+  return experiences.reduce((total, exp) => {
+    const start = normalizeDate(exp.startDate);
+    const end = exp.isCurrentJob ? new Date() : normalizeDate(exp.endDate);
+    return total + calculateMonthsBetween(start, end);
+  }, 0);
 }; 

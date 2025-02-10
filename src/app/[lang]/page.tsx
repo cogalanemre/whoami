@@ -27,6 +27,7 @@ import { useState, useEffect, useMemo } from "react";
 import ExperienceCard from "@/components/ExperienceCard";
 import EducationCard from "@/components/EducationCard";
 import BlogCard from "@/components/BlogCard";
+import SkillsSection from "@/components/SkillsSection";
 import { personalInfo } from "@/data/personalInfo";
 import { experiences } from "@/data/experiences";
 import { education } from "@/data/education";
@@ -425,6 +426,11 @@ export default function Home() {
                 </Stack>
               </Box>
             </Box>
+          </Grid>
+
+          {/* Skills Section */}
+          <Grid item xs={12}>
+            <SkillsSection experiences={experiences} />
           </Grid>
 
           {/* Education Section */}
