@@ -8,7 +8,7 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import { Experience } from "@/data/experiences";
+import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
@@ -16,14 +16,14 @@ import { LocationOn, AccessTime } from "@mui/icons-material";
 import InfoWithIcon from "./InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
 interface ExperienceCardProps {
   experience: Experience;
 }
 
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
-  ({ experience }, ref) => {
+  function ExperienceCard({ experience }, ref) {
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === "dark";
     const currentColors = isDarkMode ? colors.dark : colors.light;
@@ -31,7 +31,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
     const experienceTranslations = t("experiences")[experience.id];
     const commonTranslations = t("common");
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
-    const [showAllSkills, setShowAllSkills] = useState(false);
 
     const isHighlighted =
       selectedSkill && experience.skills.includes(selectedSkill);

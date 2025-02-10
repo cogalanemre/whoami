@@ -1,7 +1,6 @@
 import { Box, Typography, CircularProgress, Grid, Paper } from "@mui/material";
 import {
   calculateSkillDuration,
-  formatDuration,
   calculateTotalMonths,
 } from "@/utils/dateUtils";
 import { Experience } from "@/types";
@@ -166,7 +165,9 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
           ([skill, duration], index) => (
             <Grid item xs={12} sm={6} md={4} key={skill}>
               <MotionPaper
-                ref={(el) => (skillRefs.current[skill] = el)}
+                ref={(el) => {
+                  skillRefs.current[skill] = el;
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
