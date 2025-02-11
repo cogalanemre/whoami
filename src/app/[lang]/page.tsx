@@ -19,8 +19,6 @@ import {
   School,
   Article,
   ContactMail,
-  DarkMode,
-  LightMode,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -35,9 +33,9 @@ import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
 import type { ContactFormData } from "@/types";
-import { useThemeContext } from "@/context/ThemeContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 // Lazy load components
 const Typewriter = dynamic(() => import("@/components/Typewriter"), {
@@ -56,8 +54,6 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const { isDarkMode, toggleTheme } = useThemeContext();
-  const theme = useTheme();
   const { t, locale } = useTranslation();
   const personalTranslations = t("personal");
   const commonTranslations = t("common");
@@ -161,77 +157,7 @@ export default function Home() {
       sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
     >
       <LanguageSwitcher />
-      <Box
-        onClick={toggleTheme}
-        sx={{
-          position: "fixed",
-          top: 20,
-          right: 20,
-          width: "70px",
-          height: "30px",
-          borderRadius: "15px",
-          backgroundColor: theme.palette.background.paper,
-          border: "2px solid",
-          borderColor: "primary.main",
-          display: "flex",
-          alignItems: "center",
-          padding: "2px",
-          cursor: "pointer",
-          zIndex: 1000,
-          transition: "all 0.3s ease-in-out",
-          justifyContent: "space-between",
-          "&:hover": {
-            transform: "scale(1.05)",
-          },
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: "0.7rem",
-            color: isDarkMode ? "primary.main" : "text.secondary",
-            ml: 0.8,
-            userSelect: "none",
-            opacity: isDarkMode ? 1 : 0,
-            transition: "opacity 0.3s ease-in-out",
-          }}
-        >
-          {commonTranslations.theme.dark}
-        </Typography>
-        <Box
-          sx={{
-            width: "26px",
-            height: "26px",
-            borderRadius: "50%",
-            backgroundColor: "primary.main",
-            transform: isDarkMode ? "translateX(23px)" : "translateX(-20px)",
-            transition: "transform 0.3s ease-in-out",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: theme.palette.background.paper,
-            position: "absolute",
-            left: "18px",
-          }}
-        >
-          {isDarkMode ? (
-            <LightMode sx={{ fontSize: 16 }} />
-          ) : (
-            <DarkMode sx={{ fontSize: 16 }} />
-          )}
-        </Box>
-        <Typography
-          sx={{
-            fontSize: "0.8rem",
-            color: !isDarkMode ? "primary.main" : "text.secondary",
-            mr: 0.8,
-            userSelect: "none",
-            opacity: !isDarkMode ? 1 : 0,
-            transition: "opacity 0.3s ease-in-out",
-          }}
-        >
-          {commonTranslations.theme.light}
-        </Typography>
-      </Box>
+      <ThemeSwitcher />
       <Box
         component="main"
         sx={{
