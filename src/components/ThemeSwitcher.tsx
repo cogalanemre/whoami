@@ -3,7 +3,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useThemeContext } from "@/context/ThemeContext";
-import { colors } from "@/theme/colors";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function ThemeSwitcher() {
