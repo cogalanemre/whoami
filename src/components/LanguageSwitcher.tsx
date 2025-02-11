@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
         top: 60,
         right: 20,
         zIndex: 1000,
-        width: "70px",
+        width: "60px",
         height: "30px",
         backgroundColor: theme.palette.background.paper,
         border: "2px solid",
@@ -37,7 +37,8 @@ export default function LanguageSwitcher() {
         overflow: "hidden",
         padding: 0,
         "& .MuiButton-root": {
-          minWidth: "35px",
+          minWidth: "30px",
+          width: "30px",
           height: "100%",
           padding: 0,
           border: "none",
@@ -70,14 +71,15 @@ export default function LanguageSwitcher() {
       >
         <Box
           sx={{
-            width: "20px",
-            height: "20px",
+            width: "100%",
+            height: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "0.7rem",
-            fontWeight: "normal",
+            fontSize: "0.6rem",
+            fontWeight: "bold",
             userSelect: "none",
+            ml: 0.5,
           }}
         >
           TR
@@ -89,14 +91,15 @@ export default function LanguageSwitcher() {
       >
         <Box
           sx={{
-            width: "20px",
-            height: "20px",
+            width: "100%",
+            height: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "0.7rem",
-            fontWeight: "normal",
+            fontSize: "0.6rem",
+            fontWeight: "bold",
             userSelect: "none",
+            mr: 0.5,
           }}
         >
           EN

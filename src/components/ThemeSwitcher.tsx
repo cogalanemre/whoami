@@ -18,7 +18,7 @@ export default function ThemeSwitcher() {
         position: "fixed",
         top: 20,
         right: 20,
-        width: "70px",
+        width: "60px",
         height: "30px",
         borderRadius: "15px",
         backgroundColor: theme.palette.background.paper,
@@ -31,16 +31,27 @@ export default function ThemeSwitcher() {
         zIndex: 1000,
         transition: "all 0.3s ease-in-out",
         justifyContent: "space-between",
+        "@keyframes rotate360": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
         "&:hover": {
-          transform: "scale(1.05)",
+          "& .theme-icon-inner": {
+            animation: "rotate360 0.5s ease-in-out",
+          },
         },
       }}
     >
       <Typography
         sx={{
-          fontSize: "0.7rem",
+          fontSize: "0.6rem",
+          fontWeight: "bold",
           color: isDarkMode ? "primary.main" : "text.secondary",
-          ml: 0.8,
+          ml: 0.4,
           userSelect: "none",
           opacity: isDarkMode ? 1 : 0,
           transition: "opacity 0.3s ease-in-out",
@@ -49,12 +60,13 @@ export default function ThemeSwitcher() {
         {commonTranslations.theme.dark}
       </Typography>
       <Box
+        className="theme-icon"
         sx={{
           width: "26px",
           height: "26px",
           borderRadius: "50%",
           backgroundColor: "primary.main",
-          transform: isDarkMode ? "translateX(23px)" : "translateX(-20px)",
+          transform: isDarkMode ? "translateX(13px)" : "translateX(-19px)",
           transition: "transform 0.3s ease-in-out",
           display: "flex",
           alignItems: "center",
@@ -64,17 +76,27 @@ export default function ThemeSwitcher() {
           left: "18px",
         }}
       >
-        {isDarkMode ? (
-          <LightMode sx={{ fontSize: 16 }} />
-        ) : (
-          <DarkMode sx={{ fontSize: 16 }} />
-        )}
+        <Box
+          className="theme-icon-inner"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {isDarkMode ? (
+            <LightMode sx={{ fontSize: 16 }} />
+          ) : (
+            <DarkMode sx={{ fontSize: 16 }} />
+          )}
+        </Box>
       </Box>
       <Typography
         sx={{
-          fontSize: "0.8rem",
+          fontSize: "0.6rem",
+          fontWeight: "bold",
           color: !isDarkMode ? "primary.main" : "text.secondary",
-          mr: 0.8,
+          mr: 0.6,
           userSelect: "none",
           opacity: !isDarkMode ? 1 : 0,
           transition: "opacity 0.3s ease-in-out",

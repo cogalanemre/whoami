@@ -35,8 +35,6 @@ export default function EducationCard({ education }: EducationCardProps) {
             display: "flex",
             flexDirection: "column",
             gap: 0.5,
-            m: 0,
-            p: 0,
           }}
         >
           <Box
@@ -46,7 +44,6 @@ export default function EducationCard({ education }: EducationCardProps) {
               gap: 1,
               borderBottom: `1px solid ${currentColors.surface}`,
               pb: 0.5,
-              m: 0,
             }}
           >
             <Typography
@@ -54,8 +51,6 @@ export default function EducationCard({ education }: EducationCardProps) {
               sx={{
                 color: currentColors.primary,
                 fontWeight: 600,
-                m: 0,
-                p: 0,
               }}
             >
               {educationTranslations.school}
@@ -67,8 +62,6 @@ export default function EducationCard({ education }: EducationCardProps) {
                   color: currentColors.secondary,
                   fontSize: "0.9rem",
                   fontStyle: "italic",
-                  m: 0,
-                  p: 0,
                 }}
               >
                 ({educationTranslations.department})
@@ -80,8 +73,6 @@ export default function EducationCard({ education }: EducationCardProps) {
               display: "flex",
               gap: 3,
               alignItems: "center",
-              m: 0,
-              p: 0,
             }}
           >
             <InfoWithIcon
