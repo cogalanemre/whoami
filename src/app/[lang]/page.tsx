@@ -9,7 +9,6 @@ import {
   Stack,
   Avatar,
   Container,
-  useTheme,
 } from "@mui/material";
 import {
   GitHub,
@@ -36,13 +35,9 @@ import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import Typewriter from "@/components/Typewriter";
 
 // Lazy load components
-const Typewriter = dynamic(() => import("@/components/Typewriter"), {
-  loading: () => <Typography variant="h2"></Typography>,
-  ssr: false,
-});
-
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
   loading: () => <Typography>Loading contact form...</Typography>,
   ssr: false,

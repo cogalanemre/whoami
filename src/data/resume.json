@@ -1,0 +1,208 @@
+{
+  "personalInfo": {
+    "name": "Emre ÇOĞALAN",
+    "avatar": "/profile.png",
+    "contact": {
+      "phone": "+90 551 853 5776",
+      "email": "comengcogalan@gmail.com"
+    },
+    "socialMedia": {
+      "github": "https://github.com/cogalanemre",
+      "linkedin": "https://www.linkedin.com/in/cogalanemre",
+      "medium": "https://medium.com/@cogalanemre"
+    },
+    "location": {
+      "tr": "İstanbul, Türkiye",
+      "en": "Istanbul, Turkey"
+    },
+    "titles": {
+      "tr": [
+        "Kıdemli Yazılım Mühendisi",
+        "Full Stack Geliştirici",
+        "Yazılım Danışmanı",
+        "Mikroservis Mimarı"
+      ],
+      "en": [
+        "Senior Software Engineer",
+        "Full Stack Developer",
+        "Software Consultant",
+        "Microservice Architect"
+      ]
+    }
+  },
+  "experiences": [
+    {
+      "company": "DGPays",
+      "logo": "/dgpays.png",
+      "startDate": "2023-01-01",
+      "endDate": null,
+      "workingModel": 1,
+      "employmentType": 1,
+      "tr": {
+        "position": "Kıdemli Yazılım Mühendisi",
+        "location": "Ataşehir, İstanbul, Türkiye",
+        "description": [
+          "C# ve .NET Core kullanarak API'ler geliştirdim",
+          "JavaScript ve DevExtreme ile kullanıcı arayüzleri oluşturdum",
+          "Ödeme kolaylaştırıcı entegrasyonu, kampanya modülü ve doğrudan operatör faturalandırma (DCB) modülü gibi çeşitli projelerde çalıştım",
+          "MSSQL ile veritabanı yönetimi yaptım",
+          "Agile Scrum metodolojisini takip ettim, görev ve proje yönetimi için JIRA kullandım"
+        ]
+      },
+      "en": {
+        "position": "Senior Software Engineer",
+        "location": "Atasehir, Istanbul, Turkey",
+        "description": [
+          "Developed APIs using C# and .NET Core",
+          "Created user interfaces using JavaScript and DevExtreme",
+          "Worked on various projects including payment facilitator integration, campaign module, and direct carrier billing (DCB) module",
+          "Managed databases using MSSQL",
+          "Followed Agile Scrum methodology, used JIRA for task and project management"
+        ]
+      },
+      "skills": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
+    },
+    {
+      "company": "OBSS",
+      "logo": "/obss.webp",
+      "startDate": "2022-01-01",
+      "endDate": "2023-01-01",
+      "workingModel": 1,
+      "employmentType": 1,
+      "tr": {
+        "position": "Kıdemli Yazılım Danışmanı",
+        "location": "Ankara, Türkiye",
+        "description": [
+          "Aselsan'da dış kaynaklı Kıdemli Yazılım Danışmanı olarak çalıştım",
+          "Java 8+, Spring ve Hibernate kullanarak mikroservisler geliştirdim",
+          "Kafka kullanarak servisler arası event-driven iletişimi uyguladım",
+          "React kullanarak single-page uygulamalar geliştirdim",
+          "PostgreSQL ile veritabanı yönetimi yaptım",
+          "Servisleri Kubernetes'e deploy ettim"
+        ]
+      },
+      "en": {
+        "position": "Senior Software Consultant",
+        "location": "Ankara, Turkey",
+        "description": [
+          "Worked as an outsourced Senior Software Consultant at Aselsan",
+          "Developed microservices using Java 8+, Spring, and Hibernate",
+          "Implemented event-driven communication between services using Kafka",
+          "Developed single-page applications using React",
+          "Managed databases using PostgreSQL",
+          "Deployed services to Kubernetes"
+        ]
+      },
+      "skills": ["Java", "Spring", "React", "Kubernetes", "Kafka"]
+    },
+    {
+      "company": "StreamDelta",
+      "logo": "/streamDelta.jpeg",
+      "startDate": "2021-07-01",
+      "endDate": "2021-12-31",
+      "workingModel": 2,
+      "employmentType": 1,
+      "tr": {
+        "position": "Yazılım Mühendisi",
+        "location": "İstanbul, Türkiye",
+        "description": [
+          "Vodafone projelerinde dış kaynaklı geliştirici olarak çalıştım",
+          "Java, Spring Boot ve Hibernate kullanarak mikroservisler geliştirdim",
+          "Camunda ve BPMN 2.0 notasyonu kullanarak İş Yönetimi Mikroservisinden sorumlu oldum",
+          "Oracle DB, MongoDB ve Redis ile veri depolama ve önbellekleme yaptım",
+          "Jenkins kullanarak mikroservisleri OpenShift'e deploy ettim"
+        ]
+      },
+      "en": {
+        "position": "Software Engineer",
+        "location": "Istanbul, Turkey",
+        "description": [
+          "Worked as an outsourced developer for Vodafone projects",
+          "Developed microservices using Java, Spring Boot, and Hibernate",
+          "Responsible for Business Process Management Microservice using Camunda and BPMN 2.0 notation",
+          "Handled data storage and caching with Oracle DB, MongoDB, and Redis",
+          "Deployed microservices to OpenShift using Jenkins"
+        ]
+      },
+      "skills": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
+    },
+    {
+      "company": "Sikayetvar.com",
+      "logo": "/sikayetvar_logo.jpeg",
+      "startDate": "2018-09-01",
+      "endDate": "2020-12-31",
+      "workingModel": 3,
+      "employmentType": 1,
+      "tr": {
+        "position": "Yazılım Mühendisi",
+        "location": "Ankara, Türkiye",
+        "description": [
+          "Java ve Spring Boot kullanarak mikroservisler geliştirdim",
+          "Şikayetvar'ın altyapısını yeniden geliştirme projesine katıldım",
+          "Elasticsearch kullanarak otomatik tamamlama mikroservisi geliştirdim",
+          "RESTful iletişim ile servisler geliştirdim",
+          "MySQL ile veritabanı yönetimi yaptım",
+          "Jenkins kullanarak mikroservisleri Google Cloud'a deploy ettim"
+        ]
+      },
+      "en": {
+        "position": "Software Engineer",
+        "location": "Ankara, Turkey",
+        "description": [
+          "Developed microservices using Java and Spring Boot",
+          "Participated in Sikayetvar's infrastructure redevelopment project",
+          "Developed autocomplete microservice using Elasticsearch",
+          "Built services with RESTful communication",
+          "Managed databases using MySQL",
+          "Deployed microservices to Google Cloud using Jenkins"
+        ]
+      },
+      "skills": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
+    }
+  ],
+  "education": [
+    {
+      "startDate": "2014-09-01",
+      "endDate": "2018-06-30",
+      "logo": "/sau.png",
+      "tr": {
+        "school": "Sakarya Üniversitesi",
+        "department": "Bilgisayar Mühendisliği",
+        "location": "Sakarya, Türkiye"
+      },
+      "en": {
+        "school": "Sakarya University",
+        "department": "Computer Engineering",
+        "location": "Sakarya, Turkey"
+      }
+    },
+    {
+      "startDate": "2013-09-01",
+      "endDate": "2014-06-30",
+      "logo": "/cu.png",
+      "tr": {
+        "school": "Çukurova Üniversitesi",
+        "department": "İngilizce Hazırlık",
+        "location": "Adana, Türkiye"
+      },
+      "en": {
+        "school": "Cukurova University",
+        "department": "English Preparatory",
+        "location": "Adana, Turkey"
+      }
+    },
+    {
+      "startDate": "2009-09-01",
+      "endDate": "2013-06-30",
+      "logo": "/gal.png",
+      "tr": {
+        "school": "Gazi Anadolu Lisesi",
+        "location": "Ankara, Türkiye"
+      },
+      "en": {
+        "school": "Gazi Anatolian High School",
+        "location": "Ankara, Turkey"
+      }
+    }
+  ]
+} 

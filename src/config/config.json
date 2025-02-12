@@ -1,0 +1,43 @@
+{
+  "features": {
+    "languageSwitcher": true,
+    "themeSwitcher": true,
+    "sections": {
+      "skills": true,
+      "education": true,
+      "blog": true,
+      "contact": {
+        "enabled": true,
+        "showContactInfo": true,
+        "showMessageForm": true
+      }
+    }
+  },
+  "theme": {
+    "default": "light",
+    "colors": {
+      "light": {
+        "background": "#F5F5F5",
+        "surface": "#FFFFFF",
+        "secondary": "#333333",
+        "primary": "#2497FF"
+      },
+      "dark": {
+        "background": "#121212",
+        "surface": "#1E1E1E",
+        "secondary": "#E0E0E0",
+        "primary": "#2497ff"
+      }
+    }
+  },
+  "language": {
+    "default": "tr",
+    "supported": ["tr", "en"]
+  },
+  "email": {
+    "serviceId": "service_cv",
+    "templateId": "template_cv",
+    "publicKey": "your-emailjs-public-key",
+    "privateKey": "your-emailjs-private-key"
+  }
+} 
