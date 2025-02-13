@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { validateColorPalette } from '../utils/colorUtils';
 
 // Ana renk paleti
 const palette = {
@@ -24,23 +23,6 @@ const palette = {
     secondary: '#757575',
   },
 };
-
-// Renk paletini doğrula
-const colorValidation = validateColorPalette({
-  'primary.main': palette.primary.main,
-  'primary.contrastText': palette.primary.contrastText,
-  'secondary.main': palette.secondary.main,
-  'secondary.contrastText': palette.secondary.contrastText,
-  'background.default': palette.background.default,
-  'background.paper': palette.background.paper,
-  'text.primary': palette.text.primary,
-  'text.secondary': palette.text.secondary,
-});
-
-// Eğer kontrast sorunları varsa konsola uyarı bas
-if (!colorValidation.valid) {
-  console.warn('Renk kontrastı sorunları tespit edildi:', colorValidation.issues);
-}
 
 const theme = createTheme({
   palette,

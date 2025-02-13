@@ -15,7 +15,7 @@ import { useState } from "react";
 import { ContactFormData } from "@/types";
 import { colors } from "@/theme/colors";
 import { useTranslation } from "@/hooks/useTranslation";
-import { personalInfo } from "@/config/resume.json";
+import resumeData from "@/config/resume.json";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -150,21 +150,21 @@ export default function ContactSection({
             <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
               <LocationOn sx={{ color: currentColors.primary }} />
               <Typography color={currentColors.secondary}>
-                {personalInfo.location[locale]}
+                {resumeData.personalInfo.location[locale]}
               </Typography>
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
               <Phone sx={{ color: currentColors.primary }} />
               <Typography color={currentColors.secondary}>
-                {personalInfo.contact.phone}
+                {resumeData.personalInfo.contact.phone}
               </Typography>
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
               <Email sx={{ color: currentColors.primary }} />
               <Typography color={currentColors.secondary}>
-                {personalInfo.contact.email}
+                {resumeData.personalInfo.contact.email}
               </Typography>
             </Box>
           </Paper>

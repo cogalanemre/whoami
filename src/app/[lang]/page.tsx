@@ -25,7 +25,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import EducationCard from "@/components/EducationCard";
 import BlogCard from "@/components/BlogCard";
 import SkillsSection from "@/components/SkillsSection";
-import { personalInfo, experiences, education } from "@/config/resume.json";
+import resumeData from "@/config/resume.json";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
@@ -48,7 +48,6 @@ export default function Home() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { t, locale } = useTranslation();
-  const personalTranslations = t("personal");
   const commonTranslations = t("common");
 
   useEffect(() => {
@@ -72,18 +71,18 @@ export default function Home() {
 
   // Memoize expensive calculations
   const totalExperience = useMemo(
-    () => calculateTotalExperience(experiences, locale),
+    () => calculateTotalExperience(resumeData.experiences, locale),
     [locale]
   );
 
   const socialButtons = useMemo(
     () => (
       <Stack direction="row" spacing={3} sx={{ mb: 4 }}>
-        {personalInfo.socialMedia.github && (
+        {resumeData.personalInfo.socialMedia.github && (
           <IconButton
             color="primary"
             size="large"
-            href={personalInfo.socialMedia.github}
+            href={resumeData.personalInfo.socialMedia.github}
             target="_blank"
             sx={{
               border: "2px solid",
@@ -98,11 +97,11 @@ export default function Home() {
             <GitHub />
           </IconButton>
         )}
-        {personalInfo.socialMedia.linkedin && (
+        {resumeData.personalInfo.socialMedia.linkedin && (
           <IconButton
             color="primary"
             size="large"
-            href={personalInfo.socialMedia.linkedin}
+            href={resumeData.personalInfo.socialMedia.linkedin}
             target="_blank"
             sx={{
               border: "2px solid",
@@ -117,11 +116,11 @@ export default function Home() {
             <LinkedIn />
           </IconButton>
         )}
-        {personalInfo.contact.email && (
+        {resumeData.personalInfo.contact.email && (
           <IconButton
             color="primary"
             size="large"
-            href={`mailto:${personalInfo.contact.email}`}
+            href={`mailto:${resumeData.personalInfo.contact.email}`}
             sx={{
               border: "2px solid",
               borderColor: "primary.main",
@@ -211,8 +210,8 @@ export default function Home() {
                       transform: "scale(1.02)",
                     },
                   }}
-                  alt={personalInfo.name}
-                  src={personalInfo.avatar}
+                  alt={resumeData.personalInfo.name}
+                  src={resumeData.personalInfo.avatar}
                 />
                 <Box
                   sx={{
@@ -240,7 +239,7 @@ export default function Home() {
                       color: "primary.main",
                     }}
                   >
-                    {personalInfo.name}
+                    {resumeData.personalInfo.name}
                   </Typography>
                   <Box
                     sx={{
@@ -250,7 +249,7 @@ export default function Home() {
                     }}
                   >
                     <Typewriter
-                      texts={personalInfo.titles[locale]}
+                      texts={resumeData.personalInfo.titles[locale]}
                       delay={150}
                     />
                   </Box>
@@ -332,7 +331,7 @@ export default function Home() {
               </Typography>
               <Box>
                 <Stack spacing={6}>
-                  {experiences.map((experience, index) => (
+                  {resumeData.experiences.map((experience, index) => (
                     <MotionBox
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
@@ -349,7 +348,7 @@ export default function Home() {
 
           {/* Skills Section */}
           <Grid item xs={12}>
-            <SkillsSection experiences={experiences} />
+            <SkillsSection experiences={resumeData.experiences} />
           </Grid>
 
           {/* Education Section */}
@@ -388,7 +387,7 @@ export default function Home() {
               </Typography>
               <Box>
                 <Stack spacing={4}>
-                  {education.map((edu, index) => (
+                  {resumeData.education.map((edu, index) => (
                     <MotionBox
                       key={index}
                       initial={{ opacity: 0, y: 20 }}

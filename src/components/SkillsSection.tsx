@@ -46,7 +46,9 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
     if (firstMatchingExperience) {
       setTimeout(() => {
         const experienceElement = document.getElementById(
-          `experience-${firstMatchingExperience.id}`
+          `experience-${firstMatchingExperience.company
+            .toLowerCase()
+            .replace(/\s+/g, "-")}`
         );
         if (experienceElement) {
           const yOffset = -100;

@@ -70,22 +70,29 @@ export const formatDate = (date: DateInput, locale: Locale = 'tr'): string => {
 };
 
 /**
+ * İki tarih arasındaki ay farkını hesaplar
+ */
+const calculateExperienceMonths = (experience: { 
+  startDate: DateInput; 
+  endDate: DateInput;
+}): number => {
+  const start = normalizeDate(experience.startDate);
+  const end = experience.endDate ? normalizeDate(experience.endDate) : new Date();
+  return calculateMonthsBetween(start, end);
+};
+
+/**
  * Toplam deneyim süresini hesaplar
  */
 export const calculateTotalExperience = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate?: DateInput; 
-    isCurrentJob?: boolean; 
+    endDate: DateInput;
   }>,
   locale: Locale = 'tr'
 ): string => {
-  const totalMonths = experiences.reduce((total, exp) => {
-    const start = normalizeDate(exp.startDate);
-    const end = exp.isCurrentJob ? new Date() : normalizeDate(exp.endDate);
-    return total + calculateMonthsBetween(start, end);
-  }, 0);
-
+  const totalMonths = experiences.reduce((total, exp) => 
+    total + calculateExperienceMonths(exp), 0);
   return formatDuration(totalMonths, locale);
 };
 
@@ -95,18 +102,14 @@ export const calculateTotalExperience = (
 export const calculateSkillDuration = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate?: DateInput; 
-    isCurrentJob?: boolean;
+    endDate: DateInput;
     skills: string[];
   }>,
 ): Map<string, number> => {
   const skillDurations = new Map<string, number>();
 
   experiences.forEach((exp) => {
-    const start = normalizeDate(exp.startDate);
-    const end = exp.isCurrentJob ? new Date() : normalizeDate(exp.endDate);
-    const months = calculateMonthsBetween(start, end);
-
+    const months = calculateExperienceMonths(exp);
     exp.skills.forEach((skill) => {
       const currentDuration = skillDurations.get(skill) || 0;
       skillDurations.set(skill, currentDuration + months);
@@ -123,13 +126,9 @@ export const calculateSkillDuration = (
 export const calculateTotalMonths = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate?: DateInput; 
-    isCurrentJob?: boolean; 
+    endDate: DateInput;
   }>,
 ): number => {
-  return experiences.reduce((total, exp) => {
-    const start = normalizeDate(exp.startDate);
-    const end = exp.isCurrentJob ? new Date() : normalizeDate(exp.endDate);
-    return total + calculateMonthsBetween(start, end);
-  }, 0);
+  return experiences.reduce((total, exp) => 
+    total + calculateExperienceMonths(exp), 0);
 }; 
