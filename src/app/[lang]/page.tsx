@@ -25,7 +25,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import EducationCard from "@/components/EducationCard";
 import BlogCard from "@/components/BlogCard";
 import SkillsSection from "@/components/SkillsSection";
-import { personalInfo } from "@/data/personalInfo";
+import { personalInfo } from "@/config/resume.json";
 import { experiences } from "@/data/experiences";
 import { education } from "@/data/education";
 import { calculateTotalExperience } from "@/utils/dateUtils";
@@ -81,11 +81,11 @@ export default function Home() {
   const socialButtons = useMemo(
     () => (
       <Stack direction="row" spacing={3} sx={{ mb: 4 }}>
-        {personalInfo.social.github && (
+        {personalInfo.socialMedia.github && (
           <IconButton
             color="primary"
             size="large"
-            href={personalInfo.social.github}
+            href={personalInfo.socialMedia.github}
             target="_blank"
             sx={{
               border: "2px solid",
@@ -100,11 +100,11 @@ export default function Home() {
             <GitHub />
           </IconButton>
         )}
-        {personalInfo.social.linkedin && (
+        {personalInfo.socialMedia.linkedin && (
           <IconButton
             color="primary"
             size="large"
-            href={personalInfo.social.linkedin}
+            href={personalInfo.socialMedia.linkedin}
             target="_blank"
             sx={{
               border: "2px solid",
@@ -119,11 +119,11 @@ export default function Home() {
             <LinkedIn />
           </IconButton>
         )}
-        {personalInfo.social.email && (
+        {personalInfo.contact.email && (
           <IconButton
             color="primary"
             size="large"
-            href={personalInfo.social.email}
+            href={`mailto:${personalInfo.contact.email}`}
             sx={{
               border: "2px solid",
               borderColor: "primary.main",
@@ -252,7 +252,7 @@ export default function Home() {
                     }}
                   >
                     <Typewriter
-                      texts={personalTranslations.titles}
+                      texts={personalInfo.titles[locale]}
                       delay={150}
                     />
                   </Box>

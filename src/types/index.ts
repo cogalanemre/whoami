@@ -2,27 +2,40 @@ import type { DateInput } from '@/utils/dateUtils';
 
 // Deneyim tipleri
 export interface Experience {
-  id: 'dgpays' | 'obss' | 'streamDelta' | 'sikayetvar';
   company: string;
-  title: string;
-  startDate: DateInput;
-  endDate?: DateInput;
-  isCurrentJob?: boolean;
-  location: string;
-  type: string;
   logo: string;
-  description: string[];
+  startDate: string;
+  endDate: string | null;
+  workingModel: number;
+  employmentType: number;
+  tr: {
+    position: string;
+    location: string;
+    description: string[];
+  };
+  en: {
+    position: string;
+    location: string;
+    description: string[];
+  };
   skills: string[];
 }
 
 // Eğitim tipleri
 export interface Education {
-  school: string;
-  department?: string;
-  location: string;
-  startDate: DateInput;
-  endDate: DateInput;
-  type: 'university' | 'highschool' | 'prep';
+  startDate: string;
+  endDate: string;
+  logo: string;
+  tr: {
+    school: string;
+    department?: string;
+    location: string;
+  };
+  en: {
+    school: string;
+    department?: string;
+    location: string;
+  };
 }
 
 // Blog tipleri
@@ -47,17 +60,23 @@ export interface BlogData {
 // Kişisel bilgi tipleri
 export interface PersonalInfo {
   name: string;
-  titles: string[];
-  bio: string;
-  social: {
-    github?: string;
-    linkedin?: string;
-    email?: string;
-  };
+  avatar: string;
   contact: {
-    address: string;
     phone: string;
     email: string;
+  };
+  socialMedia: {
+    github?: string;
+    linkedin?: string;
+    medium?: string;
+  };
+  location: {
+    tr: string;
+    en: string;
+  };
+  titles: {
+    tr: string[];
+    en: string[];
   };
 }
 
