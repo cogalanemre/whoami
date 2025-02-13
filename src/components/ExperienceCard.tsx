@@ -6,13 +6,12 @@ import {
   Chip,
   Avatar,
   Box,
-  Divider,
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
-import { LocationOn, AccessTime } from "@mui/icons-material";
+import { LocationOn, CalendarToday, Work } from "@mui/icons-material";
 import InfoWithIcon from "./InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
@@ -22,23 +21,73 @@ interface ExperienceCardProps {
   experience: Experience;
 }
 
+enum WorkingModel {
+  Hybrid = 1,
+  Remote = 2,
+  Office = 3,
+}
+
+enum EmploymentType {
+  FullTime = 1,
+  PartTime = 2,
+  Contract = 3,
+  Freelance = 4,
+}
+
+const getWorkingModelText = (workingModel: number, locale: string): string => {
+  switch (workingModel) {
+    case WorkingModel.Hybrid:
+      return locale === "tr" ? "Hibrit" : "Hybrid";
+    case WorkingModel.Remote:
+      return locale === "tr" ? "Uzaktan" : "Remote";
+    case WorkingModel.Office:
+      return locale === "tr" ? "Ofisten" : "Office";
+    default:
+      return "";
+  }
+};
+
+const getEmploymentTypeText = (
+  employmentType: number,
+  locale: string
+): string => {
+  switch (employmentType) {
+    case EmploymentType.FullTime:
+      return locale === "tr" ? "Tam Zamanlı" : "Full Time";
+    case EmploymentType.PartTime:
+      return locale === "tr" ? "Yarı Zamanlı" : "Part Time";
+    case EmploymentType.Contract:
+      return locale === "tr" ? "Sözleşmeli" : "Contract";
+    case EmploymentType.Freelance:
+      return locale === "tr" ? "Serbest" : "Freelance";
+    default:
+      return "";
+  }
+};
+
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === "dark";
     const currentColors = isDarkMode ? colors.dark : colors.light;
-    const { t, locale } = useTranslation();
-    const experienceTranslations = t("experiences")[experience.id];
-    const commonTranslations = t("common");
+    const { locale } = useTranslation();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
     const isHighlighted =
       selectedSkill && experience.skills.includes(selectedSkill);
 
+    const experienceTranslations =
+      locale === "tr" ? experience.tr : experience.en;
+
+    const duration = calculateDuration(
+      experience.startDate,
+      experience.endDate ? experience.endDate : new Date().toISOString(),
+      locale
+    );
+
     return (
       <Card
         ref={ref}
-        id={`experience-${experience.id}`}
         sx={{
           background: currentColors.surface,
           position: "relative",
@@ -96,7 +145,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                {experienceTranslations.title}
+                {experienceTranslations.position}
               </Typography>
               <Stack
                 direction={{ xs: "column", md: "row" }}
@@ -117,21 +166,30 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 </Typography>
                 <InfoWithIcon
                   icon={LocationOn}
-                  text={`${experienceTranslations.location} • ${experienceTranslations.type}`}
+                  text={`${
+                    experienceTranslations.location
+                  } • ${getWorkingModelText(experience.workingModel, locale)}`}
                   currentColors={currentColors}
                   fontSize="0.875rem"
                 />
                 <InfoWithIcon
-                  icon={AccessTime}
+                  icon={CalendarToday}
                   text={`${formatDate(experience.startDate, locale)} - ${
-                    experience.isCurrentJob
-                      ? commonTranslations.experience.current
-                      : formatDate(experience.endDate, locale)
-                  } (${calculateDuration(
-                    experience.startDate,
-                    experience.isCurrentJob ? new Date() : experience.endDate,
+                    experience.endDate
+                      ? formatDate(experience.endDate, locale)
+                      : locale === "tr"
+                      ? "Devam ediyor"
+                      : "Present"
+                  } (${duration})`}
+                  currentColors={currentColors}
+                  fontSize="0.875rem"
+                />
+                <InfoWithIcon
+                  icon={Work}
+                  text={getEmploymentTypeText(
+                    experience.employmentType,
                     locale
-                  )}) • ${commonTranslations.experience.fullTime}`}
+                  )}
                   currentColors={currentColors}
                   fontSize="0.875rem"
                 />
@@ -152,13 +210,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               </span>
             ))}
           </Typography>
-
-          <Divider
-            sx={{
-              my: 2,
-              borderColor: currentColors.background,
-            }}
-          />
 
           <Stack
             direction="row"

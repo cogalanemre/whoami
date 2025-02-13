@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
-import { Education } from "@/data/education";
+import { Education } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { colors } from "@/theme/colors";
@@ -12,20 +12,13 @@ interface EducationCardProps {
   education: Education;
 }
 
-interface EducationTranslation {
-  school: string;
-  department?: string;
-  location: string;
-}
-
-export default function EducationCard({ education }: EducationCardProps) {
+const EducationCard = ({ education }: EducationCardProps) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
-  const { t, locale } = useTranslation();
-  const educationTranslations = t("education")[
-    education.id
-  ] as EducationTranslation;
+  const { locale } = useTranslation();
+
+  const educationTranslations = locale === "tr" ? education.tr : education.en;
 
   return (
     <Card sx={cardStyles(currentColors)}>
@@ -93,4 +86,6 @@ export default function EducationCard({ education }: EducationCardProps) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default EducationCard;

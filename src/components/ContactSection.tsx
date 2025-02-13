@@ -11,11 +11,11 @@ import {
   useTheme,
 } from "@mui/material";
 import { LocationOn, Phone, Email, Send } from "@mui/icons-material";
-import { personalInfo } from "@/data/personalInfo";
 import { useState } from "react";
 import { ContactFormData } from "@/types";
 import { colors } from "@/theme/colors";
 import { useTranslation } from "@/hooks/useTranslation";
+import { personalInfo } from "@/config/resume.json";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -29,9 +29,8 @@ export default function ContactSection({
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   const currentColors = isDarkMode ? colors.dark : colors.light;
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const commonTranslations = t("common");
-  const personalTranslations = t("personal");
 
   const [loading, setLoading] = useState(isLoading);
   const [formData, setFormData] = useState({
@@ -151,7 +150,7 @@ export default function ContactSection({
             <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
               <LocationOn sx={{ color: currentColors.primary }} />
               <Typography color={currentColors.secondary}>
-                {personalTranslations.contact.address}
+                {personalInfo.location[locale]}
               </Typography>
             </Box>
 

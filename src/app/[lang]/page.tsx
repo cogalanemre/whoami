@@ -25,9 +25,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import EducationCard from "@/components/EducationCard";
 import BlogCard from "@/components/BlogCard";
 import SkillsSection from "@/components/SkillsSection";
-import { personalInfo } from "@/config/resume.json";
-import { experiences } from "@/data/experiences";
-import { education } from "@/data/education";
+import { personalInfo, experiences, education } from "@/config/resume.json";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
@@ -214,7 +212,7 @@ export default function Home() {
                     },
                   }}
                   alt={personalInfo.name}
-                  src="/profile.png"
+                  src={personalInfo.avatar}
                 />
                 <Box
                   sx={{
