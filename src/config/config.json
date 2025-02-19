@@ -31,7 +31,7 @@
     }
   },
   "language": {
-    "default": "tr",
+    "default": "en",
     "supported": ["tr", "en"]
   },
   "email": {

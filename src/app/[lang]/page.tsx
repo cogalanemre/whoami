@@ -32,7 +32,6 @@ import { BlogPost } from "@/types";
 import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 import Typewriter from "@/components/Typewriter";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {

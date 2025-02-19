@@ -1,4 +1,4 @@
-import { BlogPost } from '@/data/blog';
+import { BlogPost } from '@/types/blog';
 
 interface APIResponse {
   posts: Array<Omit<BlogPost, 'pubDate'> & { pubDate: string }>;
