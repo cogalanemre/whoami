@@ -39,7 +39,7 @@ const ContactSection = dynamic(() => import("@/components/ContactSection"), {
   ssr: false,
 });
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
