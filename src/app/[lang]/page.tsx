@@ -37,6 +37,7 @@ import config from "@/config/config.json";
 import emailjs from '@emailjs/browser';
 import { FORM_CONFIG } from "@/constants";
 import SectionTitle from "@/components/SectionTitle";
+import SocialMediaButtons from "@/components/molecules/buttons/SocialMediaButtons";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -76,70 +77,6 @@ export default function Home() {
   const totalExperience = useMemo(
     () => calculateTotalExperience(resumeData.experiences, locale),
     [locale]
-  );
-
-  const socialButtons = useMemo(
-    () => (
-      <Stack direction="row" spacing={3} sx={{ mb: 4 }}>
-        {resumeData.personalInfo.socialMedia.github && (
-          <IconButton
-            color="primary"
-            size="large"
-            href={resumeData.personalInfo.socialMedia.github}
-            target="_blank"
-            sx={{
-              border: "2px solid",
-              borderColor: "primary.main",
-              backdropFilter: "blur(4px)",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                transition: "all 0.2s ease-in-out",
-              },
-            }}
-          >
-            <GitHub />
-          </IconButton>
-        )}
-        {resumeData.personalInfo.socialMedia.linkedin && (
-          <IconButton
-            color="primary"
-            size="large"
-            href={resumeData.personalInfo.socialMedia.linkedin}
-            target="_blank"
-            sx={{
-              border: "2px solid",
-              borderColor: "primary.main",
-              backdropFilter: "blur(4px)",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                transition: "all 0.2s ease-in-out",
-              },
-            }}
-          >
-            <LinkedIn />
-          </IconButton>
-        )}
-        {resumeData.personalInfo.contact.email && (
-          <IconButton
-            color="primary"
-            size="large"
-            href={`mailto:${resumeData.personalInfo.contact.email}`}
-            sx={{
-              border: "2px solid",
-              borderColor: "primary.main",
-              backdropFilter: "blur(4px)",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                transition: "all 0.2s ease-in-out",
-              },
-            }}
-          >
-            <Email />
-          </IconButton>
-        )}
-      </Stack>
-    ),
-    []
   );
 
   if (!currentDate) {
@@ -276,7 +213,7 @@ export default function Home() {
                 mb: { xs: 4, md: 6 },
               }}
             >
-              {socialButtons}
+              <SocialMediaButtons socialMedia={resumeData.personalInfo.socialMedia} />
             </Box>
           </Grid>
 

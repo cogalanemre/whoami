@@ -12,6 +12,10 @@
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.2",
     "@types/dompurify": "^3.0.5",
@@ -23,6 +27,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
+    "react-icons": "^5.5.0",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
