@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Experience } from "@/types";
 import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import { memo } from "react";
 
 const MotionBox = motion.create(Box);
 
@@ -13,7 +14,7 @@ interface ExperienceSectionProps {
   sectionTitle: string;
 }
 
-export default function ExperienceSection({ 
+function ExperienceSection({ 
   experiences, 
   totalExperience,
   sectionTitle 
@@ -29,7 +30,7 @@ export default function ExperienceSection({
         <Stack spacing={6}>
           {experiences.map((experience, index) => (
             <MotionBox
-              key={index}
+              key={`${experience.company}-${experience.startDate}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -41,4 +42,7 @@ export default function ExperienceSection({
       </Box>
     </Box>
   );
-} 
+}
+
+// memo ile sarmalayarak gereksiz render'ları önlüyoruz
+export default memo(ExperienceSection); 

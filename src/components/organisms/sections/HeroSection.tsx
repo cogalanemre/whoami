@@ -12,6 +12,8 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ hero, locale }: HeroSectionProps) {
+  const titles = hero.titles[locale];
+
   return (
     <>
       <MotionBox
@@ -102,21 +104,10 @@ export default function HeroSection({ hero, locale }: HeroSectionProps) {
               }}
             >
               <Typewriter
-                texts={hero.titles[locale]}
+                texts={titles}
                 delay={150}
               />
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "center", md: "flex-start" },
-                position: "absolute",
-                bottom: { xs: -60, md: -70 },
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "100%",
-              }}
-            ></Box>
           </Box>
         </Stack>
       </MotionBox>

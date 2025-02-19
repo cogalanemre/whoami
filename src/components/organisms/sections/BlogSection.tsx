@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BlogPost } from "@/types";
 import BlogCard from "@/components/molecules/cards/BlogCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import { memo } from "react";
 
 const MotionBox = motion.create(Box);
 
@@ -15,7 +16,7 @@ interface BlogSectionProps {
   noPostsText: string;
 }
 
-export default function BlogSection({ 
+function BlogSection({ 
   blogPosts,
   loading,
   sectionTitle,
@@ -59,4 +60,7 @@ export default function BlogSection({
       </Box>
     </Box>
   );
-} 
+}
+
+// memo ile sarmalayarak gereksiz render'ları önlüyoruz
+export default memo(BlogSection); 
