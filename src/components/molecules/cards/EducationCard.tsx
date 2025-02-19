@@ -4,7 +4,7 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { LocationOn, CalendarToday } from "@mui/icons-material";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import InfoWithIcon from "@/components/molecules/InfoWithIcon";
 
 interface EducationCardProps {
   education: Education;

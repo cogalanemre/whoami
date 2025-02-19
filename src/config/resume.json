@@ -61,7 +61,7 @@
           "Followed Agile Scrum methodology, used JIRA for task and project management"
         ]
       },
-      "skills": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
+      "skillTags": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
     },
     {
       "company": "OBSS",
@@ -94,7 +94,7 @@
           "Deployed services to Kubernetes"
         ]
       },
-      "skills": ["Java", "Spring", "React", "Kubernetes", "Kafka"]
+      "skillTags": ["Java", "Spring", "React", "Kubernetes", "Kafka"]
     },
     {
       "company": "StreamDelta",
@@ -125,7 +125,7 @@
           "Deployed microservices to OpenShift using Jenkins"
         ]
       },
-      "skills": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
+      "skillTags": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
     },
     {
       "company": "Sikayetvar.com",
@@ -158,7 +158,7 @@
           "Deployed microservices to Google Cloud using Jenkins"
         ]
       },
-      "skills": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
+      "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
     }
   ],
   "education": [

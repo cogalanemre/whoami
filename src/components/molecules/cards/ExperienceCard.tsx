@@ -74,7 +74,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
     const isHighlighted =
-      selectedSkill && experience.skills.includes(selectedSkill);
+      selectedSkill && experience.skillTags.includes(selectedSkill);
 
     const experienceTranslations =
       locale === "tr" ? experience.tr : experience.en;
@@ -214,30 +214,30 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               gap: 1,
             }}
           >
-            {experience.skills.map((skill, index) => (
+            {experience.skillTags.map((skillTag: string, index: number) => (
               <Chip
                 key={index}
                 size="small"
-                label={skill}
+                label={skillTag}
                 variant="outlined"
                 onClick={() =>
-                  setSelectedSkill(selectedSkill === skill ? null : skill)
+                  setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
                 }
                 sx={{
                   bgcolor:
-                    selectedSkill === skill
+                    selectedSkill === skillTag
                       ? colors.primary
                       : colors.background,
                   borderColor:
-                    selectedSkill === skill ? colors.primary : colors.primary,
+                    selectedSkill === skillTag ? colors.primary : colors.primary,
                   color:
-                    selectedSkill === skill
+                    selectedSkill === skillTag
                       ? colors.background
                       : colors.primary,
                   cursor: "pointer",
                   "&:hover": {
                     bgcolor:
-                      selectedSkill === skill ? colors.primary : colors.surface,
+                      selectedSkill === skillTag ? colors.primary : colors.surface,
                     borderColor: colors.primary,
                   },
                 }}

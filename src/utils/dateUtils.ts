@@ -74,7 +74,7 @@ export const formatDate = (date: DateInput, locale: Locale = 'tr'): string => {
  */
 const calculateExperienceMonths = (experience: { 
   startDate: DateInput; 
-  endDate: DateInput;
+  endDate?: DateInput | null;
 }): number => {
   const start = normalizeDate(experience.startDate);
   const end = experience.endDate ? normalizeDate(experience.endDate) : new Date();
@@ -87,7 +87,7 @@ const calculateExperienceMonths = (experience: {
 export const calculateTotalExperience = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate: DateInput;
+    endDate?: DateInput | null;
   }>,
   locale: Locale = 'tr'
 ): string => {
@@ -102,17 +102,17 @@ export const calculateTotalExperience = (
 export const calculateSkillDuration = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate: DateInput;
-    skills: string[];
+    endDate?: DateInput | null;
+    skillTags: string[];
   }>,
 ): Map<string, number> => {
   const skillDurations = new Map<string, number>();
 
   experiences.forEach((exp) => {
     const months = calculateExperienceMonths(exp);
-    exp.skills.forEach((skill) => {
-      const currentDuration = skillDurations.get(skill) || 0;
-      skillDurations.set(skill, currentDuration + months);
+    exp.skillTags.forEach((skillTag) => {
+      const currentDuration = skillDurations.get(skillTag) || 0;
+      skillDurations.set(skillTag, currentDuration + months);
     });
   });
 
@@ -125,7 +125,7 @@ export const calculateSkillDuration = (
 export const calculateTotalMonths = (
   experiences: Array<{ 
     startDate: DateInput; 
-    endDate: DateInput;
+    endDate?: DateInput | null;
   }>,
 ): number => {
   return experiences.reduce((total, exp) => 

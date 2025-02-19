@@ -13,18 +13,19 @@ export enum EmploymentType {
 
 interface ExperienceTranslation {
   position: string;
+  company?: string;
   location: string;
   description: string[];
 }
 
 export interface Experience {
-  company: string;
-  logo: string;
   startDate: string;
-  endDate: string | null;
-  workingModel: WorkingModel;
-  employmentType: EmploymentType;
+  endDate?: string | null;
+  company: string;
+  logo?: string;
+  workingModel: number;
+  employmentType: number;
+  skillTags: string[];
   tr: ExperienceTranslation;
   en: ExperienceTranslation;
-  skills: string[];
 } 

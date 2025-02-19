@@ -18,15 +18,15 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
   const commonTranslations = t("common");
   const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
-  const handleSkillClick = (skill: string) => {
-    if (selectedSkill === skill) {
+  const handleSkillClick = (skillTag: string) => {
+    if (selectedSkill === skillTag) {
       setSelectedSkill(null);
       return;
     }
 
-    setSelectedSkill(skill);
+    setSelectedSkill(skillTag);
     const firstMatchingExperience = experiences.find((exp) =>
-      exp.skills.includes(skill)
+      exp.skillTags.includes(skillTag)
     );
 
     if (firstMatchingExperience) {
@@ -78,20 +78,20 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
           gap: 1,
         }}
       >
-        {sortedSkills.map(([skill, duration]) => (
+        {sortedSkills.map(([skillTag, duration]) => (
           <Chip
-            key={skill}
-            label={`${skill} (${Math.round((duration / totalMonths) * 100)}%)`}
-            onClick={() => handleSkillClick(skill)}
+            key={skillTag}
+            label={`${skillTag} (${Math.round((duration / totalMonths) * 100)}%)`}
+            onClick={() => handleSkillClick(skillTag)}
             sx={{
               bgcolor:
-                selectedSkill === skill ? colors.primary : colors.surface,
-              color: selectedSkill === skill ? colors.surface : colors.primary,
+                selectedSkill === skillTag ? colors.primary : colors.surface,
+              color: selectedSkill === skillTag ? colors.surface : colors.primary,
               border: `1px solid ${colors.primary}`,
               cursor: "pointer",
               "&:hover": {
                 bgcolor:
-                  selectedSkill === skill ? colors.primary : colors.surface,
+                  selectedSkill === skillTag ? colors.primary : colors.surface,
                 opacity: 0.9,
               },
             }}
