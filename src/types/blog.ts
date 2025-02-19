@@ -8,7 +8,9 @@ export interface BlogPost {
   thumbnail?: string;
   categories: string[];
   content: string;
-  readingTime: string;
+  readingTime: {
+    minutes: number;
+  };
   guid: string;
 }
 

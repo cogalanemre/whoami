@@ -1,158 +1,98 @@
-import { Card, CardContent, Typography, Box, Button } from "@mui/material";
+import { Card, CardContent, Typography, Box, Link } from "@mui/material";
 import Image from "next/image";
-import { AccessTime, ArrowForward } from "@mui/icons-material";
-import { BlogPost } from "@/data/blog";
+import { BlogPost } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
-import { useTheme } from "@mui/material/styles";
-import { colors } from "@/theme/colors";
-import {
-  cardStyles,
-  cardContentStyles,
-  truncatedTextStyles,
-  linkButtonStyles,
-} from "@/theme/commonStyles";
-import InfoWithIcon from "@/components/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
-import { memo } from "react";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
-function BlogCard({ post }: BlogCardProps) {
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
-  const currentColors = isDarkMode ? colors.dark : colors.light;
-  const { t, locale } = useTranslation();
-  const commonTranslations = t("common");
-
-  const formatReadingTime = (readingTime: BlogPost["readingTime"]): string => {
-    const minutes = readingTime?.minutes || 1;
-    return locale === "tr"
-      ? `${minutes} dakika`
-      : `${minutes} minute${minutes > 1 ? "s" : ""}`;
-  };
+export default function BlogCard({ post }: BlogCardProps) {
+  const { locale } = useTranslation();
+  const colors = useThemeColors();
 
   return (
-    <Card
-      sx={cardStyles(currentColors)}
-      component="article"
-      role="article"
-      aria-label={post.title}
+    <Link
+      href={post.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={{ textDecoration: "none" }}
     >
-      {post.thumbnail && (
-        <Box
-          sx={{
-            position: "relative",
-            width: "100%",
-            paddingTop: "56.25%",
-            backgroundColor: currentColors.background,
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            src={post.thumbnail}
-            alt={`${post.title} için kapak görseli`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            style={{
-              objectFit: "cover",
-              objectPosition: "center",
-            }}
-            priority
-          />
+      <Card
+        sx={{
+          background: colors.surface,
+          transition: "all 0.3s ease-in-out",
+          height: "100%",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+          },
+        }}
+      >
+        {post.thumbnail && (
           <Box
             sx={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))",
-              height: "70%",
-              pointerEvents: "none",
+              width: "100%",
+              height: 200,
+              position: "relative",
             }}
-            aria-hidden="true"
-          />
-        </Box>
-      )}
-      <CardContent sx={cardContentStyles}>
-        <Typography
-          variant="h6"
-          component="a"
-          href={post.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            color: currentColors.primary,
-            fontWeight: 600,
-            fontSize: "1.1rem",
-            lineHeight: 1.3,
-            mb: 1,
-            ...truncatedTextStyles,
-            textDecoration: "none",
-            "&:hover": { color: currentColors.secondary },
-          }}
-          aria-label={`${post.title} - Blog yazısını oku`}
-        >
-          {post.title}
-        </Typography>
-
-        <InfoWithIcon
-          icon={AccessTime}
-          text={formatReadingTime(post.readingTime)}
-          currentColors={currentColors}
-          aria-label={`Tahmini okuma süresi: ${formatReadingTime(
-            post.readingTime
-          )}`}
-        />
-
-        <Typography
-          variant="body2"
-          color={currentColors.secondary}
-          sx={{
-            mb: 2,
-            fontSize: "0.9rem",
-            ...truncatedTextStyles,
-          }}
-        >
-          {post.description}
-        </Typography>
-
-        <Box
-          sx={{
-            mt: "auto",
-            pt: 1,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderTop: `1px solid ${currentColors.background}`,
-          }}
-        >
+          >
+            <Image
+              src={post.thumbnail}
+              alt={post.title}
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
+        )}
+        <CardContent sx={{ p: 3 }}>
           <Typography
-            variant="caption"
-            color={currentColors.secondary}
-            aria-label={`Yayın tarihi: ${formatDate(post.pubDate, locale)}`}
+            variant="h6"
+            sx={{
+              color: colors.primary,
+              mb: 1,
+              fontWeight: "bold",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
           >
-            {formatDate(post.pubDate, locale)}
+            {post.title}
           </Typography>
-
-          <Button
-            variant="text"
-            sx={linkButtonStyles(currentColors)}
-            size="small"
-            endIcon={<ArrowForward aria-hidden="true" />}
-            href={post.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${post.title} - ${commonTranslations.blog.readMore}`}
+          <Typography
+            variant="body2"
+            sx={{
+              color: colors.secondary,
+              mb: 2,
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
           >
-            {commonTranslations.blog.readMore}
-          </Button>
-        </Box>
-      </CardContent>
-    </Card>
+            {post.description}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              color: colors.secondary,
+              fontSize: "0.875rem",
+            }}
+          >
+            <Typography variant="caption">
+              {formatDate(post.pubDate, locale)}
+            </Typography>
+            <Typography variant="caption">
+              {post.readingTime.minutes} {locale === "tr" ? "dakika" : "minutes"}
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
-
-export default memo(BlogCard);

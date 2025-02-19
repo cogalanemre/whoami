@@ -1,91 +1,110 @@
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, Typography, Box, Avatar } from "@mui/material";
 import { Education } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
-import { useTheme } from "@mui/material/styles";
-import { colors } from "@/theme/colors";
 import { LocationOn, CalendarToday } from "@mui/icons-material";
-import { cardStyles, cardContentStyles } from "@/theme/commonStyles";
 import InfoWithIcon from "./InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface EducationCardProps {
   education: Education;
 }
 
-const EducationCard = ({ education }: EducationCardProps) => {
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
-  const currentColors = isDarkMode ? colors.dark : colors.light;
+export default function EducationCard({ education }: EducationCardProps) {
+  const colors = useThemeColors();
   const { locale } = useTranslation();
 
   const educationTranslations = locale === "tr" ? education.tr : education.en;
 
   return (
-    <Card sx={cardStyles(currentColors)}>
-      <CardContent sx={cardContentStyles}>
-        <Box
+    <Card
+      sx={{
+        background: colors.surface,
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+          "& .MuiAvatar-root": {
+            transform: "scale(1.05)",
+            transition: "transform 0.3s ease-in-out",
+          },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          p: 3,
+          display: "flex",
+          gap: 4,
+          alignItems: "flex-start",
+        }}
+      >
+        <Avatar
+          src={education.logo}
+          alt={educationTranslations.school}
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 0.5,
+            width: 80,
+            height: 80,
+            bgcolor: "transparent",
+            border: "2px solid",
+            borderColor: colors.primary,
+            display: { xs: "none", md: "block" },
+            "& img": {
+              objectFit: "cover",
+              borderRadius: "50%",
+            },
           }}
-        >
-          <Box
+        />
+        <Box sx={{ flex: 1 }}>
+          <Typography
+            variant="h6"
             sx={{
-              display: "flex",
-              alignItems: "baseline",
-              gap: 1,
-              borderBottom: `1px solid ${currentColors.surface}`,
-              pb: 0.5,
+              color: colors.primary,
+              mb: 1,
+              fontWeight: "bold",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
+            {educationTranslations.school}
+          </Typography>
+          {educationTranslations.department && (
             <Typography
-              variant="h6"
+              variant="subtitle1"
               sx={{
-                color: currentColors.primary,
-                fontWeight: 600,
+                color: colors.secondary,
+                mb: 1,
+                fontWeight: "bold",
               }}
             >
-              {educationTranslations.school}
+              {educationTranslations.department}
             </Typography>
-            {educationTranslations.department && (
-              <Typography
-                variant="body2"
-                sx={{
-                  color: currentColors.secondary,
-                  fontSize: "0.9rem",
-                  fontStyle: "italic",
-                }}
-              >
-                ({educationTranslations.department})
-              </Typography>
-            )}
-          </Box>
+          )}
           <Box
             sx={{
               display: "flex",
-              gap: 3,
-              alignItems: "center",
+              flexDirection: { xs: "column", md: "row" },
+              gap: { xs: 1, md: 3 },
+              alignItems: { xs: "flex-start", md: "center" },
             }}
           >
+            <InfoWithIcon
+              icon={LocationOn}
+              text={educationTranslations.location}
+              colors={colors}
+              fontSize="0.875rem"
+            />
             <InfoWithIcon
               icon={CalendarToday}
               text={`${formatDate(education.startDate, locale)} - ${formatDate(
                 education.endDate,
                 locale
               )}`}
-              currentColors={currentColors}
-            />
-            <InfoWithIcon
-              icon={LocationOn}
-              text={educationTranslations.location}
-              currentColors={currentColors}
+              colors={colors}
+              fontSize="0.875rem"
             />
           </Box>
         </Box>
-      </CardContent>
+      </Box>
     </Card>
   );
-};
-
-export default EducationCard;
+}

@@ -10,12 +10,12 @@ import {
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
-import { colors } from "@/theme/colors";
 import { LocationOn, CalendarToday, Work } from "@mui/icons-material";
 import InfoWithIcon from "./InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -69,7 +69,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === "dark";
-    const currentColors = isDarkMode ? colors.dark : colors.light;
+    const colors = useThemeColors();
     const { locale } = useTranslation();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
@@ -89,16 +89,12 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
       <Card
         ref={ref}
         sx={{
-          background: currentColors.surface,
+          background: colors.surface,
           position: "relative",
           transition: "all 0.3s ease-in-out",
-          border: `1px solid ${
-            isHighlighted ? currentColors.primary : "transparent"
-          }`,
+          border: `1px solid ${isHighlighted ? colors.primary : "transparent"}`,
           transform: isHighlighted ? "translateY(-4px)" : "none",
-          boxShadow: isHighlighted
-            ? `0 4px 20px ${currentColors.primary}40`
-            : "none",
+          boxShadow: isHighlighted ? `0 4px 20px ${colors.primary}40` : "none",
           "&:hover": {
             transform: "translateY(-4px)",
             boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
@@ -127,7 +123,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 height: 80,
                 bgcolor: "transparent",
                 border: "2px solid",
-                borderColor: currentColors.primary,
+                borderColor: colors.primary,
                 display: { xs: "none", md: "block" },
                 "& img": {
                   objectFit: "cover",
@@ -139,7 +135,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               <Typography
                 variant="h6"
                 sx={{
-                  color: currentColors.primary,
+                  color: colors.primary,
                   mb: 1,
                   fontWeight: "bold",
                   textAlign: { xs: "center", md: "left" },
@@ -155,7 +151,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: currentColors.secondary,
+                    color: colors.secondary,
                     fontWeight: "bold",
                     display: "flex",
                     alignItems: "center",
@@ -169,7 +165,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                   text={`${
                     experienceTranslations.location
                   } • ${getWorkingModelText(experience.workingModel, locale)}`}
-                  currentColors={currentColors}
+                  colors={colors}
                   fontSize="0.875rem"
                 />
                 <InfoWithIcon
@@ -181,7 +177,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                       ? "Devam ediyor"
                       : "Present"
                   } (${duration})`}
-                  currentColors={currentColors}
+                  colors={colors}
                   fontSize="0.875rem"
                 />
                 <InfoWithIcon
@@ -190,7 +186,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                     experience.employmentType,
                     locale
                   )}
-                  currentColors={currentColors}
+                  colors={colors}
                   fontSize="0.875rem"
                 />
               </Stack>
@@ -199,13 +195,10 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         </Box>
 
         <CardContent sx={{ p: 3 }}>
-          <Typography
-            variant="body1"
-            sx={{ color: currentColors.secondary, mb: 3 }}
-          >
+          <Typography variant="body1" sx={{ color: colors.secondary, mb: 3 }}>
             {experienceTranslations.description.map((desc, index) => (
               <span key={index}>
-                <span style={{ color: currentColors.primary }}>•</span> {desc}
+                <span style={{ color: colors.primary }}>•</span> {desc}
                 <br />
               </span>
             ))}
@@ -232,23 +225,19 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 sx={{
                   bgcolor:
                     selectedSkill === skill
-                      ? currentColors.primary
-                      : currentColors.background,
+                      ? colors.primary
+                      : colors.background,
                   borderColor:
-                    selectedSkill === skill
-                      ? currentColors.primary
-                      : currentColors.primary,
+                    selectedSkill === skill ? colors.primary : colors.primary,
                   color:
                     selectedSkill === skill
-                      ? currentColors.background
-                      : currentColors.primary,
+                      ? colors.background
+                      : colors.primary,
                   cursor: "pointer",
                   "&:hover": {
                     bgcolor:
-                      selectedSkill === skill
-                        ? currentColors.primary
-                        : currentColors.surface,
-                    borderColor: currentColors.primary,
+                      selectedSkill === skill ? colors.primary : colors.surface,
+                    borderColor: colors.primary,
                   },
                 }}
               />

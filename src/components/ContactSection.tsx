@@ -8,12 +8,11 @@ import {
   Snackbar,
   Alert,
   CircularProgress,
-  useTheme,
 } from "@mui/material";
 import { LocationOn, Phone, Email, Send } from "@mui/icons-material";
 import { useState } from "react";
 import { ContactFormData } from "@/types";
-import { colors } from "@/theme/colors";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import { useTranslation } from "@/hooks/useTranslation";
 import resumeData from "@/config/resume.json";
 
@@ -26,9 +25,7 @@ export default function ContactSection({
   onSubmit,
   isLoading,
 }: ContactSectionProps) {
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
-  const currentColors = isDarkMode ? colors.dark : colors.light;
+  const colors = useThemeColors();
   const { t, locale } = useTranslation();
   const commonTranslations = t("common");
 
@@ -52,21 +49,13 @@ export default function ContactSection({
 
     try {
       await onSubmit(formData);
-
       setSnackbar({
         open: true,
         message: commonTranslations.contact.success,
         severity: "success",
       });
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("E-posta gönderirken hata oluştu:", error);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch {
       setSnackbar({
         open: true,
         message: commonTranslations.contact.error,
@@ -77,49 +66,6 @@ export default function ContactSection({
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleCloseSnackbar = () => {
-    setSnackbar({ ...snackbar, open: false });
-  };
-
-  const inputProps = {
-    sx: {
-      "& .MuiInput-underline:before": {
-        borderBottomColor: currentColors.primary,
-      },
-      "& .MuiInput-underline:hover:before": {
-        borderBottomColor: currentColors.primary,
-      },
-      "& .MuiInput-underline:after": {
-        borderBottomColor: currentColors.primary,
-      },
-      "& .MuiInputLabel-root": {
-        color: currentColors.secondary,
-        "&.Mui-focused": {
-          color: currentColors.primary,
-        },
-      },
-      "& .MuiInput-input": {
-        color: currentColors.secondary,
-        "&::placeholder": {
-          color: currentColors.secondary,
-          opacity: 0.7,
-        },
-        "&:hover": {
-          color: currentColors.primary,
-        },
-      },
-    },
-  };
-
   return (
     <Box>
       <Grid container spacing={4}>
@@ -128,145 +74,181 @@ export default function ContactSection({
             sx={{
               p: 3,
               height: "100%",
-              background: currentColors.surface,
-              backdropFilter: "blur(10px)",
-              borderRadius: 3,
-              border: `1px solid ${currentColors.surface}`,
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                borderColor: currentColors.primary,
-                transform: "translateY(-4px)",
-              },
+              background: colors.surface,
             }}
           >
             <Typography
               variant="h5"
-              gutterBottom
-              sx={{ color: currentColors.primary, mb: 4 }}
+              sx={{
+                color: colors.primary,
+                mb: 3,
+                fontWeight: "bold",
+              }}
             >
               {commonTranslations.contact.info}
             </Typography>
 
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
-              <LocationOn sx={{ color: currentColors.primary }} />
-              <Typography color={currentColors.secondary}>
-                {resumeData.personalInfo.location[locale]}
-              </Typography>
-            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <LocationOn sx={{ color: colors.secondary }} />
+                <Typography sx={{ color: colors.secondary }}>
+                  {resumeData.personalInfo.location[locale]}
+                </Typography>
+              </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
-              <Phone sx={{ color: currentColors.primary }} />
-              <Typography color={currentColors.secondary}>
-                {resumeData.personalInfo.contact.phone}
-              </Typography>
-            </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Phone sx={{ color: colors.secondary }} />
+                <Typography sx={{ color: colors.secondary }}>
+                  {resumeData.personalInfo.contact.phone}
+                </Typography>
+              </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3, gap: 2 }}>
-              <Email sx={{ color: currentColors.primary }} />
-              <Typography color={currentColors.secondary}>
-                {resumeData.personalInfo.contact.email}
-              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Email sx={{ color: colors.secondary }} />
+                <Typography sx={{ color: colors.secondary }}>
+                  {resumeData.personalInfo.contact.email}
+                </Typography>
+              </Box>
             </Box>
           </Paper>
         </Grid>
 
         <Grid item xs={12} md={6}>
           <Paper
+            component="form"
+            onSubmit={handleSubmit}
             sx={{
               p: 3,
-              height: "100%",
-              background: currentColors.surface,
-              backdropFilter: "blur(10px)",
-              borderRadius: 3,
-              border: `1px solid ${currentColors.surface}`,
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                borderColor: currentColors.primary,
-                transform: "translateY(-4px)",
-                boxShadow: `0 4px 20px ${currentColors.primary}20`,
-              },
+              background: colors.surface,
             }}
           >
             <Typography
               variant="h5"
-              gutterBottom
-              sx={{ color: currentColors.primary, mb: 4 }}
+              sx={{
+                color: colors.primary,
+                mb: 3,
+                fontWeight: "bold",
+              }}
             >
-              {commonTranslations.contact.sendMessage}
+              {commonTranslations.contact.form}
             </Typography>
 
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-            >
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <TextField
-                label={commonTranslations.contact.form.name}
-                name="name"
+                label={commonTranslations.contact.name}
                 value={formData.name}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 required
                 fullWidth
-                variant="standard"
-                {...inputProps}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: colors.secondary,
+                    },
+                    "&:hover fieldset": {
+                      borderColor: colors.primary,
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: colors.secondary,
+                  },
+                }}
               />
 
               <TextField
-                label={commonTranslations.contact.form.email}
-                name="email"
+                label={commonTranslations.contact.email}
                 type="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 required
                 fullWidth
-                variant="standard"
-                {...inputProps}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: colors.secondary,
+                    },
+                    "&:hover fieldset": {
+                      borderColor: colors.primary,
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: colors.secondary,
+                  },
+                }}
               />
 
               <TextField
-                label={commonTranslations.contact.form.phone}
-                name="phone"
+                label={`${commonTranslations.contact.phone} (${commonTranslations.contact.phoneOptional})`}
                 value={formData.phone}
-                onChange={handleChange}
-                placeholder={commonTranslations.contact.form.phoneOptional}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 fullWidth
-                variant="standard"
-                {...inputProps}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: colors.secondary,
+                    },
+                    "&:hover fieldset": {
+                      borderColor: colors.primary,
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: colors.secondary,
+                  },
+                }}
               />
 
               <TextField
-                label={commonTranslations.contact.form.message}
-                name="message"
+                label={commonTranslations.contact.message}
                 value={formData.message}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 required
-                fullWidth
                 multiline
                 rows={4}
-                variant="standard"
-                {...inputProps}
+                fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: colors.secondary,
+                    },
+                    "&:hover fieldset": {
+                      borderColor: colors.primary,
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: colors.secondary,
+                  },
+                }}
               />
 
               <Button
                 type="submit"
-                variant="outlined"
-                size="large"
+                variant="contained"
                 disabled={loading}
-                endIcon={loading ? <CircularProgress size={20} /> : <Send />}
                 sx={{
-                  mt: 2,
-                  borderRadius: 2,
-                  borderColor: currentColors.primary,
-                  color: currentColors.primary,
+                  bgcolor: colors.primary,
+                  color: colors.surface,
                   "&:hover": {
-                    borderColor: currentColors.primary,
-                    backgroundColor: `${currentColors.primary}10`,
+                    bgcolor: colors.primary,
+                    opacity: 0.9,
                   },
                 }}
               >
-                {loading
-                  ? commonTranslations.contact.form.sending
-                  : commonTranslations.contact.form.send}
+                {loading ? (
+                  <CircularProgress size={24} color="inherit" />
+                ) : (
+                  <>
+                    <Send sx={{ mr: 1 }} />
+                    {commonTranslations.contact.send}
+                  </>
+                )}
               </Button>
             </Box>
           </Paper>
@@ -276,9 +258,13 @@ export default function ContactSection({
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
       >
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>
