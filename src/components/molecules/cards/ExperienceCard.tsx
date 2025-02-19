@@ -11,7 +11,7 @@ import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
 import { LocationOn, CalendarToday, Work } from "@mui/icons-material";
-import InfoWithIcon from "./InfoWithIcon";
+import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
@@ -250,4 +250,4 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   }
 );
 
-export default ExperienceCard;
+export default ExperienceCard; 

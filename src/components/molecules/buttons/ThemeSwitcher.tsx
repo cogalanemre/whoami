@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Typography, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useThemeContext } from "@/context/ThemeContext";
@@ -102,4 +100,4 @@ export default function ThemeSwitcher() {
       </Typography>
     </Box>
   );
-}
+} 

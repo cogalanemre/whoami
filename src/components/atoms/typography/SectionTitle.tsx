@@ -1,5 +1,4 @@
 import { Typography, Box, SvgIconProps } from "@mui/material";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface SectionTitleProps {
   icon: React.ComponentType<SvgIconProps>;
@@ -8,8 +7,6 @@ interface SectionTitleProps {
 }
 
 export default function SectionTitle({ icon: Icon, title, subtitle }: SectionTitleProps) {
-  const colors = useThemeColors();
-
   return (
     <Box sx={{ mb: 6 }}>
       <Typography

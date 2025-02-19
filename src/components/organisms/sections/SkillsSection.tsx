@@ -100,4 +100,4 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
       </Stack>
     </Box>
   );
-}
+} 

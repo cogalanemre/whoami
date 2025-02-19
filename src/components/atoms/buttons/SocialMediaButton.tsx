@@ -1,6 +1,5 @@
 import { IconButton, IconButtonProps } from "@mui/material";
 import { IconType } from "react-icons";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface SocialMediaButtonProps extends Omit<IconButtonProps, 'children'> {
   icon: IconType;
@@ -14,8 +13,6 @@ export default function SocialMediaButton({
   sx,
   ...props 
 }: SocialMediaButtonProps) {
-  const colors = useThemeColors();
-
   return (
     <IconButton
       color="primary"

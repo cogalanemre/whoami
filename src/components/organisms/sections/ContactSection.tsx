@@ -1,7 +1,14 @@
-import { Box, Grid, Typography, Button, Snackbar, Alert, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Snackbar,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 import { LocationOn, Phone, Email, Send } from "@mui/icons-material";
 import { useState } from "react";
-import { ContactFormData } from "@/types";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { useTranslation } from "@/hooks/useTranslation";
 import resumeData from "@/config/resume.json";
@@ -11,7 +18,7 @@ import { FORM_CONFIG } from "@/constants";
 import CardBase from "@/components/molecules/cards/CardBase";
 import FormField from "@/components/molecules/forms/FormField";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "@/components/atoms/typography/SectionTitle";
 
 export default function ContactSection() {
   const colors = useThemeColors();

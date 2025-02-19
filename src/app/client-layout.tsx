@@ -5,8 +5,8 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
 import MUIThemeProvider from "@/theme/MUIThemeProvider";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeSwitcher from "@/components/molecules/buttons/ThemeSwitcher";
+import LanguageSwitcher from "@/components/molecules/buttons/LanguageSwitcher";
 import config from "@/config/config.json";
 
 interface ClientLayoutProps {

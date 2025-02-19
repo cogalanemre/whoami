@@ -5,15 +5,11 @@ import {
   Box,
   Grid,
   Typography,
-  IconButton,
   Stack,
   Avatar,
   Container,
 } from "@mui/material";
 import {
-  GitHub,
-  LinkedIn,
-  Email,
   BusinessCenter,
   School,
   Article,
@@ -22,25 +18,22 @@ import {
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import ExperienceCard from "@/components/ExperienceCard";
-import EducationCard from "@/components/EducationCard";
-import BlogCard from "@/components/BlogCard";
-import SkillsSection from "@/components/SkillsSection";
+import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
+import EducationCard from "@/components/molecules/cards/EducationCard";
+import BlogCard from "@/components/molecules/cards/BlogCard";
+import SkillsSection from "@/components/organisms/sections/SkillsSection";
 import resumeData from "@/config/resume.json";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/types";
-import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
-import Typewriter from "@/components/Typewriter";
+import Typewriter from "@/components/atoms/typography/Typewriter";
 import config from "@/config/config.json";
-import emailjs from '@emailjs/browser';
-import { FORM_CONFIG } from "@/constants";
-import SectionTitle from "@/components/SectionTitle";
+import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import SocialMediaButtons from "@/components/molecules/buttons/SocialMediaButtons";
 
 // Lazy load components
-const ContactSection = dynamic(() => import("@/components/ContactSection"), {
+const LazyContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
   loading: () => <Typography>Loading contact form...</Typography>,
   ssr: false,
 });
@@ -333,26 +326,7 @@ export default function Home() {
                   title={commonTranslations.sections.contact}
                 />
                 <Box>
-                  <ContactSection
-                    onSubmit={async (data: ContactFormData) => {
-                      try {
-                        await emailjs.send(
-                          FORM_CONFIG.EMAIL_SERVICE,
-                          FORM_CONFIG.EMAIL_TEMPLATE,
-                          {
-                            from_name: data.name,
-                            from_email: data.email,
-                            phone: data.phone,
-                            message: data.message,
-                          },
-                          FORM_CONFIG.EMAIL_PUBLIC_KEY
-                        );
-                      } catch (error) {
-                        console.error('Email gönderimi başarısız:', error);
-                        throw error;
-                      }
-                    }}
-                  />
+                  <LazyContactSection />
                 </Box>
               </Box>
             </Grid>
