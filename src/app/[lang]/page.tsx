@@ -18,8 +18,6 @@ import {
   School,
   Article,
   ContactMail,
-  LocationOn,
-  Phone,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -30,7 +28,7 @@ import SkillsSection from "@/components/SkillsSection";
 import resumeData from "@/config/resume.json";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
-import { BlogPost } from "@/data/blog";
+import { BlogPost } from "@/types";
 import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 import Typewriter from "@/components/Typewriter";
@@ -50,7 +48,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const { t, locale } = useTranslation();
   const commonTranslations = t("common");
-  const colors = useThemeColors();
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -502,28 +499,6 @@ export default function Home() {
                 />
                 {commonTranslations.sections.contact}
               </Typography>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <LocationOn sx={{ color: "primary.main" }} />
-                  <Typography sx={{ color: colors.secondary }}>
-                    {resumeData.personalInfo.location[locale]}
-                  </Typography>
-                </Box>
-
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <Phone sx={{ color: "primary.main" }} />
-                  <Typography sx={{ color: colors.secondary }}>
-                    {resumeData.personalInfo.contact.phone}
-                  </Typography>
-                </Box>
-
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <Email sx={{ color: "primary.main" }} />
-                  <Typography sx={{ color: colors.secondary }}>
-                    {resumeData.personalInfo.contact.email}
-                  </Typography>
-                </Box>
-              </Box>
               <Box>
                 <ContactSection
                   onSubmit={async (data: ContactFormData) => {
