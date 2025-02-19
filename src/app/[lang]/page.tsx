@@ -18,6 +18,7 @@ import {
   School,
   Article,
   ContactMail,
+  Code,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -35,6 +36,7 @@ import Typewriter from "@/components/Typewriter";
 import config from "@/config/config.json";
 import emailjs from '@emailjs/browser';
 import { FORM_CONFIG } from "@/constants";
+import SectionTitle from "@/components/SectionTitle";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -281,53 +283,12 @@ export default function Home() {
           {/* Experience Section */}
           {config.features.sections.experience && (
             <Grid item xs={12}>
-              <Box
-                sx={{
-                  mt: 4,
-                  position: "relative",
-                }}
-              >
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 6,
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                    position: "relative",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: -8,
-                      left: 0,
-                      width: "40px",
-                      height: "3px",
-                      background: "linear-gradient(90deg, primary.main, transparent)",
-                      borderRadius: "4px",
-                    },
-                  }}
-                >
-                  <BusinessCenter
-                    sx={{
-                      color: "primary.main",
-                      fontSize: "2rem",
-                    }}
-                  />
-                  {commonTranslations.sections.experience}
-                  <Typography
-                    component="span"
-                    variant="h6"
-                    sx={{
-                      ml: 2,
-                      color: "primary.main",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    ({totalExperience})
-                  </Typography>
-                </Typography>
+              <Box sx={{ mt: 4 }}>
+                <SectionTitle
+                  icon={BusinessCenter}
+                  title={commonTranslations.sections.experience}
+                  subtitle={totalExperience}
+                />
                 <Box>
                   <Stack spacing={6}>
                     {resumeData.experiences.map((experience, index) => (
@@ -350,6 +311,10 @@ export default function Home() {
           {config.features.sections.skills && (
             <Grid item xs={12}>
               <Box sx={{ mt: 4 }}>
+                <SectionTitle
+                  icon={Code}
+                  title={commonTranslations.sections.skills}
+                />
                 <SkillsSection experiences={resumeData.experiences} />
               </Box>
             </Grid>
@@ -359,37 +324,10 @@ export default function Home() {
           {config.features.sections.education && (
             <Grid item xs={12}>
               <Box sx={{ mt: 4 }}>
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 6,
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                    position: "relative",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: -8,
-                      left: 0,
-                      width: "40px",
-                      height: "3px",
-                      background:
-                        "linear-gradient(90deg, primary.main, transparent)",
-                      borderRadius: "4px",
-                    },
-                  }}
-                >
-                  <School
-                    sx={{
-                      color: "primary.main",
-                      fontSize: "2rem",
-                    }}
-                  />
-                  {commonTranslations.sections.education}
-                </Typography>
+                <SectionTitle
+                  icon={School}
+                  title={commonTranslations.sections.education}
+                />
                 <Box>
                   <Stack spacing={4}>
                     {resumeData.education.map((edu, index) => (
@@ -412,37 +350,10 @@ export default function Home() {
           {config.features.sections.blog && (
             <Grid item xs={12}>
               <Box sx={{ mt: 4 }}>
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 6,
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                    position: "relative",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: -8,
-                      left: 0,
-                      width: "40px",
-                      height: "3px",
-                      background:
-                        "linear-gradient(90deg, primary.main, transparent)",
-                      borderRadius: "4px",
-                    },
-                  }}
-                >
-                  <Article
-                    sx={{
-                      color: "primary.main",
-                      fontSize: "2rem",
-                    }}
-                  />
-                  {commonTranslations.sections.blog}
-                </Typography>
+                <SectionTitle
+                  icon={Article}
+                  title={commonTranslations.sections.blog}
+                />
                 <Box>
                   <Grid container spacing={{ xs: 2, sm: 3 }}>
                     {loading ? (
@@ -480,36 +391,10 @@ export default function Home() {
           {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
             <Grid item xs={12}>
               <Box sx={{ mt: 4 }}>
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 6,
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                    position: "relative",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: -8,
-                      left: 0,
-                      width: "40px",
-                      height: "3px",
-                      background: "linear-gradient(90deg, primary.main, transparent)",
-                      borderRadius: "4px",
-                    },
-                  }}
-                >
-                  <ContactMail
-                    sx={{
-                      color: "primary.main",
-                      fontSize: "2rem",
-                    }}
-                  />
-                  {commonTranslations.sections.contact}
-                </Typography>
+                <SectionTitle
+                  icon={ContactMail}
+                  title={commonTranslations.sections.contact}
+                />
                 <Box>
                   <ContactSection
                     onSubmit={async (data: ContactFormData) => {

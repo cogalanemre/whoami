@@ -18,6 +18,7 @@ import resumeData from "@/config/resume.json";
 import config from "@/config/config.json";
 import emailjs from '@emailjs/browser';
 import { FORM_CONFIG } from "@/constants";
+import SectionTitle from "./SectionTitle";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -93,16 +94,10 @@ export default function ContactSection({
                 background: colors.surface,
               }}
             >
-              <Typography
-                variant="h5"
-                sx={{
-                  color: colors.primary,
-                  mb: 3,
-                  fontWeight: "bold",
-                }}
-              >
-                {commonTranslations.contact.info}
-              </Typography>
+              <SectionTitle
+                icon={Email}
+                title={commonTranslations.contact.info}
+              />
 
               <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
