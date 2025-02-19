@@ -16,6 +16,8 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 import { useTranslation } from "@/hooks/useTranslation";
 import resumeData from "@/config/resume.json";
 import config from "@/config/config.json";
+import emailjs from '@emailjs/browser';
+import { FORM_CONFIG } from "@/constants";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -49,14 +51,26 @@ export default function ContactSection({
     setLoading(true);
 
     try {
-      await onSubmit(formData);
+      await emailjs.send(
+        FORM_CONFIG.EMAIL_SERVICE,
+        FORM_CONFIG.EMAIL_TEMPLATE,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          from_phone: formData.phone,
+          message: formData.message,
+        },
+        FORM_CONFIG.EMAIL_PUBLIC_KEY
+      );
+      
       setSnackbar({
         open: true,
         message: commonTranslations.contact.success,
         severity: "success",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch {
+    } catch (error) {
+      console.error('Email gönderimi başarısız:', error);
       setSnackbar({
         open: true,
         message: commonTranslations.contact.error,

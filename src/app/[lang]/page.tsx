@@ -33,6 +33,8 @@ import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 import Typewriter from "@/components/Typewriter";
 import config from "@/config/config.json";
+import emailjs from '@emailjs/browser';
+import { FORM_CONFIG } from "@/constants";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -511,7 +513,22 @@ export default function Home() {
                 <Box>
                   <ContactSection
                     onSubmit={async (data: ContactFormData) => {
-                      console.log("Form data:", data);
+                      try {
+                        await emailjs.send(
+                          FORM_CONFIG.EMAIL_SERVICE,
+                          FORM_CONFIG.EMAIL_TEMPLATE,
+                          {
+                            from_name: data.name,
+                            from_email: data.email,
+                            phone: data.phone,
+                            message: data.message,
+                          },
+                          FORM_CONFIG.EMAIL_PUBLIC_KEY
+                        );
+                      } catch (error) {
+                        console.error('Email gönderimi başarısız:', error);
+                        throw error;
+                      }
                     }}
                   />
                 </Box>

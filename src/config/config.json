@@ -35,10 +35,9 @@
     "supported": ["tr", "en"]
   },
   "email": {
-    "serviceId": "service_cv",
-    "templateId": "template_cv",
-    "publicKey": "your-emailjs-public-key",
-    "privateKey": "your-emailjs-private-key"
+    "serviceId": "service_0v280wa",
+    "templateId": "template_d6vbew4",
+    "publicKey": "VbqA_ubqPCM6yAkLQ"
   },
   "api": {
     "blog": {
