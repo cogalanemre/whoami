@@ -39,5 +39,21 @@
     "templateId": "template_cv",
     "publicKey": "your-emailjs-public-key",
     "privateKey": "your-emailjs-private-key"
+  },
+  "api": {
+    "blog": {
+      "feedUrl": "https://medium.com/feed/@cogalanemre",
+      "revalidateTime": 3600
+    }
+  },
+  "security": {
+    "cors": {
+      "origins": {
+        "production": ["https://cogalanemre.com"],
+        "development": ["http://localhost:3000"]
+      },
+      "methods": ["GET", "POST"],
+      "credentials": true
+    }
   }
 } 

@@ -1,50 +1,54 @@
-// Animasyon sabitleri
-export const ANIMATION_DURATION = {
-  FAST: 0.2,
-  NORMAL: 0.3,
-  SLOW: 0.8,
-} as const;
+import config from '@/config/config.json';
 
-// Sayfa sabitleri
-export const PAGE_PADDING = {
-  MOBILE: 2,
-  DESKTOP: 4,
-} as const;
-
-// Bileşen boyutları
-export const COMPONENT_SIZES = {
-  AVATAR: {
-    LARGE: 300,
-    MEDIUM: 100,
-    SMALL: 60,
+// UI sabitleri
+export const UI_CONSTANTS = {
+  ANIMATION: {
+    DURATION: {
+      FAST: 0.2,
+      NORMAL: 0.3,
+      SLOW: 0.8,
+    }
   },
-  BORDER_RADIUS: {
-    SMALL: 6,
-    MEDIUM: 8,
-    LARGE: 12,
+  LAYOUT: {
+    PAGE_PADDING: {
+      MOBILE: 2,
+      DESKTOP: 4,
+    }
   },
+  COMPONENTS: {
+    AVATAR: {
+      LARGE: 300,
+      MEDIUM: 100,
+      SMALL: 60,
+    },
+    BORDER_RADIUS: {
+      SMALL: 6,
+      MEDIUM: 8,
+      LARGE: 12,
+    }
+  }
 } as const;
 
-// Form sabitleri
+// Form ayarları
 export const FORM_CONFIG = {
-  EMAIL_SERVICE: process.env.EMAIL_SERVICE_ID || '',
-  EMAIL_TEMPLATE: process.env.EMAIL_TEMPLATE_ID || '',
-  EMAIL_PUBLIC_KEY: process.env.EMAIL_PUBLIC_KEY || '',
+  EMAIL_SERVICE: config.email.serviceId,
+  EMAIL_TEMPLATE: config.email.templateId,
+  EMAIL_PUBLIC_KEY: config.email.publicKey,
 } as const;
 
-// API sabitleri
+// API ayarları
 export const API_CONFIG = {
-  BLOG_FEED_URL: process.env.BLOG_FEED_URL || 'https://medium.com/feed/@cogalanemre',
-  REVALIDATE_TIME: Number(process.env.BLOG_REVALIDATE_TIME) || 3600,
+  BLOG_FEED_URL: config.api.blog.feedUrl,
+  REVALIDATE_TIME: config.api.blog.revalidateTime,
 } as const;
 
-// Güvenlik sabitleri
+// Güvenlik ayarları
 export const SECURITY_CONFIG = {
   CORS_OPTIONS: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ['https://cogalanemre.com'] 
-      : ['http://localhost:3000'],
-    methods: ['GET', 'POST'],
-    credentials: true,
+      ? config.security.cors.origins.production 
+      : config.security.cors.origins.development,
+    methods: config.security.cors.methods,
+    credentials: config.security.cors.credentials,
   },
 } as const; 
