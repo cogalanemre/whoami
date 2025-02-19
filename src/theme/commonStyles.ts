@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import { ThemeColors } from "./colors";
+import { ThemeColors } from "@/types";
 
 export const cardStyles = (currentColors: ThemeColors): SxProps => ({
   display: "flex",

@@ -7,7 +7,7 @@ interface EducationTranslation {
 export interface Education {
   startDate: string;
   endDate: string;
-  logo: string;
+  logo?: string;
   tr: EducationTranslation;
   en: EducationTranslation;
 } 

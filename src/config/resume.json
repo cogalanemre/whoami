@@ -164,7 +164,7 @@
     {
       "startDate": "2014-09-01",
       "endDate": "2018-06-30",
-      "logo": "/sau.png",
+      "logo": "/sau.jpg",
       "tr": {
         "school": "Sakarya Üniversitesi",
         "department": "Bilgisayar Mühendisliği",
@@ -194,7 +194,6 @@
     {
       "startDate": "2009-09-01",
       "endDate": "2013-06-30",
-      "logo": "/gal.png",
       "tr": {
         "school": "Gazi Anadolu Lisesi",
         "location": "Ankara, Türkiye"

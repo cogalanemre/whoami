@@ -41,12 +41,12 @@ export default async function RootLayout({
   return (
     <html
       lang={resolvedParams.lang}
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.className}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} h-full`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body>
+      <body className="h-full">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
