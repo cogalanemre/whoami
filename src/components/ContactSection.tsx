@@ -15,6 +15,7 @@ import { ContactFormData } from "@/types";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { useTranslation } from "@/hooks/useTranslation";
 import resumeData from "@/config/resume.json";
+import config from "@/config/config.json";
 
 interface ContactSectionProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
@@ -69,190 +70,194 @@ export default function ContactSection({
   return (
     <Box>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Paper
-            sx={{
-              p: 3,
-              height: "100%",
-              background: colors.surface,
-            }}
-          >
-            <Typography
-              variant="h5"
+        {config.features.sections.contact.showContactInfo && (
+          <Grid item xs={12} md={6}>
+            <Paper
               sx={{
-                color: colors.primary,
-                mb: 3,
-                fontWeight: "bold",
+                p: 3,
+                height: "100%",
+                background: colors.surface,
               }}
             >
-              {commonTranslations.contact.info}
-            </Typography>
-
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <LocationOn sx={{ color: colors.primary }} />
-                <Typography sx={{ color: colors.secondary }}>
-                  {resumeData.personalInfo.location[locale]}
-                </Typography>
-              </Box>
-
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Phone sx={{ color: colors.primary }} />
-                <Typography sx={{ color: colors.secondary }}>
-                  {resumeData.personalInfo.contact.phone}
-                </Typography>
-              </Box>
-
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Email sx={{ color: colors.primary }} />
-                <Typography sx={{ color: colors.secondary }}>
-                  {resumeData.personalInfo.contact.email}
-                </Typography>
-              </Box>
-            </Box>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Paper
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-              p: 3,
-              background: colors.surface,
-            }}
-          >
-            <Typography
-              variant="h5"
-              sx={{
-                color: colors.primary,
-                mb: 3,
-                fontWeight: "bold",
-              }}
-            >
-              {commonTranslations.contact.sendMessage}
-            </Typography>
-
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <TextField
-                label={commonTranslations.contact.form.name}
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-                fullWidth
+              <Typography
+                variant="h5"
                 sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: colors.secondary,
-                    },
-                    "&:hover fieldset": {
-                      borderColor: colors.primary,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: colors.secondary,
-                  },
-                }}
-              />
-
-              <TextField
-                label={commonTranslations.contact.form.email}
-                type="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                required
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: colors.secondary,
-                    },
-                    "&:hover fieldset": {
-                      borderColor: colors.primary,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: colors.secondary,
-                  },
-                }}
-              />
-
-              <TextField
-                label={`${commonTranslations.contact.form.phone} (${commonTranslations.contact.form.phoneOptional})`}
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: colors.secondary,
-                    },
-                    "&:hover fieldset": {
-                      borderColor: colors.primary,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: colors.secondary,
-                  },
-                }}
-              />
-
-              <TextField
-                label={commonTranslations.contact.form.message}
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                required
-                multiline
-                rows={4}
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: colors.secondary,
-                    },
-                    "&:hover fieldset": {
-                      borderColor: colors.primary,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: colors.secondary,
-                  },
-                }}
-              />
-
-              <Button
-                type="submit"
-                variant="contained"
-                disabled={loading}
-                sx={{
-                  bgcolor: colors.primary,
-                  color: colors.surface,
-                  "&:hover": {
-                    bgcolor: colors.primary,
-                    opacity: 0.9,
-                  },
+                  color: colors.primary,
+                  mb: 3,
+                  fontWeight: "bold",
                 }}
               >
-                {loading ? (
-                  <CircularProgress size={24} color="inherit" />
-                ) : (
-                  <>
-                    <Send sx={{ mr: 1 }} />
-                    {commonTranslations.contact.form.send}
-                  </>
-                )}
-              </Button>
-            </Box>
-          </Paper>
-        </Grid>
+                {commonTranslations.contact.info}
+              </Typography>
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <LocationOn sx={{ color: colors.primary }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.location[locale]}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Phone sx={{ color: colors.primary }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.contact.phone}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Email sx={{ color: colors.primary }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.contact.email}
+                  </Typography>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+        )}
+
+        {config.features.sections.contact.showMessageForm && (
+          <Grid item xs={12} md={config.features.sections.contact.showContactInfo ? 6 : 12}>
+            <Paper
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{
+                p: 3,
+                background: colors.surface,
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  color: colors.primary,
+                  mb: 3,
+                  fontWeight: "bold",
+                }}
+              >
+                {commonTranslations.contact.sendMessage}
+              </Typography>
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <TextField
+                  label={commonTranslations.contact.form.name}
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: colors.secondary,
+                      },
+                      "&:hover fieldset": {
+                        borderColor: colors.primary,
+                      },
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: colors.secondary,
+                    },
+                  }}
+                />
+
+                <TextField
+                  label={commonTranslations.contact.form.email}
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  required
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: colors.secondary,
+                      },
+                      "&:hover fieldset": {
+                        borderColor: colors.primary,
+                      },
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: colors.secondary,
+                    },
+                  }}
+                />
+
+                <TextField
+                  label={`${commonTranslations.contact.form.phone} (${commonTranslations.contact.form.phoneOptional})`}
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: colors.secondary,
+                      },
+                      "&:hover fieldset": {
+                        borderColor: colors.primary,
+                      },
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: colors.secondary,
+                    },
+                  }}
+                />
+
+                <TextField
+                  label={commonTranslations.contact.form.message}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  required
+                  multiline
+                  rows={4}
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: colors.secondary,
+                      },
+                      "&:hover fieldset": {
+                        borderColor: colors.primary,
+                      },
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: colors.secondary,
+                    },
+                  }}
+                />
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={loading}
+                  sx={{
+                    bgcolor: colors.primary,
+                    color: colors.surface,
+                    "&:hover": {
+                      bgcolor: colors.primary,
+                      opacity: 0.9,
+                    },
+                  }}
+                >
+                  {loading ? (
+                    <CircularProgress size={24} color="inherit" />
+                  ) : (
+                    <>
+                      <Send sx={{ mr: 1 }} />
+                      {commonTranslations.contact.form.send}
+                    </>
+                  )}
+                </Button>
+              </Box>
+            </Paper>
+          </Grid>
+        )}
       </Grid>
 
       <Snackbar

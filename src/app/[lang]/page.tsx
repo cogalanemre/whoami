@@ -32,6 +32,7 @@ import { BlogPost } from "@/types";
 import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 import Typewriter from "@/components/Typewriter";
+import config from "@/config/config.json";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -276,237 +277,247 @@ export default function Home() {
           </Grid>
 
           {/* Experience Section */}
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                mt: 4,
-                position: "relative",
-              }}
-            >
-              <Typography
-                variant="h3"
-                gutterBottom
+          {config.features.sections.experience && (
+            <Grid item xs={12}>
+              <Box
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  mb: 6,
-                  fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+                  mt: 4,
                   position: "relative",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: -8,
-                    left: 0,
-                    width: "40px",
-                    height: "3px",
-                    background: "linear-gradient(90deg, primary.main, transparent)",
-                    borderRadius: "4px",
-                  },
                 }}
               >
-                <BusinessCenter
-                  sx={{
-                    color: "primary.main",
-                    fontSize: "2rem",
-                  }}
-                />
-                {commonTranslations.sections.experience}
                 <Typography
-                  component="span"
-                  variant="h6"
+                  variant="h3"
+                  gutterBottom
                   sx={{
-                    ml: 2,
-                    color: "primary.main",
-                    fontStyle: "italic",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    mb: 6,
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+                    position: "relative",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -8,
+                      left: 0,
+                      width: "40px",
+                      height: "3px",
+                      background: "linear-gradient(90deg, primary.main, transparent)",
+                      borderRadius: "4px",
+                    },
                   }}
                 >
-                  ({totalExperience})
+                  <BusinessCenter
+                    sx={{
+                      color: "primary.main",
+                      fontSize: "2rem",
+                    }}
+                  />
+                  {commonTranslations.sections.experience}
+                  <Typography
+                    component="span"
+                    variant="h6"
+                    sx={{
+                      ml: 2,
+                      color: "primary.main",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    ({totalExperience})
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Box>
-                <Stack spacing={6}>
-                  {resumeData.experiences.map((experience, index) => (
-                    <MotionBox
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <ExperienceCard experience={experience} />
-                    </MotionBox>
-                  ))}
-                </Stack>
+                <Box>
+                  <Stack spacing={6}>
+                    {resumeData.experiences.map((experience, index) => (
+                      <MotionBox
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <ExperienceCard experience={experience} />
+                      </MotionBox>
+                    ))}
+                  </Stack>
+                </Box>
               </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          )}
 
           {/* Skills Section */}
-          <Grid item xs={12}>
-            <Box sx={{ mt: 4 }}>
-              <SkillsSection experiences={resumeData.experiences} />
-            </Box>
-          </Grid>
+          {config.features.sections.skills && (
+            <Grid item xs={12}>
+              <Box sx={{ mt: 4 }}>
+                <SkillsSection experiences={resumeData.experiences} />
+              </Box>
+            </Grid>
+          )}
 
           {/* Education Section */}
-          <Grid item xs={12}>
-            <Box sx={{ mt: 4 }}>
-              <Typography
-                variant="h3"
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  mb: 6,
-                  fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                  position: "relative",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: -8,
-                    left: 0,
-                    width: "40px",
-                    height: "3px",
-                    background:
-                      "linear-gradient(90deg, primary.main, transparent)",
-                    borderRadius: "4px",
-                  },
-                }}
-              >
-                <School
+          {config.features.sections.education && (
+            <Grid item xs={12}>
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h3"
+                  gutterBottom
                   sx={{
-                    color: "primary.main",
-                    fontSize: "2rem",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    mb: 6,
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+                    position: "relative",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -8,
+                      left: 0,
+                      width: "40px",
+                      height: "3px",
+                      background:
+                        "linear-gradient(90deg, primary.main, transparent)",
+                      borderRadius: "4px",
+                    },
                   }}
-                />
-                {commonTranslations.sections.education}
-              </Typography>
-              <Box>
-                <Stack spacing={4}>
-                  {resumeData.education.map((edu, index) => (
-                    <MotionBox
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <EducationCard education={edu} />
-                    </MotionBox>
-                  ))}
-                </Stack>
+                >
+                  <School
+                    sx={{
+                      color: "primary.main",
+                      fontSize: "2rem",
+                    }}
+                  />
+                  {commonTranslations.sections.education}
+                </Typography>
+                <Box>
+                  <Stack spacing={4}>
+                    {resumeData.education.map((edu, index) => (
+                      <MotionBox
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <EducationCard education={edu} />
+                      </MotionBox>
+                    ))}
+                  </Stack>
+                </Box>
               </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          )}
 
           {/* Blog Section */}
-          <Grid item xs={12}>
-            <Box sx={{ mt: 4 }}>
-              <Typography
-                variant="h3"
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  mb: 6,
-                  fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                  position: "relative",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: -8,
-                    left: 0,
-                    width: "40px",
-                    height: "3px",
-                    background:
-                      "linear-gradient(90deg, primary.main, transparent)",
-                    borderRadius: "4px",
-                  },
-                }}
-              >
-                <Article
+          {config.features.sections.blog && (
+            <Grid item xs={12}>
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h3"
+                  gutterBottom
                   sx={{
-                    color: "primary.main",
-                    fontSize: "2rem",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    mb: 6,
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+                    position: "relative",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -8,
+                      left: 0,
+                      width: "40px",
+                      height: "3px",
+                      background:
+                        "linear-gradient(90deg, primary.main, transparent)",
+                      borderRadius: "4px",
+                    },
                   }}
-                />
-                {commonTranslations.sections.blog}
-              </Typography>
-              <Box>
-                <Grid container spacing={{ xs: 2, sm: 3 }}>
-                  {loading ? (
-                    <Grid item xs={12}>
-                      <Typography align="center">
-                        {commonTranslations.blog.loading}
-                      </Typography>
-                    </Grid>
-                  ) : blogPosts.length > 0 ? (
-                    blogPosts.map((post) => (
-                      <Grid item xs={12} sm={6} md={4} key={post.link}>
-                        <MotionBox
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.1 }}
-                        >
-                          <BlogCard post={post} />
-                        </MotionBox>
+                >
+                  <Article
+                    sx={{
+                      color: "primary.main",
+                      fontSize: "2rem",
+                    }}
+                  />
+                  {commonTranslations.sections.blog}
+                </Typography>
+                <Box>
+                  <Grid container spacing={{ xs: 2, sm: 3 }}>
+                    {loading ? (
+                      <Grid item xs={12}>
+                        <Typography align="center">
+                          {commonTranslations.blog.loading}
+                        </Typography>
                       </Grid>
-                    ))
-                  ) : (
-                    <Grid item xs={12}>
-                      <Typography align="center">
-                        {commonTranslations.blog.noPosts}
-                      </Typography>
-                    </Grid>
-                  )}
-                </Grid>
+                    ) : blogPosts.length > 0 ? (
+                      blogPosts.map((post) => (
+                        <Grid item xs={12} sm={6} md={4} key={post.link}>
+                          <MotionBox
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                          >
+                            <BlogCard post={post} />
+                          </MotionBox>
+                        </Grid>
+                      ))
+                    ) : (
+                      <Grid item xs={12}>
+                        <Typography align="center">
+                          {commonTranslations.blog.noPosts}
+                        </Typography>
+                      </Grid>
+                    )}
+                  </Grid>
+                </Box>
               </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          )}
 
           {/* Contact Section */}
-          <Grid item xs={12}>
-            <Box sx={{ mt: 4 }}>
-              <Typography
-                variant="h3"
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  mb: 6,
-                  fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
-                  position: "relative",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: -8,
-                    left: 0,
-                    width: "40px",
-                    height: "3px",
-                    background: "linear-gradient(90deg, primary.main, transparent)",
-                    borderRadius: "4px",
-                  },
-                }}
-              >
-                <ContactMail
+          {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
+            <Grid item xs={12}>
+              <Box sx={{ mt: 4 }}>
+                <Typography
+                  variant="h3"
+                  gutterBottom
                   sx={{
-                    color: "primary.main",
-                    fontSize: "2rem",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    mb: 6,
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+                    position: "relative",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -8,
+                      left: 0,
+                      width: "40px",
+                      height: "3px",
+                      background: "linear-gradient(90deg, primary.main, transparent)",
+                      borderRadius: "4px",
+                    },
                   }}
-                />
-                {commonTranslations.sections.contact}
-              </Typography>
-              <Box>
-                <ContactSection
-                  onSubmit={async (data: ContactFormData) => {
-                    console.log("Form data:", data);
-                  }}
-                />
+                >
+                  <ContactMail
+                    sx={{
+                      color: "primary.main",
+                      fontSize: "2rem",
+                    }}
+                  />
+                  {commonTranslations.sections.contact}
+                </Typography>
+                <Box>
+                  <ContactSection
+                    onSubmit={async (data: ContactFormData) => {
+                      console.log("Form data:", data);
+                    }}
+                  />
+                </Box>
               </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          )}
         </Grid>
       </Box>
     </Container>

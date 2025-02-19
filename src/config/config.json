@@ -1,13 +1,13 @@
 {
   "features": {
-    "languageSwitcher": false,
+    "languageSwitcher": true,
     "themeSwitcher": true,
     "sections": {
+      "experience": true,
       "skills": true,
       "education": true,
       "blog": true,
       "contact": {
-        "enabled": true,
         "showContactInfo": true,
         "showMessageForm": true
       }
@@ -49,7 +49,7 @@
   "security": {
     "cors": {
       "origins": {
-        "production": ["https://cogalanemre.com"],
+        "production": ["https://emrecogalan.com"],
         "development": ["http://localhost:3000"]
       },
       "methods": ["GET", "POST"],
