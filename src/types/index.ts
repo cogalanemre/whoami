@@ -5,6 +5,7 @@ export type { BlogPost, BlogData } from './blog';
 export type { PersonalInfo } from './personal';
 export type { ContactFormData } from './contact';
 export type { ThemeColors } from './theme';
+export type { Hero } from './hero';
 
 export interface SocialMedia {
   github?: string;

@@ -5,40 +5,31 @@ import {
   Box,
   Grid,
   Typography,
-  Stack,
-  Avatar,
   Container,
 } from "@mui/material";
 import {
-  BusinessCenter,
-  School,
-  Article,
   ContactMail,
   Code,
 } from "@mui/icons-material";
-import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
-import EducationCard from "@/components/molecules/cards/EducationCard";
-import BlogCard from "@/components/molecules/cards/BlogCard";
+import ExperienceSection from "@/components/organisms/sections/ExperienceSection";
+import EducationSection from "@/components/organisms/sections/EducationSection";
+import BlogSection from "@/components/organisms/sections/BlogSection";
 import SkillsSection from "@/components/organisms/sections/SkillsSection";
+import HeroSection from "@/components/organisms/sections/HeroSection";
 import resumeData from "@/config/resume.json";
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
-import { BlogPost } from "@/types";
+import { BlogPost, Hero } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
-import Typewriter from "@/components/atoms/typography/Typewriter";
 import config from "@/config/config.json";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
-import SocialMediaButtons from "@/components/molecules/buttons/SocialMediaButtons";
 
 // Lazy load components
 const LazyContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
   loading: () => <Typography>Loading contact form...</Typography>,
   ssr: false,
 });
-
-const MotionBox = motion.create(Box);
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
@@ -76,6 +67,8 @@ export default function Home() {
     return null;
   }
 
+  const hero: Hero = resumeData.hero;
+
   return (
     <Container
       maxWidth="lg"
@@ -92,148 +85,20 @@ export default function Home() {
         <Grid container spacing={{ xs: 8, md: 12 }}>
           {/* Hero Section */}
           <Grid item xs={12}>
-            <MotionBox
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: {
-                  xs: "calc(100vh - 96px)",
-                  md: "calc(100vh - 128px)",
-                },
-              }}
-            >
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={{ xs: 4, md: 8 }}
-                alignItems="center"
-                sx={{
-                  position: "relative",
-                  pb: { xs: 8, md: 12 },
-                  maxWidth: "1200px",
-                  width: "100%",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: 0,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "80%",
-                    height: "2px",
-                    background: (theme) =>
-                      `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
-                  },
-                }}
-              >
-                <Avatar
-                  sx={{
-                    width: { xs: 200, sm: 250, md: 300 },
-                    height: { xs: 200, sm: 250, md: 300 },
-                    mx: { xs: "auto", md: 0 },
-                    mb: { xs: 4, md: 0 },
-                    bgcolor: "transparent",
-                    alignSelf: "center",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                  alt={resumeData.personalInfo.name}
-                  src={resumeData.personalInfo.avatar}
-                />
-                <Box
-                  sx={{
-                    pt: 1,
-                    width: "100%",
-                    textAlign: { xs: "center", md: "left" },
-                    position: "relative",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 2,
-                  }}
-                >
-                  <Typography
-                    variant="h1"
-                    gutterBottom
-                    sx={{
-                      mb: 1,
-                      fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-                      textAlign: { xs: "center", md: "left" },
-                      fontWeight: "normal",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      justifyContent: { xs: "center", md: "flex-start" },
-                      color: "primary.main",
-                    }}
-                  >
-                    {resumeData.personalInfo.name}
-                  </Typography>
-                  <Box
-                    sx={{
-                      minHeight: "60px",
-                      textAlign: { xs: "center", md: "left" },
-                      mb: 1,
-                    }}
-                  >
-                    <Typewriter
-                      texts={resumeData.personalInfo.titles[locale]}
-                      delay={150}
-                    />
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: { xs: "center", md: "flex-start" },
-                      position: "absolute",
-                      bottom: { xs: -60, md: -70 },
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "100%",
-                    }}
-                  ></Box>
-                </Box>
-              </Stack>
-            </MotionBox>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                mt: { xs: -4, md: -6 },
-                mb: { xs: 4, md: 6 },
-              }}
-            >
-              <SocialMediaButtons socialMedia={resumeData.personalInfo.socialMedia} />
-            </Box>
+            <HeroSection 
+              hero={hero}
+              locale={locale} 
+            />
           </Grid>
 
           {/* Experience Section */}
           {config.features.sections.experience && (
             <Grid item xs={12}>
-              <Box sx={{ mt: 4 }}>
-                <SectionTitle
-                  icon={BusinessCenter}
-                  title={commonTranslations.sections.experience}
-                  subtitle={totalExperience}
-                />
-                <Box>
-                  <Stack spacing={6}>
-                    {resumeData.experiences.map((experience, index) => (
-                      <MotionBox
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <ExperienceCard experience={experience} />
-                      </MotionBox>
-                    ))}
-                  </Stack>
-                </Box>
-              </Box>
+              <ExperienceSection
+                experiences={resumeData.experiences}
+                totalExperience={totalExperience}
+                sectionTitle={commonTranslations.sections.experience}
+              />
             </Grid>
           )}
 
@@ -253,67 +118,23 @@ export default function Home() {
           {/* Education Section */}
           {config.features.sections.education && (
             <Grid item xs={12}>
-              <Box sx={{ mt: 4 }}>
-                <SectionTitle
-                  icon={School}
-                  title={commonTranslations.sections.education}
-                />
-                <Box>
-                  <Stack spacing={4}>
-                    {resumeData.education.map((edu, index) => (
-                      <MotionBox
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <EducationCard education={edu} />
-                      </MotionBox>
-                    ))}
-                  </Stack>
-                </Box>
-              </Box>
+              <EducationSection
+                education={resumeData.education}
+                sectionTitle={commonTranslations.sections.education}
+              />
             </Grid>
           )}
 
           {/* Blog Section */}
           {config.features.sections.blog && (
             <Grid item xs={12}>
-              <Box sx={{ mt: 4 }}>
-                <SectionTitle
-                  icon={Article}
-                  title={commonTranslations.sections.blog}
-                />
-                <Box>
-                  <Grid container spacing={{ xs: 2, sm: 3 }}>
-                    {loading ? (
-                      <Grid item xs={12}>
-                        <Typography align="center">
-                          {commonTranslations.blog.loading}
-                        </Typography>
-                      </Grid>
-                    ) : blogPosts.length > 0 ? (
-                      blogPosts.map((post) => (
-                        <Grid item xs={12} sm={6} md={4} key={post.link}>
-                          <MotionBox
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                          >
-                            <BlogCard post={post} />
-                          </MotionBox>
-                        </Grid>
-                      ))
-                    ) : (
-                      <Grid item xs={12}>
-                        <Typography align="center">
-                          {commonTranslations.blog.noPosts}
-                        </Typography>
-                      </Grid>
-                    )}
-                  </Grid>
-                </Box>
-              </Box>
+              <BlogSection
+                blogPosts={blogPosts}
+                loading={loading}
+                sectionTitle={commonTranslations.sections.blog}
+                loadingText={commonTranslations.blog.loading}
+                noPostsText={commonTranslations.blog.noPosts}
+              />
             </Grid>
           )}
 

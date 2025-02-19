@@ -89,19 +89,19 @@ export default function ContactSection() {
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <InfoWithIcon
                     icon={LocationOn}
-                    text={resumeData.personalInfo.location[locale]}
+                    text={resumeData.contact.location[locale]}
                     colors={colors}
                   />
 
                   <InfoWithIcon
                     icon={Phone}
-                    text={resumeData.personalInfo.contact.phone}
+                    text={resumeData.contact.phone}
                     colors={colors}
                   />
 
                   <InfoWithIcon
                     icon={Email}
-                    text={resumeData.personalInfo.contact.email}
+                    text={resumeData.contact.email}
                     colors={colors}
                   />
                 </Box>
