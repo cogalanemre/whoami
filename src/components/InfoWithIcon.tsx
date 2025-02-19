@@ -18,7 +18,7 @@ export default function InfoWithIcon({
     <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
       <Icon
         sx={{
-          color: colors.secondary,
+          color: colors.primary,
           fontSize: "inherit",
         }}
       />

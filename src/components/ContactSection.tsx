@@ -90,21 +90,21 @@ export default function ContactSection({
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <LocationOn sx={{ color: colors.secondary }} />
+                <LocationOn sx={{ color: colors.primary }} />
                 <Typography sx={{ color: colors.secondary }}>
                   {resumeData.personalInfo.location[locale]}
                 </Typography>
               </Box>
 
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Phone sx={{ color: colors.secondary }} />
+                <Phone sx={{ color: colors.primary }} />
                 <Typography sx={{ color: colors.secondary }}>
                   {resumeData.personalInfo.contact.phone}
                 </Typography>
               </Box>
 
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Email sx={{ color: colors.secondary }} />
+                <Email sx={{ color: colors.primary }} />
                 <Typography sx={{ color: colors.secondary }}>
                   {resumeData.personalInfo.contact.email}
                 </Typography>
@@ -130,12 +130,12 @@ export default function ContactSection({
                 fontWeight: "bold",
               }}
             >
-              {commonTranslations.contact.form}
+              {commonTranslations.contact.sendMessage}
             </Typography>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <TextField
-                label={commonTranslations.contact.name}
+                label={commonTranslations.contact.form.name}
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -158,7 +158,7 @@ export default function ContactSection({
               />
 
               <TextField
-                label={commonTranslations.contact.email}
+                label={commonTranslations.contact.form.email}
                 type="email"
                 value={formData.email}
                 onChange={(e) =>
@@ -182,7 +182,7 @@ export default function ContactSection({
               />
 
               <TextField
-                label={`${commonTranslations.contact.phone} (${commonTranslations.contact.phoneOptional})`}
+                label={`${commonTranslations.contact.form.phone} (${commonTranslations.contact.form.phoneOptional})`}
                 value={formData.phone}
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
@@ -204,7 +204,7 @@ export default function ContactSection({
               />
 
               <TextField
-                label={commonTranslations.contact.message}
+                label={commonTranslations.contact.form.message}
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
@@ -246,7 +246,7 @@ export default function ContactSection({
                 ) : (
                   <>
                     <Send sx={{ mr: 1 }} />
-                    {commonTranslations.contact.send}
+                    {commonTranslations.contact.form.send}
                   </>
                 )}
               </Button>

@@ -48,10 +48,12 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
     }
   };
 
-  const skillDurations = calculateSkillDuration(experiences);
+  // Tüm yetenekleri ve sürelerini hesapla
+  const skillDurationsMap = calculateSkillDuration(experiences);
   const totalMonths = calculateTotalMonths(experiences);
 
-  const sortedSkills = Object.entries(skillDurations).sort(
+  // Map'i array'e çevir ve sürelerine göre sırala
+  const sortedSkills = Array.from(skillDurationsMap.entries()).sort(
     ([, durationA], [, durationB]) => durationB - durationA
   );
 
@@ -65,7 +67,7 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
           fontWeight: "bold",
         }}
       >
-        {commonTranslations.skills}
+        {commonTranslations.sections.skills}
       </Typography>
 
       <Stack

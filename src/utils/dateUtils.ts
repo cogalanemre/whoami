@@ -116,8 +116,7 @@ export const calculateSkillDuration = (
     });
   });
 
-  // Sürelere göre sırala
-  return new Map([...skillDurations.entries()].sort((a, b) => b[1] - a[1]));
+  return skillDurations;
 };
 
 /**

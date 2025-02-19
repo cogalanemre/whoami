@@ -88,6 +88,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
     return (
       <Card
         ref={ref}
+        id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
           background: colors.surface,
           position: "relative",

@@ -18,6 +18,8 @@ import {
   School,
   Article,
   ContactMail,
+  LocationOn,
+  Phone,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -31,9 +33,8 @@ import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import { BlogPost } from "@/data/blog";
 import type { ContactFormData } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Typewriter from "@/components/Typewriter";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 // Lazy load components
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -49,6 +50,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const { t, locale } = useTranslation();
   const commonTranslations = t("common");
+  const colors = useThemeColors();
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -148,8 +150,6 @@ export default function Home() {
       maxWidth="lg"
       sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
     >
-      <LanguageSwitcher />
-      <ThemeSwitcher />
       <Box
         component="main"
         sx={{
@@ -304,8 +304,7 @@ export default function Home() {
                     left: 0,
                     width: "40px",
                     height: "3px",
-                    background:
-                      "linear-gradient(90deg, primary.main, transparent)",
+                    background: "linear-gradient(90deg, primary.main, transparent)",
                     borderRadius: "4px",
                   },
                 }}
@@ -348,7 +347,9 @@ export default function Home() {
 
           {/* Skills Section */}
           <Grid item xs={12}>
-            <SkillsSection experiences={resumeData.experiences} />
+            <Box sx={{ mt: 4 }}>
+              <SkillsSection experiences={resumeData.experiences} />
+            </Box>
           </Grid>
 
           {/* Education Section */}
@@ -488,8 +489,7 @@ export default function Home() {
                     left: 0,
                     width: "40px",
                     height: "3px",
-                    background:
-                      "linear-gradient(90deg, primary.main, transparent)",
+                    background: "linear-gradient(90deg, primary.main, transparent)",
                     borderRadius: "4px",
                   },
                 }}
@@ -502,6 +502,28 @@ export default function Home() {
                 />
                 {commonTranslations.sections.contact}
               </Typography>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <LocationOn sx={{ color: "primary.main" }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.location[locale]}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Phone sx={{ color: "primary.main" }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.contact.phone}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Email sx={{ color: "primary.main" }} />
+                  <Typography sx={{ color: colors.secondary }}>
+                    {resumeData.personalInfo.contact.email}
+                  </Typography>
+                </Box>
+              </Box>
               <Box>
                 <ContactSection
                   onSubmit={async (data: ContactFormData) => {

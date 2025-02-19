@@ -15,9 +15,6 @@ export default function ThemeSwitcher() {
     <Box
       onClick={toggleTheme}
       sx={{
-        position: "fixed",
-        top: 20,
-        right: 20,
         width: "60px",
         height: "30px",
         borderRadius: "15px",
@@ -28,7 +25,6 @@ export default function ThemeSwitcher() {
         alignItems: "center",
         padding: "2px",
         cursor: "pointer",
-        zIndex: 1000,
         transition: "all 0.3s ease-in-out",
         justifyContent: "space-between",
         "@keyframes rotate360": {
