@@ -1,6 +1,6 @@
 {
   "features": {
-    "languageSwitcher": true,
+    "languageSwitcher": false,
     "themeSwitcher": true,
     "sections": {
       "skills": true,

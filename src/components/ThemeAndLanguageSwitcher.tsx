@@ -3,6 +3,7 @@
 import { Box } from "@mui/material";
 import ThemeSwitcher from "./ThemeSwitcher";
 import LanguageSwitcher from "./LanguageSwitcher";
+import config from "@/config/config.json";
 
 export default function ThemeAndLanguageSwitcher() {
   return (
@@ -18,7 +19,7 @@ export default function ThemeAndLanguageSwitcher() {
       }}
     >
       <ThemeSwitcher />
-      <LanguageSwitcher />
+      {config.features.languageSwitcher && <LanguageSwitcher />}
     </Box>
   );
 } 

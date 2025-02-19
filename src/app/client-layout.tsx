@@ -5,7 +5,9 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
 import MUIThemeProvider from "@/theme/MUIThemeProvider";
-import ThemeAndLanguageSwitcher from "@/components/ThemeAndLanguageSwitcher";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import config from "@/config/config.json";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -34,7 +36,20 @@ function ClientContent({ children }: { children: React.ReactNode }) {
         color: colors.secondary,
       }}
     >
-      <ThemeAndLanguageSwitcher />
+      <Box
+        sx={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          zIndex: 1000,
+        }}
+      >
+        {config.features.themeSwitcher && <ThemeSwitcher />}
+        {config.features.languageSwitcher && <LanguageSwitcher />}
+      </Box>
       {children}
     </Box>
   );
