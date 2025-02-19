@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { Poppins } from "next/font/google";
 import ClientLayout from "../client-layout";
-import { metadata } from "../metadata";
+import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +20,10 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export { metadata };
+export const metadata: Metadata = {
+  title: "Emre ÇOĞALAN",
+  description: "Kıdemli Yazılım Mühendisi",
+};
 
 export async function generateStaticParams() {
   return [{ lang: "tr" }, { lang: "en" }];
@@ -39,14 +42,11 @@ export default async function RootLayout({
 }: RootLayoutProps) {
   const resolvedParams = await params;
   return (
-    <html
-      lang={resolvedParams.lang}
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} h-full`}
-    >
+    <html lang={resolvedParams.lang} className="h-full">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="h-full">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} h-full`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
