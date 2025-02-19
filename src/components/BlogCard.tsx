@@ -43,6 +43,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               src={post.thumbnail}
               alt={post.title}
               fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
               style={{ objectFit: "cover" }}
             />
           </Box>
