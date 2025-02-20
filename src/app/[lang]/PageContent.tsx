@@ -7,22 +7,38 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import {
-  ContactMail,
-  Code,
-} from "@mui/icons-material";
-import ExperienceSection from "@/components/organisms/sections/ExperienceSection";
-import EducationSection from "@/components/organisms/sections/EducationSection";
-import BlogSection from "@/components/organisms/sections/BlogSection";
-import SkillsSection from "@/components/organisms/sections/SkillsSection";
-import HeroSection from "@/components/organisms/sections/HeroSection";
-import resumeData from "@/config/resume.json";
 import { BlogPost, Hero } from "@/types";
 import config from "@/config/config.json";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import resumeData from "@/config/resume.json";
+import { memo } from "react";
 
-// Lazy load components
-const LazyContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
+// Lazy load all sections
+const DynamicHeroSection = dynamic(() => import("@/components/organisms/sections/HeroSection"), {
+  loading: () => <Typography>Loading hero section...</Typography>,
+  ssr: true,
+});
+
+const DynamicExperienceSection = dynamic(() => import("@/components/organisms/sections/ExperienceSection"), {
+  loading: () => <Typography>Loading experience section...</Typography>,
+  ssr: true,
+});
+
+const DynamicSkillsSection = dynamic(() => import("@/components/organisms/sections/SkillsSection"), {
+  loading: () => <Typography>Loading skills section...</Typography>,
+  ssr: true,
+});
+
+const DynamicEducationSection = dynamic(() => import("@/components/organisms/sections/EducationSection"), {
+  loading: () => <Typography>Loading education section...</Typography>,
+  ssr: true,
+});
+
+const DynamicBlogSection = dynamic(() => import("@/components/organisms/sections/BlogSection"), {
+  loading: () => <Typography>Loading blog section...</Typography>,
+  ssr: true,
+});
+
+const DynamicContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
   loading: () => <Typography>Loading contact form...</Typography>,
   ssr: false,
 });
@@ -34,13 +50,53 @@ interface PageContentProps {
   hero: Hero;
 }
 
+// Dil bazlı metinleri statik olarak tanımla
+const translations = {
+  tr: {
+    experience: "Deneyim",
+    skills: "Yetenekler",
+    education: "Eğitim",
+    blog: "Blog",
+    contact: "İletişim",
+    loadingBlog: "Blog yazıları yükleniyor...",
+    noBlogPosts: "Henüz blog yazısı yok.",
+    loading: {
+      hero: "Hero bölümü yükleniyor...",
+      experience: "Deneyim bölümü yükleniyor...",
+      skills: "Yetenekler bölümü yükleniyor...",
+      education: "Eğitim bölümü yükleniyor...",
+      blog: "Blog bölümü yükleniyor...",
+      contact: "İletişim formu yükleniyor..."
+    }
+  },
+  en: {
+    experience: "Experience",
+    skills: "Skills",
+    education: "Education",
+    blog: "Blog",
+    contact: "Contact",
+    loadingBlog: "Loading blog posts...",
+    noBlogPosts: "No blog posts yet.",
+    loading: {
+      hero: "Loading hero section...",
+      experience: "Loading experience section...",
+      skills: "Loading skills section...",
+      education: "Loading education section...",
+      blog: "Loading blog section...",
+      contact: "Loading contact form..."
+    }
+  }
+};
+
 // Client component olarak sayfa içeriği
-export default function PageContent({
+function PageContent({
   lang,
   blogPosts,
   totalExperience,
   hero,
 }: PageContentProps) {
+  const t = translations[lang as keyof typeof translations];
+
   return (
     <Container
       maxWidth="lg"
@@ -57,7 +113,7 @@ export default function PageContent({
         <Grid container spacing={{ xs: 8, md: 12 }}>
           {/* Hero Section */}
           <Grid item xs={12}>
-            <HeroSection 
+            <DynamicHeroSection 
               hero={hero}
               locale={lang as "tr" | "en"} 
             />
@@ -66,10 +122,10 @@ export default function PageContent({
           {/* Experience Section */}
           {config.features.sections.experience && (
             <Grid item xs={12}>
-              <ExperienceSection
+              <DynamicExperienceSection
                 experiences={resumeData.experiences}
                 totalExperience={totalExperience}
-                sectionTitle={lang === "tr" ? "Deneyim" : "Experience"}
+                sectionTitle={t.experience}
               />
             </Grid>
           )}
@@ -77,22 +133,19 @@ export default function PageContent({
           {/* Skills Section */}
           {config.features.sections.skills && (
             <Grid item xs={12}>
-              <Box sx={{ mt: 4 }}>
-                <SectionTitle
-                  icon={Code}
-                  title={lang === "tr" ? "Yetenekler" : "Skills"}
-                />
-                <SkillsSection experiences={resumeData.experiences} />
-              </Box>
+              <DynamicSkillsSection 
+                experiences={resumeData.experiences}
+                title={t.skills}
+              />
             </Grid>
           )}
 
           {/* Education Section */}
           {config.features.sections.education && (
             <Grid item xs={12}>
-              <EducationSection
+              <DynamicEducationSection
                 education={resumeData.education}
-                sectionTitle={lang === "tr" ? "Eğitim" : "Education"}
+                sectionTitle={t.education}
               />
             </Grid>
           )}
@@ -100,12 +153,12 @@ export default function PageContent({
           {/* Blog Section */}
           {config.features.sections.blog && (
             <Grid item xs={12}>
-              <BlogSection
+              <DynamicBlogSection
                 blogPosts={blogPosts}
                 loading={false}
-                sectionTitle={lang === "tr" ? "Blog" : "Blog"}
-                loadingText={lang === "tr" ? "Blog yazıları yükleniyor..." : "Loading blog posts..."}
-                noPostsText={lang === "tr" ? "Henüz blog yazısı yok." : "No blog posts yet."}
+                sectionTitle={t.blog}
+                loadingText={t.loadingBlog}
+                noPostsText={t.noBlogPosts}
               />
             </Grid>
           )}
@@ -113,19 +166,14 @@ export default function PageContent({
           {/* Contact Section */}
           {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
             <Grid item xs={12}>
-              <Box sx={{ mt: 4 }}>
-                <SectionTitle
-                  icon={ContactMail}
-                  title={lang === "tr" ? "İletişim" : "Contact"}
-                />
-                <Box>
-                  <LazyContactSection />
-                </Box>
-              </Box>
+              <DynamicContactSection />
             </Grid>
           )}
         </Grid>
       </Box>
     </Container>
   );
-} 
+}
+
+// memo ile sarmalayarak gereksiz render'ları önlüyoruz
+export default memo(PageContent); 

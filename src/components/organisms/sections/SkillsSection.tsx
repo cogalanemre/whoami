@@ -1,21 +1,21 @@
-import { Box, Typography, Chip, Stack } from "@mui/material";
+import { Box, Chip, Stack } from "@mui/material";
 import { Experience } from "@/types";
-import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import {
   calculateSkillDuration,
   calculateTotalMonths,
 } from "@/utils/dateUtils";
 import { useThemeColors } from "@/hooks/useThemeColors";
+import { Code } from "@mui/icons-material";
+import SectionTitle from "@/components/atoms/typography/SectionTitle";
 
 interface SkillsSectionProps {
   experiences: Experience[];
+  title: string;
 }
 
-export default function SkillsSection({ experiences }: SkillsSectionProps) {
+export default function SkillsSection({ experiences, title }: SkillsSectionProps) {
   const colors = useThemeColors();
-  const { t } = useTranslation();
-  const commonTranslations = t("common");
   const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
   const handleSkillClick = (skillTag: string) => {
@@ -59,16 +59,10 @@ export default function SkillsSection({ experiences }: SkillsSectionProps) {
 
   return (
     <Box>
-      <Typography
-        variant="h5"
-        sx={{
-          color: colors.primary,
-          mb: 3,
-          fontWeight: "bold",
-        }}
-      >
-        {commonTranslations.sections.skills}
-      </Typography>
+      <SectionTitle
+        icon={Code}
+        title={title}
+      />
 
       <Stack
         direction="row"

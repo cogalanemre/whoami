@@ -29,17 +29,13 @@ export async function generateStaticParams() {
   return [{ lang: "tr" }, { lang: "en" }];
 }
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-  params: Promise<{
-    lang: string;
-  }>;
-}
-
 export default async function RootLayout({
   children,
   params,
-}: RootLayoutProps) {
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
   const resolvedParams = await params;
   return (
     <html lang={resolvedParams.lang} className="h-full">

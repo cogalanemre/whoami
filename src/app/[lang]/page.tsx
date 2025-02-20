@@ -6,6 +6,20 @@ import resumeData from "@/config/resume.json";
 import PageContent from "./PageContent";
 import { Metadata } from "next";
 
+// Build zamanında hesaplanacak veriler
+const staticData = {
+  tr: {
+    totalExperience: calculateTotalExperience(resumeData.experiences, "tr"),
+    title: "Emre ÇOĞALAN - Kıdemli Yazılım Mühendisi",
+    description: `${resumeData.hero.titles.tr.join(" | ")} | ${calculateTotalExperience(resumeData.experiences, "tr")} deneyim`,
+  },
+  en: {
+    totalExperience: calculateTotalExperience(resumeData.experiences, "en"),
+    title: "Emre ÇOĞALAN - Senior Software Engineer",
+    description: `${resumeData.hero.titles.en.join(" | ")} | ${calculateTotalExperience(resumeData.experiences, "en")} experience`,
+  },
+};
+
 // Build esnasında hangi dil sayfalarının oluşturulacağını belirt
 export async function generateStaticParams() {
   return config.language.supported.map((lang) => ({
@@ -13,28 +27,68 @@ export async function generateStaticParams() {
   }));
 }
 
-// Metadata tanımla
-export const metadata: Metadata = {
-  title: "Emre ÇOĞALAN",
-  description: "Kıdemli Yazılım Mühendisi",
-};
+// Dinamik metadata
+export async function generateMetadata({ params }: { params: Promise<{ lang: "tr" | "en" }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { lang } = resolvedParams;
+  
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? config.security.cors.origins.production[0]
+    : config.security.cors.origins.development[0];
+  
+  return {
+    title: staticData[lang].title,
+    description: staticData[lang].description,
+    keywords: ["software engineer", "full stack developer", "senior developer", "yazılım mühendisi", "kıdemli geliştirici"],
+    authors: [{ name: resumeData.hero.name }],
+    metadataBase: new URL(baseUrl),
+    openGraph: {
+      title: staticData[lang].title,
+      description: staticData[lang].description,
+      images: [
+        {
+          url: resumeData.hero.avatar,
+          width: 300,
+          height: 300,
+          alt: resumeData.hero.name,
+        },
+      ],
+      locale: lang,
+      type: "profile",
+    },
+    twitter: {
+      card: "summary",
+      title: staticData[lang].title,
+      description: staticData[lang].description,
+      images: [resumeData.hero.avatar],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      languages: {
+        tr: "/tr",
+        en: "/en",
+      },
+    },
+  };
+}
 
-// Server component olarak ana sayfa
 export default async function Page({
   params,
 }: {
   params: Promise<{ lang: "tr" | "en" }>;
 }) {
-  const { lang } = await params;
+  const resolvedParams = await params;
   const blogPosts = await fetchBlogPosts();
-  const totalExperience = calculateTotalExperience(resumeData.experiences, lang);
   const hero: Hero = resumeData.hero;
 
   return (
     <PageContent
-      lang={lang}
+      lang={resolvedParams.lang}
       blogPosts={blogPosts}
-      totalExperience={totalExperience}
+      totalExperience={staticData[resolvedParams.lang].totalExperience}
       hero={hero}
     />
   );
