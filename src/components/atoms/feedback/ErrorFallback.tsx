@@ -1,49 +1,57 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useThemeColors } from "@/hooks/useThemeColors";
 import { useTranslation } from "@/hooks/useTranslation";
-import { FallbackProps } from "react-error-boundary";
 
-export default function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
-  const colors = useThemeColors();
+interface ErrorFallbackProps {
+  error: Error;
+  resetErrorBoundary: () => void;
+}
+
+export default function ErrorFallback({
+  error,
+  resetErrorBoundary,
+}: ErrorFallbackProps) {
   const { t } = useTranslation();
-  const commonTranslations = t("common");
 
   return (
     <Box
       sx={{
-        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 2,
+        minHeight: "100vh",
         p: 3,
-        background: colors.background,
-        color: colors.secondary,
       }}
     >
       <Typography variant="h4" color="error" gutterBottom>
-        {commonTranslations.error.title}
+        {t("error.title")}
       </Typography>
       <Typography variant="body1" align="center" sx={{ mb: 2 }}>
-        {commonTranslations.error.message}
+        {t("error.message")}
       </Typography>
-      <Typography variant="body2" color="error" sx={{ mb: 2 }}>
-        {error.message}
-      </Typography>
+      {process.env.NODE_ENV === "development" && (
+        <Typography
+          variant="body2"
+          component="pre"
+          sx={{
+            backgroundColor: "background.paper",
+            p: 2,
+            borderRadius: 1,
+            maxWidth: "100%",
+            overflow: "auto",
+            mb: 2,
+          }}
+        >
+          {error.message}
+        </Typography>
+      )}
       <Button
         variant="contained"
+        color="primary"
         onClick={resetErrorBoundary}
-        sx={{
-          bgcolor: colors.primary,
-          color: colors.surface,
-          "&:hover": {
-            bgcolor: colors.primary,
-            opacity: 0.9,
-          },
-        }}
+        sx={{ mt: 2 }}
       >
-        {commonTranslations.error.retry}
+        {t("error.retry")}
       </Button>
     </Box>
   );

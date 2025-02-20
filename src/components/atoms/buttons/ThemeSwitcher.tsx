@@ -7,7 +7,6 @@ export default function ThemeSwitcher() {
   const theme = useTheme();
   const { isDarkMode, toggleTheme } = useThemeContext();
   const { t } = useTranslation();
-  const commonTranslations = t("common");
 
   return (
     <Box
@@ -51,7 +50,7 @@ export default function ThemeSwitcher() {
           transition: "opacity 0.3s ease-in-out",
         }}
       >
-        {commonTranslations.theme.dark}
+        {t("theme.dark")}
       </Typography>
       <Box
         className="theme-icon"
@@ -96,7 +95,7 @@ export default function ThemeSwitcher() {
           transition: "opacity 0.3s ease-in-out",
         }}
       >
-        {commonTranslations.theme.light}
+        {t("theme.light")}
       </Typography>
     </Box>
   );

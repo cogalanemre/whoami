@@ -16,28 +16,24 @@ const geistMono = Geist_Mono({
 });
 
 const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
-  display: "swap",
 });
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F5F5F5" },
-    { media: "(prefers-color-scheme: dark)", color: "#121212" }
-  ]
-};
 
 export const metadata: Metadata = {
   title: "Emre ÇOĞALAN",
   description: "Kıdemli Yazılım Mühendisi",
   applicationName: "Emre ÇOĞALAN - Portfolio",
   authors: [{ name: "Emre ÇOĞALAN" }],
-  keywords: ["software engineer", "full stack developer", "senior developer", "yazılım mühendisi", "kıdemli geliştirici"],
-  robots: "index, follow",
-  manifest: "/manifest.json"
+  generator: "Next.js",
+  keywords: ["Emre ÇOĞALAN", "Portfolio", "Software Engineer", "Developer"],
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 };
 
 export async function generateStaticParams() {
@@ -49,11 +45,12 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
+  params: { lang: string };
 }) {
-  const resolvedParams = await params;
+  const lang = await Promise.resolve(params.lang);
+
   return (
-    <html lang={resolvedParams.lang} className="h-full">
+    <html lang={lang}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
@@ -62,16 +59,13 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} h-full`}>
         <ClientLayout>{children}</ClientLayout>
         {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-YOUR-MEASUREMENT-ID"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YOUR-MEASUREMENT-ID');
+            gtag('config', 'G-XXXXXXXXXX');
           `}
         </Script>
       </body>

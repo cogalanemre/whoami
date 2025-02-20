@@ -28,9 +28,8 @@ export async function generateStaticParams() {
 }
 
 // Dinamik metadata
-export async function generateMetadata({ params }: { params: Promise<{ lang: "tr" | "en" }> }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
+export async function generateMetadata({ params }: { params: { lang: "tr" | "en" } }): Promise<Metadata> {
+  const lang = await Promise.resolve(params.lang);
   
   const baseUrl = process.env.NODE_ENV === 'production' 
     ? config.security.cors.origins.production[0]
@@ -78,17 +77,17 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "tr
 export default async function Page({
   params,
 }: {
-  params: Promise<{ lang: "tr" | "en" }>;
+  params: { lang: "tr" | "en" };
 }) {
-  const resolvedParams = await params;
+  const lang = await Promise.resolve(params.lang);
   const blogPosts = await fetchBlogPosts();
   const hero: Hero = resumeData.hero;
 
   return (
     <PageContent
-      lang={resolvedParams.lang}
+      lang={lang}
       blogPosts={blogPosts}
-      totalExperience={staticData[resolvedParams.lang].totalExperience}
+      totalExperience={staticData[lang].totalExperience}
       hero={hero}
     />
   );
