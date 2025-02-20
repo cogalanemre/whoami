@@ -6,7 +6,10 @@ import resumeData from "@/config/resume.json";
 import PageContent from "./PageContent";
 import { Metadata } from "next";
 
-// Build zamanında hesaplanacak veriler
+/**
+ * Statik veriler
+ * Build zamanında hesaplanacak ve her iki dil için kullanılacak veriler
+ */
 const staticData = {
   tr: {
     totalExperience: calculateTotalExperience(resumeData.experiences, "tr"),
@@ -18,19 +21,32 @@ const staticData = {
     title: "Emre ÇOĞALAN - Senior Software Engineer",
     description: `${resumeData.hero.titles.en.join(" | ")} | ${calculateTotalExperience(resumeData.experiences, "en")} experience`,
   },
-};
+} as const;
 
-// Build esnasında hangi dil sayfalarının oluşturulacağını belirt
+/**
+ * Statik sayfa parametrelerini oluştur
+ * @returns {Promise<Array<{lang: string}>>} Desteklenen diller için route parametreleri
+ */
 export async function generateStaticParams() {
   return config.language.supported.map((lang) => ({
     lang: lang as "tr" | "en",
   }));
 }
 
-// Dinamik metadata
-export async function generateMetadata({ params }: { params: { lang: "tr" | "en" } }): Promise<Metadata> {
+/**
+ * Sayfa meta verilerini oluştur
+ * @param {Object} params - Route parametreleri
+ * @param {string} params.lang - Aktif dil kodu (tr/en)
+ * @returns {Promise<Metadata>} Sayfa meta verileri
+ */
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { lang: "tr" | "en" } 
+}): Promise<Metadata> {
   const lang = await Promise.resolve(params.lang);
   
+  // Ortama göre base URL belirle
   const baseUrl = process.env.NODE_ENV === 'production' 
     ? config.security.cors.origins.production[0]
     : config.security.cors.origins.development[0];
@@ -38,7 +54,13 @@ export async function generateMetadata({ params }: { params: { lang: "tr" | "en"
   return {
     title: staticData[lang].title,
     description: staticData[lang].description,
-    keywords: ["software engineer", "full stack developer", "senior developer", "yazılım mühendisi", "kıdemli geliştirici"],
+    keywords: [
+      "software engineer",
+      "full stack developer", 
+      "senior developer",
+      "yazılım mühendisi",
+      "kıdemli geliştirici"
+    ],
     authors: [{ name: resumeData.hero.name }],
     metadataBase: new URL(baseUrl),
     openGraph: {
@@ -74,6 +96,17 @@ export async function generateMetadata({ params }: { params: { lang: "tr" | "en"
   };
 }
 
+/**
+ * Ana Sayfa Bileşeni
+ * 
+ * Seçilen dile göre içeriği render eden ve gerekli verileri
+ * PageContent bileşenine ileten ana sayfa bileşeni.
+ * 
+ * @param {Object} props - Bileşen props'ları
+ * @param {Object} props.params - Route parametreleri
+ * @param {string} props.params.lang - Aktif dil kodu (tr/en)
+ * @returns {Promise<JSX.Element>} Sayfa içeriği
+ */
 export default async function Page({
   params,
 }: {

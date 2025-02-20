@@ -18,10 +18,6 @@ const sectionStyles = {
   mt: 4,
 };
 
-const stackContainerStyles = {
-  spacing: 6,
-};
-
 /**
  * Deneyim Section Bileşeni
  * 

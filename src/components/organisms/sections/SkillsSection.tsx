@@ -9,6 +9,7 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 import { Code } from "@mui/icons-material";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
+import { ThemeColors } from "@/types";
 
 interface SkillsSectionProps {
   experiences: Experience[];
@@ -28,7 +29,7 @@ const stackStyles = {
 };
 
 // Chip stilleri için yardımcı fonksiyon
-const getChipStyles = (isSelected: boolean, colors: any) => ({
+const getChipStyles = (isSelected: boolean, colors: ThemeColors) => ({
   bgcolor: isSelected ? colors.primary : colors.surface,
   color: isSelected ? colors.surface : colors.primary,
   border: `1px solid ${colors.primary}`,
