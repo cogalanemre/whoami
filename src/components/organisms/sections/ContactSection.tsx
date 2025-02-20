@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 import { ContactInfo } from "@/components/molecules/contact/ContactInfo";
 import FormField from "@/components/molecules/forms/FormField";
+import { memo } from "react";
 
 interface FormData {
   name: string;
@@ -26,7 +27,46 @@ interface SnackbarState {
   severity: "success" | "error";
 }
 
-export default function ContactSection() {
+// Section container stilleri
+const sectionStyles = {
+  component: "section",
+  py: 8,
+};
+
+// Grid container stilleri
+const gridContainerStyles = {
+  spacing: 4,
+};
+
+// Card stilleri
+const cardStyles = {
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+};
+
+// Form container stilleri
+const formContainerStyles = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 2,
+};
+
+// Submit button stilleri
+const submitButtonStyles = {
+  mt: 2,
+  alignSelf: "flex-start",
+};
+
+/**
+ * İletişim Section Bileşeni
+ * 
+ * İletişim bilgilerini ve iletişim formunu içeren bölüm.
+ * Form gönderimi sonrası başarılı/başarısız durumları Snackbar ile gösterilir.
+ * 
+ * @returns {JSX.Element} Contact section bileşeni
+ */
+function ContactSection() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -40,6 +80,7 @@ export default function ContactSection() {
     severity: "success",
   });
 
+  // Form gönderme işleyicisi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -57,7 +98,7 @@ export default function ContactSection() {
           message: t("contact.success"),
           severity: "success",
         });
-        setFormData({ name: "", email: "", phone: "", message: "" });
+        resetForm();
       } else {
         throw new Error();
       }
@@ -70,22 +111,28 @@ export default function ContactSection() {
     }
   };
 
+  // Form alanları değişim işleyicisi
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Form sıfırlama
+  const resetForm = () => {
+    setFormData({ name: "", email: "", phone: "", message: "" });
+  };
+
+  // Snackbar kapatma işleyicisi
+  const handleSnackbarClose = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
+
   return (
-    <Box component="section" sx={{ py: 8 }}>
-      <Grid container spacing={4}>
+    <Box sx={sectionStyles}>
+      <Grid container sx={gridContainerStyles}>
+        {/* İletişim Bilgileri */}
         <Grid item xs={12} md={6}>
-          <Card
-            sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
+          <Card sx={cardStyles}>
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 {t("sections.contact")}
@@ -94,35 +141,29 @@ export default function ContactSection() {
             </CardContent>
           </Card>
         </Grid>
+
+        {/* İletişim Formu */}
         <Grid item xs={12} md={6}>
           <Card
             component="form"
             onSubmit={handleSubmit}
-            sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-            }}
+            sx={cardStyles}
           >
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 {t("contact.sendMessage")}
               </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                }}
-              >
+              <Box sx={formContainerStyles}>
                 <FormField
                   label={t("contact.form.name")}
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
                 />
                 <FormField
                   label={t("contact.form.email")}
+                  name="email"
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -130,11 +171,13 @@ export default function ContactSection() {
                 />
                 <FormField
                   label={`${t("contact.form.phone")} (${t("contact.form.phoneOptional")})`}
+                  name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                 />
                 <FormField
                   label={t("contact.form.message")}
+                  name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -145,10 +188,7 @@ export default function ContactSection() {
                   type="submit"
                   variant="contained"
                   size="large"
-                  sx={{
-                    mt: 2,
-                    alignSelf: "flex-start",
-                  }}
+                  sx={submitButtonStyles}
                 >
                   {t("contact.form.send")}
                 </Button>
@@ -157,13 +197,15 @@ export default function ContactSection() {
           </Card>
         </Grid>
       </Grid>
+
+      {/* Bildirim Snackbar'ı */}
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+        onClose={handleSnackbarClose}
       >
         <Alert
-          onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+          onClose={handleSnackbarClose}
           severity={snackbar.severity}
           sx={{ width: "100%" }}
         >
@@ -172,4 +214,7 @@ export default function ContactSection() {
       </Snackbar>
     </Box>
   );
-} 
+}
+
+// Bileşeni memo ile sarmalayarak gereksiz render'ları önlüyoruz
+export default memo(ContactSection); 

@@ -6,7 +6,7 @@ import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
 
-const MotionBox = motion.create(Box);
+const MotionBox = motion(Box);
 
 interface ExperienceSectionProps {
   experiences: Experience[];
@@ -14,13 +14,32 @@ interface ExperienceSectionProps {
   sectionTitle: string;
 }
 
+const sectionStyles = {
+  mt: 4,
+};
+
+const stackContainerStyles = {
+  spacing: 6,
+};
+
+/**
+ * Deneyim Section Bileşeni
+ * 
+ * Kullanıcının iş deneyimlerini kronolojik sırayla gösteren bölüm.
+ * Her deneyim için ayrı bir kart oluşturur ve animasyonlu bir şekilde gösterir.
+ * 
+ * @param {Experience[]} experiences - Deneyim listesi
+ * @param {string} totalExperience - Toplam deneyim süresi
+ * @param {string} sectionTitle - Bölüm başlığı
+ * @returns {JSX.Element} Experience section bileşeni
+ */
 function ExperienceSection({ 
   experiences, 
   totalExperience,
   sectionTitle 
 }: ExperienceSectionProps) {
   return (
-    <Box sx={{ mt: 4 }}>
+    <Box sx={sectionStyles}>
       <SectionTitle
         icon={BusinessCenter}
         title={sectionTitle}
@@ -44,5 +63,4 @@ function ExperienceSection({
   );
 }
 
-// memo ile sarmalayarak gereksiz render'ları önlüyoruz
 export default memo(ExperienceSection); 

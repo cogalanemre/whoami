@@ -8,16 +8,52 @@ import {
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { Code } from "@mui/icons-material";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import { memo } from "react";
 
 interface SkillsSectionProps {
   experiences: Experience[];
   title: string;
 }
 
-export default function SkillsSection({ experiences, title }: SkillsSectionProps) {
+// Section container stilleri
+const sectionStyles = {
+  mt: 4,
+};
+
+// Stack container stilleri
+const stackStyles = {
+  gap: 1,
+  direction: "row",
+  flexWrap: "wrap",
+};
+
+// Chip stilleri için yardımcı fonksiyon
+const getChipStyles = (isSelected: boolean, colors: any) => ({
+  bgcolor: isSelected ? colors.primary : colors.surface,
+  color: isSelected ? colors.surface : colors.primary,
+  border: `1px solid ${colors.primary}`,
+  cursor: "pointer",
+  "&:hover": {
+    bgcolor: isSelected ? colors.primary : colors.surface,
+    opacity: 0.9,
+  },
+});
+
+/**
+ * Yetenekler Section Bileşeni
+ * 
+ * Kullanıcının sahip olduğu yetenekleri ve bu yeteneklerdeki deneyim sürelerini
+ * yüzdelik olarak gösteren bölüm. Tıklanabilir etiketler ile filtreleme yapılabilir.
+ * 
+ * @param {Experience[]} experiences - Deneyim listesi
+ * @param {string} title - Bölüm başlığı
+ * @returns {JSX.Element} Skills section bileşeni
+ */
+function SkillsSection({ experiences, title }: SkillsSectionProps) {
   const colors = useThemeColors();
   const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
+  // Yetenek tıklama işleyicisi
   const handleSkillClick = (skillTag: string) => {
     if (selectedSkill === skillTag) {
       setSelectedSkill(null);
@@ -25,6 +61,11 @@ export default function SkillsSection({ experiences, title }: SkillsSectionProps
     }
 
     setSelectedSkill(skillTag);
+    scrollToFirstMatchingExperience(skillTag);
+  };
+
+  // İlgili deneyime scroll yapma
+  const scrollToFirstMatchingExperience = (skillTag: string) => {
     const firstMatchingExperience = experiences.find((exp) =>
       exp.skillTags.includes(skillTag)
     );
@@ -58,40 +99,25 @@ export default function SkillsSection({ experiences, title }: SkillsSectionProps
   );
 
   return (
-    <Box>
+    <Box sx={sectionStyles}>
       <SectionTitle
         icon={Code}
         title={title}
       />
 
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        sx={{
-          gap: 1,
-        }}
-      >
+      <Stack sx={stackStyles}>
         {sortedSkills.map(([skillTag, duration]) => (
           <Chip
             key={skillTag}
             label={`${skillTag} (${Math.round((duration / totalMonths) * 100)}%)`}
             onClick={() => handleSkillClick(skillTag)}
-            sx={{
-              bgcolor:
-                selectedSkill === skillTag ? colors.primary : colors.surface,
-              color: selectedSkill === skillTag ? colors.surface : colors.primary,
-              border: `1px solid ${colors.primary}`,
-              cursor: "pointer",
-              "&:hover": {
-                bgcolor:
-                  selectedSkill === skillTag ? colors.primary : colors.surface,
-                opacity: 0.9,
-              },
-            }}
+            sx={getChipStyles(selectedSkill === skillTag, colors)}
           />
         ))}
       </Stack>
     </Box>
   );
-} 
+}
+
+// Bileşeni memo ile sarmalayarak gereksiz render'ları önlüyoruz
+export default memo(SkillsSection); 

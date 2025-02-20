@@ -6,25 +6,43 @@ import EducationCard from "@/components/molecules/cards/EducationCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
 
-const MotionBox = motion.create(Box);
+const MotionBox = motion(Box);
 
 interface EducationSectionProps {
   education: Education[];
   sectionTitle: string;
 }
 
+const sectionStyles = {
+  mt: 4,
+};
+
+const stackContainerStyles = {
+  spacing: 4,
+};
+
+/**
+ * Eğitim Section Bileşeni
+ * 
+ * Kullanıcının eğitim geçmişini kronolojik sırayla gösteren bölüm.
+ * Her eğitim için ayrı bir kart oluşturur ve animasyonlu bir şekilde gösterir.
+ * 
+ * @param {Education[]} education - Eğitim listesi
+ * @param {string} sectionTitle - Bölüm başlığı
+ * @returns {JSX.Element} Education section bileşeni
+ */
 function EducationSection({ 
   education,
   sectionTitle 
 }: EducationSectionProps) {
   return (
-    <Box sx={{ mt: 4 }}>
+    <Box sx={sectionStyles}>
       <SectionTitle
         icon={School}
         title={sectionTitle}
       />
       <Box>
-        <Stack spacing={4}>
+        <Stack sx={stackContainerStyles}>
           {education.map((edu, index) => (
             <MotionBox
               key={`${edu.tr.school}-${edu.startDate}`}
@@ -41,5 +59,4 @@ function EducationSection({
   );
 }
 
-// memo ile sarmalayarak gereksiz render'ları önlüyoruz
 export default memo(EducationSection); 
