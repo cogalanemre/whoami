@@ -39,7 +39,6 @@ export const FORM_CONFIG = {
 // API ayarları
 export const API_CONFIG = {
   BLOG_FEED_URL: config.api.blog.feedUrl,
-  REVALIDATE_TIME: config.api.blog.revalidateTime,
 } as const;
 
 // Güvenlik ayarları

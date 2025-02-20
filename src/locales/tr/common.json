@@ -1,8 +1,8 @@
 {
   "sections": {
-    "experience": "İş Tecrübesi",
+    "experience": "Deneyim",
     "education": "Eğitim",
-    "blog": "Blog Yazılarım",
+    "blog": "Blog",
     "contact": "İletişim",
     "skills": "Yetenekler"
   },
@@ -13,18 +13,18 @@
       "name": "Ad Soyad",
       "email": "E-posta",
       "phone": "Telefon",
-      "phoneOptional": "Opsiyonel",
-      "message": "Mesajınız",
+      "phoneOptional": "opsiyonel",
+      "message": "Mesaj",
       "send": "Gönder",
       "sending": "Gönderiliyor..."
     },
-    "success": "Mesajınız başarıyla gönderildi!",
-    "error": "Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+    "success": "Mesajınız başarıyla gönderildi.",
+    "error": "Mesaj gönderilirken bir hata oluştu."
   },
   "blog": {
     "readMore": "Devamını oku",
-    "loading": "Yazılar yükleniyor...",
-    "noPosts": "Henüz blog yazısı bulunmuyor."
+    "loading": "Blog yazıları yükleniyor...",
+    "noPosts": "Henüz blog yazısı yok."
   },
   "theme": {
     "dark": "Koyu",
@@ -37,5 +37,10 @@
   "skills": {
     "showAll": "Tüm Yetenekleri Göster",
     "showLess": "Daha Az Göster"
+  },
+  "error": {
+    "title": "Bir Hata Oluştu",
+    "message": "Üzgünüz, bir şeyler yanlış gitti.",
+    "retry": "Tekrar Dene"
   }
 } 

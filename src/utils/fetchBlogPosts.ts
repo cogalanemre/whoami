@@ -1,39 +1,84 @@
 import { BlogPost } from '@/types/blog';
 import config from '@/config/config.json';
+import Parser from 'rss-parser';
 
-interface APIResponse {
-  posts: Array<Omit<BlogPost, 'pubDate'> & { pubDate: string }>;
+// RSS Parser için özel tip tanımlaması
+type CustomFeed = Parser.Output<{
+  title: string;
+  description: string;
+  link: string;
+  pubDate: string;
+  'content:encoded': string;
+  content: string;
+  contentSnippet: string;
+}>;
+
+type CustomItem = Parser.Item & {
+  title: string;
+  contentSnippet?: string;
+  content?: string;
+  link: string;
+  pubDate: string;
+  'content:encoded'?: string;
+};
+
+const parser: Parser<CustomFeed, CustomItem> = new Parser({
+  customFields: {
+    item: ['content:encoded']
+  }
+});
+
+// Ortalama okuma hızı (kelime/dakika)
+const AVERAGE_READING_SPEED = 200;
+
+// HTML içeriğinden metin çıkaran yardımcı fonksiyon
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '');
+}
+
+// Kelime sayısını hesaplayan yardımcı fonksiyon
+function countWords(text: string): number {
+  return text.trim().split(/\s+/).length;
+}
+
+// Okuma süresini hesaplayan yardımcı fonksiyon
+function calculateReadingTime(content: string): number {
+  const words = countWords(stripHtml(content));
+  return Math.max(1, Math.ceil(words / AVERAGE_READING_SPEED));
 }
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   try {
-    console.log('Blog yazıları yükleniyor...');
+    console.log('Blog yazıları Medium\'dan yükleniyor...');
     
-    // Sunucu tarafında çalışacak şekilde tam URL'yi belirt
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? config.security.cors.origins.production[0]
-      : config.security.cors.origins.development[0];
+    const feed = await parser.parseURL(config.api.blog.feedUrl);
+    
+    return feed.items.map(item => {
+      // HTML içeriğini temizle
+      const cleanContent = item['content:encoded'] || item.content || '';
+      const plainText = stripHtml(cleanContent);
 
-    const response = await fetch(`${baseUrl}/api/blog`, {
-      next: {
-        revalidate: config.api.blog.revalidateTime
-      }
+      return {
+        title: item.title || '',
+        description: item.contentSnippet || plainText.substring(0, 200) + '...',
+        link: item.link || '',
+        pubDate: new Date(item.pubDate || ''),
+        thumbnail: item['content:encoded'] 
+          ? extractThumbnail(item['content:encoded']) 
+          : undefined,
+        readingTime: {
+          minutes: calculateReadingTime(cleanContent)
+        }
+      };
     });
-
-    if (!response.ok) {
-      console.error('HTTP Hata:', response.status, response.statusText);
-      throw new Error('Blog yazıları alınamadı');
-    }
-
-    const data = await response.json() as APIResponse;
-    console.log('Blog yazıları alındı:', data.posts.length);
-    console.log('Blog yazıları alındı:', Date.now());
-    return data.posts.map(post => ({
-      ...post,
-      pubDate: new Date(post.pubDate)
-    }));
   } catch (error) {
     console.error('Blog yazıları alınırken hata oluştu:', error);
     return [];
   }
+}
+
+// Medium içeriğinden thumbnail URL'sini çıkaran yardımcı fonksiyon
+function extractThumbnail(content: string): string | undefined {
+  const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+  return imgMatch ? imgMatch[1] : undefined;
 } 

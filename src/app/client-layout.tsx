@@ -1,12 +1,16 @@
 "use client";
 
 import { Box } from "@mui/material";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
 import MUIThemeProvider from "@/theme/MUIThemeProvider";
 import ThemeSwitcher from "@/components/atoms/buttons/ThemeSwitcher";
 import LanguageSwitcher from "@/components/atoms/buttons/LanguageSwitcher";
+import ErrorFallback from "@/components/atoms/feedback/ErrorFallback";
+import LoadingSpinner from "@/components/atoms/feedback/LoadingSpinner";
 import config from "@/config/config.json";
 
 interface ClientLayoutProps {
@@ -15,13 +19,17 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
-    <ThemeProvider>
-      <MUIThemeProvider>
-        <SelectedSkillProvider>
-          <ClientContent>{children}</ClientContent>
-        </SelectedSkillProvider>
-      </MUIThemeProvider>
-    </ThemeProvider>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ThemeProvider>
+        <MUIThemeProvider>
+          <SelectedSkillProvider>
+            <Suspense fallback={<LoadingSpinner />}>
+              <ClientContent>{children}</ClientContent>
+            </Suspense>
+          </SelectedSkillProvider>
+        </MUIThemeProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

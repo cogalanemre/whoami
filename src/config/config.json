@@ -41,8 +41,7 @@
   },
   "api": {
     "blog": {
-      "feedUrl": "https://medium.com/feed/@cogalanemre",
-      "revalidateTime": 3600
+      "feedUrl": "https://medium.com/feed/@cogalanemre"
     }
   },
   "security": {

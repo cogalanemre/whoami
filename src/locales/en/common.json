@@ -1,8 +1,8 @@
 {
   "sections": {
-    "experience": "Work Experience",
+    "experience": "Experience",
     "education": "Education",
-    "blog": "My Blog Posts",
+    "blog": "Blog",
     "contact": "Contact",
     "skills": "Skills"
   },
@@ -13,18 +13,18 @@
       "name": "Full Name",
       "email": "Email",
       "phone": "Phone",
-      "phoneOptional": "Optional",
-      "message": "Your Message",
+      "phoneOptional": "optional",
+      "message": "Message",
       "send": "Send",
       "sending": "Sending..."
     },
-    "success": "Your message has been sent successfully!",
-    "error": "An error occurred while sending your message. Please try again later."
+    "success": "Your message has been sent successfully.",
+    "error": "An error occurred while sending your message."
   },
   "blog": {
     "readMore": "Read more",
-    "loading": "Loading posts...",
-    "noPosts": "No blog posts available yet."
+    "loading": "Loading blog posts...",
+    "noPosts": "No blog posts yet."
   },
   "theme": {
     "dark": "Dark",
@@ -37,5 +37,10 @@
   "skills": {
     "showAll": "Show All Skills",
     "showLess": "Show Less"
+  },
+  "error": {
+    "title": "An Error Occurred",
+    "message": "Sorry, something went wrong.",
+    "retry": "Try Again"
   }
 } 
