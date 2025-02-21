@@ -84,43 +84,47 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
  */
 function ClientContent({ children }: { children: React.ReactNode }) {
   /**
-   * Tema renklerini memoize et
-   * Gereksiz hesaplamaları ve re-render'ları önler
+   * Tema renklerini al
    */
-  const colors = useMemo(() => useThemeColors(), []);
+  const colors = useThemeColors();
+
+  /**
+   * Memoize edilmiş stiller
+   */
+  const styles = useMemo(() => ({
+    root: {
+      minHeight: "100vh",
+      background: colors.background,
+      color: colors.secondary,
+      transition: `
+        background-color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease,
+        color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease
+      `,
+    },
+    controls: {
+      position: "fixed",
+      top: 20,
+      right: 20,
+      display: "flex",
+      flexDirection: "column",
+      gap: 2,
+      zIndex: 1000,
+      opacity: 1,
+      animation: `fadeIn ${UI_CONSTANTS.ANIMATION.DURATION.SLOW}s ease-in`,
+      "@keyframes fadeIn": {
+        "0%": { opacity: 0 },
+        "100%": { opacity: 1 },
+      },
+    },
+    content: {
+      transition: `opacity ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease`,
+    }
+  }), [colors]);
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        background: colors.background,
-        color: colors.secondary,
-        // Smooth tema geçişleri için transition ekle
-        transition: `
-          background-color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease,
-          color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease
-        `,
-      }}
-    >
+    <Box sx={styles.root}>
       {/* UI Kontrolleri (Tema ve Dil Değiştirici) */}
-      <Box
-        sx={{
-          position: "fixed",
-          top: 20,
-          right: 20,
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          zIndex: 1000,
-          // UI kontrolleri için fade-in animasyonu
-          opacity: 1,
-          animation: `fadeIn ${UI_CONSTANTS.ANIMATION.DURATION.SLOW}s ease-in`,
-          "@keyframes fadeIn": {
-            "0%": { opacity: 0 },
-            "100%": { opacity: 1 },
-          },
-        }}
-      >
+      <Box sx={styles.controls}>
         {/* Konfigürasyona göre tema değiştiriciyi göster */}
         {config.features.themeSwitcher && <ThemeSwitcher />}
         
@@ -129,12 +133,7 @@ function ClientContent({ children }: { children: React.ReactNode }) {
       </Box>
 
       {/* Ana İçerik */}
-      <Box
-        sx={{
-          // İçerik için smooth transition
-          transition: `opacity ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease`,
-        }}
-      >
+      <Box sx={styles.content}>
         {children}
       </Box>
     </Box>

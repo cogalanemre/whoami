@@ -10,7 +10,7 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "../globals.css";
 import ClientLayout from "../client-layout";
-import type { Viewport } from "next";
+import type { Viewport, Metadata } from "next";
 
 /**
  * Geist Sans font konfigürasyonu
@@ -43,6 +43,45 @@ const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
 });
+
+/**
+ * Metadata tanımlamaları
+ * SEO, favicon ve tema rengi ayarlarını içerir
+ */
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "48x48",
+        type: "image/x-icon",
+      },
+      {
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      }
+    ],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      }
+    ],
+    other: [
+      {
+        rel: "manifest",
+        url: "/site.webmanifest",
+      }
+    ],
+  },
+};
 
 /**
  * Viewport meta etiketleri
@@ -86,6 +125,14 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full`}>
         <ClientLayout>{children}</ClientLayout>
       </body>

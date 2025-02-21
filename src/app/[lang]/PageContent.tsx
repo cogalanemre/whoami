@@ -15,7 +15,6 @@ import { memo } from "react";
 import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
 import { UI_CONSTANTS } from "@/constants";
 import { getTranslation } from "@/i18n/utils";
-import translations from "@/i18n/translations";
 
 /**
  * Dinamik olarak yüklenen bölümler
