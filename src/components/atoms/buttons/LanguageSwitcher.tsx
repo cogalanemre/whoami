@@ -10,7 +10,7 @@ import { useTheme } from "@mui/material/styles";
  * Dil değiştirici bileşeni
  * 
  * İlaç kapsülü şeklinde tasarlanmış dil değiştirme butonu.
- * Aktif dil vurgulanır ve hover durumunda animasyon içerir.
+ * Aktif dil vurgulanır.
  * Erişilebilirlik standartlarına uygun.
  * Loading state ve hata yönetimi içerir.
  * 
@@ -61,17 +61,10 @@ export default function LanguageSwitcher() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          "&:hover": {
-            backgroundColor: theme.palette.primary.main + "10",
-            border: "none",
-          },
           "&.active": {
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.background.paper,
             border: `1px solid ${theme.palette.primary.main}`,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.main,
-            },
           },
           "&:not(:last-child)": {
             borderRight: `2px solid ${theme.palette.primary.main}`,
