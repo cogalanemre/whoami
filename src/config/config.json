@@ -1,4 +1,8 @@
 {
+  "domain": {
+    "production": "https://emrecogalan.com",
+    "development": "http://localhost:3000"
+  },
   "features": {
     "languageSwitcher": true,
     "themeSwitcher": true,
@@ -47,7 +51,7 @@
   "security": {
     "cors": {
       "origins": {
-        "production": ["https://emrecogalan.com"],
+        "production": ["https://cogalanemre.com"],
         "development": ["http://localhost:3000"]
       },
       "methods": ["GET", "POST"],
