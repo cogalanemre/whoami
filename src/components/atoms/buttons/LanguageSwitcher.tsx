@@ -1,9 +1,10 @@
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+"use client";
+
+import { Box, Button, CircularProgress, ButtonGroup } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
-import { UI_CONSTANTS } from "@/constants";
-import config from "@/config/config.json";
+import { useTheme } from "@mui/material/styles";
 
 /**
  * Dil değiştirici bileşeni
@@ -20,16 +21,12 @@ export default function LanguageSwitcher() {
   const router = useRouter();
   const { locale } = useTranslation();
   const [isChanging, setIsChanging] = useState(false);
+  const theme = useTheme();
 
-  /**
-   * Dil değiştirme işleyicisi
-   * Config'den desteklenen dilleri kontrol eder ve geçiş yapar
-   */
-  const handleLanguageChange = async () => {
+  const handleLanguageChange = async (newLocale: string) => {
     try {
       setIsChanging(true);
-      const nextLocale = config.language.supported.find(lang => lang !== locale) || config.language.default;
-      await router.push(`/${nextLocale}`);
+      await router.push(`/${newLocale}`);
     } catch (error) {
       console.error('Failed to change language:', error);
     } finally {
@@ -38,96 +35,96 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <Button
-      onClick={handleLanguageChange}
-      disabled={isChanging}
-      aria-label="Change language"
+    <ButtonGroup
+      variant="outlined"
+      size="small"
       sx={{
-        position: 'relative',
-        minWidth: 'unset',
-        width: '76px',
-        height: '36px',
-        borderRadius: '18px',
+        position: "fixed",
+        top: 60,
+        right: 20,
+        zIndex: 1000,
+        width: "70px",
+        height: "30px",
+        backgroundColor: theme.palette.background.paper,
+        border: "2px solid",
+        borderColor: "primary.main",
+        borderRadius: "15px",
+        overflow: "hidden",
         padding: 0,
-        backgroundColor: 'background.paper',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        border: '1px solid',
-        borderColor: 'divider',
-        overflow: 'hidden',
-        transition: `all ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s cubic-bezier(0.4, 0, 0.2, 1)`,
-        '&:hover': {
-          backgroundColor: 'background.paper',
-          transform: 'translateY(-2px)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        "& .MuiButton-root": {
+          minWidth: "35px",
+          height: "100%",
+          padding: 0,
+          border: "none",
+          borderRadius: 0,
+          color: theme.palette.primary.main,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          "&:hover": {
+            backgroundColor: theme.palette.primary.main + "10",
+            border: "none",
+          },
+          "&.active": {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.background.paper,
+            border: `1px solid ${theme.palette.primary.main}`,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.main,
+            },
+          },
+          "&:not(:last-child)": {
+            borderRight: `2px solid ${theme.palette.primary.main}`,
+          },
         },
       }}
     >
-      {/* Hareketli Seçici Arka Plan */}
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '50%',
-          height: '100%',
-          backgroundColor: 'primary.main',
-          left: locale === 'tr' ? '0%' : '50%',
-          transition: `left ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s cubic-bezier(0.4, 0, 0.2, 1)`,
-          borderRadius: '16px',
-          opacity: isChanging ? 0.7 : 1,
-        }}
-      />
-
-      {/* Dil Seçenekleri */}
-      <Box
-        sx={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {isChanging ? (
-          <CircularProgress 
-            size={20}
-            sx={{ 
-              color: locale === 'tr' ? 'background.paper' : 'primary.main'
-            }}
-          />
-        ) : (
-          <>
-            {/* TR */}
-            <Typography
-              variant="caption"
+      {isChanging ? (
+        <CircularProgress size={20} sx={{ m: "auto" }} />
+      ) : (
+        <>
+          <Button
+            onClick={() => handleLanguageChange("tr")}
+            className={locale === "tr" ? "active" : ""}
+            disabled={isChanging}
+          >
+            <Box
               sx={{
-                width: '50%',
-                textAlign: 'center',
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                color: locale === 'tr' ? 'background.paper' : 'text.secondary',
-                transition: 'color 0.3s ease',
+                width: "20px",
+                height: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "0.7rem",
+                fontWeight: "normal",
+                userSelect: "none",
               }}
             >
               TR
-            </Typography>
-
-            {/* EN */}
-            <Typography
-              variant="caption"
+            </Box>
+          </Button>
+          <Button
+            onClick={() => handleLanguageChange("en")}
+            className={locale === "en" ? "active" : ""}
+            disabled={isChanging}
+          >
+            <Box
               sx={{
-                width: '50%',
-                textAlign: 'center',
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                color: locale === 'en' ? 'background.paper' : 'text.secondary',
-                transition: 'color 0.3s ease',
+                width: "20px",
+                height: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "0.7rem",
+                fontWeight: "normal",
+                userSelect: "none",
               }}
             >
               EN
-            </Typography>
-          </>
-        )}
-      </Box>
-    </Button>
+            </Box>
+          </Button>
+        </>
+      )}
+    </ButtonGroup>
   );
 } 
