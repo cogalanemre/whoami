@@ -1,3 +1,12 @@
+/**
+ * Next.js Ana Sayfa Bileşeni
+ * 
+ * Bu dosya, portfolyo web sitesinin ana sayfa içeriğini ve meta verilerini yönetir.
+ * Çoklu dil desteği, SEO optimizasyonları ve dinamik içerik yönetimi burada yapılır.
+ * 
+ * @module Page
+ */
+
 import { calculateTotalExperience } from "@/utils/dateUtils";
 import { fetchBlogPosts } from "@/utils/fetchBlogPosts";
 import type { Hero } from "@/types";
@@ -7,25 +16,34 @@ import PageContent from "./PageContent";
 import { Metadata } from "next";
 
 /**
- * Statik veriler
- * Build zamanında hesaplanacak ve her iki dil için kullanılacak veriler
+ * Build zamanında oluşturulan statik veriler
+ * Her dil için ayrı başlık, açıklama ve toplam deneyim bilgilerini içerir
+ * 
+ * @type {Record<'tr' | 'en', {
+ *   totalExperience: string,
+ *   title: string,
+ *   description: string
+ * }>}
  */
 const staticData = {
   tr: {
     totalExperience: calculateTotalExperience(resumeData.experiences, "tr"),
-    title: "Emre ÇOĞALAN - Kıdemli Yazılım Mühendisi",
+    title: `${resumeData.hero.name} - ${resumeData.hero.titles.tr[0]}`,
     description: `${resumeData.hero.titles.tr.join(" | ")} | ${calculateTotalExperience(resumeData.experiences, "tr")} deneyim`,
   },
   en: {
     totalExperience: calculateTotalExperience(resumeData.experiences, "en"),
-    title: "Emre ÇOĞALAN - Senior Software Engineer",
+    title: `${resumeData.hero.name} - ${resumeData.hero.titles.en[0]}`,
     description: `${resumeData.hero.titles.en.join(" | ")} | ${calculateTotalExperience(resumeData.experiences, "en")} experience`,
   },
 } as const;
 
 /**
- * Statik sayfa parametrelerini oluştur
- * @returns {Promise<Array<{lang: string}>>} Desteklenen diller için route parametreleri
+ * Next.js tarafından build zamanında çağrılır
+ * Desteklenen tüm diller için statik sayfalar oluşturur
+ * 
+ * @returns {Promise<Array<{lang: "tr" | "en"}>>} Desteklenen diller için route parametreleri
+ * @see {@link config.language.supported} Desteklenen diller listesi
  */
 export async function generateStaticParams() {
   return config.language.supported.map((lang) => ({
@@ -34,10 +52,13 @@ export async function generateStaticParams() {
 }
 
 /**
- * Sayfa meta verilerini oluştur
- * @param {Object} params - Route parametreleri
- * @param {string} params.lang - Aktif dil kodu (tr/en)
- * @returns {Promise<Metadata>} Sayfa meta verileri
+ * Sayfa meta verilerini dinamik olarak oluşturur
+ * SEO optimizasyonları, Open Graph ve Twitter Cards için gerekli meta verileri sağlar
+ * 
+ * @param {Object} props - Fonksiyon parametreleri
+ * @param {Object} props.params - Route parametreleri
+ * @param {("tr"|"en")} props.params.lang - Aktif dil kodu
+ * @returns {Promise<Metadata>} Next.js metadata objesi
  */
 export async function generateMetadata({ 
   params 
@@ -51,16 +72,17 @@ export async function generateMetadata({
     ? config.security.cors.origins.production[0]
     : config.security.cors.origins.development[0];
   
+  // Tüm dillerdeki title'ları keywords olarak kullan ve duplicate'leri kaldır
+  const keywords = Array.from(new Set([
+    ...resumeData.hero.titles.tr,
+    ...resumeData.hero.titles.en,
+    resumeData.hero.name
+  ]));
+  
   return {
     title: staticData[lang].title,
     description: staticData[lang].description,
-    keywords: [
-      "software engineer",
-      "full stack developer", 
-      "senior developer",
-      "yazılım mühendisi",
-      "kıdemli geliştirici"
-    ],
+    keywords,
     authors: [{ name: resumeData.hero.name }],
     metadataBase: new URL(baseUrl),
     openGraph: {
@@ -97,15 +119,16 @@ export async function generateMetadata({
 }
 
 /**
- * Ana Sayfa Bileşeni
+ * Ana Sayfa Server Component'i
  * 
- * Seçilen dile göre içeriği render eden ve gerekli verileri
- * PageContent bileşenine ileten ana sayfa bileşeni.
+ * Blog yazılarını çeker, dil bazlı içeriği hazırlar ve
+ * PageContent bileşenine gerekli props'ları ileterek render eder.
  * 
  * @param {Object} props - Bileşen props'ları
  * @param {Object} props.params - Route parametreleri
- * @param {string} props.params.lang - Aktif dil kodu (tr/en)
- * @returns {Promise<JSX.Element>} Sayfa içeriği
+ * @param {("tr"|"en")} props.params.lang - Aktif dil kodu
+ * @returns {Promise<JSX.Element>} Render edilecek sayfa içeriği
+ * @see {@link PageContent} Asıl içeriği render eden client component
  */
 export default async function Page({
   params,

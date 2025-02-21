@@ -4,53 +4,98 @@ import dynamic from "next/dynamic";
 import {
   Box,
   Grid,
-  Typography,
   Container,
+  useTheme,
+  useMediaQuery
 } from "@mui/material";
-import { BlogPost, Hero } from "@/types";
+import type { BlogPost, Hero } from "@/types";
 import config from "@/config/config.json";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
+import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
+import { UI_CONSTANTS } from "@/constants";
 
-// Lazy load all sections
+/**
+ * Dinamik olarak yüklenen bölümler
+ * Code splitting ve lazy loading için Next.js dynamic import kullanılıyor
+ * Her bölüm için özel yükleme durumu gösteriliyor
+ */
+
+/**
+ * Hero bölümü
+ * Kullanıcı bilgileri ve ana başlıkları içerir
+ */
 const DynamicHeroSection = dynamic(() => import("@/components/organisms/sections/HeroSection"), {
-  loading: () => <Typography>Loading hero section...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.HERO} withTitle={false} />,
   ssr: true,
 });
 
+/**
+ * Deneyim bölümü
+ * İş deneyimleri ve toplam deneyim süresini gösterir
+ */
 const DynamicExperienceSection = dynamic(() => import("@/components/organisms/sections/ExperienceSection"), {
-  loading: () => <Typography>Loading experience section...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Experience" />,
   ssr: true,
 });
 
+/**
+ * Yetenekler bölümü
+ * Teknik beceriler ve uzmanlık alanlarını listeler
+ */
 const DynamicSkillsSection = dynamic(() => import("@/components/organisms/sections/SkillsSection"), {
-  loading: () => <Typography>Loading skills section...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Skills" />,
   ssr: true,
 });
 
+/**
+ * Eğitim bölümü
+ * Eğitim geçmişi ve akademik bilgileri gösterir
+ */
 const DynamicEducationSection = dynamic(() => import("@/components/organisms/sections/EducationSection"), {
-  loading: () => <Typography>Loading education section...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Education" />,
   ssr: true,
 });
 
+/**
+ * Blog bölümü
+ * Medium'dan çekilen blog yazılarını listeler
+ */
 const DynamicBlogSection = dynamic(() => import("@/components/organisms/sections/BlogSection"), {
-  loading: () => <Typography>Loading blog section...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Blog" />,
   ssr: true,
 });
 
+/**
+ * İletişim bölümü
+ * İletişim formu ve bilgilerini içerir
+ * Client-side rendering kullanır (ssr: false)
+ */
 const DynamicContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
-  loading: () => <Typography>Loading contact form...</Typography>,
+  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.CONTACT} title="Contact" />,
   ssr: false,
 });
 
+/**
+ * Sayfa içeriği için gerekli prop tipleri
+ * 
+ * @interface PageContentProps
+ * @property {("tr"|"en")} lang - Aktif dil kodu
+ * @property {BlogPost[]} blogPosts - Medium'dan çekilen blog yazıları
+ * @property {string} totalExperience - Toplam deneyim süresi
+ * @property {Hero} hero - Kullanıcı profil bilgileri
+ */
 interface PageContentProps {
-  lang: string;
+  lang: "tr" | "en";
   blogPosts: BlogPost[];
   totalExperience: string;
   hero: Hero;
 }
 
-// Dil bazlı metinleri statik olarak tanımla
+/**
+ * Çoklu dil desteği için metinler
+ * Her dil için sayfa içinde kullanılan statik metinleri içerir
+ */
 const translations = {
   tr: {
     experience: "Deneyim",
@@ -60,14 +105,6 @@ const translations = {
     contact: "İletişim",
     loadingBlog: "Blog yazıları yükleniyor...",
     noBlogPosts: "Henüz blog yazısı yok.",
-    loading: {
-      hero: "Hero bölümü yükleniyor...",
-      experience: "Deneyim bölümü yükleniyor...",
-      skills: "Yetenekler bölümü yükleniyor...",
-      education: "Eğitim bölümü yükleniyor...",
-      blog: "Blog bölümü yükleniyor...",
-      contact: "İletişim formu yükleniyor..."
-    }
   },
   en: {
     experience: "Experience",
@@ -77,45 +114,87 @@ const translations = {
     contact: "Contact",
     loadingBlog: "Loading blog posts...",
     noBlogPosts: "No blog posts yet.",
-    loading: {
-      hero: "Loading hero section...",
-      experience: "Loading experience section...",
-      skills: "Loading skills section...",
-      education: "Loading education section...",
-      blog: "Loading blog section...",
-      contact: "Loading contact form..."
-    }
   }
-};
+} as const;
 
-// Client component olarak sayfa içeriği
+/**
+ * Translation tipi için type alias
+ * Tip güvenliği için kullanılır
+ */
+type TranslationType = typeof translations.tr;
+
+/**
+ * Desteklenen diller için type alias
+ * Tip güvenliği için kullanılır
+ */
+type SupportedLanguages = keyof typeof translations;
+
+/**
+ * Ana sayfa içeriği bileşeni
+ * Tüm bölümleri yönetir ve responsive görünümü sağlar
+ * 
+ * @component
+ * @param {PageContentProps} props - Bileşen props'ları
+ * @returns {JSX.Element} Render edilecek sayfa içeriği
+ */
 function PageContent({
   lang,
   blogPosts,
   totalExperience,
   hero,
 }: PageContentProps) {
-  const t = translations[lang as keyof typeof translations];
+  /**
+   * Material-UI tema ve medya query hook'ları
+   * Responsive tasarım için kullanılır
+   */
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
+
+  /**
+   * Aktif dile göre metinleri seç
+   */
+  const t = translations[lang as SupportedLanguages];
+
+  /**
+   * Ekran boyutuna göre container genişliğini belirle
+   */
+  const containerMaxWidth = isMobile 
+    ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.MOBILE
+    : isTablet 
+      ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.TABLET 
+      : UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.DESKTOP;
 
   return (
     <Container
-      maxWidth="lg"
-      sx={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
+      sx={{ 
+        minHeight: "100vh", 
+        display: "flex", 
+        alignItems: "center",
+        maxWidth: containerMaxWidth,
+        transition: 'max-width 0.3s ease'
+      }}
     >
       <Box
         component="main"
         sx={{
-          py: { xs: 6, md: 8 },
-          px: { xs: 3, sm: 4 },
+          py: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
+          px: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
           width: "100%",
         }}
       >
-        <Grid container spacing={{ xs: 8, md: 12 }}>
+        <Grid 
+          container 
+          spacing={{ 
+            xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS, 
+            md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD 
+          }}
+        >
           {/* Hero Section */}
           <Grid item xs={12}>
             <DynamicHeroSection 
               hero={hero}
-              locale={lang as "tr" | "en"} 
+              locale={lang} 
             />
           </Grid>
 
@@ -175,5 +254,4 @@ function PageContent({
   );
 }
 
-// memo ile sarmalayarak gereksiz render'ları önlüyoruz
 export default memo(PageContent); 

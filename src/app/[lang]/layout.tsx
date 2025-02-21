@@ -1,34 +1,53 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import { Poppins } from "next/font/google";
-import ClientLayout from "../client-layout";
-import type { Metadata, Viewport } from "next";
-import Script from "next/script";
+/**
+ * Next.js App Router Layout Dosyası
+ * 
+ * Bu dosya, tüm sayfalar için ortak layout'u tanımlar.
+ * Font yüklemeleri, viewport ayarları ve dil desteği burada yapılandırılır.
+ * 
+ * @module Layout
+ */
 
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import "../globals.css";
+import ClientLayout from "../client-layout";
+import type { Viewport } from "next";
+
+/**
+ * Geist Sans font konfigürasyonu
+ * Ana font olarak kullanılır
+ */
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
+/**
+ * Geist Mono font konfigürasyonu
+ * Kod blokları ve teknik içerikler için kullanılır
+ */
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
+/**
+ * Poppins font konfigürasyonu
+ * Başlıklar ve özel içerikler için kullanılır
+ * Sadece kullanılan font ağırlıkları yüklenir
+ */
 const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Emre ÇOĞALAN",
-  description: "Kıdemli Yazılım Mühendisi",
-  applicationName: "Emre ÇOĞALAN - Portfolio",
-  authors: [{ name: "Emre ÇOĞALAN" }],
-  generator: "Next.js",
-  keywords: ["Emre ÇOĞALAN", "Portfolio", "Software Engineer", "Developer"],
-};
-
+/**
+ * Viewport meta etiketleri
+ * Tema rengi için light/dark mode desteği sağlar
+ */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -36,10 +55,26 @@ export const viewport: Viewport = {
   ],
 };
 
+/**
+ * Statik sayfa parametrelerini oluşturur
+ * Next.js build zamanında desteklenen diller için rotalar oluşturur
+ * 
+ * @returns {Promise<Array<{lang: string}>>} Desteklenen diller için route parametreleri
+ */
 export async function generateStaticParams() {
   return [{ lang: "tr" }, { lang: "en" }];
 }
 
+/**
+ * Root Layout Bileşeni
+ * Tüm sayfalar için temel HTML yapısını ve ortak özellikleri sağlar
+ * 
+ * @param {Object} props - Bileşen props'ları
+ * @param {React.ReactNode} props.children - Alt bileşenler
+ * @param {Object} props.params - Route parametreleri
+ * @param {string} props.params.lang - Aktif dil kodu (tr/en)
+ * @returns {Promise<JSX.Element>} Layout bileşeni
+ */
 export default async function RootLayout({
   children,
   params,
@@ -51,23 +86,8 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
-        <meta name="google-site-verification" content="your-verification-code" />
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} h-full`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full`}>
         <ClientLayout>{children}</ClientLayout>
-        {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
       </body>
     </html>
   );

@@ -13,6 +13,21 @@ export const UI_CONSTANTS = {
     PAGE_PADDING: {
       MOBILE: 2,
       DESKTOP: 4,
+    },
+    CONTAINER: {
+      MAX_WIDTH: {
+        MOBILE: "100%",
+        TABLET: "90%",
+        DESKTOP: "1200px"
+      },
+      PADDING: {
+        XS: 3,
+        SM: 4
+      },
+      SPACING: {
+        XS: 8,
+        MD: 12
+      }
     }
   },
   COMPONENTS: {
@@ -25,6 +40,13 @@ export const UI_CONSTANTS = {
       SMALL: 6,
       MEDIUM: 8,
       LARGE: 12,
+    },
+    SKELETON: {
+      HEIGHT: {
+        HERO: 400,
+        SECTION: 300,
+        CONTACT: 250
+      }
     }
   }
 } as const;
