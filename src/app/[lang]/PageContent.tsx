@@ -14,66 +14,81 @@ import resumeData from "@/config/resume.json";
 import { memo } from "react";
 import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
 import { UI_CONSTANTS } from "@/constants";
+import { getTranslation } from "@/i18n/utils";
+import translations from "@/i18n/translations";
 
 /**
  * Dinamik olarak yüklenen bölümler
  * Code splitting ve lazy loading için Next.js dynamic import kullanılıyor
  * Her bölüm için özel yükleme durumu gösteriliyor
+ * 
+ * SSR (Server Side Rendering) Stratejisi:
+ * - ssr: true -> Bileşen sunucu tarafında render edilir, SEO için önemlidir
+ * - ssr: false -> Bileşen sadece client tarafında render edilir, form gibi interaktif öğeler için uygundur
  */
 
 /**
  * Hero bölümü
  * Kullanıcı bilgileri ve ana başlıkları içerir
+ * SSR aktif: SEO için önemli içerik
  */
 const DynamicHeroSection = dynamic(() => import("@/components/organisms/sections/HeroSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.HERO} withTitle={false} />,
-  ssr: true,
+  ssr: true, // SEO için kritik içerik
 });
 
 /**
  * Deneyim bölümü
  * İş deneyimleri ve toplam deneyim süresini gösterir
+ * SSR aktif: SEO için önemli içerik
  */
 const DynamicExperienceSection = dynamic(() => import("@/components/organisms/sections/ExperienceSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Experience" />,
-  ssr: true,
+  ssr: true, // SEO için kritik içerik
 });
 
 /**
  * Yetenekler bölümü
  * Teknik beceriler ve uzmanlık alanlarını listeler
+ * SSR aktif: SEO için önemli içerik
  */
 const DynamicSkillsSection = dynamic(() => import("@/components/organisms/sections/SkillsSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Skills" />,
-  ssr: true,
+  ssr: true, // SEO için kritik içerik
 });
 
 /**
  * Eğitim bölümü
  * Eğitim geçmişi ve akademik bilgileri gösterir
+ * SSR aktif: SEO için önemli içerik
  */
 const DynamicEducationSection = dynamic(() => import("@/components/organisms/sections/EducationSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Education" />,
-  ssr: true,
+  ssr: true, // SEO için kritik içerik
 });
 
 /**
  * Blog bölümü
  * Medium'dan çekilen blog yazılarını listeler
+ * SSR aktif: SEO için önemli içerik
  */
 const DynamicBlogSection = dynamic(() => import("@/components/organisms/sections/BlogSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Blog" />,
-  ssr: true,
+  ssr: true, // SEO için kritik içerik
 });
 
 /**
  * İletişim bölümü
  * İletişim formu ve bilgilerini içerir
- * Client-side rendering kullanır (ssr: false)
+ * SSR devre dışı çünkü:
+ * 1. Form elemanları client-side JavaScript gerektiriyor
+ * 2. SEO için kritik içerik değil
+ * 3. Kullanıcı etkileşimi odaklı bir bölüm
+ * 4. EmailJS gibi client-side servisleri kullanıyor
  */
 const DynamicContactSection = dynamic(() => import("@/components/organisms/sections/ContactSection"), {
   loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.CONTACT} title="Contact" />,
-  ssr: false,
+  ssr: false, // Client-side only rendering
 });
 
 /**
@@ -91,43 +106,6 @@ interface PageContentProps {
   totalExperience: string;
   hero: Hero;
 }
-
-/**
- * Çoklu dil desteği için metinler
- * Her dil için sayfa içinde kullanılan statik metinleri içerir
- */
-const translations = {
-  tr: {
-    experience: "Deneyim",
-    skills: "Yetenekler",
-    education: "Eğitim",
-    blog: "Blog",
-    contact: "İletişim",
-    loadingBlog: "Blog yazıları yükleniyor...",
-    noBlogPosts: "Henüz blog yazısı yok.",
-  },
-  en: {
-    experience: "Experience",
-    skills: "Skills",
-    education: "Education",
-    blog: "Blog",
-    contact: "Contact",
-    loadingBlog: "Loading blog posts...",
-    noBlogPosts: "No blog posts yet.",
-  }
-} as const;
-
-/**
- * Translation tipi için type alias
- * Tip güvenliği için kullanılır
- */
-type TranslationType = typeof translations.tr;
-
-/**
- * Desteklenen diller için type alias
- * Tip güvenliği için kullanılır
- */
-type SupportedLanguages = keyof typeof translations;
 
 /**
  * Ana sayfa içeriği bileşeni
@@ -152,9 +130,20 @@ function PageContent({
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
 
   /**
-   * Aktif dile göre metinleri seç
+   * i18n çevirilerini al
    */
-  const t = translations[lang as SupportedLanguages];
+  const t = {
+    sections: {
+      experience: getTranslation('sections.experience', lang),
+      skills: getTranslation('sections.skills', lang),
+      education: getTranslation('sections.education', lang),
+      blog: getTranslation('sections.blog', lang),
+    },
+    blog: {
+      loading: getTranslation('blog.loading', lang),
+      noPosts: getTranslation('blog.noPosts', lang),
+    }
+  };
 
   /**
    * Ekran boyutuna göre container genişliğini belirle
@@ -204,7 +193,7 @@ function PageContent({
               <DynamicExperienceSection
                 experiences={resumeData.experiences}
                 totalExperience={totalExperience}
-                sectionTitle={t.experience}
+                sectionTitle={t.sections.experience}
               />
             </Grid>
           )}
@@ -214,7 +203,7 @@ function PageContent({
             <Grid item xs={12}>
               <DynamicSkillsSection 
                 experiences={resumeData.experiences}
-                title={t.skills}
+                title={t.sections.skills}
               />
             </Grid>
           )}
@@ -224,7 +213,7 @@ function PageContent({
             <Grid item xs={12}>
               <DynamicEducationSection
                 education={resumeData.education}
-                sectionTitle={t.education}
+                sectionTitle={t.sections.education}
               />
             </Grid>
           )}
@@ -235,9 +224,9 @@ function PageContent({
               <DynamicBlogSection
                 blogPosts={blogPosts}
                 loading={false}
-                sectionTitle={t.blog}
-                loadingText={t.loadingBlog}
-                noPostsText={t.noBlogPosts}
+                sectionTitle={t.sections.blog}
+                loadingText={t.blog.loading}
+                noPostsText={t.blog.noPosts}
               />
             </Grid>
           )}
