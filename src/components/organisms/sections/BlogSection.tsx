@@ -61,15 +61,19 @@ interface BlogSectionProps {
  */
 const STYLES = {
   SECTION: {
-    mt: 4,
+    mt: { xs: 4, sm: 6, md: 8 },
   },
   GRID_CONTAINER: {
-    spacing: 6,
+    spacing: { xs: 3, sm: 4 },
+    justifyContent: "flex-start",
+    mx: "-16px",
+    width: "calc(100% + 32px)",
   },
   GRID_ITEM: {
     xs: 12,
     sm: 6,
     md: 4,
+    p: { xs: 1, sm: 2 },
   },
   MOTION_CONTAINER: {
     height: "100%",
@@ -111,37 +115,35 @@ function BlogSection({
       />
 
       {/* Blog Kartları Grid Container */}
-      <Box>
-        <Grid 
-          container 
-          sx={STYLES.GRID_CONTAINER}
-        >
-          {/* Yükleme Durumu */}
-          {loading ? (
-            <Grid item xs={12}>
-              <Typography align="center">
-                {loadingText}
-              </Typography>
+      <Grid 
+        container 
+        sx={STYLES.GRID_CONTAINER}
+      >
+        {/* Yükleme Durumu */}
+        {loading ? (
+          <Grid item xs={12}>
+            <Typography align="center">
+              {loadingText}
+            </Typography>
+          </Grid>
+        ) : blogPosts.length > 0 ? (
+          // Blog Kartları
+          blogPosts.map((post) => (
+            <Grid item {...STYLES.GRID_ITEM} key={post.link}>
+              <MotionBox {...MOTION_PROPS} sx={STYLES.MOTION_CONTAINER}>
+                <BlogCard post={post} />
+              </MotionBox>
             </Grid>
-          ) : blogPosts.length > 0 ? (
-            // Blog Kartları
-            blogPosts.map((post) => (
-              <Grid item {...STYLES.GRID_ITEM} key={post.link}>
-                <MotionBox {...MOTION_PROPS} sx={STYLES.MOTION_CONTAINER}>
-                  <BlogCard post={post} />
-                </MotionBox>
-              </Grid>
-            ))
-          ) : (
-            // Boş Durum
-            <Grid item xs={12}>
-              <Typography align="center">
-                {noPostsText}
-              </Typography>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
+          ))
+        ) : (
+          // Boş Durum
+          <Grid item xs={12}>
+            <Typography align="center">
+              {noPostsText}
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
     </Box>
   );
 }

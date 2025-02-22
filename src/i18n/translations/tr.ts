@@ -26,7 +26,15 @@ const tr: TranslationType = {
   blog: {
     readMore: "Devamını oku",
     loading: "Blog yazıları yükleniyor...",
-    noPosts: "Henüz blog yazısı yok."
+    noPosts: "Henüz blog yazısı yok.",
+    readingTime: {
+      minute: "dakika",
+      minutes: "dakika"
+    },
+    aria: {
+      coverImage: "için kapak görseli",
+      readPost: "Blog yazısını oku"
+    }
   },
   theme: {
     dark: "Koyu",

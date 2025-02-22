@@ -155,89 +155,81 @@ function PageContent({
 
   return (
     <Container
+      component="main"
       sx={{ 
-        minHeight: "100vh", 
-        display: "flex", 
-        alignItems: "center",
+        minHeight: "100vh",
         maxWidth: containerMaxWidth,
-        transition: 'max-width 0.3s ease'
+        transition: 'max-width 0.3s ease',
+        py: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
+        px: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
       }}
     >
-      <Box
-        component="main"
-        sx={{
-          py: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
-          px: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
-          width: "100%",
+      <Grid 
+        container 
+        spacing={{ 
+          xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS, 
+          md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD 
         }}
       >
-        <Grid 
-          container 
-          spacing={{ 
-            xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS, 
-            md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD 
-          }}
-        >
-          {/* Hero Section */}
+        {/* Hero Section */}
+        <Grid item xs={12}>
+          <DynamicHeroSection 
+            hero={hero}
+            locale={lang} 
+          />
+        </Grid>
+
+        {/* Experience Section */}
+        {config.features.sections.experience && (
           <Grid item xs={12}>
-            <DynamicHeroSection 
-              hero={hero}
-              locale={lang} 
+            <DynamicExperienceSection
+              experiences={resumeData.experiences}
+              totalExperience={totalExperience}
+              sectionTitle={t.sections.experience}
             />
           </Grid>
+        )}
 
-          {/* Experience Section */}
-          {config.features.sections.experience && (
-            <Grid item xs={12}>
-              <DynamicExperienceSection
-                experiences={resumeData.experiences}
-                totalExperience={totalExperience}
-                sectionTitle={t.sections.experience}
-              />
-            </Grid>
-          )}
+        {/* Skills Section */}
+        {config.features.sections.skills && (
+          <Grid item xs={12}>
+            <DynamicSkillsSection 
+              experiences={resumeData.experiences}
+              title={t.sections.skills}
+            />
+          </Grid>
+        )}
 
-          {/* Skills Section */}
-          {config.features.sections.skills && (
-            <Grid item xs={12}>
-              <DynamicSkillsSection 
-                experiences={resumeData.experiences}
-                title={t.sections.skills}
-              />
-            </Grid>
-          )}
+        {/* Education Section */}
+        {config.features.sections.education && (
+          <Grid item xs={12}>
+            <DynamicEducationSection
+              education={resumeData.education}
+              sectionTitle={t.sections.education}
+            />
+          </Grid>
+        )}
 
-          {/* Education Section */}
-          {config.features.sections.education && (
-            <Grid item xs={12}>
-              <DynamicEducationSection
-                education={resumeData.education}
-                sectionTitle={t.sections.education}
-              />
-            </Grid>
-          )}
+        {/* Blog Section */}
+        {config.features.sections.blog && (
+          <Grid item xs={12}>
+            <DynamicBlogSection
+              blogPosts={blogPosts}
+              loading={false}
+              sectionTitle={t.sections.blog}
+              loadingText={t.blog.loading}
+              noPostsText={t.blog.noPosts}
+            />
+          </Grid>
+        )}
 
-          {/* Blog Section */}
-          {config.features.sections.blog && (
-            <Grid item xs={12}>
-              <DynamicBlogSection
-                blogPosts={blogPosts}
-                loading={false}
-                sectionTitle={t.sections.blog}
-                loadingText={t.blog.loading}
-                noPostsText={t.blog.noPosts}
-              />
-            </Grid>
-          )}
-
-          {/* Contact Section */}
-          {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
-            <Grid item xs={12}>
-              <DynamicContactSection />
-            </Grid>
-          )}
-        </Grid>
-      </Box>
+        {/* Contact Section */}
+        {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
+          <Grid item xs={12}>
+            <DynamicContactSection />
+          </Grid>
+        )}
+      </Grid>
     </Container>
   );
 }

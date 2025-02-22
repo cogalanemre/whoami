@@ -14,8 +14,8 @@ interface HeroSectionProps {
 
 const heroContainerStyles = {
   display: "flex",
-  justifyContent: "center",
   alignItems: "center",
+  width: "100%",
   minHeight: {
     xs: "calc(100vh - 96px)",
     md: "calc(100vh - 128px)",
@@ -25,7 +25,6 @@ const heroContainerStyles = {
 const stackStyles = {
   position: "relative",
   pb: { xs: 8, md: 12 },
-  maxWidth: "1200px",
   width: "100%",
   "&::after": {
     content: '""',
@@ -56,6 +55,7 @@ const avatarStyles = {
 const contentBoxStyles = {
   pt: 1,
   width: "100%",
+  flex: 1,
   textAlign: { xs: "center", md: "left" },
   position: "relative",
   display: "flex",

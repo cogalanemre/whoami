@@ -18,15 +18,17 @@ export const UI_CONSTANTS = {
       MAX_WIDTH: {
         MOBILE: "100%",
         TABLET: "90%",
-        DESKTOP: "1200px"
+        DESKTOP: "85%"
       },
       PADDING: {
-        XS: 3,
-        SM: 4
+        XS: 2,
+        SM: 3,
+        MD: 4
       },
       SPACING: {
-        XS: 8,
-        MD: 12
+        XS: 4,
+        SM: 6,
+        MD: 8
       }
     }
   },

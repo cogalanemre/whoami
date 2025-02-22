@@ -26,7 +26,15 @@ const en: TranslationType = {
   blog: {
     readMore: "Read more",
     loading: "Loading blog posts...",
-    noPosts: "No blog posts yet."
+    noPosts: "No blog posts yet.",
+    readingTime: {
+      minute: "minute",
+      minutes: "minutes"
+    },
+    aria: {
+      coverImage: "cover image",
+      readPost: "Read blog post"
+    }
   },
   theme: {
     dark: "Dark",

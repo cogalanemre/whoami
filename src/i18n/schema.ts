@@ -26,7 +26,15 @@ export const translationSchema = z.object({
   blog: z.object({
     readMore: z.string(),
     loading: z.string(),
-    noPosts: z.string()
+    noPosts: z.string(),
+    readingTime: z.object({
+      minute: z.string(),
+      minutes: z.string()
+    }),
+    aria: z.object({
+      coverImage: z.string(),
+      readPost: z.string()
+    })
   }),
   theme: z.object({
     dark: z.string(),

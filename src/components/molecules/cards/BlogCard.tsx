@@ -1,7 +1,7 @@
 /**
  * Blog Kartı Bileşeni
  * 
- * Medium blog yazılarını gösteren kart bileşeni.
+ * Medium'dan çekilen blog yazılarını gösteren kart bileşeni.
  * Her kart için:
  * - Kapak resmi (varsa)
  * - Başlık (2 satırla sınırlı)
@@ -26,8 +26,8 @@
  * ```
  */
 
-import { Card, CardContent, Typography, Box, Link, Button } from "@mui/material";
-import { AccessTime, CalendarToday, OpenInNew } from "@mui/icons-material";
+import { Card, CardContent, Typography, Box, Button } from "@mui/material";
+import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
 import Image from "next/image";
 import { memo } from "react";
 import { BlogPost } from "@/types";
@@ -35,25 +35,35 @@ import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import { getTranslation } from "@/i18n/utils";
 
 /**
  * Blog kartı için stil sabitleri
  */
 const STYLES = {
   CARD: {
-    transition: "all 0.3s ease-in-out",
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    transition: "transform 0.2s ease-in-out",
     "&:hover": {
       transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
     },
   },
   IMAGE_CONTAINER: {
-    width: "100%",
-    height: 200,
     position: "relative",
+    width: "100%",
+    paddingTop: "56.25%",
+    overflow: "hidden",
+  },
+  IMAGE_OVERLAY: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))",
+    height: "70%",
+    pointerEvents: "none",
   },
   CONTENT: {
     p: 3,
@@ -61,31 +71,49 @@ const STYLES = {
     flexDirection: "column",
     flex: 1,
   },
-  TRUNCATED_TEXT: {
-    display: "-webkit-box",
-    WebkitBoxOrient: "vertical" as const,
-    overflow: "hidden",
-  },
   TITLE: {
-    mb: 0.5,
-    fontWeight: "bold",
+    color: "primary.main",
+    fontWeight: 600,
+    fontSize: "1.1rem",
+    lineHeight: 1.3,
+    mb: 1,
+    display: "-webkit-box",
     WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+    textDecoration: "none",
+    transition: "color 0.2s ease-in-out",
+    "&:hover": {
+      color: colors => colors.secondary,
+    },
   },
   META: {
     display: "flex",
-    gap: 2,
     alignItems: "center",
+    gap: 2,
     mb: 2,
   },
   DESCRIPTION: {
-    WebkitLineClamp: 3,
-    mb: 3,
+    mb: 2,
+    fontSize: "0.9rem",
+    display: "-webkit-box",
+    WebkitLineClamp: 5,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
   },
-  BUTTON: {
+  FOOTER: {
     mt: "auto",
     display: "flex",
+    justifyContent: "flex-end",
     alignItems: "center",
-    gap: 0.5,
+  },
+  BUTTON: {
+    minWidth: "auto",
+    p: 1,
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "primary.main",
+    },
   },
 } as const;
 
@@ -106,14 +134,27 @@ interface BlogCardProps {
  * @returns {JSX.Element} Blog kartı
  */
 function BlogCard({ post }: BlogCardProps) {
-  // Hook'ları çağır
   const { locale } = useTranslation();
   const colors = useThemeColors();
 
+  // Çevirileri al
+  const t = {
+    readingTime: {
+      minutes: getTranslation("blog.readingTime.minutes", locale),
+      minute: getTranslation("blog.readingTime.minute", locale),
+    },
+    button: getTranslation("blog.readMore", locale),
+    aria: {
+      coverImage: getTranslation("blog.aria.coverImage", locale),
+      readPost: getTranslation("blog.aria.readPost", locale),
+    }
+  };
+
   // Meta bilgileri oluştur
-  const readingTimeText = `${post.readingTime.minutes} ${locale === "tr" ? "dakika" : "minutes"}`;
+  const readingTimeText = `${post.readingTime.minutes} ${
+    post.readingTime.minutes > 1 ? t.readingTime.minutes : t.readingTime.minute
+  }`;
   const publishDateText = formatDate(post.pubDate, locale);
-  const buttonText = locale === "tr" ? "Devamını Oku" : "Read More";
 
   return (
     <Card
@@ -121,17 +162,25 @@ function BlogCard({ post }: BlogCardProps) {
         ...STYLES.CARD,
         background: colors.surface,
       }}
+      component="article"
+      role="article"
+      aria-label={post.title}
     >
       {/* Kapak Resmi */}
       {post.thumbnail && (
         <Box sx={STYLES.IMAGE_CONTAINER}>
           <Image
             src={post.thumbnail}
-            alt={post.title}
+            alt={`${post.title} ${t.aria.coverImage}`}
             fill
-            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+            priority
           />
+          <Box sx={STYLES.IMAGE_OVERLAY} aria-hidden="true" />
         </Box>
       )}
 
@@ -139,17 +188,18 @@ function BlogCard({ post }: BlogCardProps) {
         {/* Başlık */}
         <Typography
           variant="h6"
-          sx={{
-            ...STYLES.TRUNCATED_TEXT,
-            ...STYLES.TITLE,
-            color: colors.primary,
-          }}
+          component="a"
+          href={post.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={STYLES.TITLE}
+          aria-label={`${post.title} - ${t.aria.readPost}`}
         >
           {post.title}
         </Typography>
 
         {/* Meta Bilgiler */}
-        <Box sx={{ ...STYLES.META, color: colors.secondary }}>
+        <Box sx={STYLES.META}>
           <InfoWithIcon
             icon={AccessTime}
             text={readingTimeText}
@@ -168,7 +218,6 @@ function BlogCard({ post }: BlogCardProps) {
         <Typography
           variant="body2"
           sx={{
-            ...STYLES.TRUNCATED_TEXT,
             ...STYLES.DESCRIPTION,
             color: colors.secondary,
           }}
@@ -177,17 +226,23 @@ function BlogCard({ post }: BlogCardProps) {
         </Typography>
 
         {/* Devamını Oku Butonu */}
-        <Button
-          variant="outlined"
-          color="primary"
-          href={post.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={STYLES.BUTTON}
-          endIcon={<OpenInNew />}
-        >
-          {buttonText}
-        </Button>
+        <Box sx={STYLES.FOOTER}>
+          <Button
+            variant="text"
+            size="small"
+            endIcon={<ArrowForward />}
+            href={post.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              ...STYLES.BUTTON,
+              color: colors.secondary,
+            }}
+            aria-label={`${post.title} - ${t.button}`}
+          >
+            {t.button}
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );

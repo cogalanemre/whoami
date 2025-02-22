@@ -49,7 +49,7 @@ function calculateReadingTime(content: string): number {
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   try {
-    console.log('Blog yazıları Medium\'dan yükleniyor...');
+    console.log('Loading blog posts from Medium...');
     
     const feed = await parser.parseURL(config.api.blog.feedUrl);
     
@@ -72,7 +72,7 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
       };
     });
   } catch (error) {
-    console.error('Blog yazıları alınırken hata oluştu:', error);
+    console.error('Error fetching blog posts:', error);
     return [];
   }
 }
