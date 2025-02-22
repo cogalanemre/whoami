@@ -99,13 +99,15 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
           content: '"_"',
           position: "relative",
           marginLeft: "2px",
-          top: "-4px",
+          top: "4px",
           animation: isWaiting ? "blink 1s infinite" : "none",
           opacity: isWaiting ? undefined : 1,
           color: colors.primary,
           fontSize: "inherit",
           lineHeight: 1,
           fontWeight: "normal",
+          display: "inline-block",
+          transform: "translateY(2px)",
         },
         // İmleç animasyonu
         "@keyframes blink": {
