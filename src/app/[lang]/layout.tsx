@@ -35,11 +35,11 @@ const geistMono = Geist_Mono({
 /**
  * Poppins font konfigürasyonu
  * Başlıklar ve özel içerikler için kullanılır
- * Sadece kullanılan font ağırlıkları yüklenir
+ * Sadece kullanılan kalınlıkları bıraktım
  */
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: ["400", "500", "600"],
+  weight: ["300", "400"],
   subsets: ["latin"],
   display: "swap",
 });
