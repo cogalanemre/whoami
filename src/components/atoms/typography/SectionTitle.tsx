@@ -1,14 +1,59 @@
+/**
+ * Bölüm Başlığı Bileşeni
+ * 
+ * Sayfa bölümlerinin başlıklarını göstermek için kullanılan özelleştirilmiş başlık komponenti.
+ * Material-UI bileşenlerini kullanarak gelişmiş bir başlık tasarımı sunar.
+ * 
+ * Özellikler:
+ * - İkon entegrasyonu
+ * - Alt başlık desteği (opsiyonel)
+ * - Responsive tasarım
+ * - Gradient alt çizgi efekti
+ * - Özelleştirilmiş tipografi
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * import { WorkHistory } from '@mui/icons-material';
+ * 
+ * <SectionTitle
+ *   icon={WorkHistory}
+ *   title="Deneyim"
+ *   subtitle="5+ Yıl"
+ * />
+ * ```
+ */
+
 import { Typography, Box, SvgIconProps } from "@mui/material";
 
+/**
+ * Bölüm Başlığı Props Interface
+ * 
+ * @interface SectionTitleProps
+ * @property {React.ComponentType<SvgIconProps>} icon - Başlık yanında gösterilecek Material-UI ikonu
+ * @property {string} title - Başlık metni
+ * @property {string} [subtitle] - Alt başlık metni (opsiyonel)
+ */
 interface SectionTitleProps {
   icon: React.ComponentType<SvgIconProps>;
   title: string;
   subtitle?: string;
 }
 
-export default function SectionTitle({ icon: Icon, title, subtitle }: SectionTitleProps) {
+/**
+ * Bölüm Başlığı Bileşeni
+ * 
+ * @param {SectionTitleProps} props - Bileşen props'ları
+ * @returns {JSX.Element} Başlık bileşeni
+ */
+export default function SectionTitle({ 
+  icon: Icon, 
+  title, 
+  subtitle 
+}: SectionTitleProps) {
   return (
     <Box sx={{ mb: 6 }}>
+      {/* Ana Başlık Konteyner */}
       <Typography
         variant="h3"
         gutterBottom
@@ -16,8 +61,14 @@ export default function SectionTitle({ icon: Icon, title, subtitle }: SectionTit
           display: "flex",
           alignItems: "center",
           gap: 2,
-          fontSize: { xs: "1.5rem", sm: "1.75rem", md: "1.75rem" },
+          // Responsive font boyutu
+          fontSize: { 
+            xs: "1.5rem",  // Mobil
+            sm: "1.75rem", // Tablet
+            md: "1.75rem"  // Desktop
+          },
           position: "relative",
+          // Gradient alt çizgi efekti
           "&::after": {
             content: '""',
             position: "absolute",
@@ -30,13 +81,18 @@ export default function SectionTitle({ icon: Icon, title, subtitle }: SectionTit
           },
         }}
       >
+        {/* Başlık İkonu */}
         <Icon
           sx={{
             color: "primary.main",
             fontSize: "2rem",
           }}
         />
+
+        {/* Başlık Metni */}
         {title}
+
+        {/* Opsiyonel Alt Başlık */}
         {subtitle && (
           <Typography
             component="span"
