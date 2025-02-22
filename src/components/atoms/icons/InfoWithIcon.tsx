@@ -25,7 +25,6 @@
  */
 
 import { Box, Typography, SvgIconProps } from "@mui/material";
-import { ThemeColors } from "@/types";
 
 /**
  * İkon ile Bilgi Gösterimi Props Interface
@@ -33,13 +32,11 @@ import { ThemeColors } from "@/types";
  * @interface InfoWithIconProps
  * @property {React.ComponentType<SvgIconProps>} icon - Gösterilecek Material-UI ikonu
  * @property {string} text - İkonun yanında gösterilecek metin
- * @property {ThemeColors} colors - Tema renkleri (primary ve secondary)
  * @property {string} [fontSize="1rem"] - Metin boyutu (opsiyonel, varsayılan: 1rem)
  */
 interface InfoWithIconProps {
   icon: React.ComponentType<SvgIconProps>;
   text: string;
-  colors: ThemeColors;
   fontSize?: string;
 }
 
@@ -52,7 +49,6 @@ interface InfoWithIconProps {
 export default function InfoWithIcon({
   icon: Icon,
   text,
-  colors,
   fontSize = "1rem",
 }: InfoWithIconProps) {
   return (
@@ -60,8 +56,8 @@ export default function InfoWithIcon({
       {/* İkon Bileşeni */}
       <Icon
         sx={{
-          color: colors.primary,
-          fontSize: "inherit", // Parent'tan gelen font boyutunu kullan
+          color: "primary.main",
+          fontSize: "inherit",
         }}
       />
 
@@ -69,8 +65,8 @@ export default function InfoWithIcon({
       <Typography
         variant="body2"
         sx={{
-          color: colors.secondary,
-          fontSize, // Props'tan gelen font boyutunu kullan
+          color: "text.secondary",
+          fontSize,
         }}
       >
         {text}

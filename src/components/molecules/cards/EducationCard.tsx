@@ -48,7 +48,7 @@ import { getTranslation } from "@/i18n/utils";
  */
 const STYLES = {
   CARD: {
-    background: (colors) => colors.surface,
+    background: "background.paper",
     position: "relative",
     transition: "all 0.3s ease-in-out",
     "&:hover": {
@@ -93,7 +93,7 @@ const STYLES = {
     textAlign: { xs: "center", md: "left" },
   },
   DEPARTMENT: {
-    color: (colors) => colors.secondary,
+    color: "text.secondary",
     mb: 2,
     textAlign: { xs: "center", md: "left" },
   },
@@ -122,7 +122,6 @@ interface EducationCardProps {
  * @returns {JSX.Element} Eğitim kartı
  */
 function EducationCard({ education }: EducationCardProps) {
-  const colors = useThemeColors();
   const { locale } = useTranslation();
 
   // Çevirileri al
@@ -154,7 +153,7 @@ function EducationCard({ education }: EducationCardProps) {
             alt={`${educationTranslations.school} ${t.aria.logo}`}
             sx={STYLES.AVATAR}
           >
-            {!education.logo && <School sx={{ fontSize: 40, color: colors.primary }} />}
+            {!education.logo && <School sx={{ fontSize: 40, color: "primary.main" }} />}
           </Avatar>
           <Box sx={{
             ...STYLES.INFO_CONTAINER,
@@ -180,20 +179,17 @@ function EducationCard({ education }: EducationCardProps) {
               <InfoWithIcon
                 icon={LocationOn}
                 text={educationTranslations.location}
-                colors={colors}
                 fontSize="0.875rem"
               />
               <InfoWithIcon
                 icon={CalendarToday}
                 text={dateRange}
-                colors={colors}
                 fontSize="0.875rem"
                 aria-label={t.aria.dates}
               />
               <InfoWithIcon
                 icon={AccessTime}
                 text={duration}
-                colors={colors}
                 fontSize="0.875rem"
                 aria-label={t.aria.duration}
               />

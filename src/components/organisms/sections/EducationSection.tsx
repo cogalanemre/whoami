@@ -8,18 +8,33 @@ import { memo } from "react";
 
 const MotionBox = motion(Box);
 
+/**
+ * Stil sabitleri
+ */
+const STYLES = {
+  SECTION: {
+    mt: { xs: 4, sm: 6, md: 8 },
+  },
+  STACK: {
+    spacing: { xs: 4, md: 6 },
+  },
+  MOTION: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 },
+  },
+  MOTION_CONTAINER: {
+    mb: { xs: 4, md: 6 },
+    "&:last-child": {
+      mb: 0,
+    },
+  },
+} as const;
+
 interface EducationSectionProps {
   education: Education[];
   sectionTitle: string;
 }
-
-const sectionStyles = {
-  mt: 4,
-};
-
-const stackContainerStyles = {
-  spacing: 4,
-};
 
 /**
  * Eğitim Section Bileşeni
@@ -36,19 +51,20 @@ function EducationSection({
   sectionTitle 
 }: EducationSectionProps) {
   return (
-    <Box sx={sectionStyles}>
+    <Box sx={STYLES.SECTION}>
       <SectionTitle
         icon={School}
         title={sectionTitle}
       />
       <Box>
-        <Stack sx={stackContainerStyles}>
+        <Stack sx={STYLES.STACK}>
           {education.map((edu, index) => (
             <MotionBox
               key={`${edu.tr.school}-${edu.startDate}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={STYLES.MOTION.initial}
+              animate={STYLES.MOTION.animate}
+              transition={{ ...STYLES.MOTION.transition, delay: index * 0.1 }}
+              sx={STYLES.MOTION_CONTAINER}
             >
               <EducationCard education={edu} />
             </MotionBox>
