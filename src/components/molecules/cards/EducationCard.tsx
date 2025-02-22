@@ -1,97 +1,182 @@
+/**
+ * Eğitim Kartı Bileşeni
+ * 
+ * Kullanıcının eğitim geçmişini gösteren kart bileşeni.
+ * Özellikler:
+ * - Okul logosu ve bilgileri
+ * - Çok dilli destek (TR/EN)
+ * - Responsive tasarım
+ * - Hover animasyonları
+ * - Tema renk entegrasyonu
+ * - Erişilebilirlik özellikleri
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <EducationCard
+ *   education={{
+ *     logo: "/school-logo.png",
+ *     startDate: "2020-09-01",
+ *     endDate: "2024-06-01",
+ *     tr: {
+ *       school: "Üniversite Adı",
+ *       department: "Bölüm Adı",
+ *       location: "Şehir, Ülke"
+ *     },
+ *     en: {
+ *       school: "University Name",
+ *       department: "Department Name",
+ *       location: "City, Country"
+ *     }
+ *   }}
+ * />
+ * ```
+ */
+
 import { Card, Typography, Box, Avatar } from "@mui/material";
+import { LocationOn, CalendarToday, AccessTime, School } from "@mui/icons-material";
+import { memo } from "react";
 import { Education } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useThemeColors } from "@/hooks/useThemeColors";
-import { LocationOn, CalendarToday } from "@mui/icons-material";
-import InfoWithIcon from "@/components/molecules/InfoWithIcon";
+import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import { getTranslation } from "@/i18n/utils";
 
+/**
+ * Stil sabitleri
+ */
+const STYLES = {
+  CARD: {
+    background: (colors) => colors.surface,
+    position: "relative",
+    transition: "all 0.3s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      "& .MuiAvatar-root": {
+        transform: "scale(1.05)",
+        transition: "transform 0.3s ease-in-out",
+      },
+    },
+  },
+  HEADER: {
+    p: 3,
+  },
+  CONTENT: {
+    display: "flex",
+    gap: 4,
+    alignItems: "flex-start",
+  },
+  AVATAR: {
+    width: 80,
+    height: 80,
+    bgcolor: "background.paper",
+    border: "2px solid",
+    borderColor: "primary.main",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
+    },
+  },
+  INFO_CONTAINER: {
+    flex: 1,
+    width: "100%",
+  },
+  SCHOOL_NAME: {
+    color: "primary.main",
+    mb: 1,
+    fontWeight: "bold",
+    textAlign: { xs: "center", md: "left" },
+  },
+  DEPARTMENT: {
+    color: (colors) => colors.secondary,
+    mb: 2,
+    textAlign: { xs: "center", md: "left" },
+  },
+  META_CONTAINER: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    gap: { xs: 1, md: 3 },
+    alignItems: { xs: "flex-start", md: "center" },
+  },
+} as const;
+
+/**
+ * Eğitim Kartı Props Interface
+ * 
+ * @interface EducationCardProps
+ * @property {Education} education - Eğitim bilgileri
+ */
 interface EducationCardProps {
   education: Education;
 }
 
-export default function EducationCard({ education }: EducationCardProps) {
+/**
+ * Eğitim Kartı Bileşeni
+ * 
+ * @param {EducationCardProps} props - Bileşen props'ları
+ * @returns {JSX.Element} Eğitim kartı
+ */
+function EducationCard({ education }: EducationCardProps) {
   const colors = useThemeColors();
   const { locale } = useTranslation();
 
+  // Çevirileri al
+  const t = {
+    aria: {
+      card: getTranslation("education.aria.card", locale),
+      logo: getTranslation("education.aria.logo", locale),
+      duration: getTranslation("education.aria.duration", locale),
+      dates: getTranslation("education.aria.dates", locale),
+    },
+  };
+
+  // Eğitim bilgilerini dile göre al
   const educationTranslations = locale === "tr" ? education.tr : education.en;
   const duration = calculateDuration(education.startDate, education.endDate, locale);
+  const dateRange = `${formatDate(education.startDate, locale)} - ${formatDate(education.endDate, locale)}`;
 
   return (
     <Card
-      sx={{
-        background: colors.surface,
-        position: "relative",
-        transition: "all 0.3s ease-in-out",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-          "& .MuiAvatar-root": {
-            transform: "scale(1.05)",
-            transition: "transform 0.3s ease-in-out",
-          },
-        },
-      }}
+      sx={STYLES.CARD}
+      component="article"
+      role="article"
+      aria-label={`${educationTranslations.school} - ${t.aria.card}`}
     >
-      <Box
-        sx={{
-          background: (theme) =>
-            theme.palette.mode === "dark"
-              ? "rgba(255, 255, 255, 0.03)"
-              : "rgba(0, 0, 0, 0.03)",
-          backdropFilter: "blur(4px)",
-          p: 3,
-        }}
-      >
-        <Box sx={{ display: "flex", gap: 4, alignItems: "flex-start" }}>
+      <Box sx={STYLES.HEADER}>
+        <Box sx={STYLES.CONTENT}>
           <Avatar
             src={education.logo}
-            alt={educationTranslations.school}
-            sx={{
-              width: 80,
-              height: 80,
-              bgcolor: "transparent",
-              border: "2px solid",
-              borderColor: colors.primary,
-              display: { xs: "none", md: "block" },
-              "& img": {
-                objectFit: "cover",
-                borderRadius: "50%",
-              },
-            }}
-          />
-          <Box sx={{ flex: 1 }}>
+            alt={`${educationTranslations.school} ${t.aria.logo}`}
+            sx={STYLES.AVATAR}
+          >
+            {!education.logo && <School sx={{ fontSize: 40, color: colors.primary }} />}
+          </Avatar>
+          <Box sx={{
+            ...STYLES.INFO_CONTAINER,
+            ml: 0,
+          }}>
             <Typography
               variant="h6"
-              sx={{
-                color: colors.primary,
-                mb: 1,
-                fontWeight: "bold",
-                textAlign: { xs: "center", md: "left" },
-              }}
+              component="h3"
+              sx={STYLES.SCHOOL_NAME}
             >
               {educationTranslations.school}
             </Typography>
             {educationTranslations.department && (
               <Typography
                 variant="subtitle1"
-                sx={{
-                  color: colors.secondary,
-                  mb: 2,
-                  textAlign: { xs: "center", md: "left" },
-                }}
+                component="h4"
+                sx={STYLES.DEPARTMENT}
               >
                 {educationTranslations.department}
               </Typography>
             )}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                gap: { xs: 1, md: 3 },
-                alignItems: { xs: "flex-start", md: "center" },
-              }}
-            >
+            <Box sx={STYLES.META_CONTAINER}>
               <InfoWithIcon
                 icon={LocationOn}
                 text={educationTranslations.location}
@@ -100,12 +185,17 @@ export default function EducationCard({ education }: EducationCardProps) {
               />
               <InfoWithIcon
                 icon={CalendarToday}
-                text={`${formatDate(education.startDate, locale)} - ${formatDate(
-                  education.endDate,
-                  locale
-                )} (${duration})`}
+                text={dateRange}
                 colors={colors}
                 fontSize="0.875rem"
+                aria-label={t.aria.dates}
+              />
+              <InfoWithIcon
+                icon={AccessTime}
+                text={duration}
+                colors={colors}
+                fontSize="0.875rem"
+                aria-label={t.aria.duration}
               />
             </Box>
           </Box>
@@ -113,4 +203,7 @@ export default function EducationCard({ education }: EducationCardProps) {
       </Box>
     </Card>
   );
-} 
+}
+
+// Gereksiz render'ları önlemek için memo kullan
+export default memo(EducationCard); 

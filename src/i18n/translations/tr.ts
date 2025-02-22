@@ -36,6 +36,14 @@ const tr: TranslationType = {
       readPost: "Blog yazısını oku"
     }
   },
+  education: {
+    aria: {
+      card: "eğitim bilgisi",
+      logo: "logosu",
+      duration: "eğitim süresi",
+      dates: "eğitim tarihleri"
+    }
+  },
   theme: {
     dark: "Koyu",
     light: "Açık"

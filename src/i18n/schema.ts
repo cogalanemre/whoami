@@ -36,6 +36,14 @@ export const translationSchema = z.object({
       readPost: z.string()
     })
   }),
+  education: z.object({
+    aria: z.object({
+      card: z.string(),
+      logo: z.string(),
+      duration: z.string(),
+      dates: z.string()
+    })
+  }),
   theme: z.object({
     dark: z.string(),
     light: z.string()

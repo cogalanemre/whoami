@@ -36,6 +36,13 @@ const en: TranslationType = {
       readPost: "Read blog post"
     }
   },
+  education: {
+    aria: {
+      card: "education details",
+      logo: "logo",
+      duration: "education duration"
+    }
+  },
   theme: {
     dark: "Dark",
     light: "Light"
