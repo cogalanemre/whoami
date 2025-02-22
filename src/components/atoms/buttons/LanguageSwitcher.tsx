@@ -1,31 +1,30 @@
 "use client";
 
-import { Box, Button, CircularProgress, ButtonGroup } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import ToggleButton from "./ToggleButton";
 
 /**
- * Dil değiştirici bileşeni
+ * Dil Değiştirici Bileşeni
  * 
- * İlaç kapsülü şeklinde tasarlanmış dil değiştirme butonu.
- * Aktif dil vurgulanır.
- * Erişilebilirlik standartlarına uygun.
- * Loading state ve hata yönetimi içerir.
+ * İki dil arasında geçiş yapan toggle buton.
  * 
  * @component
- * @returns {JSX.Element} Dil değiştirici buton
+ * @example
+ * ```tsx
+ * <LanguageSwitcher />
+ * ```
  */
 export default function LanguageSwitcher() {
   const router = useRouter();
   const { locale } = useTranslation();
   const [isChanging, setIsChanging] = useState(false);
-  const theme = useTheme();
 
-  const handleLanguageChange = async (newLocale: string) => {
+  const handleLanguageChange = async () => {
     try {
       setIsChanging(true);
+      const newLocale = locale === "tr" ? "en" : "tr";
       await router.push(`/${newLocale}`);
     } catch (error) {
       console.error('Failed to change language:', error);
@@ -34,90 +33,18 @@ export default function LanguageSwitcher() {
     }
   };
 
+  if (isChanging) {
+    return null; // veya loading spinner
+  }
+
   return (
-    <ButtonGroup
-      variant="outlined"
-      size="small"
-      sx={{
-        position: "fixed",
-        top: 60,
-        right: 20,
-        zIndex: 1000,
-        width: "70px",
-        height: "30px",
-        backgroundColor: theme.palette.background.paper,
-        border: "2px solid",
-        borderColor: "primary.main",
-        borderRadius: "15px",
-        overflow: "hidden",
-        padding: 0,
-        "& .MuiButton-root": {
-          minWidth: "35px",
-          height: "100%",
-          padding: 0,
-          border: "none",
-          borderRadius: 0,
-          color: theme.palette.primary.main,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          "&.active": {
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.background.paper,
-            border: `1px solid ${theme.palette.primary.main}`,
-          },
-          "&:not(:last-child)": {
-            borderRight: `2px solid ${theme.palette.primary.main}`,
-          },
-        },
-      }}
-    >
-      {isChanging ? (
-        <CircularProgress size={20} sx={{ m: "auto" }} />
-      ) : (
-        <>
-          <Button
-            onClick={() => handleLanguageChange("tr")}
-            className={locale === "tr" ? "active" : ""}
-            disabled={isChanging}
-          >
-            <Box
-              sx={{
-                width: "20px",
-                height: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "0.7rem",
-                fontWeight: "normal",
-                userSelect: "none",
-              }}
-            >
-              TR
-            </Box>
-          </Button>
-          <Button
-            onClick={() => handleLanguageChange("en")}
-            className={locale === "en" ? "active" : ""}
-            disabled={isChanging}
-          >
-            <Box
-              sx={{
-                width: "20px",
-                height: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "0.7rem",
-                fontWeight: "normal",
-                userSelect: "none",
-              }}
-            >
-              EN
-            </Box>
-          </Button>
-        </>
-      )}
-    </ButtonGroup>
+    <ToggleButton
+      buttons={[
+        { Icon: "TR", isActive: locale === "tr" },
+        { Icon: "EN", isActive: locale === "en" }
+      ]}
+      onClick={handleLanguageChange}
+      position={{ top: 60, right: 20 }}
+    />
   );
 } 
