@@ -156,8 +156,8 @@
   
   "education": [
     {
-      "startDate": "2014-09-01",
-      "endDate": "2018-06-30",
+      "startDate": "2014-06-01",
+      "endDate": "2018-06-01",
       "logo": "/sau.jpg",
       "tr": {
         "school": "Sakarya Üniversitesi",
@@ -171,8 +171,8 @@
       }
     },
     {
-      "startDate": "2013-09-01",
-      "endDate": "2014-06-30",
+      "startDate": "2013-06-01",
+      "endDate": "2014-06-01",
       "logo": "/cu.png",
       "tr": {
         "school": "Çukurova Üniversitesi",
@@ -186,14 +186,16 @@
       }
     },
     {
-      "startDate": "2009-09-01",
-      "endDate": "2013-06-30",
+      "startDate": "2009-06-01",
+      "endDate": "2013-06-01",
       "tr": {
         "school": "Gazi Anadolu Lisesi",
+        "department": "Lise",
         "location": "Ankara, Türkiye"
       },
       "en": {
         "school": "Gazi Anatolian High School",
+        "department": "High School",
         "location": "Ankara, Turkey"
       }
     }
