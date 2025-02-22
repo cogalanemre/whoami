@@ -23,16 +23,35 @@ const calculateMonthsBetween = (startDate: Date, endDate: Date): number => {
   const start = new Date(startDate);
   const end = new Date(endDate);
   
-  end.setDate(end.getDate() + 1);
+  // Yıl ve ay farkını hesapla
+  const yearDiff = end.getFullYear() - start.getFullYear();
+  const monthDiff = end.getMonth() - start.getMonth();
   
-  let months = (end.getFullYear() - start.getFullYear()) * 12;
-  months += end.getMonth() - start.getMonth();
+  // Toplam ay farkını hesapla
+  let totalMonths = yearDiff * 12 + monthDiff;
   
-  if (end.getDate() < start.getDate()) {
-    months--;
+  // Gün bazında hassas kontrol
+  const startDay = start.getDate();
+  const endDay = end.getDate();
+  const lastDayOfEndMonth = new Date(end.getFullYear(), end.getMonth() + 1, 0).getDate();
+  const lastDayOfStartMonth = new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate();
+  
+  // Ay sonu durumlarını kontrol et
+  if (startDay === lastDayOfStartMonth && endDay === lastDayOfEndMonth) {
+    // Her iki tarih de ay sonlarındaysa, tam ay sayısını kullan
+    return totalMonths;
   }
   
-  return months;
+  // Gün farkını kontrol et
+  if (endDay < startDay) {
+    // Eğer bitiş günü başlangıç gününden küçükse ve ay sonu durumu değilse
+    // bir ay eksilt
+    if (endDay !== lastDayOfEndMonth || startDay !== lastDayOfStartMonth) {
+      totalMonths--;
+    }
+  }
+  
+  return totalMonths;
 };
 
 /**

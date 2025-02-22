@@ -1,3 +1,36 @@
+/**
+ * Deneyim Kartı Bileşeni
+ * 
+ * Kullanıcının iş deneyimlerini gösteren kart bileşeni.
+ * Özellikler:
+ * - Şirket logosu ve bilgileri
+ * - Çalışma modeli (Uzaktan/Hibrit/Ofis)
+ * - İstihdam türü (Tam/Yarı Zamanlı vb.)
+ * - Yetenek etiketleri
+ * - Seçilebilir/filtrelenebilir yetenekler
+ * - Responsive tasarım
+ * - Hover ve seçim animasyonları
+ * - Çok dilli destek
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <ExperienceCard
+ *   experience={{
+ *     company: "Şirket Adı",
+ *     logo: "/logo.png",
+ *     startDate: "2020-01",
+ *     endDate: "2023-01",
+ *     workingModel: WorkingModel.Remote,
+ *     employmentType: EmploymentType.FullTime,
+ *     skillTags: ["React", "TypeScript"],
+ *     tr: { position: "Yazılım Geliştirici", location: "İstanbul" },
+ *     en: { position: "Software Developer", location: "Istanbul" }
+ *   }}
+ * />
+ * ```
+ */
+
 import {
   Card,
   CardContent,
@@ -10,23 +43,25 @@ import {
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTheme } from "@mui/material/styles";
-import { LocationOn, CalendarToday, Work } from "@mui/icons-material";
+import { LocationOn, CalendarToday, Work, AccessTime, WorkOutline, Business, Apartment } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
 import { useThemeColors } from "@/hooks/useThemeColors";
 
-interface ExperienceCardProps {
-  experience: Experience;
-}
-
+/**
+ * Çalışma Modeli Enum
+ */
 enum WorkingModel {
   Hybrid = 1,
   Remote = 2,
   Office = 3,
 }
 
+/**
+ * İstihdam Türü Enum
+ */
 enum EmploymentType {
   FullTime = 1,
   PartTime = 2,
@@ -34,6 +69,9 @@ enum EmploymentType {
   Freelance = 4,
 }
 
+/**
+ * Çalışma modelini metne çevirir
+ */
 const getWorkingModelText = (workingModel: number, locale: string): string => {
   switch (workingModel) {
     case WorkingModel.Hybrid:
@@ -47,10 +85,10 @@ const getWorkingModelText = (workingModel: number, locale: string): string => {
   }
 };
 
-const getEmploymentTypeText = (
-  employmentType: number,
-  locale: string
-): string => {
+/**
+ * İstihdam türünü metne çevirir
+ */
+const getEmploymentTypeText = (employmentType: number, locale: string): string => {
   switch (employmentType) {
     case EmploymentType.FullTime:
       return locale === "tr" ? "Tam Zamanlı" : "Full Time";
@@ -65,6 +103,118 @@ const getEmploymentTypeText = (
   }
 };
 
+/**
+ * Stil sabitleri
+ */
+const STYLES = {
+  CARD: {
+    background: "background.paper",
+    position: "relative",
+    transition: "all 0.3s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      "& .MuiAvatar-root": {
+        transform: "scale(1.05)",
+      },
+    },
+  },
+  CARD_HIGHLIGHTED: {
+    border: "1px solid",
+    borderColor: "primary.main",
+    transform: "translateY(-4px)",
+    boxShadow: (colors) => `0 4px 20px ${colors.primary}40`,
+  },
+  HEADER: {
+    background: (isDarkMode) =>
+      isDarkMode
+        ? "rgba(255, 255, 255, 0.03)"
+        : "rgba(0, 0, 0, 0.03)",
+    backdropFilter: "blur(4px)",
+    p: 3,
+  },
+  HEADER_CONTENT: {
+    display: "flex",
+    gap: 4,
+    alignItems: "flex-start",
+  },
+  AVATAR: {
+    width: 80,
+    height: 80,
+    bgcolor: "transparent",
+    border: "2px solid",
+    borderColor: "primary.main",
+    display: { xs: "none", md: "block" },
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
+    },
+  },
+  CONTENT: {
+    flex: 1,
+  },
+  POSITION: {
+    color: "primary.main",
+    mb: 1,
+    fontWeight: "bold",
+    textAlign: { xs: "center", md: "left" },
+  },
+  COMPANY: {
+    color: "text.secondary",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    gap: 0.5,
+  },
+  DESCRIPTION: {
+    color: "text.secondary",
+    mb: 3,
+  },
+  DESCRIPTION_CONTAINER: {
+    width: "100%",
+    mb: 3,
+  },
+  SKILL_SECTION: {
+    width: "100%",
+    display: "flex",
+    justifyContent: { xs: "center", md: "flex-start" },
+  },
+  SKILL_CONTAINER: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 1,
+    maxWidth: "fit-content",
+  },
+  SKILL_CHIP: (isSelected: boolean, colors: any) => ({
+    bgcolor: isSelected ? "primary.main" : "background.default",
+    borderColor: "primary.main",
+    color: isSelected ? "background.paper" : "primary.main",
+    cursor: "pointer",
+    "&:hover": {
+      bgcolor: isSelected ? "primary.main" : "background.paper",
+      borderColor: "primary.main",
+    },
+  }),
+} as const;
+
+/**
+ * Deneyim Kartı Props Interface
+ * 
+ * @interface ExperienceCardProps
+ * @property {Experience} experience - Deneyim bilgileri
+ */
+interface ExperienceCardProps {
+  experience: Experience;
+}
+
+/**
+ * Deneyim Kartı Bileşeni
+ * 
+ * @param {ExperienceCardProps} props - Bileşen props'ları
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref
+ * @returns {JSX.Element} Deneyim kartı
+ */
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const theme = useTheme();
@@ -73,12 +223,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
     const { locale } = useTranslation();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
-    const isHighlighted =
-      selectedSkill && experience.skillTags.includes(selectedSkill);
-
-    const experienceTranslations =
-      locale === "tr" ? experience.tr : experience.en;
-
+    const isHighlighted = selectedSkill && experience.skillTags.includes(selectedSkill);
+    const experienceTranslations = locale === "tr" ? experience.tr : experience.en;
     const duration = calculateDuration(
       experience.startDate,
       experience.endDate ? experience.endDate : new Date().toISOString(),
@@ -90,85 +236,51 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         ref={ref}
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
-          background: colors.surface,
-          position: "relative",
-          transition: "all 0.3s ease-in-out",
-          border: `1px solid ${isHighlighted ? colors.primary : "transparent"}`,
-          transform: isHighlighted ? "translateY(-4px)" : "none",
-          boxShadow: isHighlighted ? `0 4px 20px ${colors.primary}40` : "none",
-          "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-            "& .MuiAvatar-root": {
-              transform: "scale(1.05)",
-              transition: "transform 0.3s ease-in-out",
-            },
-          },
+          ...STYLES.CARD,
+          ...(isHighlighted && STYLES.CARD_HIGHLIGHTED),
         }}
       >
-        <Box
-          sx={{
-            background: isDarkMode
-              ? "rgba(255, 255, 255, 0.03)"
-              : "rgba(0, 0, 0, 0.03)",
-            backdropFilter: "blur(4px)",
-            p: 3,
-          }}
-        >
-          <Box sx={{ display: "flex", gap: 4, alignItems: "flex-start" }}>
+        {/* Kart Başlığı */}
+        <Box sx={STYLES.HEADER}>
+          <Box sx={STYLES.HEADER_CONTENT}>
+            {/* Şirket Logosu */}
             <Avatar
               src={experience.logo}
               alt={experience.company}
-              sx={{
-                width: 80,
-                height: 80,
-                bgcolor: "transparent",
-                border: "2px solid",
-                borderColor: colors.primary,
-                display: { xs: "none", md: "block" },
-                "& img": {
-                  objectFit: "cover",
-                  borderRadius: "50%",
-                },
-              }}
+              sx={STYLES.AVATAR}
             />
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: colors.primary,
-                  mb: 1,
-                  fontWeight: "bold",
-                  textAlign: { xs: "center", md: "left" },
-                }}
-              >
+
+            {/* Pozisyon ve Şirket Bilgileri */}
+            <Box sx={STYLES.CONTENT}>
+              <Typography variant="h6" sx={STYLES.POSITION}>
                 {experienceTranslations.position}
               </Typography>
+
+              {/* Meta Bilgiler */}
               <Stack
                 direction={{ xs: "column", md: "row" }}
                 spacing={{ xs: 1, md: 3 }}
                 alignItems={{ xs: "flex-start", md: "center" }}
               >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    color: colors.secondary,
-                    fontWeight: "bold",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 0.5,
-                  }}
-                >
+                <Typography variant="subtitle1" sx={STYLES.COMPANY}>
                   {experience.company}
                 </Typography>
+
+                {/* Konum */}
                 <InfoWithIcon
                   icon={LocationOn}
-                  text={`${
-                    experienceTranslations.location
-                  } • ${getWorkingModelText(experience.workingModel, locale)}`}
-                  colors={colors}
+                  text={experienceTranslations.location}
                   fontSize="0.875rem"
                 />
+
+                {/* Çalışma Modeli */}
+                <InfoWithIcon
+                  icon={Apartment}
+                  text={getWorkingModelText(experience.workingModel, locale)}
+                  fontSize="0.875rem"
+                />
+
+                {/* Tarih Aralığı */}
                 <InfoWithIcon
                   icon={CalendarToday}
                   text={`${formatDate(experience.startDate, locale)} - ${
@@ -177,17 +289,21 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                       : locale === "tr"
                       ? "Devam ediyor"
                       : "Present"
-                  } (${duration})`}
-                  colors={colors}
+                  }`}
                   fontSize="0.875rem"
                 />
+
+                {/* Süre */}
+                <InfoWithIcon
+                  icon={AccessTime}
+                  text={duration}
+                  fontSize="0.875rem"
+                />
+
+                {/* İstihdam Türü */}
                 <InfoWithIcon
                   icon={Work}
-                  text={getEmploymentTypeText(
-                    experience.employmentType,
-                    locale
-                  )}
-                  colors={colors}
+                  text={getEmploymentTypeText(experience.employmentType, locale)}
                   fontSize="0.875rem"
                 />
               </Stack>
@@ -195,59 +311,45 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
           </Box>
         </Box>
 
+        {/* Kart İçeriği */}
         <CardContent sx={{ p: 3 }}>
-          <Typography variant="body1" sx={{ color: colors.secondary, mb: 3 }}>
-            {experienceTranslations.description.map((desc, index) => (
-              <span key={index}>
-                <span style={{ color: colors.primary }}>•</span> {desc}
-                <br />
-              </span>
-            ))}
-          </Typography>
+          {/* Deneyim Açıklaması */}
+          <Box sx={STYLES.DESCRIPTION_CONTAINER}>
+            <Typography variant="body1" sx={STYLES.DESCRIPTION}>
+              {experienceTranslations.description.map((desc, index) => (
+                <span key={index}>
+                  <span style={{ color: colors.primary }}>•</span> {desc}
+                  <br />
+                </span>
+              ))}
+            </Typography>
+          </Box>
 
-          <Stack
-            direction="row"
-            spacing={1}
-            flexWrap="wrap"
-            justifyContent={{ xs: "center", md: "flex-start" }}
-            sx={{
-              gap: 1,
-            }}
-          >
-            {experience.skillTags.map((skillTag: string, index: number) => (
-              <Chip
-                key={index}
-                size="small"
-                label={skillTag}
-                variant="outlined"
-                onClick={() =>
-                  setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
-                }
-                sx={{
-                  bgcolor:
-                    selectedSkill === skillTag
-                      ? colors.primary
-                      : colors.background,
-                  borderColor:
-                    selectedSkill === skillTag ? colors.primary : colors.primary,
-                  color:
-                    selectedSkill === skillTag
-                      ? colors.background
-                      : colors.primary,
-                  cursor: "pointer",
-                  "&:hover": {
-                    bgcolor:
-                      selectedSkill === skillTag ? colors.primary : colors.surface,
-                    borderColor: colors.primary,
-                  },
-                }}
-              />
-            ))}
-          </Stack>
+          {/* Yetenek Etiketleri */}
+          <Box sx={STYLES.SKILL_SECTION}>
+            <Stack 
+              direction="row"
+              sx={STYLES.SKILL_CONTAINER}
+            >
+              {experience.skillTags.map((skillTag: string, index: number) => (
+                <Chip
+                  key={index}
+                  size="small"
+                  label={skillTag}
+                  variant="outlined"
+                  onClick={() =>
+                    setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
+                  }
+                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag, colors)}
+                />
+              ))}
+            </Stack>
+          </Box>
         </CardContent>
       </Card>
     );
   }
 );
 
+// Gereksiz render'ları önlemek için memo kullan
 export default ExperienceCard; 
