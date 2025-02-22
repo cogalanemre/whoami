@@ -1,6 +1,6 @@
 "use client";
 
-import { DarkMode, WbSunny } from "@mui/icons-material";
+import { DarkMode, LightMode } from "@mui/icons-material";
 import { useThemeContext } from "@/context/ThemeContext";
 import ToggleButton from "./ToggleButton";
 
@@ -22,7 +22,7 @@ export default function ThemeSwitcher() {
     <ToggleButton
       buttons={[
         { Icon: DarkMode, isActive: isDarkMode },
-        { Icon: WbSunny, isActive: !isDarkMode }
+        { Icon: LightMode, isActive: !isDarkMode }
       ]}
       onClick={toggleTheme}
       position={{ top: 20, right: 20 }}

@@ -19,7 +19,7 @@ import MUIThemeProvider from "@/theme/MUIThemeProvider";
 import ThemeSwitcher from "@/components/atoms/buttons/ThemeSwitcher";
 import LanguageSwitcher from "@/components/atoms/buttons/LanguageSwitcher";
 import ErrorFallback from "@/components/atoms/feedback/ErrorFallback";
-import LoadingSpinner from "@/components/atoms/feedback/LoadingSpinner";
+import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
 import config from "@/config/config.json";
 import { UI_CONSTANTS } from "@/constants";
 
@@ -54,7 +54,12 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <ThemeProvider>
         <MUIThemeProvider>
           <SelectedSkillProvider>
-            <Suspense fallback={<LoadingSpinner />}>
+            <Suspense fallback={
+              <LoadingSkeleton 
+                height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.HERO} 
+                withTitle={false}
+              />
+            }>
               <ClientContent>{children}</ClientContent>
             </Suspense>
           </SelectedSkillProvider>
