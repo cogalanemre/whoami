@@ -121,10 +121,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  const lang = await Promise.resolve(params.lang);
+  // Tüm params objesini bekle
+  const resolvedParams = await Promise.resolve(params);
 
   return (
-    <html lang={lang}>
+    <html lang={resolvedParams.lang}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />

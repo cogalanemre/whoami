@@ -65,7 +65,9 @@ export async function generateMetadata({
 }: { 
   params: { lang: "tr" | "en" } 
 }): Promise<Metadata> {
-  const lang = await Promise.resolve(params.lang);
+  // Tüm params objesini bekle
+  const resolvedParams = await Promise.resolve(params);
+  const lang = resolvedParams.lang;
   
   // Ortama göre base URL belirle
   const baseUrl = process.env.NODE_ENV === 'production' 
@@ -135,7 +137,10 @@ export default async function Page({
 }: {
   params: { lang: "tr" | "en" };
 }) {
-  const lang = await Promise.resolve(params.lang);
+  // Tüm params objesini bekle
+  const resolvedParams = await Promise.resolve(params);
+  const lang = resolvedParams.lang;
+  
   const blogPosts = await fetchBlogPosts();
   const hero: Hero = resumeData.hero;
 
