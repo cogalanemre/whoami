@@ -2,17 +2,16 @@ import { useState } from "react";
 import {
   Box,
   Grid,
-  Typography,
-  Button,
   Snackbar,
   Alert,
-  Card,
-  CardContent,
 } from "@mui/material";
+import { ContactPhone } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
-import { ContactInfo } from "@/components/molecules/contact/ContactInfo";
-import FormField from "@/components/molecules/forms/FormField";
 import { memo } from "react";
+import ContactCard from "@/components/molecules/cards/ContactCard";
+import SocialMediaCard from "@/components/molecules/cards/SocialMediaCard";
+import MessageCard from "@/components/molecules/cards/MessageCard";
+import SectionTitle from "@/components/atoms/typography/SectionTitle";
 
 interface FormData {
   name: string;
@@ -35,27 +34,8 @@ const sectionStyles = {
 
 // Grid container stilleri
 const gridContainerStyles = {
-  spacing: 4,
-};
-
-// Card stilleri
-const cardStyles = {
-  height: "100%",
   display: "flex",
-  flexDirection: "column",
-};
-
-// Form container stilleri
-const formContainerStyles = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 2,
-};
-
-// Submit button stilleri
-const submitButtonStyles = {
-  mt: 2,
-  alignSelf: "flex-start",
+  justifyContent: "space-between",
 };
 
 /**
@@ -129,72 +109,35 @@ function ContactSection() {
 
   return (
     <Box sx={sectionStyles}>
+      {/* Bölüm Başlığı */}
+      <SectionTitle
+        icon={ContactPhone}
+        title={t("sections.contact")}
+      />
+
       <Grid container sx={gridContainerStyles}>
-        {/* İletişim Bilgileri */}
-        <Grid item xs={12} md={6}>
-          <Card sx={cardStyles}>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                {t("sections.contact")}
-              </Typography>
-              <ContactInfo />
-            </CardContent>
-          </Card>
+        {/* Sol Taraf: İletişim Bilgileri ve Sosyal Medya */}
+        <Grid item xs={12} md={5.8}>
+          <Grid container spacing={{ xs: 4, md: 8 }}>
+            {/* İletişim Bilgileri */}
+            <Grid item xs={12}>
+              <ContactCard />
+            </Grid>
+
+            {/* Sosyal Medya Bağlantıları */}
+            <Grid item xs={12}>
+              <SocialMediaCard />
+            </Grid>
+          </Grid>
         </Grid>
 
-        {/* İletişim Formu */}
-        <Grid item xs={12} md={6}>
-          <Card
-            component="form"
+        {/* Sağ Taraf: İletişim Formu */}
+        <Grid item xs={12} md={5.8}>
+          <MessageCard
+            formData={formData}
+            onChange={handleChange}
             onSubmit={handleSubmit}
-            sx={cardStyles}
-          >
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                {t("contact.sendMessage")}
-              </Typography>
-              <Box sx={formContainerStyles}>
-                <FormField
-                  label={t("contact.form.name")}
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                <FormField
-                  label={t("contact.form.email")}
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <FormField
-                  label={`${t("contact.form.phone")} (${t("contact.form.phoneOptional")})`}
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-                <FormField
-                  label={t("contact.form.message")}
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  multiline
-                  rows={4}
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  sx={submitButtonStyles}
-                >
-                  {t("contact.form.send")}
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
+          />
         </Grid>
       </Grid>
 
