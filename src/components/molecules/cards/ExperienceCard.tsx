@@ -160,11 +160,11 @@ const STYLES = {
     textAlign: { xs: "center", md: "left" },
   },
   COMPANY: {
-    color: "text.secondary",
+    color: "primary.main",
     fontWeight: "bold",
-    display: "flex",
-    alignItems: "center",
-    gap: 0.5,
+    whiteSpace: "nowrap",
+    minWidth: "fit-content",
+    marginRight: 2,
   },
   DESCRIPTION: {
     color: "text.secondary",
@@ -196,6 +196,19 @@ const STYLES = {
       borderColor: "primary.main",
     },
   }),
+  META_CONTAINER: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    gap: { xs: 1, md: 3 },
+    alignItems: { xs: "flex-start", md: "center" },
+    flexWrap: "wrap",
+  },
+  META_ITEM: {
+    display: "flex",
+    alignItems: "center",
+    whiteSpace: "nowrap",
+    minWidth: "fit-content",
+  }
 } as const;
 
 /**
@@ -257,56 +270,52 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               </Typography>
 
               {/* Meta Bilgiler */}
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={{ xs: 1, md: 3 }}
-                alignItems={{ xs: "flex-start", md: "center" }}
-              >
+              <Box sx={STYLES.META_CONTAINER}>
                 <Typography variant="subtitle1" sx={STYLES.COMPANY}>
                   {experience.company}
                 </Typography>
-
-                {/* Konum */}
-                <InfoWithIcon
-                  icon={LocationOn}
-                  text={experienceTranslations.location}
-                  fontSize="0.875rem"
-                />
-
-                {/* Çalışma Modeli */}
-                <InfoWithIcon
-                  icon={Apartment}
-                  text={getWorkingModelText(experience.workingModel, locale)}
-                  fontSize="0.875rem"
-                />
-
-                {/* Tarih Aralığı */}
-                <InfoWithIcon
-                  icon={CalendarToday}
-                  text={`${formatDate(experience.startDate, locale)} - ${
-                    experience.endDate
-                      ? formatDate(experience.endDate, locale)
-                      : locale === "tr"
-                      ? "Devam ediyor"
-                      : "Present"
-                  }`}
-                  fontSize="0.875rem"
-                />
-
-                {/* Süre */}
-                <InfoWithIcon
-                  icon={AccessTime}
-                  text={duration}
-                  fontSize="0.875rem"
-                />
-
-                {/* İstihdam Türü */}
-                <InfoWithIcon
-                  icon={Work}
-                  text={getEmploymentTypeText(experience.employmentType, locale)}
-                  fontSize="0.875rem"
-                />
-              </Stack>
+                <Box sx={STYLES.META_ITEM}>
+                  <InfoWithIcon
+                    icon={LocationOn}
+                    text={experienceTranslations.location}
+                    fontSize="0.875rem"
+                  />
+                </Box>
+                <Box sx={STYLES.META_ITEM}>
+                  <InfoWithIcon
+                    icon={Apartment}
+                    text={getWorkingModelText(experience.workingModel, locale)}
+                    fontSize="0.875rem"
+                  />
+                </Box>
+                <Box sx={STYLES.META_ITEM}>
+                  <InfoWithIcon
+                    icon={CalendarToday}
+                    text={`${formatDate(experience.startDate, locale)} - ${
+                      experience.endDate
+                        ? formatDate(experience.endDate, locale)
+                        : locale === "tr"
+                        ? "Devam ediyor"
+                        : "Present"
+                    }`}
+                    fontSize="0.875rem"
+                  />
+                </Box>
+                <Box sx={STYLES.META_ITEM}>
+                  <InfoWithIcon
+                    icon={AccessTime}
+                    text={duration}
+                    fontSize="0.875rem"
+                  />
+                </Box>
+                <Box sx={STYLES.META_ITEM}>
+                  <InfoWithIcon
+                    icon={Work}
+                    text={getEmploymentTypeText(experience.employmentType, locale)}
+                    fontSize="0.875rem"
+                  />
+                </Box>
+              </Box>
             </Box>
           </Box>
         </Box>
