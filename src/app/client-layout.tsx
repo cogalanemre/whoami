@@ -10,7 +10,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { Suspense, useMemo } from "react";
+import { Suspense, useMemo, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -92,6 +92,18 @@ function ClientContent({ children }: { children: React.ReactNode }) {
    * Tema renklerini al
    */
   const colors = useThemeColors();
+
+  // Sayfa yüklendiğinde body'e loaded class'ını ekle
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('loaded');
+    }
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.classList.remove('loaded');
+      }
+    };
+  }, []);
 
   /**
    * Memoize edilmiş stiller

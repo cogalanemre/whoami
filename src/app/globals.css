@@ -10,6 +10,7 @@ html {
   min-height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  opacity: 0;
 }
 
 #__next {
@@ -39,13 +41,8 @@ html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Sayfa yüklenene kadar içeriği gizle */
-body {
-  visibility: hidden;
-}
-
+/* Sayfa yüklendiğinde içeriği göster */
 body.loaded {
-  visibility: visible;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
