@@ -15,16 +15,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? "dark" : "light",
-      primary: {
-        main: isDarkMode ? config.theme.colors.dark.primary : config.theme.colors.light.primary,
-      },
-      background: {
-        default: isDarkMode ? config.theme.colors.dark.background : config.theme.colors.light.background,
-        paper: isDarkMode ? config.theme.colors.dark.surface : config.theme.colors.light.surface,
-      },
-      text: {
-        primary: isDarkMode ? config.theme.colors.dark.secondary : config.theme.colors.light.secondary,
-      },
+
     },
   });
 

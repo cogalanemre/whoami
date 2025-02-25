@@ -125,7 +125,7 @@ export default async function RootLayout({
   const resolvedParams = await Promise.resolve(params);
 
   return (
-    <html lang={resolvedParams.lang}>
+    <html lang={resolvedParams.lang} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
@@ -134,7 +134,7 @@ export default async function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full`} suppressHydrationWarning>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

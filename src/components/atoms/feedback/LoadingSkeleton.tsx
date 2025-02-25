@@ -28,9 +28,8 @@
 
 'use client';
 
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { memo } from "react";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 /**
  * Yükleme İskeleti Props Interface
@@ -58,7 +57,7 @@ function LoadingSkeleton({
   withTitle = true 
 }: LoadingSkeletonProps) {
   // Tema renklerini al
-  const colors = useThemeColors();
+  const theme = useTheme();
 
   return (
     <Box>
@@ -69,7 +68,7 @@ function LoadingSkeleton({
             variant="text" 
             width={200}
             sx={{
-              bgcolor: colors.surface,
+              bgcolor: theme.palette.background.paper,
             }}
           >
             <Typography variant="h5">{title}</Typography>
@@ -84,13 +83,13 @@ function LoadingSkeleton({
         animation="wave"
         sx={{
           borderRadius: 2,
-          bgcolor: colors.surface,
+          bgcolor: theme.palette.background.paper,
           // Dalga animasyonu için gradient efekti
           '&::after': {
             background: `linear-gradient(
               90deg, 
               transparent, 
-              ${colors.primary}10, 
+              ${theme.palette.primary.main}10, 
               transparent
             )`
           }

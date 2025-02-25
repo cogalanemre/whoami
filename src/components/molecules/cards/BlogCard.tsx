@@ -26,14 +26,13 @@
  * ```
  */
 
-import { Card, CardContent, Typography, Box, Button } from "@mui/material";
+import { Card, CardContent, Typography, Box, Button, useTheme } from "@mui/material";
 import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
 import Image from "next/image";
 import { memo } from "react";
 import { BlogPost } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useThemeColors } from "@/hooks/useThemeColors";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
 
@@ -84,7 +83,7 @@ const STYLES = {
     textDecoration: "none",
     transition: "color 0.2s ease-in-out",
     "&:hover": {
-      color: colors => colors.secondary,
+      color: theme => theme.palette.text.primary,
     },
   },
   META: {
@@ -135,7 +134,7 @@ interface BlogCardProps {
  */
 function BlogCard({ post }: BlogCardProps) {
   const { locale } = useTranslation();
-  const colors = useThemeColors();
+  const theme = useTheme();
 
   // Çevirileri al
   const t = {
@@ -160,7 +159,7 @@ function BlogCard({ post }: BlogCardProps) {
     <Card
       sx={{
         ...STYLES.CARD,
-        background: colors.surface,
+        background: theme.palette.background.paper,
       }}
       component="article"
       role="article"
@@ -203,13 +202,11 @@ function BlogCard({ post }: BlogCardProps) {
           <InfoWithIcon
             icon={AccessTime}
             text={readingTimeText}
-            colors={colors}
             fontSize="0.875rem"
           />
           <InfoWithIcon
             icon={CalendarToday}
             text={publishDateText}
-            colors={colors}
             fontSize="0.875rem"
           />
         </Box>
@@ -219,7 +216,7 @@ function BlogCard({ post }: BlogCardProps) {
           variant="body2"
           sx={{
             ...STYLES.DESCRIPTION,
-            color: colors.secondary,
+            color: theme.palette.text.primary,
           }}
         >
           {post.description}
@@ -236,7 +233,7 @@ function BlogCard({ post }: BlogCardProps) {
             rel="noopener noreferrer"
             sx={{
               ...STYLES.BUTTON,
-              color: colors.secondary,
+              color: theme.palette.text.primary,
             }}
             aria-label={`${post.title} - ${t.button}`}
           >

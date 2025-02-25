@@ -1,8 +1,7 @@
-import { TextField, TextFieldProps } from "@mui/material";
-import { useThemeColors } from "@/hooks/useThemeColors";
+import { TextField, TextFieldProps, useTheme } from "@mui/material";
 
 export default function FormField({ sx, ...props }: TextFieldProps) {
-  const colors = useThemeColors();
+  const theme = useTheme();
 
   return (
     <TextField
@@ -10,14 +9,14 @@ export default function FormField({ sx, ...props }: TextFieldProps) {
       sx={{
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
-            borderColor: colors.secondary,
+            borderColor: theme.palette.text.primary,
           },
           "&:hover fieldset": {
-            borderColor: colors.primary,
+            borderColor: theme.palette.primary.main,
           },
         },
         "& .MuiInputLabel-root": {
-          color: colors.secondary,
+          color: theme.palette.text.primary,
         },
         ...sx
       }}

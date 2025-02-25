@@ -39,16 +39,15 @@ import {
   Chip,
   Avatar,
   Box,
+  useTheme,
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { useTheme } from "@mui/material/styles";
 import { LocationOn, CalendarToday, Work, AccessTime, WorkOutline, Business, Apartment } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 /**
  * Çalışma Modeli Enum
@@ -123,7 +122,7 @@ const STYLES = {
     border: "1px solid",
     borderColor: "primary.main",
     transform: "translateY(-4px)",
-    boxShadow: (colors) => `0 4px 20px ${colors.primary}40`,
+    boxShadow: (theme) => `0 4px 20px ${theme.palette.primary.main}40`,
   },
   HEADER: {
     background: (isDarkMode) =>
@@ -186,7 +185,7 @@ const STYLES = {
     gap: 1,
     maxWidth: "fit-content",
   },
-  SKILL_CHIP: (isSelected: boolean, colors: any) => ({
+  SKILL_CHIP: (isSelected: boolean, theme: any) => ({
     bgcolor: isSelected ? "primary.main" : "background.default",
     borderColor: "primary.main",
     color: isSelected ? "background.paper" : "primary.main",
@@ -232,7 +231,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === "dark";
-    const colors = useThemeColors();
     const { locale } = useTranslation();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
@@ -327,7 +325,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             <Typography variant="body1" sx={STYLES.DESCRIPTION}>
               {experienceTranslations.description.map((desc, index) => (
                 <span key={index}>
-                  <span style={{ color: colors.primary }}>•</span> {desc}
+                  <span style={{ color: theme.palette.primary.main }}>•</span> {desc}
                   <br />
                 </span>
               ))}
@@ -349,7 +347,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                   onClick={() =>
                     setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
                   }
-                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag, colors)}
+                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag, theme)}
                 />
               ))}
             </Stack>

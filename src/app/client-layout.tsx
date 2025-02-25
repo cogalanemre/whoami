@@ -9,10 +9,9 @@
 
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Suspense, useMemo, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useThemeColors } from "@/hooks/useThemeColors";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
 import MUIThemeProvider from "@/theme/MUIThemeProvider";
@@ -88,21 +87,21 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
  * @returns {JSX.Element} İçerik bileşeni
  */
 function ClientContent({ children }: { children: React.ReactNode }) {
-  /**
-   * Tema renklerini al
-   */
-  const colors = useThemeColors();
+  const theme = useTheme();
 
   // Sayfa yüklendiğinde body'e loaded class'ını ekle
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.body.classList.add('loaded');
-    }
-    return () => {
-      if (typeof document !== 'undefined') {
+    // requestAnimationFrame kullanarak hydration sonrasına ertele
+    if (typeof window !== 'undefined') {
+      const frame = requestAnimationFrame(() => {
+        document.body.classList.add('loaded');
+      });
+
+      return () => {
+        cancelAnimationFrame(frame);
         document.body.classList.remove('loaded');
-      }
-    };
+      };
+    }
   }, []);
 
   /**
@@ -111,8 +110,8 @@ function ClientContent({ children }: { children: React.ReactNode }) {
   const styles = useMemo(() => ({
     root: {
       minHeight: "100vh",
-      background: colors.background,
-      color: colors.secondary,
+      background: theme.palette.background.default,
+      color: theme.palette.text.primary,
       transition: `
         background-color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease,
         color ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease
@@ -136,7 +135,7 @@ function ClientContent({ children }: { children: React.ReactNode }) {
     content: {
       transition: `opacity ${UI_CONSTANTS.ANIMATION.DURATION.NORMAL}s ease`,
     }
-  }), [colors]);
+  }), [theme]);
 
   return (
     <Box sx={styles.root}>

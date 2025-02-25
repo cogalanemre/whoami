@@ -1,15 +1,13 @@
-import { Box, Chip, Stack } from "@mui/material";
+import { Box, Chip, Stack, useTheme } from "@mui/material";
 import { Experience } from "@/types";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import {
   calculateSkillDuration,
   calculateTotalMonths,
 } from "@/utils/dateUtils";
-import { useThemeColors } from "@/hooks/useThemeColors";
 import { Code } from "@mui/icons-material";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
-import { ThemeColors } from "@/types";
 
 interface SkillsSectionProps {
   experiences: Experience[];
@@ -29,13 +27,13 @@ const stackStyles = {
 };
 
 // Chip stilleri için yardımcı fonksiyon
-const getChipStyles = (isSelected: boolean, colors: ThemeColors) => ({
-  bgcolor: isSelected ? colors.primary : colors.surface,
-  color: isSelected ? colors.surface : colors.primary,
-  border: `1px solid ${colors.primary}`,
+const getChipStyles = (isSelected: boolean, theme: any) => ({
+  bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
+  color: isSelected ? theme.palette.background.paper : theme.palette.primary.main,
+  border: `1px solid ${theme.palette.primary.main}`,
   cursor: "pointer",
   "&:hover": {
-    bgcolor: isSelected ? colors.primary : colors.surface,
+    bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
     opacity: 0.9,
   },
 });
@@ -51,7 +49,7 @@ const getChipStyles = (isSelected: boolean, colors: ThemeColors) => ({
  * @returns {JSX.Element} Skills section bileşeni
  */
 function SkillsSection({ experiences, title }: SkillsSectionProps) {
-  const colors = useThemeColors();
+  const theme = useTheme();
   const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
   // Yetenek tıklama işleyicisi
@@ -112,7 +110,7 @@ function SkillsSection({ experiences, title }: SkillsSectionProps) {
             key={skillTag}
             label={`${skillTag} (${Math.round((duration / totalMonths) * 100)}%)`}
             onClick={() => handleSkillClick(skillTag)}
-            sx={getChipStyles(selectedSkill === skillTag, colors)}
+            sx={getChipStyles(selectedSkill === skillTag, theme)}
           />
         ))}
       </Stack>

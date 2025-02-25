@@ -18,7 +18,6 @@
  * <InfoWithIcon
  *   icon={LocationOn}
  *   text="İstanbul, Türkiye"
- *   colors={themeColors}
  *   fontSize="0.875rem"
  * />
  * ```

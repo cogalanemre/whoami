@@ -21,9 +21,8 @@
  * ```
  */
 
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useThemeColors } from "@/hooks/useThemeColors";
 
 /**
  * Daktilo Efekti Props Interface
@@ -49,7 +48,7 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
-  const colors = useThemeColors();
+  const theme = useTheme();
 
   useEffect(() => {
     const text = texts[currentTextIndex];
@@ -88,7 +87,7 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
     <Typography
       variant="h4"
       sx={{
-        color: colors.secondary,
+        color: theme.palette.text.primary,
         fontWeight: 300,
         fontFamily: "var(--font-poppins)",
         position: "relative",
@@ -102,7 +101,7 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
           top: "4px",
           animation: isWaiting ? "blink 1s infinite" : "none",
           opacity: isWaiting ? undefined : 1,
-          color: colors.primary,
+          color: theme.palette.primary.main,
           fontSize: "inherit",
           lineHeight: 1,
           fontWeight: "normal",
