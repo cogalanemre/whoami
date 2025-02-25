@@ -19,20 +19,7 @@
   },
   "theme": {
     "default": "light",
-    "colors": {
-      "light": {
-        "background": "#F5F5F5",
-        "surface": "#FFFFFF",
-        "secondary": "#333333",
-        "primary": "#2497FF"
-      },
-      "dark": {
-        "background": "#121212",
-        "surface": "#1E1E1E",
-        "secondary": "#E0E0E0",
-        "primary": "#2497ff"
-      }
-    }
+    "color": "#2497ff"
   },
   "language": {
     "default": "en",

@@ -15,7 +15,9 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? "dark" : "light",
-
+      primary: {
+        main: config.theme.color,
+      },
     },
   });
 
