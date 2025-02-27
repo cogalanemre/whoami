@@ -6,7 +6,8 @@ export const translationSchema = z.object({
     education: z.string(),
     blog: z.string(),
     contact: z.string(),
-    skills: z.string()
+    skills: z.string(),
+    social: z.string()
   }),
   contact: z.object({
     info: z.string(),

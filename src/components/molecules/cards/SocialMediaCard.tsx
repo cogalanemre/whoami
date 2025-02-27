@@ -27,8 +27,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
-import { useTheme } from "@mui/material/styles";
 import { SocialMediaCardStyles } from "@/styles/components/cards/SocialMediaCard.styles";
+import { getTranslation } from "@/i18n/utils";
 
 /**
  * Sosyal Medya Kartı Bileşeni
@@ -37,10 +37,6 @@ import { SocialMediaCardStyles } from "@/styles/components/cards/SocialMediaCard
  */
 function SocialMediaCard() {
   const { locale } = useTranslation();
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
-
-  // Sosyal medya bilgilerini al
   const socialMedia = resumeData.hero.socialMedia;
 
   return (
@@ -49,7 +45,7 @@ function SocialMediaCard() {
       <Box sx={SocialMediaCardStyles.header}>
         {/* Başlık */}
         <Typography variant="h6" sx={SocialMediaCardStyles.title}>
-          {locale === "tr" ? "Sosyal Medya" : "Social Media"}
+          {getTranslation("sections.social", locale)}
         </Typography>
       </Box>
 

@@ -1,15 +1,11 @@
 /**
  * İletişim Kartı Bileşeni
  * 
- * Kullanıcının iletişim bilgilerini gösteren kart bileşeni.
- * Özellikler:
- * - İletişim bilgileri (e-posta, telefon, konum)
+ * Kullanıcının iletişim bilgilerini (e-posta, telefon, konum) gösteren kart.
  * - Responsive tasarım
  * - Hover animasyonları
- * - Tema renk entegrasyonu
+ * - Tema entegrasyonu
  * - Erişilebilirlik özellikleri
- * 
- * @component
  */
 
 import {
@@ -27,8 +23,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
-import { useTheme } from "@mui/material/styles";
 import { ContactInfoCardStyles } from "@/styles/components/cards/ContactInfoCard.styles";
+import { getTranslation } from "@/i18n/utils";
 
 /**
  * İletişim Kartı Bileşeni
@@ -37,8 +33,6 @@ import { ContactInfoCardStyles } from "@/styles/components/cards/ContactInfoCard
  */
 function ContactCard() {
   const { locale } = useTranslation();
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
 
   // İletişim bilgilerini al
   const contact = resumeData.contact;
@@ -49,7 +43,7 @@ function ContactCard() {
       <Box sx={ContactInfoCardStyles.header}>
         {/* Başlık */}
         <Typography variant="h6" sx={ContactInfoCardStyles.title}>
-          {locale === "tr" ? "İletişim Bilgileri" : "Contact Information"}
+          {getTranslation("contact.info", locale)}
         </Typography>
       </Box>
 

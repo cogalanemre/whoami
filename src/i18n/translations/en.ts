@@ -6,7 +6,8 @@ const en: TranslationType = {
     education: "Education",
     blog: "Blog",
     contact: "Contact",
-    skills: "Skills"
+    skills: "Skills",
+    social: "Social Media"
   },
   contact: {
     info: "Contact Information",

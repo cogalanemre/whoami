@@ -27,7 +27,7 @@ export const CommonCardStyles = {
     backdropFilter: "blur(4px)",
   },
   title: {
-    color: "#ffffff",
+    color: "text.primary",
     fontWeight: "bold",
   },
   content: {
