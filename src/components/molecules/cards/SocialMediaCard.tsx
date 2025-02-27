@@ -34,7 +34,7 @@ import { useTheme } from "@mui/material/styles";
  */
 const STYLES = {
   CARD: {
-    background: "background.paper",
+    background: "background.default",
     position: "relative",
     transition: "all 0.3s ease-in-out",
     height: "100%",
