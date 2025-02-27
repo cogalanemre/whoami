@@ -34,7 +34,9 @@ import { useTheme } from "@mui/material/styles";
  */
 const STYLES = {
   CARD: {
-    background: "background.default",
+    border: "1px solid",
+    borderColor: "primary.main",
+    borderRadius: "16px",
     position: "relative",
     transition: "all 0.3s ease-in-out",
     height: "100%",
@@ -47,7 +49,7 @@ const STYLES = {
     p: 3,
   },
   TITLE: {
-    color: "primary.main",
+    color: "#ffffff",
     fontWeight: "bold",
   },
   CONTENT: {
@@ -76,17 +78,14 @@ function SocialMediaCard() {
   const socialMedia = resumeData.hero.socialMedia;
 
   return (
-    <Card sx={STYLES.CARD}>
+    <Card sx={{ ...STYLES.CARD, background: 'transparent' }}>
       {/* Başlık Bölümü */}
       <Box sx={{
         ...STYLES.HEADER,
-        background: isDarkMode
-          ? "rgba(255, 255, 255, 0.03)"
-          : "rgba(0, 0, 0, 0.03)",
         backdropFilter: "blur(4px)",
       }}>
         {/* Başlık */}
-        <Typography variant="h6" sx={STYLES.TITLE}>
+        <Typography variant="h6" sx={{ ...STYLES.TITLE, color: '#ffffff' }}>
           {locale === "tr" ? "Sosyal Medya" : "Social Media"}
         </Typography>
       </Box>
