@@ -28,39 +28,7 @@ import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
 import { useTheme } from "@mui/material/styles";
-
-/**
- * Stil sabitleri
- */
-const STYLES = {
-  CARD: {
-    background: "background.paper",
-    position: "relative",
-    transition: "all 0.3s ease-in-out",
-    height: "100%",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-    },
-  },
-  HEADER: {
-    p: 3,
-  },
-  TITLE: {
-    color: "primary.main",
-    fontWeight: "bold",
-  },
-  CONTENT: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 3,
-  },
-  SECTION: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 2,
-  },
-} as const;
+import { ContactInfoCardStyles } from "@/styles/components/cards/ContactInfoCard.styles";
 
 /**
  * İletişim Kartı Bileşeni
@@ -76,26 +44,20 @@ function ContactCard() {
   const contact = resumeData.contact;
 
   return (
-    <Card sx={STYLES.CARD}>
+    <Card sx={ContactInfoCardStyles.card}>
       {/* Başlık Bölümü */}
-      <Box sx={{
-        ...STYLES.HEADER,
-        background: isDarkMode
-          ? "rgba(255, 255, 255, 0.03)"
-          : "rgba(0, 0, 0, 0.03)",
-        backdropFilter: "blur(4px)",
-      }}>
+      <Box sx={ContactInfoCardStyles.header}>
         {/* Başlık */}
-        <Typography variant="h6" sx={STYLES.TITLE}>
+        <Typography variant="h6" sx={ContactInfoCardStyles.title}>
           {locale === "tr" ? "İletişim Bilgileri" : "Contact Information"}
         </Typography>
       </Box>
 
       {/* İletişim Bilgileri */}
       <CardContent sx={{ p: 3 }}>
-        <Box sx={STYLES.CONTENT}>
+        <Box sx={ContactInfoCardStyles.content}>
           {/* İletişim Bilgileri */}
-          <Box sx={STYLES.SECTION}>
+          <Box sx={ContactInfoCardStyles.section}>
             {/* E-posta */}
             <InfoWithIcon
               icon={Email}

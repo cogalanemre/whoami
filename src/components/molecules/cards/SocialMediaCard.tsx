@@ -28,41 +28,7 @@ import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
 import { useTheme } from "@mui/material/styles";
-
-/**
- * Stil sabitleri
- */
-const STYLES = {
-  CARD: {
-    border: "1px solid",
-    borderColor: "primary.main",
-    borderRadius: "16px",
-    position: "relative",
-    transition: "all 0.3s ease-in-out",
-    height: "100%",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-    },
-  },
-  HEADER: {
-    p: 3,
-  },
-  TITLE: {
-    color: "#ffffff",
-    fontWeight: "bold",
-  },
-  CONTENT: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 3,
-  },
-  SECTION: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 2,
-  },
-} as const;
+import { SocialMediaCardStyles } from "@/styles/components/cards/SocialMediaCard.styles";
 
 /**
  * Sosyal Medya Kartı Bileşeni
@@ -78,21 +44,18 @@ function SocialMediaCard() {
   const socialMedia = resumeData.hero.socialMedia;
 
   return (
-    <Card sx={{ ...STYLES.CARD, background: 'transparent' }}>
+    <Card sx={SocialMediaCardStyles.card}>
       {/* Başlık Bölümü */}
-      <Box sx={{
-        ...STYLES.HEADER,
-        backdropFilter: "blur(4px)",
-      }}>
+      <Box sx={SocialMediaCardStyles.header}>
         {/* Başlık */}
-        <Typography variant="h6" sx={{ ...STYLES.TITLE, color: '#ffffff' }}>
+        <Typography variant="h6" sx={SocialMediaCardStyles.title}>
           {locale === "tr" ? "Sosyal Medya" : "Social Media"}
         </Typography>
       </Box>
 
       {/* Sosyal Medya Bağlantıları */}
       <CardContent sx={{ p: 3 }}>
-        <Box sx={STYLES.CONTENT}>
+        <Box sx={SocialMediaCardStyles.content}>
           {/* GitHub */}
           {socialMedia.github && (
             <InfoWithIcon
