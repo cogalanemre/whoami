@@ -39,7 +39,6 @@ import { memo } from "react";
 import { Education } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useThemeColors } from "@/hooks/useThemeColors";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
 

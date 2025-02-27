@@ -43,7 +43,7 @@ import {
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { LocationOn, CalendarToday, Work, AccessTime, WorkOutline, Business, Apartment } from "@mui/icons-material";
+import { LocationOn, CalendarToday, Work, AccessTime, Apartment } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
@@ -185,7 +185,7 @@ const STYLES = {
     gap: 1,
     maxWidth: "fit-content",
   },
-  SKILL_CHIP: (isSelected: boolean, theme: any) => ({
+  SKILL_CHIP: (isSelected: boolean) => ({
     bgcolor: isSelected ? "primary.main" : "background.default",
     borderColor: "primary.main",
     color: isSelected ? "background.paper" : "primary.main",
@@ -229,9 +229,8 @@ interface ExperienceCardProps {
  */
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
-    const theme = useTheme();
-    const isDarkMode = theme.palette.mode === "dark";
     const { locale } = useTranslation();
+    const theme = useTheme();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
     const isHighlighted = selectedSkill && experience.skillTags.includes(selectedSkill);
@@ -293,8 +292,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                       experience.endDate
                         ? formatDate(experience.endDate, locale)
                         : locale === "tr"
-                        ? "Devam ediyor"
-                        : "Present"
+                          ? "Devam ediyor"
+                          : "Present"
                     }`}
                     fontSize="0.875rem"
                   />
@@ -347,7 +346,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                   onClick={() =>
                     setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
                   }
-                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag, theme)}
+                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag)}
                 />
               ))}
             </Stack>

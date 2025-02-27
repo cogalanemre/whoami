@@ -1,4 +1,4 @@
-import { Box, Chip, Stack, useTheme } from "@mui/material";
+import { Box, Chip, Stack, useTheme, Theme } from "@mui/material";
 import { Experience } from "@/types";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import {
@@ -27,7 +27,7 @@ const stackStyles = {
 };
 
 // Chip stilleri için yardımcı fonksiyon
-const getChipStyles = (isSelected: boolean, theme: any) => ({
+const getChipStyles = (isSelected: boolean, theme: Theme) => ({
   bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
   color: isSelected ? theme.palette.background.paper : theme.palette.primary.main,
   border: `1px solid ${theme.palette.primary.main}`,
