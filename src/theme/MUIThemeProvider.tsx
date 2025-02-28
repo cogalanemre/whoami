@@ -66,6 +66,15 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       },
       divider: isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
     },
+    components: {
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderColor: config.theme.color,
+          },
+        },
+      },
+    },
   });
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;

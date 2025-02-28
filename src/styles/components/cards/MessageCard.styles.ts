@@ -8,8 +8,11 @@ export const MessageCardStyles = {
     ...CommonCardStyles.base,
     "&:hover": CommonCardStyles.hover,
     bgcolor: "background.paper",
-    border: "1px solid",
-    borderColor: "text.secondary",
+    "&&": {
+      border: "1px solid",
+      borderColor: "primary.main",
+    },
+
   },
   header: {
     ...CommonCardStyles.header,
@@ -31,23 +34,21 @@ export const MessageCardStyles = {
     "& .MuiInputBase-root": {
       transition: "all 0.2s ease-in-out",
       "&::before": {
-        borderBottom: "1px solid",
-        borderColor: theme => theme.palette.mode === "dark"
-          ? "rgba(255,255,255,0.2)"
-          : "rgba(0,0,0,0.2)",
+        borderBottom: "2px solid",
+        borderColor: "primary.main",
       },
       "&::after": {
         borderBottom: "2px solid",
-        borderColor: "text.primary",
+        borderColor: "primary.main",
       },
       "&:hover:not(.Mui-disabled)::before": {
-        borderColor: "text.primary",
+        borderColor: "primary.main",
       },
     },
     "& .MuiInputLabel-root": {
       color: "text.secondary",
       "&.Mui-focused": {
-        color: "text.primary",
+        color: "primary.main",
       },
     },
     "& .MuiInput-input": {

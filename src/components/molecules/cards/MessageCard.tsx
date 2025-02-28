@@ -44,10 +44,9 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
 
   return (
     <Card
-      component="form"
-      onSubmit={onSubmit}
       sx={MessageCardStyles.card}
       elevation={0}
+      variant="outlined"
     >
       {/* Başlık Bölümü */}
       <Box sx={MessageCardStyles.header}>
@@ -58,7 +57,11 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
 
       {/* Form */}
       <CardContent sx={MessageCardStyles.content}>
-        <Box sx={MessageCardStyles.form}>
+        <Box 
+          component="form"
+          onSubmit={onSubmit}
+          sx={MessageCardStyles.form}
+        >
           <FormField
             label={t("contact.form.name")}
             name="name"
