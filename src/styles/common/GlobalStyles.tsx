@@ -51,4 +51,4 @@ const GlobalStyles = () => {
   );
 };
 
-export default GlobalStyles;
+export default GlobalStyles; 
