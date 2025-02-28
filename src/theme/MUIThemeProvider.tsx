@@ -5,6 +5,78 @@ import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
 import config from "@/config/config.json";
 
+// Sabit tema değerleri
+const COMMON_COLORS = {
+  secondary: {
+    main: '#9c27b0',
+    light: '#ba68c8',
+    dark: '#7b1fa2',
+  },
+  error: {
+    main: '#d32f2f',
+    light: '#ef5350',
+    dark: '#c62828',
+  },
+  warning: {
+    main: '#ed6c02',
+    light: '#ff9800',
+    dark: '#e65100',
+  },
+  info: {
+    main: '#0288d1',
+    light: '#03a9f4',
+    dark: '#01579b',
+  },
+  success: {
+    main: '#2e7d32',
+    light: '#4caf50',
+    dark: '#1b5e20',
+  },
+  grey: {
+    50: '#fafafa',
+    100: '#f5f5f5',
+    200: '#eeeeee',
+    300: '#e0e0e0',
+    400: '#bdbdbd',
+    500: '#9e9e9e',
+    600: '#757575',
+    700: '#616161',
+    800: '#424242',
+    900: '#212121',
+  },
+};
+
+// Kart stilleri
+const CARD_STYLES = {
+  border: '0.5px solid',
+  borderColor: 'rgba(128, 128, 128, 0.2)',
+  bgcolor: 'background.paper',
+  borderRadius: "16px",
+  position: "relative" as const,
+  height: "100%",
+  transition: "all 0.3s ease-in-out",
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+  },
+};
+
+// Input stilleri
+const INPUT_STYLES = {
+  transition: 'all 0.2s ease-in-out',
+  '&::before': {
+    borderBottom: '2px solid',
+    borderColor: 'primary.main',
+  },
+  '&::after': {
+    borderBottom: '2px solid',
+    borderColor: 'primary.main',
+  },
+  '&:hover:not(.Mui-disabled)::before': {
+    borderColor: 'primary.main',
+  },
+};
+
 interface MUIThemeProviderProps {
   children: ReactNode;
 }
@@ -18,43 +90,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       primary: {
         main: config.theme.color,
       },
-      secondary: {
-        main: '#9c27b0',
-        light: '#ba68c8',
-        dark: '#7b1fa2',
-      },
-      error: {
-        main: '#d32f2f',
-        light: '#ef5350',
-        dark: '#c62828',
-      },
-      warning: {
-        main: '#ed6c02',
-        light: '#ff9800',
-        dark: '#e65100',
-      },
-      info: {
-        main: '#0288d1',
-        light: '#03a9f4',
-        dark: '#01579b',
-      },
-      success: {
-        main: '#2e7d32',
-        light: '#4caf50',
-        dark: '#1b5e20',
-      },
-      grey: {
-        50: '#fafafa',
-        100: '#f5f5f5',
-        200: '#eeeeee',
-        300: '#e0e0e0',
-        400: '#bdbdbd',
-        500: '#9e9e9e',
-        600: '#757575',
-        700: '#616161',
-        800: '#424242',
-        900: '#212121',
-      },
+      ...COMMON_COLORS,
       background: {
         default: isDarkMode ? '#0B1018' : '#ffffff',
         paper: isDarkMode ? '#121418' : '#ffffff',
@@ -71,17 +107,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
         styleOverrides: {
           root: {
             '&&': {
-              border: '2px solid',
-              borderColor: config.theme.color,
-              bgcolor: 'background.paper',
-              borderRadius: "16px",
-              position: "relative" as const,
-              height: "100%",
-              transition: "all 0.3s ease-in-out",
-              '&:hover': {
-                transform: "translateY(-4px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-              },
+              ...CARD_STYLES,
               '& .MuiCardHeader-root': {
                 padding: '24px',
                 backdropFilter: 'blur(4px)',
@@ -117,20 +143,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       },
       MuiInput: {
         styleOverrides: {
-          root: {
-            transition: 'all 0.2s ease-in-out',
-            '&::before': {
-              borderBottom: '2px solid',
-              borderColor: 'primary.main',
-            },
-            '&::after': {
-              borderBottom: '2px solid',
-              borderColor: 'primary.main',
-            },
-            '&:hover:not(.Mui-disabled)::before': {
-              borderColor: 'primary.main',
-            },
-          },
+          root: INPUT_STYLES,
         },
       },
       MuiInputLabel: {
