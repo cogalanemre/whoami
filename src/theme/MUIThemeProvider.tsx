@@ -70,7 +70,73 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       MuiCard: {
         styleOverrides: {
           root: {
-            borderColor: config.theme.color,
+            '&&': {
+              border: '2px solid',
+              borderColor: config.theme.color,
+              bgcolor: 'background.paper',
+              borderRadius: "16px",
+              position: "relative" as const,
+              height: "100%",
+              '& .MuiCardHeader-root': {
+                padding: '24px',
+                backdropFilter: 'blur(4px)',
+              },
+              '& .MuiCardHeader-title': {
+                color: 'text.primary',
+                fontWeight: 'bold',
+              },
+              '& .MuiCardContent-root': {
+                padding: '24px',
+              },
+            },
+          },
+        },
+        defaultProps: {
+          elevation: 0,
+          variant: 'outlined',
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            transition: 'all 0.2s ease-in-out',
+            '&::before': {
+              borderBottom: '2px solid',
+              borderColor: 'primary.main',
+            },
+            '&::after': {
+              borderBottom: '2px solid',
+              borderColor: 'primary.main',
+            },
+            '&:hover:not(.Mui-disabled)::before': {
+              borderColor: 'primary.main',
+            },
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: 'text.secondary',
+            '&.Mui-focused': {
+              color: 'primary.main',
+            },
+          },
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          input: {
+            color: 'text.primary',
+            padding: '8px 0',
+            fontSize: '1rem',
+            '&::placeholder': {
+              color: 'text.secondary',
+              opacity: 0.5,
+            },
+          },
+          multiline: {
+            padding: '8px 0',
           },
         },
       },

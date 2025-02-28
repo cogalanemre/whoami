@@ -5,15 +5,7 @@ import { CommonCardStyles } from './CardStyles';
  */
 export const SocialMediaCardStyles = {
   card: {
-    ...CommonCardStyles.base,
     "&:hover": CommonCardStyles.hover,
-    bgcolor: "background.paper",
-  },
-  header: {
-    ...CommonCardStyles.header,
-  },
-  title: {
-    ...CommonCardStyles.title,
   },
   content: {
     display: "flex",
