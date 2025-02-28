@@ -48,7 +48,7 @@ interface InfoWithIconProps {
 export default function InfoWithIcon({
   icon: Icon,
   text,
-  fontSize = "0.95rem",
+  fontSize = "1rem",
 }: InfoWithIconProps) {
   return (
     <Box 
@@ -60,7 +60,7 @@ export default function InfoWithIcon({
         transition: "all 0.2s ease-in-out",
         "&:hover": {
           "& .MuiSvgIcon-root, & svg": {
-            color: "text.primary",
+            color: "primary.main",
           },
           "& .MuiTypography-root": {
             color: "text.primary",
@@ -71,7 +71,7 @@ export default function InfoWithIcon({
       {/* İkon Bileşeni */}
       <Icon
         sx={{
-          color: "text.secondary",
+          color: "primary.main",
           fontSize: "1.2em",
           transition: "color 0.2s ease-in-out",
         }}

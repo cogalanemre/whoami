@@ -16,12 +16,9 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Box,
 } from "@mui/material";
-import { 
-  GitHub, 
-  LinkedIn,
-} from "@mui/icons-material";
-import { FaMedium } from "react-icons/fa";
+import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
@@ -47,29 +44,65 @@ function SocialMediaCard() {
       <CardContent className="social-content">
         {/* GitHub */}
         {socialMedia.github && (
-          <InfoWithIcon
-            icon={GitHub}
-            text={socialMedia.github.replace("https://", "")}
-            fontSize="0.95rem"
-          />
+          <Box
+            component="a"
+            href={socialMedia.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              display: 'block',
+            }}
+          >
+            <InfoWithIcon
+              icon={FaGithub}
+              text={socialMedia.github.replace("https://", "")}
+              fontSize="1rem"
+            />
+          </Box>
         )}
 
         {/* LinkedIn */}
         {socialMedia.linkedin && (
-          <InfoWithIcon
-            icon={LinkedIn}
-            text={socialMedia.linkedin.replace("https://", "")}
-            fontSize="0.95rem"
-          />
+          <Box
+            component="a"
+            href={socialMedia.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              display: 'block',
+            }}
+          >
+            <InfoWithIcon
+              icon={FaLinkedinIn}
+              text={socialMedia.linkedin.replace("https://", "")}
+              fontSize="1rem"
+            />
+          </Box>
         )}
 
         {/* Medium */}
         {socialMedia.medium && (
-          <InfoWithIcon
-            icon={FaMedium}
-            text={socialMedia.medium.replace("https://", "")}
-            fontSize="0.95rem"
-          />
+          <Box
+            component="a"
+            href={socialMedia.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              display: 'block',
+            }}
+          >
+            <InfoWithIcon
+              icon={FaMediumM}
+              text={socialMedia.medium.replace("https://", "")}
+              fontSize="1rem"
+            />
+          </Box>
         )}
       </CardContent>
     </Card>

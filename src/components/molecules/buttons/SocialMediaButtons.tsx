@@ -27,7 +27,7 @@
 import { Stack } from "@mui/material";
 import {
   FaGithub,
-  FaLinkedin,
+  FaLinkedinIn,
   FaTwitter,
   FaFacebook,
   FaInstagram,
@@ -46,7 +46,7 @@ import type { SocialMedia } from "@/types";
  */
 const SOCIAL_MEDIA_ICONS = {
   github: FaGithub,
-  linkedin: FaLinkedin,
+  linkedin: FaLinkedinIn,
   mail: FaEnvelope,
   twitter: FaTwitter,
   facebook: FaFacebook,
