@@ -77,6 +77,11 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
               borderRadius: "16px",
               position: "relative" as const,
               height: "100%",
+              transition: "all 0.3s ease-in-out",
+              '&:hover': {
+                transform: "translateY(-4px)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+              },
               '& .MuiCardHeader-root': {
                 padding: '24px',
                 backdropFilter: 'blur(4px)',
@@ -86,6 +91,20 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                 fontWeight: 'bold',
               },
               '& .MuiCardContent-root': {
+                padding: '24px',
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+                '& .section': {
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                },
+                '&.social-content, &.contact-info-content': {
+                  gap: 3,
+                },
+              },
+              '& .MuiCardActions-root': {
                 padding: '24px',
               },
             },

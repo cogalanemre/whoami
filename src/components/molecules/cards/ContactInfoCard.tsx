@@ -22,12 +22,15 @@ import { memo } from "react";
  */
 function ContactCard() {
   return (
-    <Card>
+    <Card
+      elevation={0}
+      variant="outlined"
+    >
       <CardHeader
         title="İletişim Bilgileri"
       />
-      <CardContent>
-        <Box>
+      <CardContent className="contact-info-content">
+        <Box className="section">
           <InfoWithIcon
             icon={Email}
             text="emre.cogalan@gmail.com"

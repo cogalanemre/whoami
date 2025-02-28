@@ -26,7 +26,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
-import { SocialMediaCardStyles } from "@/styles/components/cards/SocialMediaCard.styles";
 import { getTranslation } from "@/i18n/utils";
 
 /**
@@ -39,13 +38,13 @@ function SocialMediaCard() {
   const socialMedia = resumeData.hero.socialMedia;
 
   return (
-    <Card sx={SocialMediaCardStyles.card}>
+    <Card>
       <CardHeader
         title={getTranslation("sections.social", locale)}
       />
 
       {/* Sosyal Medya Bağlantıları */}
-      <CardContent sx={SocialMediaCardStyles.content}>
+      <CardContent className="social-content">
         {/* GitHub */}
         {socialMedia.github && (
           <InfoWithIcon
