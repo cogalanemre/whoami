@@ -7,6 +7,7 @@ export const SocialMediaCardStyles = {
   card: {
     ...CommonCardStyles.base,
     "&:hover": CommonCardStyles.hover,
+    bgcolor: "background.paper",
   },
   header: {
     ...CommonCardStyles.header,

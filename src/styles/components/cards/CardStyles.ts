@@ -10,7 +10,6 @@
 
 export const CommonCardStyles = {
   base: {
-    border: "1px solid",
     borderColor: "primary.main",
     borderRadius: "16px",
     position: "relative" as const,

@@ -7,12 +7,19 @@ export const ContactCardStyles = {
   card: {
     ...CommonCardStyles.base,
     "&:hover": CommonCardStyles.hover,
+    bgcolor: "background.paper",
+    border: "1px solid",
+    borderColor: "text.secondary",
   },
   header: {
     ...CommonCardStyles.header,
   },
   title: {
     ...CommonCardStyles.title,
+  },
+  content: {
+    padding: 4,
+    paddingTop: 4,
   },
   form: {
     display: "flex",
@@ -31,19 +38,20 @@ export const ContactCardStyles = {
       },
       "&::after": {
         borderBottom: "2px solid",
-        borderColor: "primary.main",
+        borderColor: "text.primary",
       },
       "&:hover:not(.Mui-disabled)::before": {
-        borderColor: "primary.main",
+        borderColor: "text.primary",
       },
     },
     "& .MuiInputLabel-root": {
       color: "text.secondary",
       "&.Mui-focused": {
-        color: "primary.main",
+        color: "text.primary",
       },
     },
     "& .MuiInput-input": {
+      color: "text.primary",
       padding: "8px 0",
       fontSize: "1rem",
       "&::placeholder": {
@@ -53,23 +61,6 @@ export const ContactCardStyles = {
     },
     "& .MuiInputBase-multiline": {
       padding: "8px 0",
-    },
-  },
-  submit: {
-    mt: 3,
-    alignSelf: "stretch",
-    borderRadius: "12px",
-    py: 2,
-    textTransform: "none",
-    fontSize: "1rem",
-    fontWeight: 500,
-    letterSpacing: "0.5px",
-    boxShadow: "none",
-    background: theme => `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-    transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      boxShadow: "0 4px 15px rgba(36, 151, 255, 0.2)",
-      transform: "translateY(-2px)",
     },
   },
 } as const; 

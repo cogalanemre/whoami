@@ -2,14 +2,9 @@
  * Mesaj Kartı Bileşeni
  * 
  * İletişim formunu içeren kart bileşeni.
- * Özellikler:
- * - İsim, e-posta, telefon ve mesaj alanları
  * - Form validasyonu
  * - Responsive tasarım
- * - Hover animasyonları
- * - Tema renk entegrasyonu
- * 
- * @component
+ * - Tema entegrasyonu
  */
 
 import {
@@ -17,12 +12,13 @@ import {
   CardContent,
   Typography,
   Box,
-  Button,
 } from "@mui/material";
+import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
 import FormField from "@/components/molecules/forms/FormField";
 import { memo } from "react";
 import { ContactCardStyles } from "@/styles/components/cards/ContactCard.styles";
+import CustomButton from "@/components/atoms/buttons/CustomButton";
 
 interface FormData {
   name: string;
@@ -35,6 +31,7 @@ interface MessageCardProps {
   formData: FormData;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
+  isSubmitting?: boolean;
 }
 
 /**
@@ -42,7 +39,7 @@ interface MessageCardProps {
  * 
  * @returns {JSX.Element} Mesaj kartı
  */
-function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
+function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: MessageCardProps) {
   const { t } = useTranslation();
 
   return (
@@ -60,7 +57,7 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
       </Box>
 
       {/* Form */}
-      <CardContent sx={{ p: 4, pt: 4 }}>
+      <CardContent sx={ContactCardStyles.content}>
         <Box sx={ContactCardStyles.form}>
           <FormField
             label={t("contact.form.name")}
@@ -104,14 +101,14 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
             sx={ContactCardStyles.field}
             placeholder={t("contact.form.message")}
           />
-          <Button
+          <CustomButton
             type="submit"
-            variant="contained"
-            size="large"
-            sx={ContactCardStyles.submit}
+            loading={isSubmitting}
+            fullWidth
+            endIcon={<Send fontSize="small" />}
           >
             {t("contact.form.send")}
-          </Button>
+          </CustomButton>
         </Box>
       </CardContent>
     </Card>

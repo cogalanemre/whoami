@@ -56,8 +56,8 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
         900: '#212121',
       },
       background: {
-        default: isDarkMode ? '#121212' : '#ffffff',
-        paper: isDarkMode ? '#1e1e1e' : '#ffffff',
+        default: isDarkMode ? '#0B1018' : '#ffffff',
+        paper: isDarkMode ? '#121418' : '#ffffff',
       },
       text: {
         primary: isDarkMode ? '#ffffff' : 'rgba(0, 0, 0, 0.87)',

@@ -1,80 +1,53 @@
 /**
- * İletişim Kartı Bileşeni
+ * İletişim Bilgileri Kartı Bileşeni
  * 
- * Kullanıcının iletişim bilgilerini (e-posta, telefon, konum) gösteren kart.
- * - Responsive tasarım
+ * Kullanıcının iletişim bilgilerini (e-posta, telefon, konum) gösteren kart bileşeni.
+ * 
+ * Özellikler:
+ * - Duyarlı tasarım
  * - Hover animasyonları
- * - Tema entegrasyonu
+ * - Tema renk entegrasyonu
  * - Erişilebilirlik özellikleri
  */
 
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-} from "@mui/material";
-import { 
-  Email, 
-  Phone, 
-  LocationOn,
-} from "@mui/icons-material";
-import { useTranslation } from "@/hooks/useTranslation";
+import { Box, Card, Typography } from "@mui/material";
+import { Email, Phone, LocationOn } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
-import resumeData from "@/config/resume.json";
-import { memo } from "react";
 import { ContactInfoCardStyles } from "@/styles/components/cards/ContactInfoCard.styles";
-import { getTranslation } from "@/i18n/utils";
+import { memo } from "react";
 
 /**
- * İletişim Kartı Bileşeni
+ * İletişim Bilgileri Kartı Bileşeni
  * 
- * @returns {JSX.Element} İletişim kartı
+ * @returns {JSX.Element} İletişim bilgileri kartı
  */
 function ContactCard() {
-  const { locale } = useTranslation();
-
-  // İletişim bilgilerini al
-  const contact = resumeData.contact;
-
   return (
     <Card sx={ContactInfoCardStyles.card}>
-      {/* Başlık Bölümü */}
       <Box sx={ContactInfoCardStyles.header}>
-        {/* Başlık */}
         <Typography variant="h6" sx={ContactInfoCardStyles.title}>
-          {getTranslation("contact.info", locale)}
+          İletişim Bilgileri
         </Typography>
       </Box>
-
-      {/* İletişim Bilgileri */}
-      <CardContent sx={{ p: 3 }}>
-        <Box sx={ContactInfoCardStyles.content}>
-          {/* İletişim Bilgileri */}
-          <Box sx={ContactInfoCardStyles.section}>
-            {/* E-posta */}
-            <InfoWithIcon
-              icon={Email}
-              text={contact.email}
-              fontSize="1rem"
-            />
-
-            {/* Telefon */}
-            <InfoWithIcon
-              icon={Phone}
-              text={contact.phone}
-              fontSize="1rem"
-            />
-
-            {/* Konum */}
-            <InfoWithIcon
-              icon={LocationOn}
-              text={locale === "tr" ? contact.location.tr : contact.location.en}
-              fontSize="1rem"
-            />
-          </Box>
+      <Box sx={ContactInfoCardStyles.content}>
+        <Box sx={ContactInfoCardStyles.section}>
+          <InfoWithIcon
+            icon={Email}
+            text="emre.cogalan@gmail.com"
+            fontSize="1rem"
+          />
+          <InfoWithIcon
+            icon={Phone}
+            text="+90 (532) 162-7626"
+            fontSize="1rem"
+          />
+          <InfoWithIcon
+            icon={LocationOn}
+            text="İstanbul, Türkiye"
+            fontSize="1rem"
+          />
         </Box>
-      </CardContent>
+      </Box>
     </Card>
   );
 }
