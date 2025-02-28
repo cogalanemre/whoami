@@ -15,41 +15,34 @@ import { forwardRef } from "react";
 
 // Styled button bileşeni
 const StyledButton = styled(Button)(({ theme }) => ({
-  borderRadius: "12px",
-  padding: "10px 24px",
+  borderRadius: "8px",
+  padding: "8px 20px",
   textTransform: "none",
-  fontSize: "1rem",
+  fontSize: "0.95rem",
   fontWeight: 500,
-  letterSpacing: "0.5px",
-  transition: "all 0.3s ease-in-out",
+  letterSpacing: "0.3px",
+  transition: "all 0.2s ease-in-out",
   boxShadow: "none",
   background: "transparent",
-  border: `2px solid ${theme.palette.primary.main}`,
+  border: `1px solid ${theme.palette.divider}`,
   color: theme.palette.text.primary,
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "6px",
 
   "&:hover": {
-    background: theme.palette.primary.main,
-    color: theme.palette.mode === "dark" ? "#000" : "#fff",
-    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-    transform: "translateY(-2px)",
-    borderColor: theme.palette.primary.main,
+    background: theme.palette.action.hover,
+    borderColor: theme.palette.text.secondary,
   },
 
   "&:active": {
-    transform: "translateY(0)",
+    background: theme.palette.action.selected,
   },
 
   "&.Mui-disabled": {
     background: "transparent",
-    borderColor: theme.palette.mode === "dark" 
-      ? "rgba(255, 255, 255, 0.12)" 
-      : "rgba(0, 0, 0, 0.12)",
-    color: theme.palette.mode === "dark" 
-      ? "rgba(255, 255, 255, 0.3)" 
-      : "rgba(0, 0, 0, 0.26)",
+    borderColor: theme.palette.action.disabledBackground,
+    color: theme.palette.text.disabled,
   },
 
   // Loading durumunda cursor değişimi
