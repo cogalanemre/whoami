@@ -48,15 +48,35 @@ interface InfoWithIconProps {
 export default function InfoWithIcon({
   icon: Icon,
   text,
-  fontSize = "1rem",
+  fontSize = "0.95rem",
 }: InfoWithIconProps) {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+    <Box 
+      sx={{ 
+        display: "flex", 
+        alignItems: "center", 
+        gap: 1.5,
+        py: 0.75,
+        transition: "all 0.2s ease-in-out",
+        "&:hover": {
+          "& .MuiSvgIcon-root, & svg": {
+            color: "text.primary",
+          },
+          "& .MuiTypography-root": {
+            color: "text.primary",
+          }
+        }
+      }}
+    >
       {/* İkon Bileşeni */}
       <Icon
         sx={{
-          color: "primary.main",
-          fontSize: "inherit",
+          color: "text.secondary",
+          fontSize: "1.2em",
+          transition: "color 0.2s ease-in-out",
+        }}
+        style={{
+          color: 'inherit'
         }}
       />
 
@@ -66,6 +86,8 @@ export default function InfoWithIcon({
         sx={{
           color: "text.secondary",
           fontSize,
+          letterSpacing: "0.3px",
+          transition: "color 0.2s ease-in-out",
         }}
       >
         {text}

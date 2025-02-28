@@ -50,7 +50,7 @@ function SocialMediaCard() {
           <InfoWithIcon
             icon={GitHub}
             text={socialMedia.github.replace("https://", "")}
-            fontSize="1rem"
+            fontSize="0.95rem"
           />
         )}
 
@@ -59,7 +59,7 @@ function SocialMediaCard() {
           <InfoWithIcon
             icon={LinkedIn}
             text={socialMedia.linkedin.replace("https://", "")}
-            fontSize="1rem"
+            fontSize="0.95rem"
           />
         )}
 
@@ -68,7 +68,7 @@ function SocialMediaCard() {
           <InfoWithIcon
             icon={FaMedium}
             text={socialMedia.medium.replace("https://", "")}
-            fontSize="1rem"
+            fontSize="0.95rem"
           />
         )}
       </CardContent>
