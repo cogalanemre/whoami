@@ -15,8 +15,7 @@
 import {
   Card,
   CardContent,
-  Typography,
-  Box,
+  CardHeader,
 } from "@mui/material";
 import { 
   GitHub, 
@@ -41,44 +40,38 @@ function SocialMediaCard() {
 
   return (
     <Card sx={SocialMediaCardStyles.card}>
-      {/* Başlık Bölümü */}
-      <Box sx={SocialMediaCardStyles.header}>
-        {/* Başlık */}
-        <Typography variant="h6" sx={SocialMediaCardStyles.title}>
-          {getTranslation("sections.social", locale)}
-        </Typography>
-      </Box>
+      <CardHeader
+        title={getTranslation("sections.social", locale)}
+      />
 
       {/* Sosyal Medya Bağlantıları */}
-      <CardContent sx={{ p: 3 }}>
-        <Box sx={SocialMediaCardStyles.content}>
-          {/* GitHub */}
-          {socialMedia.github && (
-            <InfoWithIcon
-              icon={GitHub}
-              text={socialMedia.github.replace("https://", "")}
-              fontSize="1rem"
-            />
-          )}
+      <CardContent sx={SocialMediaCardStyles.content}>
+        {/* GitHub */}
+        {socialMedia.github && (
+          <InfoWithIcon
+            icon={GitHub}
+            text={socialMedia.github.replace("https://", "")}
+            fontSize="1rem"
+          />
+        )}
 
-          {/* LinkedIn */}
-          {socialMedia.linkedin && (
-            <InfoWithIcon
-              icon={LinkedIn}
-              text={socialMedia.linkedin.replace("https://", "")}
-              fontSize="1rem"
-            />
-          )}
+        {/* LinkedIn */}
+        {socialMedia.linkedin && (
+          <InfoWithIcon
+            icon={LinkedIn}
+            text={socialMedia.linkedin.replace("https://", "")}
+            fontSize="1rem"
+          />
+        )}
 
-          {/* Medium */}
-          {socialMedia.medium && (
-            <InfoWithIcon
-              icon={FaMedium}
-              text={socialMedia.medium.replace("https://", "")}
-              fontSize="1rem"
-            />
-          )}
-        </Box>
+        {/* Medium */}
+        {socialMedia.medium && (
+          <InfoWithIcon
+            icon={FaMedium}
+            text={socialMedia.medium.replace("https://", "")}
+            fontSize="1rem"
+          />
+        )}
       </CardContent>
     </Card>
   );

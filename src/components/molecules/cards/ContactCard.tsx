@@ -10,7 +10,7 @@
  * - Erişilebilirlik özellikleri
  */
 
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { ContactInfoCardStyles } from "@/styles/components/cards/ContactInfoCard.styles";
@@ -24,12 +24,10 @@ import { memo } from "react";
 function ContactCard() {
   return (
     <Card sx={ContactInfoCardStyles.card}>
-      <Box sx={ContactInfoCardStyles.header}>
-        <Typography variant="h6" sx={ContactInfoCardStyles.title}>
-          İletişim Bilgileri
-        </Typography>
-      </Box>
-      <Box sx={ContactInfoCardStyles.content}>
+      <CardHeader
+        title="İletişim Bilgileri"
+      />
+      <CardContent sx={ContactInfoCardStyles.content}>
         <Box sx={ContactInfoCardStyles.section}>
           <InfoWithIcon
             icon={Email}
@@ -47,7 +45,7 @@ function ContactCard() {
             fontSize="1rem"
           />
         </Box>
-      </Box>
+      </CardContent>
     </Card>
   );
 }

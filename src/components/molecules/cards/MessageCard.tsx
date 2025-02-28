@@ -10,8 +10,7 @@
 import {
   Card,
   CardContent,
-  Typography,
-  Box,
+  CardHeader,
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -48,19 +47,15 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       elevation={0}
       variant="outlined"
     >
-      {/* Başlık Bölümü */}
-      <Box sx={MessageCardStyles.header}>
-        <Typography variant="h5" sx={MessageCardStyles.title}>
-          {t("contact.sendMessage")}
-        </Typography>
-      </Box>
+      <CardHeader
+        title={t("contact.sendMessage")}
+      />
 
       {/* Form */}
-      <CardContent sx={MessageCardStyles.content}>
-        <Box 
-          component="form"
+      <CardContent>
+        <form 
           onSubmit={onSubmit}
-          sx={MessageCardStyles.form}
+          style={MessageCardStyles.form}
         >
           <FormField
             label={t("contact.form.name")}
@@ -69,7 +64,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             onChange={onChange}
             required
             variant="standard"
-            sx={MessageCardStyles.field}
             placeholder={t("contact.form.name")}
           />
           <FormField
@@ -80,7 +74,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             onChange={onChange}
             required
             variant="standard"
-            sx={MessageCardStyles.field}
             placeholder={t("contact.form.email")}
           />
           <FormField
@@ -89,7 +82,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             value={formData.phone}
             onChange={onChange}
             variant="standard"
-            sx={MessageCardStyles.field}
             placeholder={t("contact.form.phone")}
           />
           <FormField
@@ -101,7 +93,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             multiline
             rows={4}
             variant="standard"
-            sx={MessageCardStyles.field}
             placeholder={t("contact.form.message")}
           />
           <CustomButton
@@ -112,7 +103,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
           >
             {t("contact.form.send")}
           </CustomButton>
-        </Box>
+        </form>
       </CardContent>
     </Card>
   );
