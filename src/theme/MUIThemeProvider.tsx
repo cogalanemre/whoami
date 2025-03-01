@@ -374,6 +374,8 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
               '& .MuiCardHeader-root': {
                 padding: '24px',
                 backdropFilter: 'blur(4px)',
+                borderBottom: '0.5px solid',
+                borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
                 '& .MuiCardHeader-title': {
                   color: 'primary.main',
                   fontWeight: 600,
