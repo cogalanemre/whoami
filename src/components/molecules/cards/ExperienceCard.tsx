@@ -156,17 +156,14 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             )
           }
           title={
-            <Typography variant="h6" sx={EXPERIENCE_CARD_STYLES.position}>
+            <Typography variant="h3">
               {experienceTranslations.position}
             </Typography>
           }
           subheader={
             <Box sx={EXPERIENCE_CARD_STYLES.metaContainer}>
               <Typography
-                variant="subtitle1"
-                color="primary.main"
-                fontWeight="bold"
-                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                variant="h4"
               >
                 {experience.company}
               </Typography>

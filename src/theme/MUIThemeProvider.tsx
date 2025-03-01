@@ -591,6 +591,25 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           },
         },
       },
+      MuiTypography: {
+        styleOverrides: {
+          h3: {
+            fontSize: "1.25rem",
+            fontWeight: 600,
+            marginBottom: "0.5rem",
+            color: "inherit",
+            lineHeight: 1.2,
+          },
+          h4: {
+            fontSize: "1rem",
+            fontWeight: 600,
+            color: "primary.main",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.25rem",
+          },
+        },
+      },
     },
   });
 

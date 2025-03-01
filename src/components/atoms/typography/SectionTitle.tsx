@@ -55,7 +55,7 @@ export default function SectionTitle({
     <Box sx={{ mb: 6 }}>
       {/* Ana Başlık Konteyner */}
       <Typography
-        variant="h3"
+        variant="h2"
         gutterBottom
         sx={{
           display: "flex",
