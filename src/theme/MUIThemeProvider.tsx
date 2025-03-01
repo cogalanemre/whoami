@@ -126,12 +126,34 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                   flexDirection: "column",
                   gap: 2,
                 },
-                '&.social-content, &.contact-info-content': {
+                '&.social-content': {
                   gap: 3,
+                  '& .social-link': {
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    display: 'block',
+                    '&:hover': {
+                      '& .MuiTypography-root': {
+                        color: 'text.primary',
+                      },
+                      '& svg': {
+                        color: 'primary.main',
+                      }
+                    }
+                  }
                 },
+                '&.message-form': {
+                  gap: 3,
+                  '& .MuiFormControl-root': {
+                    marginBottom: 2,
+                  }
+                }
               },
               '& .MuiCardActions-root': {
                 padding: '24px',
+                '&.message-actions': {
+                  paddingTop: 0,
+                }
               },
             },
           },

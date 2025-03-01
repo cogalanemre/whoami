@@ -26,6 +26,25 @@ interface FormData {
   message: string;
 }
 
+type ContactFormKey = 
+  | "contact.form.name"
+  | "contact.form.email"
+  | "contact.form.phone"
+  | "contact.form.phoneOptional"
+  | "contact.form.message"
+  | "contact.form.send"
+  | "contact.sendMessage";
+
+interface FormField {
+  name: keyof FormData;
+  label: ContactFormKey;
+  type?: string;
+  required?: boolean;
+  multiline?: boolean;
+  rows?: number;
+  isOptional?: boolean;
+}
+
 interface MessageCardProps {
   formData: FormData;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,10 +60,35 @@ interface MessageCardProps {
 function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: MessageCardProps) {
   const { t } = useTranslation();
 
+  // Form alanları konfigürasyonu
+  const formFields: FormField[] = [
+    {
+      name: "name",
+      label: "contact.form.name",
+      required: true,
+    },
+    {
+      name: "email",
+      label: "contact.form.email",
+      type: "email",
+      required: true,
+    },
+    {
+      name: "phone",
+      label: "contact.form.phone",
+      isOptional: true,
+    },
+    {
+      name: "message",
+      label: "contact.form.message",
+      required: true,
+      multiline: true,
+      rows: 4,
+    },
+  ];
+
   return (
     <Card
-      elevation={0}
-      variant="outlined"
       component="form"
       onSubmit={onSubmit}
     >
@@ -53,49 +97,29 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       />
 
       {/* Form */}
-      <CardContent>
-        <FormField
-          label={t("contact.form.name")}
-          name="name"
-          value={formData.name}
-          onChange={onChange}
-          required
-          variant="standard"
-          placeholder={t("contact.form.name")}
-        />
-        <FormField
-          label={t("contact.form.email")}
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={onChange}
-          required
-          variant="standard"
-          placeholder={t("contact.form.email")}
-        />
-        <FormField
-          label={`${t("contact.form.phone")} (${t("contact.form.phoneOptional")})`}
-          name="phone"
-          value={formData.phone}
-          onChange={onChange}
-          variant="standard"
-          placeholder={t("contact.form.phone")}
-        />
-        <FormField
-          label={t("contact.form.message")}
-          name="message"
-          value={formData.message}
-          onChange={onChange}
-          required
-          multiline
-          rows={4}
-          variant="standard"
-          placeholder={t("contact.form.message")}
-        />
+      <CardContent className="message-form">
+        {formFields.map((field) => (
+          <FormField
+            key={field.name}
+            name={field.name}
+            label={field.isOptional 
+              ? `${t(field.label)} (${t("contact.form.phoneOptional")})`
+              : t(field.label)
+            }
+            value={formData[field.name]}
+            onChange={onChange}
+            required={field.required}
+            type={field.type}
+            multiline={field.multiline}
+            rows={field.rows}
+            variant="standard"
+            placeholder={t(field.label)}
+          />
+        ))}
       </CardContent>
 
       {/* Submit Button */}
-      <CardActions>
+      <CardActions className="message-actions">
         <CustomButton
           type="submit"
           loading={isSubmitting}
