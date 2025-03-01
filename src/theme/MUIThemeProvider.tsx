@@ -4,6 +4,83 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
 import config from "@/config/config.json";
+import { SxProps, Theme } from '@mui/material/styles';
+
+/**
+ * Tasarım Sistem Sabitleri
+ * Tüm bileşenlerde kullanılan temel değerler
+ */
+const BORDER_COLORS = {
+  default: 'rgba(128, 128, 128, 0.2)',
+  hover: 'rgba(128, 128, 128, 0.4)',
+  disabled: 'rgba(128, 128, 128, 0.1)',
+} as const;
+
+/**
+ * Tasarım Sistem Sabitleri
+ * Tüm bileşenlerde kullanılan temel değerler
+ */
+const DESIGN_TOKENS = {
+  TRANSITIONS: {
+    DEFAULT: "all 0.3s ease-in-out",
+    FAST: "all 0.2s ease-in-out",
+  },
+  EFFECTS: {
+    HOVER: {
+      LIFT: {
+        transform: "translateY(-4px)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      },
+      SCALE: {
+        transform: "scale(1.05)",
+      },
+    },
+  },
+  SPACING: {
+    CARD: {
+      PADDING: '24px',
+      GAP: 4,
+    },
+    CHIP: {
+      GAP: 1,
+    },
+  },
+  TYPOGRAPHY: {
+    BODY: {
+      fontSize: "0.95rem",
+      letterSpacing: "0.3px",
+    },
+    CHIP: {
+      fontSize: "0.875rem",
+      fontWeight: 500,
+    },
+  },
+  BORDER: {
+    RADIUS: {
+      DEFAULT: "16px",
+      INPUT: "8px",
+      CHIP: "16px",
+    },
+    COLORS: BORDER_COLORS,
+  },
+  COMPONENTS: {
+    CHIP: {
+      selected: {
+        bgcolor: "primary.main",
+        color: "background.paper",
+        borderColor: "primary.main",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+        transform: "translateY(-4px)",
+      },
+      default: {
+        bgcolor: "background.paper",
+        color: "text.primary",
+        border: "0.5px solid",
+        borderColor: BORDER_COLORS.default,
+      },
+    },
+  },
+} as const;
 
 // Sabit tema değerleri
 const COMMON_COLORS = {
@@ -47,31 +124,18 @@ const COMMON_COLORS = {
 };
 
 /**
- * Ortak kenar çizgisi renkleri
- * Tüm input ve kartlarda kullanılan tutarlı renkler
- */
-const BORDER_COLORS = {
-  default: 'rgba(128, 128, 128, 0.2)',
-  hover: 'rgba(128, 128, 128, 0.4)',
-  disabled: 'rgba(128, 128, 128, 0.1)',
-};
-
-/**
  * Kart stilleri
  * Tüm kartlarda kullanılan temel stiller
  */
 const CARD_STYLES = {
   border: '0.5px solid',
-  borderColor: BORDER_COLORS.default,
+  borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
   bgcolor: 'background.paper',
-  borderRadius: "16px",
+  borderRadius: DESIGN_TOKENS.BORDER.RADIUS.DEFAULT,
   position: "relative" as const,
   height: "100%",
-  transition: "all 0.3s ease-in-out",
-  '&:hover': {
-    transform: "translateY(-4px)",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-  },
+  transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
+  '&:hover': DESIGN_TOKENS.EFFECTS.HOVER.LIFT,
 };
 
 /**
@@ -79,10 +143,9 @@ const CARD_STYLES = {
  * MUI Input bileşenleri için ortak stiller
  */
 const BASE_INPUT_STYLES = {
-  transition: 'all 0.2s ease-in-out',
-  borderRadius: "8px",
-  fontSize: "0.95rem",
-  letterSpacing: "0.3px",
+  transition: DESIGN_TOKENS.TRANSITIONS.FAST,
+  borderRadius: DESIGN_TOKENS.BORDER.RADIUS.INPUT,
+  ...DESIGN_TOKENS.TYPOGRAPHY.BODY,
 };
 
 /**
@@ -92,7 +155,7 @@ const BASE_INPUT_STYLES = {
 const UNDERLINE_STYLES = {
   '&::before': {
     borderBottom: '1px solid',
-    borderColor: BORDER_COLORS.default,
+    borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
   },
   '&::after': {
     borderBottom: '1px solid',
@@ -100,7 +163,7 @@ const UNDERLINE_STYLES = {
   },
   '&:hover:not(.Mui-disabled)::before': {
     borderBottom: '1px solid',
-    borderColor: BORDER_COLORS.hover,
+    borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
   },
   '&.Mui-focused::before': {
     borderBottom: '1px solid !important',
@@ -116,7 +179,7 @@ const FORM_STYLES = {
   display: "flex",
   flexDirection: "column",
   '& > .MuiTextField-root:not(:last-child)': {
-    marginBottom: '24px',
+    marginBottom: DESIGN_TOKENS.SPACING.CARD.PADDING,
   }
 };
 
@@ -125,7 +188,7 @@ const FORM_STYLES = {
  * Tüm kart aksiyonlarında kullanılan ortak stiller
  */
 const CARD_ACTIONS_STYLES = {
-  padding: '24px',
+  padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
   paddingTop: 0,
   justifyContent: 'flex-end',
   '& .MuiButton-root': {
@@ -237,16 +300,22 @@ export const EXPERIENCE_CARD_STYLES = {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 1,
+    gap: DESIGN_TOKENS.SPACING.CHIP.GAP,
   },
   skillChip: (isSelected: boolean) => ({
-    bgcolor: isSelected ? "primary.main" : "background.default",
-    borderColor: "primary.main",
-    color: isSelected ? "background.paper" : "primary.main",
+    ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
+    borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
+    transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
     cursor: "pointer",
+    height: 32,
+    ...(isSelected ? DESIGN_TOKENS.COMPONENTS.CHIP.selected : DESIGN_TOKENS.COMPONENTS.CHIP.default),
     "&:hover": {
-      bgcolor: isSelected ? "primary.main" : "background.paper",
-      borderColor: "primary.main",
+      ...(isSelected ? DESIGN_TOKENS.COMPONENTS.CHIP.selected : {
+        bgcolor: "background.paper",
+        borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
+        transform: "translateY(-4px)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+      }),
     },
   }),
 } as const;
@@ -461,10 +530,10 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
               "&.MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderWidth: "1px",
-                  borderColor: BORDER_COLORS.default,
+                  borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: BORDER_COLORS.hover,
+                  borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                   borderWidth: "1px",
@@ -490,10 +559,10 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
             // Disabled durumu
             "& .Mui-disabled": {
               "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: BORDER_COLORS.disabled,
+                borderColor: DESIGN_TOKENS.BORDER.COLORS.disabled,
               },
               "&:before": {
-                borderColor: `${BORDER_COLORS.disabled} !important`,
+                borderColor: `${DESIGN_TOKENS.BORDER.COLORS.disabled} !important`,
               },
             },
           },
@@ -533,6 +602,49 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           },
           multiline: {
             padding: '8px 0',
+          },
+        },
+      },
+      // Chip bileşeni özelleştirmeleri
+      MuiChip: {
+        defaultProps: {
+          variant: "outlined",
+          size: "small",
+        },
+        styleOverrides: {
+          root: {
+            ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
+            borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
+            transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
+            height: 32,
+            border: "0.5px solid",
+            borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
+            "&:hover": {
+              borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
+              transform: "translateY(-4px)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+            },
+            "&.MuiChip-colorPrimary": {
+              bgcolor: "primary.main",
+              color: "background.paper",
+              borderColor: "primary.main",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+              transform: "translateY(-4px)",
+              "&:hover": {
+                bgcolor: "primary.main",
+                borderColor: "primary.main",
+              },
+            },
+          },
+          label: {
+            color: "text.primary",
+            padding: "0 12px",
+          },
+          clickable: {
+            cursor: "pointer",
+            "&:hover": {
+              bgcolor: "background.paper",
+            },
           },
         },
       },

@@ -211,10 +211,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 <Chip
                   key={skill}
                   label={skill}
-                  variant="outlined"
-                  size="small"
+                  color={skill === selectedSkill ? "primary" : undefined}
                   onClick={() => setSelectedSkill(skill === selectedSkill ? null : skill)}
-                  sx={EXPERIENCE_CARD_STYLES.skillChip(skill === selectedSkill)}
                 />
               ))}
             </Stack>
