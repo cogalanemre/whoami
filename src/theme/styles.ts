@@ -108,4 +108,52 @@ export const EXPERIENCE_CARD_STYLES = {
       borderColor: "primary.main",
     },
   }),
+} as const;
+
+/**
+ * Eğitim Kartı Stilleri
+ * EducationCard bileşeni için ortak stiller
+ */
+export const EDUCATION_CARD_STYLES = {
+  card: {
+    background: "background.paper",
+    position: "relative",
+    transition: "all 0.3s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      "& .MuiAvatar-root": {
+        transform: "scale(1.05)",
+      },
+    },
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    bgcolor: "background.paper",
+    border: "2px solid",
+    borderColor: "primary.main",
+    display: { xs: "none", md: "block" },
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
+    },
+  },
+  schoolName: {
+    color: "primary.main",
+    mb: 1,
+    fontWeight: "bold",
+    textAlign: { xs: "center", md: "left" },
+  },
+  department: {
+    color: "text.secondary",
+    mb: 2,
+    textAlign: { xs: "center", md: "left" },
+  },
+  metaContainer: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    gap: { xs: 1, md: 3 },
+    alignItems: { xs: "flex-start", md: "center" },
+  },
 } as const; 
