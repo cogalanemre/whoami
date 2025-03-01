@@ -55,6 +55,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
 interface CustomButtonProps extends Omit<ButtonProps, "css"> {
   loading?: boolean;
   endIcon?: React.ReactNode;
+  target?: string;
+  rel?: string;
 }
 
 /**

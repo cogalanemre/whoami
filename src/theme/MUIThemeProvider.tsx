@@ -120,6 +120,30 @@ const FORM_STYLES = {
   }
 };
 
+/**
+ * Kart aksiyon stilleri
+ * Tüm kart aksiyonlarında kullanılan ortak stiller
+ */
+const CARD_ACTIONS_STYLES = {
+  padding: '24px',
+  paddingTop: 0,
+  justifyContent: 'flex-end',
+  '& .MuiButton-root': {
+    minWidth: 'auto',
+  }
+};
+
+/**
+ * Kart medya stilleri
+ * Tüm kart medya bileşenlerinde kullanılan ortak stiller
+ */
+const CARD_MEDIA_STYLES = {
+  width: "100%",
+  height: "auto",
+  aspectRatio: "16/9",
+  objectFit: "cover",
+};
+
 interface MUIThemeProviderProps {
   children: ReactNode;
 }
@@ -157,6 +181,26 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
               '& .MuiCardHeader-root': {
                 padding: '24px',
                 backdropFilter: 'blur(4px)',
+                '& .MuiCardHeader-title': {
+                  color: 'primary.main',
+                  fontWeight: 600,
+                  fontSize: '1.1rem',
+                  lineHeight: 1.3,
+                  transition: 'color 0.2s ease-in-out',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  '&:hover': {
+                    color: 'text.primary',
+                  }
+                },
+                '& .MuiCardHeader-subheader': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 2,
+                  marginTop: 1,
+                },
               },
               '& .MuiCardHeader-title': {
                 color: 'text.primary',
@@ -188,12 +232,50 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                     }
                   }
                 },
-                '&.message-form': FORM_STYLES
+                '&.message-form': FORM_STYLES,
+                '&.blog-content': {
+                  padding: '24px',
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: 1,
+                  gap: 2,
+                  '& .blog-title': {
+                    color: 'primary.main',
+                    fontWeight: 600,
+                    fontSize: '1.1rem',
+                    lineHeight: 1.3,
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease-in-out',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    '&:hover': {
+                      color: 'text.primary',
+                    }
+                  },
+                  '& .blog-meta': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  },
+                  '& .blog-description': {
+                    fontSize: '0.9rem',
+                    color: 'text.primary',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 5,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }
+                },
+                '& .MuiCardMedia-root': {
+                  ...CARD_MEDIA_STYLES,
+                },
               },
               '& .MuiCardActions-root': {
-                padding: '24px',
-                '&.message-actions': {
-                  paddingTop: 0,
+                ...CARD_ACTIONS_STYLES,
+                '&.message-actions, &.blog-actions': {
+                  ...CARD_ACTIONS_STYLES
                 }
               },
             },
