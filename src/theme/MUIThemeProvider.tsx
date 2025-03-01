@@ -25,17 +25,6 @@ const DESIGN_TOKENS = {
     DEFAULT: "all 0.3s ease-in-out",
     FAST: "all 0.2s ease-in-out",
   },
-  EFFECTS: {
-    HOVER: {
-      LIFT: {
-        transform: "translateY(-4px)",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-      },
-      SCALE: {
-        transform: "scale(1.05)",
-      },
-    },
-  },
   SPACING: {
     CARD: {
       PADDING: '24px',
@@ -135,7 +124,10 @@ const CARD_STYLES = {
   position: "relative" as const,
   height: "100%",
   transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
-  '&:hover': DESIGN_TOKENS.EFFECTS.HOVER.LIFT,
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+  },
 };
 
 /**
@@ -248,18 +240,10 @@ export const EXPERIENCE_CARD_STYLES = {
     background: "background.paper",
     position: "relative",
     transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-      "& .MuiAvatar-root": {
-        transform: "scale(1.05)",
-      },
-    },
   },
   cardHighlighted: {
     border: "1px solid",
     borderColor: "primary.main",
-    transform: "translateY(-4px)",
     boxShadow: (theme) => `0 4px 20px ${theme.palette.primary.main}40`,
   },
   avatar: {
@@ -309,14 +293,6 @@ export const EXPERIENCE_CARD_STYLES = {
     cursor: "pointer",
     height: 32,
     ...(isSelected ? DESIGN_TOKENS.COMPONENTS.CHIP.selected : DESIGN_TOKENS.COMPONENTS.CHIP.default),
-    "&:hover": {
-      ...(isSelected ? DESIGN_TOKENS.COMPONENTS.CHIP.selected : {
-        bgcolor: "background.paper",
-        borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
-        transform: "translateY(-4px)",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-      }),
-    },
   }),
 } as const;
 
@@ -329,13 +305,6 @@ export const EDUCATION_CARD_STYLES = {
     background: "background.paper",
     position: "relative",
     transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-      "& .MuiAvatar-root": {
-        transform: "scale(1.05)",
-      },
-    },
   },
   avatar: {
     width: 80,
@@ -415,9 +384,6 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
-                  '&:hover': {
-                    color: 'text.primary',
-                  }
                 },
                 '& .MuiCardHeader-subheader': {
                   display: 'flex',
@@ -446,14 +412,6 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                     textDecoration: 'none',
                     color: 'inherit',
                     display: 'block',
-                    '&:hover': {
-                      '& .MuiTypography-root': {
-                        color: 'text.primary',
-                      },
-                      '& svg': {
-                        color: 'primary.main',
-                      }
-                    }
                   }
                 },
                 '&.message-form': FORM_STYLES,
@@ -469,14 +427,10 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                     fontSize: '1.1rem',
                     lineHeight: 1.3,
                     textDecoration: 'none',
-                    transition: 'color 0.2s ease-in-out',
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
-                    '&:hover': {
-                      color: 'text.primary',
-                    }
                   },
                   '& .blog-meta': {
                     display: 'flex',
@@ -532,13 +486,6 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                   borderWidth: "1px",
                   borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
                 },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderWidth: "1px",
-                  borderColor: "primary.main",
-                },
               },
             },
 
@@ -548,12 +495,6 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
               "&.Mui-focused": {
                 color: "primary.main",
               },
-            },
-
-            // Input stilleri
-            "& .MuiInputBase-input": {
-              ...BASE_INPUT_STYLES,
-              color: "text.primary",
             },
 
             // Disabled durumu
