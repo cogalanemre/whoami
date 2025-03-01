@@ -1,13 +1,13 @@
 "use client";
 
-import { DarkMode, LightMode } from "@mui/icons-material";
+import { Box } from "@mui/material";
 import { useThemeContext } from "@/context/ThemeContext";
-import ToggleButton from "./ToggleButton";
+import MaterialUISwitch from "./MaterialUISwitch";
 
 /**
  * Tema Değiştirici Bileşeni
  * 
- * Açık/koyu tema geçişini sağlayan animasyonlu toggle buton.
+ * Açık/koyu tema geçişini sağlayan animasyonlu switch buton.
  * 
  * @component
  * @example
@@ -19,13 +19,18 @@ export default function ThemeSwitcher() {
   const { isDarkMode, toggleTheme } = useThemeContext();
 
   return (
-    <ToggleButton
-      buttons={[
-        { Icon: DarkMode, isActive: isDarkMode },
-        { Icon: LightMode, isActive: !isDarkMode }
-      ]}
-      onClick={toggleTheme}
-      position={{ top: 20, right: 20 }}
-    />
+    <Box
+      sx={{
+        position: "fixed",
+        top: 20,
+        right: 20,
+        zIndex: 1000,
+      }}
+    >
+      <MaterialUISwitch
+        checked={isDarkMode}
+        onChange={toggleTheme}
+      />
+    </Box>
   );
 } 
