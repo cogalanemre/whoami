@@ -8,7 +8,7 @@
     "themeSwitcher": true,
     "sections": {
       "experience": true,
-      "skills": true,
+      "skills": false,
       "education": true,
       "blog": true,
       "contact": {

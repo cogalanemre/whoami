@@ -34,6 +34,8 @@
 import {
   Card,
   CardContent,
+  CardHeader,
+  CardActions,
   Typography,
   Stack,
   Chip,
@@ -43,11 +45,12 @@ import {
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { LocationOn, CalendarToday, Work, AccessTime, Apartment } from "@mui/icons-material";
+import { LocationOn, CalendarToday, Work, AccessTime } from "@mui/icons-material";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
+import { EXPERIENCE_CARD_STYLES } from "@/theme/styles";
 
 /**
  * Çalışma Modeli Enum
@@ -103,114 +106,6 @@ const getEmploymentTypeText = (employmentType: number, locale: string): string =
 };
 
 /**
- * Stil sabitleri
- */
-const STYLES = {
-  CARD: {
-    background: "background.paper",
-    position: "relative",
-    transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-      "& .MuiAvatar-root": {
-        transform: "scale(1.05)",
-      },
-    },
-  },
-  CARD_HIGHLIGHTED: {
-    border: "1px solid",
-    borderColor: "primary.main",
-    transform: "translateY(-4px)",
-    boxShadow: (theme) => `0 4px 20px ${theme.palette.primary.main}40`,
-  },
-  HEADER: {
-    background: (isDarkMode) =>
-      isDarkMode
-        ? "rgba(255, 255, 255, 0.03)"
-        : "rgba(0, 0, 0, 0.03)",
-    backdropFilter: "blur(4px)",
-    p: 3,
-  },
-  HEADER_CONTENT: {
-    display: "flex",
-    gap: 4,
-    alignItems: "flex-start",
-  },
-  AVATAR: {
-    width: 80,
-    height: 80,
-    bgcolor: "transparent",
-    border: "2px solid",
-    borderColor: "primary.main",
-    display: { xs: "none", md: "block" },
-    "& img": {
-      objectFit: "cover",
-      borderRadius: "50%",
-    },
-  },
-  CONTENT: {
-    flex: 1,
-  },
-  POSITION: {
-    color: "primary.main",
-    mb: 1,
-    fontWeight: "bold",
-    textAlign: { xs: "center", md: "left" },
-  },
-  COMPANY: {
-    color: "primary.main",
-    fontWeight: "bold",
-    whiteSpace: "nowrap",
-    minWidth: "fit-content",
-    marginRight: 2,
-  },
-  DESCRIPTION: {
-    color: "text.secondary",
-    mb: 3,
-  },
-  DESCRIPTION_CONTAINER: {
-    width: "100%",
-    mb: 3,
-  },
-  SKILL_SECTION: {
-    width: "100%",
-    display: "flex",
-    justifyContent: { xs: "center", md: "flex-start" },
-  },
-  SKILL_CONTAINER: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 1,
-    maxWidth: "fit-content",
-  },
-  SKILL_CHIP: (isSelected: boolean) => ({
-    bgcolor: isSelected ? "primary.main" : "background.default",
-    borderColor: "primary.main",
-    color: isSelected ? "background.paper" : "primary.main",
-    cursor: "pointer",
-    "&:hover": {
-      bgcolor: isSelected ? "primary.main" : "background.paper",
-      borderColor: "primary.main",
-    },
-  }),
-  META_CONTAINER: {
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    gap: { xs: 1, md: 3 },
-    alignItems: { xs: "flex-start", md: "center" },
-    flexWrap: "wrap",
-  },
-  META_ITEM: {
-    display: "flex",
-    alignItems: "center",
-    whiteSpace: "nowrap",
-    minWidth: "fit-content",
-  }
-} as const;
-
-/**
  * Deneyim Kartı Props Interface
  * 
  * @interface ExperienceCardProps
@@ -246,112 +141,85 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         ref={ref}
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
-          ...STYLES.CARD,
-          ...(isHighlighted && STYLES.CARD_HIGHLIGHTED),
+          ...EXPERIENCE_CARD_STYLES.card,
+          ...(isHighlighted && EXPERIENCE_CARD_STYLES.cardHighlighted),
         }}
       >
-        {/* Kart Başlığı */}
-        <Box sx={STYLES.HEADER}>
-          <Box sx={STYLES.HEADER_CONTENT}>
-            {/* Şirket Logosu */}
-            <Avatar
-              src={experience.logo}
-              alt={experience.company}
-              sx={STYLES.AVATAR}
-            />
-
-            {/* Pozisyon ve Şirket Bilgileri */}
-            <Box sx={STYLES.CONTENT}>
-              <Typography variant="h6" sx={STYLES.POSITION}>
-                {experienceTranslations.position}
+        <CardHeader
+          avatar={
+            experience.logo && (
+              <Avatar
+                src={experience.logo}
+                alt={`${experience.company} logo`}
+                sx={EXPERIENCE_CARD_STYLES.avatar}
+              />
+            )
+          }
+          title={
+            <Typography variant="h6" sx={EXPERIENCE_CARD_STYLES.position}>
+              {experienceTranslations.position}
+            </Typography>
+          }
+          subheader={
+            <Box sx={EXPERIENCE_CARD_STYLES.metaContainer}>
+              <Typography
+                variant="subtitle1"
+                color="primary.main"
+                fontWeight="bold"
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                {experience.company}
               </Typography>
-
-              {/* Meta Bilgiler */}
-              <Box sx={STYLES.META_CONTAINER}>
-                <Typography variant="subtitle1" sx={STYLES.COMPANY}>
-                  {experience.company}
-                </Typography>
-                <Box sx={STYLES.META_ITEM}>
-                  <InfoWithIcon
-                    icon={LocationOn}
-                    text={experienceTranslations.location}
-                    fontSize="0.875rem"
-                  />
-                </Box>
-                <Box sx={STYLES.META_ITEM}>
-                  <InfoWithIcon
-                    icon={Apartment}
-                    text={getWorkingModelText(experience.workingModel, locale)}
-                    fontSize="0.875rem"
-                  />
-                </Box>
-                <Box sx={STYLES.META_ITEM}>
-                  <InfoWithIcon
-                    icon={CalendarToday}
-                    text={`${formatDate(experience.startDate, locale)} - ${
-                      experience.endDate
-                        ? formatDate(experience.endDate, locale)
-                        : locale === "tr"
-                          ? "Devam ediyor"
-                          : "Present"
-                    }`}
-                    fontSize="0.875rem"
-                  />
-                </Box>
-                <Box sx={STYLES.META_ITEM}>
-                  <InfoWithIcon
-                    icon={AccessTime}
-                    text={duration}
-                    fontSize="0.875rem"
-                  />
-                </Box>
-                <Box sx={STYLES.META_ITEM}>
-                  <InfoWithIcon
-                    icon={Work}
-                    text={getEmploymentTypeText(experience.employmentType, locale)}
-                    fontSize="0.875rem"
-                  />
-                </Box>
-              </Box>
+              <InfoWithIcon
+                icon={LocationOn}
+                text={experienceTranslations.location}
+                fontSize="0.875rem"
+              />
+              <InfoWithIcon
+                icon={CalendarToday}
+                text={`${formatDate(experience.startDate)} - ${
+                  experience.endDate ? formatDate(experience.endDate) : "Present"
+                }`}
+                fontSize="0.875rem"
+              />
+              <InfoWithIcon
+                icon={AccessTime}
+                text={duration}
+                fontSize="0.875rem"
+              />
+              <InfoWithIcon
+                icon={Work}
+                text={getEmploymentTypeText(experience.employmentType, locale)}
+                fontSize="0.875rem"
+              />
             </Box>
-          </Box>
-        </Box>
+          }
+        />
 
-        {/* Kart İçeriği */}
-        <CardContent sx={{ p: 3 }}>
-          {/* Deneyim Açıklaması */}
-          <Box sx={STYLES.DESCRIPTION_CONTAINER}>
-            <Typography variant="body1" sx={STYLES.DESCRIPTION}>
-              {experienceTranslations.description.map((desc, index) => (
-                <span key={index}>
-                  <span style={{ color: theme.palette.primary.main }}>•</span> {desc}
-                  <br />
-                </span>
-              ))}
+        <CardContent>
+          <Box sx={EXPERIENCE_CARD_STYLES.descriptionContainer}>
+            <Typography variant="body1" sx={EXPERIENCE_CARD_STYLES.description}>
+              {experienceTranslations.description}
             </Typography>
           </Box>
+        </CardContent>
 
-          {/* Yetenek Etiketleri */}
-          <Box sx={STYLES.SKILL_SECTION}>
-            <Stack 
-              direction="row"
-              sx={STYLES.SKILL_CONTAINER}
-            >
-              {experience.skillTags.map((skillTag: string, index: number) => (
+        <CardActions>
+          <Box sx={EXPERIENCE_CARD_STYLES.skillSection}>
+            <Stack sx={EXPERIENCE_CARD_STYLES.skillContainer}>
+              {experience.skillTags.map((skill) => (
                 <Chip
-                  key={index}
-                  size="small"
-                  label={skillTag}
+                  key={skill}
+                  label={skill}
                   variant="outlined"
-                  onClick={() =>
-                    setSelectedSkill(selectedSkill === skillTag ? null : skillTag)
-                  }
-                  sx={STYLES.SKILL_CHIP(selectedSkill === skillTag)}
+                  size="small"
+                  onClick={() => setSelectedSkill(skill === selectedSkill ? null : skill)}
+                  sx={EXPERIENCE_CARD_STYLES.skillChip(skill === selectedSkill)}
                 />
               ))}
             </Stack>
           </Box>
-        </CardContent>
+        </CardActions>
       </Card>
     );
   }

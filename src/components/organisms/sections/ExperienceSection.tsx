@@ -5,12 +5,14 @@
  * Her deneyim için ayrı bir kart oluşturur ve animasyonlu bir şekilde gösterir.
  * 
  * Özellikler:
- * - Responsive tasarım
+ * - Responsive tasarım (xs, sm, md, lg breakpoint'leri için özel spacing)
  * - Framer Motion animasyonları
+ *   - Fade in ve slide up efekti
+ *   - Kademeli kart animasyonları (her kart 0.1s gecikmeli)
+ *   - Smooth geçişler (0.5s duration)
  * - Kronolojik sıralama
  * - Toplam deneyim süresi gösterimi
- * - Kademeli kart animasyonları
- * - Material-UI entegrasyonu
+ * - Material-UI tema entegrasyonu
  * 
  * @component
  * @example
@@ -18,9 +20,11 @@
  * <ExperienceSection
  *   experiences={[{
  *     company: "Şirket Adı",
+ *     position: "Pozisyon",
  *     startDate: "2020-01",
  *     endDate: "2023-01",
- *     // ... diğer deneyim özellikleri
+ *     description: "İş tanımı",
+ *     technologies: ["React", "TypeScript"]
  *   }]}
  *   totalExperience="3 yıl 2 ay"
  *   sectionTitle="Deneyim"
@@ -35,6 +39,7 @@ import { Experience } from "@/types";
 import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
+import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/styles";
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);
@@ -54,30 +59,6 @@ interface ExperienceSectionProps {
 }
 
 /**
- * Stil sabitleri
- * Material-UI theme sistem ile uyumlu stil tanımlamaları
- */
-const STYLES = {
-  SECTION: {
-    mt: { xs: 4, sm: 6, md: 8, lg: 10 },
-  },
-  STACK: {
-    spacing: { xs: 4, md: 6 },
-  },
-  MOTION: {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 },
-  },
-  MOTION_CONTAINER: {
-    mb: { xs: 4, md: 6 },
-    "&:last-child": {
-      mb: 0,
-    },
-  },
-} as const;
-
-/**
  * Deneyim Bölümü Bileşeni
  * 
  * @param {ExperienceSectionProps} props - Bileşen props'ları
@@ -89,7 +70,7 @@ function ExperienceSection({
   sectionTitle 
 }: ExperienceSectionProps) {
   return (
-    <Box sx={STYLES.SECTION}>
+    <Box sx={SECTION_STYLES}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={BusinessCenter}
@@ -99,18 +80,18 @@ function ExperienceSection({
 
       {/* Deneyim Kartları Konteyneri */}
       <Box>
-        <Stack sx={STYLES.STACK}>
-          {/* Deneyim Kartları */}
+        <Stack sx={STACK_STYLES}>
+          {/* Deneyim Kartları - Kademeli Animasyon */}
           {experiences.map((experience, index) => (
             <MotionBox
               key={`${experience.company}-${experience.startDate}`}
-              initial={STYLES.MOTION.initial}
-              animate={STYLES.MOTION.animate}
+              initial={MOTION_STYLES.initial}
+              animate={MOTION_STYLES.animate}
               transition={{ 
-                ...STYLES.MOTION.transition, 
-                delay: index * 0.1 // Her kart için kademeli animasyon
+                ...MOTION_STYLES.transition, 
+                delay: index * 0.1
               }}
-              sx={STYLES.MOTION_CONTAINER}
+              sx={MOTION_STYLES.container}
             >
               <ExperienceCard experience={experience} />
             </MotionBox>

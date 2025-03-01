@@ -144,6 +144,38 @@ const CARD_MEDIA_STYLES = {
   objectFit: "cover",
 };
 
+/**
+ * Section stilleri
+ * Tüm section'larda kullanılan ortak stiller
+ */
+const SECTION_STYLES = {
+  mt: { xs: 4, sm: 6, md: 8, lg: 10 },
+};
+
+/**
+ * Stack stilleri
+ * Stack bileşenlerinde kullanılan ortak spacing değerleri
+ */
+const STACK_STYLES = {
+  spacing: { xs: 4, md: 6 },
+};
+
+/**
+ * Motion stilleri
+ * Framer Motion animasyonları için ortak değerler
+ */
+const MOTION_STYLES = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 },
+  container: {
+    mb: { xs: 4, md: 6 },
+    "&:last-child": {
+      mb: 0,
+    },
+  },
+};
+
 interface MUIThemeProviderProps {
   children: ReactNode;
 }
