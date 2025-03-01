@@ -394,10 +394,6 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                   marginTop: 1,
                 },
               },
-              '& .MuiCardHeader-title': {
-                color: 'text.primary',
-                fontWeight: 'bold',
-              },
               '& .MuiCardContent-root': {
                 padding: '24px',
                 display: "flex",
@@ -602,7 +598,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           },
           h4: {
             fontSize: "1rem",
-            fontWeight: 600,
+            fontWeight: 500,
             color: "primary.main",
             display: "flex",
             alignItems: "center",

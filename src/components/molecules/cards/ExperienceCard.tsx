@@ -164,6 +164,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             <Box sx={EXPERIENCE_CARD_STYLES.metaContainer}>
               <Typography
                 variant="h4"
+                sx={{ color: 'primary.main' }}
               >
                 {experience.company}
               </Typography>
