@@ -39,7 +39,7 @@ import { Experience } from "@/types";
 import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
 import SectionTitle from "@/components/atoms/typography/SectionTitle";
 import { memo } from "react";
-import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/styles";
+import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/MUIThemeProvider";
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);

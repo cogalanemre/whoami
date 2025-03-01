@@ -50,7 +50,7 @@ import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
-import { EXPERIENCE_CARD_STYLES } from "@/theme/styles";
+import { EXPERIENCE_CARD_STYLES } from "@/theme/MUIThemeProvider";
 
 /**
  * Çalışma Modeli Enum

@@ -47,7 +47,7 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
-import { EDUCATION_CARD_STYLES } from "@/theme/styles";
+import { EDUCATION_CARD_STYLES } from "@/theme/MUIThemeProvider";
 
 /**
  * Eğitim Kartı Props Interface
