@@ -46,10 +46,23 @@ const COMMON_COLORS = {
   },
 };
 
-// Kart stilleri
+/**
+ * Ortak kenar çizgisi renkleri
+ * Tüm input ve kartlarda kullanılan tutarlı renkler
+ */
+const BORDER_COLORS = {
+  default: 'rgba(128, 128, 128, 0.2)',
+  hover: 'rgba(128, 128, 128, 0.4)',
+  disabled: 'rgba(128, 128, 128, 0.1)',
+};
+
+/**
+ * Kart stilleri
+ * Tüm kartlarda kullanılan temel stiller
+ */
 const CARD_STYLES = {
   border: '0.5px solid',
-  borderColor: 'rgba(128, 128, 128, 0.2)',
+  borderColor: BORDER_COLORS.default,
   bgcolor: 'background.paper',
   borderRadius: "16px",
   position: "relative" as const,
@@ -61,20 +74,50 @@ const CARD_STYLES = {
   },
 };
 
-// Input stilleri
-const INPUT_STYLES = {
+/**
+ * Temel input stilleri
+ * MUI Input bileşenleri için ortak stiller
+ */
+const BASE_INPUT_STYLES = {
   transition: 'all 0.2s ease-in-out',
+  borderRadius: "8px",
+  fontSize: "0.95rem",
+  letterSpacing: "0.3px",
+};
+
+/**
+ * Alt çizgi stilleri
+ * Standard variant input'lar için alt çizgi stilleri
+ */
+const UNDERLINE_STYLES = {
   '&::before': {
-    borderBottom: '2px solid',
-    borderColor: 'primary.main',
+    borderBottom: '1px solid',
+    borderColor: BORDER_COLORS.default,
   },
   '&::after': {
-    borderBottom: '2px solid',
+    borderBottom: '1px solid',
     borderColor: 'primary.main',
   },
   '&:hover:not(.Mui-disabled)::before': {
-    borderColor: 'primary.main',
+    borderBottom: '1px solid',
+    borderColor: BORDER_COLORS.hover,
   },
+  '&.Mui-focused::before': {
+    borderBottom: '1px solid !important',
+    borderColor: 'primary.main !important',
+  },
+};
+
+/**
+ * Form stilleri
+ * Form içindeki alanların düzeni
+ */
+const FORM_STYLES = {
+  display: "flex",
+  flexDirection: "column",
+  '& > .MuiTextField-root:not(:last-child)': {
+    marginBottom: '24px',
+  }
 };
 
 interface MUIThemeProviderProps {
@@ -85,6 +128,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
   const { isDarkMode } = useThemeContext();
 
   const theme = createTheme({
+    // Tema paleti
     palette: {
       mode: isDarkMode ? "dark" : "light",
       primary: {
@@ -102,7 +146,9 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       },
       divider: isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
     },
+    // Bileşen özelleştirmeleri
     components: {
+      // Kart bileşeni özelleştirmeleri
       MuiCard: {
         styleOverrides: {
           root: {
@@ -142,12 +188,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
                     }
                   }
                 },
-                '&.message-form': {
-                  gap: 3,
-                  '& .MuiFormControl-root': {
-                    marginBottom: 2,
-                  }
-                }
+                '&.message-form': FORM_STYLES
               },
               '& .MuiCardActions-root': {
                 padding: '24px',
@@ -163,11 +204,74 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           variant: 'outlined',
         },
       },
-      MuiInput: {
+      // TextField bileşeni özelleştirmeleri
+      MuiTextField: {
+        defaultProps: {
+          fullWidth: true,
+          variant: "standard",
+        },
         styleOverrides: {
-          root: INPUT_STYLES,
+          root: {
+            "& .MuiInputBase-root": {
+              ...BASE_INPUT_STYLES,
+              
+              // Standard variant için özel stiller
+              "&.MuiInput-root": {
+                ...UNDERLINE_STYLES,
+              },
+
+              // Outlined variant için özel stiller
+              "&.MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderWidth: "1px",
+                  borderColor: BORDER_COLORS.default,
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: BORDER_COLORS.hover,
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderWidth: "1px",
+                  borderColor: "primary.main",
+                },
+              },
+            },
+
+            // Label stilleri
+            "& .MuiInputLabel-root": {
+              color: "text.secondary",
+              "&.Mui-focused": {
+                color: "primary.main",
+              },
+            },
+
+            // Input stilleri
+            "& .MuiInputBase-input": {
+              ...BASE_INPUT_STYLES,
+              color: "text.primary",
+            },
+
+            // Disabled durumu
+            "& .Mui-disabled": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: BORDER_COLORS.disabled,
+              },
+              "&:before": {
+                borderColor: `${BORDER_COLORS.disabled} !important`,
+              },
+            },
+          },
         },
       },
+      // Input bileşeni özelleştirmeleri
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            ...BASE_INPUT_STYLES,
+            ...UNDERLINE_STYLES,
+          },
+        },
+      },
+      // InputLabel bileşeni özelleştirmeleri
       MuiInputLabel: {
         styleOverrides: {
           root: {
@@ -178,12 +282,13 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           },
         },
       },
+      // InputBase bileşeni özelleştirmeleri
       MuiInputBase: {
         styleOverrides: {
           input: {
+            ...BASE_INPUT_STYLES,
             color: 'text.primary',
             padding: '8px 0',
-            fontSize: '1rem',
             '&::placeholder': {
               color: 'text.secondary',
               opacity: 0.5,

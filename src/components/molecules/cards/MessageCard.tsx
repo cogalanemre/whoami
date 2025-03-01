@@ -12,10 +12,10 @@ import {
   CardContent,
   CardHeader,
   CardActions,
+  TextField,
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
-import FormField from "@/components/molecules/forms/FormField";
 import { memo } from "react";
 import CustomButton from "@/components/atoms/buttons/CustomButton";
 
@@ -99,7 +99,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       {/* Form */}
       <CardContent className="message-form">
         {formFields.map((field) => (
-          <FormField
+          <TextField
             key={field.name}
             name={field.name}
             label={field.isOptional 
@@ -112,7 +112,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             type={field.type}
             multiline={field.multiline}
             rows={field.rows}
-            variant="standard"
             placeholder={t(field.label)}
           />
         ))}
