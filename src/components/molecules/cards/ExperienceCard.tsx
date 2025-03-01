@@ -196,9 +196,27 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
 
         <CardContent>
           <Box sx={EXPERIENCE_CARD_STYLES.descriptionContainer}>
-            <Typography variant="body1" sx={EXPERIENCE_CARD_STYLES.description}>
-              {experienceTranslations.description}
-            </Typography>
+            {experienceTranslations.description.map((desc, index) => (
+              <Typography 
+                key={index} 
+                variant="body1" 
+                sx={{
+                  ...EXPERIENCE_CARD_STYLES.description,
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: 1,
+                  '&:not(:last-child)': {
+                    mb: 1
+                  },
+                  '& > span': {
+                    color: 'primary.main'
+                  }
+                }}
+              >
+                <span>•</span>
+                {desc}
+              </Typography>
+            ))}
           </Box>
         </CardContent>
 

@@ -68,6 +68,18 @@ const DESIGN_TOKENS = {
         borderColor: BORDER_COLORS.default,
       },
     },
+    AVATAR: {
+      width: 80,
+      height: 80,
+      bgcolor: "transparent",
+      border: "2px solid",
+      borderColor: BORDER_COLORS.default,
+      display: { xs: "none", md: "block" },
+      "& img": {
+        objectFit: "cover",
+        borderRadius: "50%",
+      },
+    },
   },
 } as const;
 
@@ -246,18 +258,7 @@ export const EXPERIENCE_CARD_STYLES = {
     borderColor: "primary.main",
     boxShadow: (theme) => `0 4px 20px ${theme.palette.primary.main}40`,
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    bgcolor: "transparent",
-    border: "2px solid",
-    borderColor: "primary.main",
-    display: { xs: "none", md: "block" },
-    "& img": {
-      objectFit: "cover",
-      borderRadius: "50%",
-    },
-  },
+  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
   position: {
     color: "primary.main",
     mb: 1,
@@ -306,18 +307,7 @@ export const EDUCATION_CARD_STYLES = {
     position: "relative",
     transition: "all 0.3s ease-in-out",
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    bgcolor: "background.paper",
-    border: "2px solid",
-    borderColor: "primary.main",
-    display: { xs: "none", md: "block" },
-    "& img": {
-      objectFit: "cover",
-      borderRadius: "50%",
-    },
-  },
+  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
   schoolName: {
     color: "primary.main",
     mb: 1,
@@ -598,7 +588,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           },
           h4: {
             fontSize: "1rem",
-            fontWeight: 500,
+            fontWeight: 600,
             color: "primary.main",
             display: "flex",
             alignItems: "center",

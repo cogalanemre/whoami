@@ -57,15 +57,6 @@ export default function InfoWithIcon({
         alignItems: "center", 
         gap: 1.5,
         py: 0.75,
-        transition: "all 0.2s ease-in-out",
-        "&:hover": {
-          "& .MuiSvgIcon-root, & svg": {
-            color: "primary.main",
-          },
-          "& .MuiTypography-root": {
-            color: "text.primary",
-          }
-        }
       }}
     >
       {/* İkon Bileşeni */}
@@ -74,9 +65,6 @@ export default function InfoWithIcon({
           color: "primary.main",
           fontSize: "1.2em",
           transition: "color 0.2s ease-in-out",
-        }}
-        style={{
-          color: 'inherit'
         }}
       />
 
