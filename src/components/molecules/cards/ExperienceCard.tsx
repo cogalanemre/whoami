@@ -41,7 +41,6 @@ import {
   Chip,
   Avatar,
   Box,
-  useTheme,
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
@@ -55,11 +54,13 @@ import { EXPERIENCE_CARD_STYLES } from "@/theme/MUIThemeProvider";
 /**
  * Çalışma Modeli Enum
  */
+/*
 enum WorkingModel {
   Hybrid = 1,
   Remote = 2,
   Office = 3,
 }
+*/
 
 /**
  * İstihdam Türü Enum
@@ -74,6 +75,7 @@ enum EmploymentType {
 /**
  * Çalışma modelini metne çevirir
  */
+/*
 const getWorkingModelText = (workingModel: number, locale: string): string => {
   switch (workingModel) {
     case WorkingModel.Hybrid:
@@ -86,6 +88,7 @@ const getWorkingModelText = (workingModel: number, locale: string): string => {
       return "";
   }
 };
+*/
 
 /**
  * İstihdam türünü metne çevirir
@@ -125,7 +128,6 @@ interface ExperienceCardProps {
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const { locale } = useTranslation();
-    const theme = useTheme();
     const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
     const isHighlighted = selectedSkill && experience.skillTags.includes(selectedSkill);

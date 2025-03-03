@@ -38,7 +38,6 @@ import {
   CardActions,
   CardHeader,
   Typography,
-  Box,
 } from "@mui/material";
 import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
 import { memo } from "react";

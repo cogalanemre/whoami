@@ -4,7 +4,6 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
 import config from "@/config/config.json";
-import { SxProps, Theme } from '@mui/material/styles';
 
 /**
  * Tasarım Sistem Sabitleri
