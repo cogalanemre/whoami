@@ -5,83 +5,6 @@ import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
 import config from "@/config/config.json";
 
-/**
- * Tasarım Sistem Sabitleri
- * Tüm bileşenlerde kullanılan temel değerler
- */
-const BORDER_COLORS = {
-  default: 'rgba(128, 128, 128, 0.2)',
-  hover: 'rgba(128, 128, 128, 0.4)',
-  disabled: 'rgba(128, 128, 128, 0.1)',
-} as const;
-
-/**
- * Tasarım Sistem Sabitleri
- * Tüm bileşenlerde kullanılan temel değerler
- */
-const DESIGN_TOKENS = {
-  TRANSITIONS: {
-    DEFAULT: "all 0.3s ease-in-out",
-    FAST: "all 0.2s ease-in-out",
-  },
-  SPACING: {
-    CARD: {
-      PADDING: '24px',
-      GAP: 4,
-    },
-    CHIP: {
-      GAP: 1,
-    },
-  },
-  TYPOGRAPHY: {
-    BODY: {
-      fontSize: "0.95rem",
-      letterSpacing: "0.3px",
-    },
-    CHIP: {
-      fontSize: "0.875rem",
-      fontWeight: 500,
-    },
-  },
-  BORDER: {
-    RADIUS: {
-      DEFAULT: "16px",
-      INPUT: "8px",
-      CHIP: "16px",
-    },
-    COLORS: BORDER_COLORS,
-  },
-  COMPONENTS: {
-    CHIP: {
-      selected: {
-        bgcolor: "primary.main",
-        color: "background.paper",
-        borderColor: "primary.main",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-        transform: "translateY(-4px)",
-      },
-      default: {
-        bgcolor: "background.paper",
-        color: "text.primary",
-        border: "0.5px solid",
-        borderColor: BORDER_COLORS.default,
-      },
-    },
-    AVATAR: {
-      width: 80,
-      height: 80,
-      bgcolor: "transparent",
-      border: "2px solid",
-      borderColor: BORDER_COLORS.default,
-      display: { xs: "none", md: "block" },
-      "& img": {
-        objectFit: "cover",
-        borderRadius: "50%",
-      },
-    },
-  },
-} as const;
-
 // Sabit tema değerleri
 const COMMON_COLORS = {
   secondary: {
@@ -121,7 +44,110 @@ const COMMON_COLORS = {
     800: '#424242',
     900: '#212121',
   },
-};
+  border: {
+    default: 'rgba(128, 128, 128, 0.2)',
+    hover: 'rgba(128, 128, 128, 0.4)',
+    disabled: 'rgba(128, 128, 128, 0.1)',
+  },
+  background: {
+    light: '#ffffff',
+    dark: {
+      default: '#0B1018',
+      paper: '#121418',
+    },
+  },
+  text: {
+    light: {
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.6)',
+      disabled: 'rgba(0, 0, 0, 0.38)',
+    },
+    dark: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+      disabled: 'rgba(255, 255, 255, 0.5)',
+    },
+  },
+  divider: {
+    light: 'rgba(0, 0, 0, 0.12)',
+    dark: 'rgba(255, 255, 255, 0.12)',
+  },
+  shadow: {
+    default: 'rgba(0,0,0,0.1)',
+    primary: 'rgba(0,0,0,0.2)',
+  },
+} as const;
+
+/**
+ * Tasarım Sistem Sabitleri
+ * Tüm bileşenlerde kullanılan temel değerler
+ */
+const DESIGN_TOKENS = {
+  TRANSITIONS: {
+    DEFAULT: "all 0.3s ease-in-out",
+    FAST: "all 0.2s ease-in-out",
+  },
+  SPACING: {
+    CARD: {
+      PADDING: '24px',
+      GAP: 4,
+    },
+    CHIP: {
+      GAP: 1,
+    },
+  },
+  TYPOGRAPHY: {
+    BODY: {
+      fontSize: "0.95rem",
+      letterSpacing: "0.3px",
+    },
+    CHIP: {
+      fontSize: "0.875rem",
+      fontWeight: 500,
+    },
+  },
+  BORDER: {
+    RADIUS: {
+      DEFAULT: "16px",
+      INPUT: "8px",
+      CHIP: "16px",
+    },
+    COLORS: {
+      default: COMMON_COLORS.border.default,
+      hover: COMMON_COLORS.border.hover,
+      disabled: COMMON_COLORS.border.disabled,
+    },
+  },
+  COMPONENTS: {
+    CHIP: {
+      selected: {
+        bgcolor: "primary.main",
+        color: "background.paper",
+        borderColor: "primary.main",
+        boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.primary}`,
+        transform: "translateY(-4px)",
+      },
+      default: {
+        bgcolor: "background.paper",
+        color: "text.primary",
+        border: "0.5px solid",
+        borderColor: COMMON_COLORS.border.default,
+      },
+    },
+    AVATAR: {
+      width: 80,
+      height: 80,
+      bgcolor: "transparent",
+      border: "2px solid",
+      borderColor: COMMON_COLORS.border.default,
+      display: { xs: "none", md: "block" },
+      "& img": {
+        objectFit: "cover",
+        borderRadius: "50%",
+      },
+    },
+  },
+} as const;
 
 /**
  * Kart stilleri
@@ -129,7 +155,7 @@ const COMMON_COLORS = {
  */
 const CARD_STYLES = {
   border: '0.5px solid',
-  borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
+  borderColor: COMMON_COLORS.border.default,
   bgcolor: 'background.paper',
   borderRadius: DESIGN_TOKENS.BORDER.RADIUS.DEFAULT,
   position: "relative" as const,
@@ -137,7 +163,7 @@ const CARD_STYLES = {
   transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
   '&:hover': {
     transform: "translateY(-4px)",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+    boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.default}`,
   },
 };
 
@@ -158,7 +184,7 @@ const BASE_INPUT_STYLES = {
 const UNDERLINE_STYLES = {
   '&::before': {
     borderBottom: '1px solid',
-    borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
+    borderColor: COMMON_COLORS.border.default,
   },
   '&::after': {
     borderBottom: '1px solid',
@@ -166,7 +192,7 @@ const UNDERLINE_STYLES = {
   },
   '&:hover:not(.Mui-disabled)::before': {
     borderBottom: '1px solid',
-    borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
+    borderColor: COMMON_COLORS.border.hover,
   },
   '&.Mui-focused::before': {
     borderBottom: '1px solid !important',
@@ -211,6 +237,100 @@ const CARD_MEDIA_STYLES = {
 };
 
 /**
+ * Kart başlık stilleri
+ * Tüm kart başlıklarında kullanılan ortak stiller
+ */
+const CARD_HEADER_STYLES = {
+  padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
+  backdropFilter: 'blur(4px)',
+  borderBottom: '0.5px solid',
+  borderColor: COMMON_COLORS.border.default,
+  '& .MuiCardHeader-title': {
+    color: 'primary.main',
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    lineHeight: 1.3,
+    transition: DESIGN_TOKENS.TRANSITIONS.FAST,
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+  },
+  '& .MuiCardHeader-subheader': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 2,
+    marginTop: 1,
+  },
+} as const;
+
+/**
+ * Kart içerik stilleri
+ * Tüm kart içeriklerinde kullanılan ortak stiller
+ */
+const CARD_CONTENT_STYLES = {
+  padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
+  display: "flex",
+  flexDirection: "column",
+  gap: 4,
+  '& .section': {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+  },
+  '&.social-content': {
+    gap: 3,
+    '& .social-link': {
+      textDecoration: 'none',
+      color: 'inherit',
+      display: 'block',
+    }
+  },
+  '&.message-form': FORM_STYLES,
+  '&.blog-content': {
+    padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    gap: 2,
+  },
+  '& .MuiCardMedia-root': {
+    ...CARD_MEDIA_STYLES,
+  },
+} as const;
+
+/**
+ * Blog içerik stilleri
+ * Blog kartlarında kullanılan özel stiller
+ */
+const BLOG_CONTENT_STYLES = {
+  '& .blog-title': {
+    color: 'primary.main',
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    lineHeight: 1.3,
+    textDecoration: 'none',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+  },
+  '& .blog-meta': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 2,
+  },
+  '& .blog-description': {
+    fontSize: '0.9rem',
+    color: 'text.primary',
+    display: '-webkit-box',
+    WebkitLineClamp: 5,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+  }
+} as const;
+
+/**
  * Section stilleri
  * Tüm section'larda kullanılan ortak stiller
  */
@@ -250,7 +370,7 @@ export const EXPERIENCE_CARD_STYLES = {
   card: {
     background: "background.paper",
     position: "relative",
-    transition: "all 0.3s ease-in-out",
+    transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
   },
   cardHighlighted: {
     border: "1px solid",
@@ -326,6 +446,112 @@ export const EDUCATION_CARD_STYLES = {
   },
 } as const;
 
+/**
+ * Input bileşeni stilleri
+ * Tüm input bileşenlerinde kullanılan ortak stiller
+ */
+const INPUT_STYLES = {
+  root: {
+    "& .MuiInputBase-root": {
+      ...BASE_INPUT_STYLES,
+      
+      // Standard variant için özel stiller
+      "&.MuiInput-root": {
+        ...UNDERLINE_STYLES,
+      },
+
+      // Outlined variant için özel stiller
+      "&.MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderWidth: "1px",
+          borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
+        },
+      },
+    },
+
+    // Label stilleri
+    "& .MuiInputLabel-root": {
+      color: "text.secondary",
+      "&.Mui-focused": {
+        color: "primary.main",
+      },
+    },
+
+    // Disabled durumu
+    "& .Mui-disabled": {
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: DESIGN_TOKENS.BORDER.COLORS.disabled,
+      },
+      "&:before": {
+        borderColor: `${DESIGN_TOKENS.BORDER.COLORS.disabled} !important`,
+      },
+    },
+  },
+} as const;
+
+/**
+ * Chip bileşeni stilleri
+ * Tüm chip bileşenlerinde kullanılan ortak stiller
+ */
+const CHIP_STYLES = {
+  root: {
+    ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
+    borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
+    transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
+    height: 32,
+    border: "0.5px solid",
+    borderColor: COMMON_COLORS.border.default,
+    "&:hover": {
+      borderColor: COMMON_COLORS.border.hover,
+      transform: "translateY(-4px)",
+      boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.default}`,
+    },
+    "&.MuiChip-colorPrimary": {
+      bgcolor: "primary.main",
+      color: "background.paper",
+      borderColor: "primary.main",
+      boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.primary}`,
+      transform: "translateY(-4px)",
+      "&:hover": {
+        bgcolor: "primary.main",
+        borderColor: "primary.main",
+      },
+    },
+  },
+  label: {
+    color: "text.primary",
+    padding: "0 12px",
+  },
+  clickable: {
+    cursor: "pointer",
+    "&:hover": {
+      bgcolor: "background.paper",
+    },
+  },
+} as const;
+
+/**
+ * Typography bileşeni stilleri
+ * Tüm typography bileşenlerinde kullanılan ortak stiller
+ */
+const TYPOGRAPHY_STYLES = {
+  h3: {
+    fontSize: "1.25rem",
+    fontWeight: 600,
+    marginBottom: "0.5rem",
+    color: "inherit",
+    lineHeight: 1.2,
+  },
+  h4: {
+    fontSize: "1rem",
+    fontWeight: 600,
+    color: "primary.main",
+    display: "flex",
+    alignItems: "center",
+    gap: "0.25rem",
+  },
+} as const;
+
 interface MUIThemeProviderProps {
   children: ReactNode;
 }
@@ -342,15 +568,15 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
       },
       ...COMMON_COLORS,
       background: {
-        default: isDarkMode ? '#0B1018' : '#ffffff',
-        paper: isDarkMode ? '#121418' : '#ffffff',
+        default: isDarkMode ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
+        paper: isDarkMode ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
       },
       text: {
-        primary: isDarkMode ? '#ffffff' : 'rgba(0, 0, 0, 0.87)',
-        secondary: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
-        disabled: isDarkMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.38)',
+        primary: isDarkMode ? COMMON_COLORS.text.dark.primary : COMMON_COLORS.text.light.primary,
+        secondary: isDarkMode ? COMMON_COLORS.text.dark.secondary : COMMON_COLORS.text.light.secondary,
+        disabled: isDarkMode ? COMMON_COLORS.text.dark.disabled : COMMON_COLORS.text.light.disabled,
       },
-      divider: isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
+      divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
     },
     // Bileşen özelleştirmeleri
     components: {
@@ -361,80 +587,12 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
             '&&': {
               ...CARD_STYLES,
               '& .MuiCardHeader-root': {
-                padding: '24px',
-                backdropFilter: 'blur(4px)',
-                borderBottom: '0.5px solid',
-                borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
-                '& .MuiCardHeader-title': {
-                  color: 'primary.main',
-                  fontWeight: 600,
-                  fontSize: '1.1rem',
-                  lineHeight: 1.3,
-                  transition: 'color 0.2s ease-in-out',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                },
-                '& .MuiCardHeader-subheader': {
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
-                  marginTop: 1,
-                },
+                ...CARD_HEADER_STYLES,
               },
               '& .MuiCardContent-root': {
-                padding: '24px',
-                display: "flex",
-                flexDirection: "column",
-                gap: 4,
-                '& .section': {
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                },
-                '&.social-content': {
-                  gap: 3,
-                  '& .social-link': {
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    display: 'block',
-                  }
-                },
-                '&.message-form': FORM_STYLES,
+                ...CARD_CONTENT_STYLES,
                 '&.blog-content': {
-                  padding: '24px',
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                  gap: 2,
-                  '& .blog-title': {
-                    color: 'primary.main',
-                    fontWeight: 600,
-                    fontSize: '1.1rem',
-                    lineHeight: 1.3,
-                    textDecoration: 'none',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden',
-                  },
-                  '& .blog-meta': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,
-                  },
-                  '& .blog-description': {
-                    fontSize: '0.9rem',
-                    color: 'text.primary',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 5,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden',
-                  }
-                },
-                '& .MuiCardMedia-root': {
-                  ...CARD_MEDIA_STYLES,
+                  ...BLOG_CONTENT_STYLES,
                 },
               },
               '& .MuiCardActions-root': {
@@ -458,42 +616,7 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           variant: "standard",
         },
         styleOverrides: {
-          root: {
-            "& .MuiInputBase-root": {
-              ...BASE_INPUT_STYLES,
-              
-              // Standard variant için özel stiller
-              "&.MuiInput-root": {
-                ...UNDERLINE_STYLES,
-              },
-
-              // Outlined variant için özel stiller
-              "&.MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderWidth: "1px",
-                  borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
-                },
-              },
-            },
-
-            // Label stilleri
-            "& .MuiInputLabel-root": {
-              color: "text.secondary",
-              "&.Mui-focused": {
-                color: "primary.main",
-              },
-            },
-
-            // Disabled durumu
-            "& .Mui-disabled": {
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: DESIGN_TOKENS.BORDER.COLORS.disabled,
-              },
-              "&:before": {
-                borderColor: `${DESIGN_TOKENS.BORDER.COLORS.disabled} !important`,
-              },
-            },
-          },
+          root: INPUT_STYLES.root,
         },
       },
       // Input bileşeni özelleştirmeleri
@@ -539,61 +662,10 @@ export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
           variant: "outlined",
           size: "small",
         },
-        styleOverrides: {
-          root: {
-            ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
-            borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
-            transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
-            height: 32,
-            border: "0.5px solid",
-            borderColor: DESIGN_TOKENS.BORDER.COLORS.default,
-            "&:hover": {
-              borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
-              transform: "translateY(-4px)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-            },
-            "&.MuiChip-colorPrimary": {
-              bgcolor: "primary.main",
-              color: "background.paper",
-              borderColor: "primary.main",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-              transform: "translateY(-4px)",
-              "&:hover": {
-                bgcolor: "primary.main",
-                borderColor: "primary.main",
-              },
-            },
-          },
-          label: {
-            color: "text.primary",
-            padding: "0 12px",
-          },
-          clickable: {
-            cursor: "pointer",
-            "&:hover": {
-              bgcolor: "background.paper",
-            },
-          },
-        },
+        styleOverrides: CHIP_STYLES,
       },
       MuiTypography: {
-        styleOverrides: {
-          h3: {
-            fontSize: "1.25rem",
-            fontWeight: 600,
-            marginBottom: "0.5rem",
-            color: "inherit",
-            lineHeight: 1.2,
-          },
-          h4: {
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: "primary.main",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.25rem",
-          },
-        },
+        styleOverrides: TYPOGRAPHY_STYLES,
       },
     },
   });
