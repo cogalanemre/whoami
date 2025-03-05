@@ -53,7 +53,6 @@ const avatarStyles = {
 };
 
 const contentBoxStyles = {
-  pt: 1,
   width: "100%",
   flex: 1,
   textAlign: { xs: "center", md: "left" },
@@ -63,11 +62,11 @@ const contentBoxStyles = {
   gap: 2,
 };
 
-const titleStyles = {
-  mb: 1,
+const nameStyles = {
   fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
   textAlign: { xs: "center", md: "left" },
   fontWeight: "normal",
+  fontFamily: "var(--font-poppins)",
   display: "flex",
   alignItems: "center",
   gap: 2,
@@ -78,7 +77,6 @@ const titleStyles = {
 const typewriterContainerStyles = {
   minHeight: "60px",
   textAlign: { xs: "center", md: "left" },
-  mb: 1,
 };
 
 const socialButtonsContainerStyles = {
@@ -123,8 +121,7 @@ function HeroSection({ hero, locale }: HeroSectionProps) {
           <Box sx={contentBoxStyles}>
             <Typography
               variant="h1"
-              gutterBottom
-              sx={titleStyles}
+              sx={nameStyles}
             >
               {hero.name}
             </Typography>

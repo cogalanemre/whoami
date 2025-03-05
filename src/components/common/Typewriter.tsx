@@ -37,6 +37,43 @@ interface TypewriterProps {
 }
 
 /**
+ * Typewriter bileşeni için stil sabitleri
+ */
+const TYPEWRITER_STYLES = {
+  root: {
+    color: "text.primary",
+    fontWeight: 300,
+    fontFamily: "var(--font-poppins)",
+    position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
+  },
+  cursor: {
+    content: '"_"',
+    position: "relative",
+    marginLeft: "2px",
+    top: "4px",
+    fontSize: "inherit",
+    lineHeight: 1,
+    fontWeight: "normal",
+    display: "inline-block",
+    transform: "translateY(2px)",
+  },
+  blinkAnimation: {
+    "0%": {
+      opacity: 0,
+    },
+    "50%": {
+      opacity: 1,
+    },
+    "100%": {
+      opacity: 0,
+    },
+  },
+} as const;
+
+/**
  * Daktilo Efektli Metin Bileşeni
  * 
  * @param {TypewriterProps} props - Bileşen props'ları
@@ -85,41 +122,18 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
 
   return (
     <Typography
-      variant="h4"
+      variant="body1"
       sx={{
-        color: theme.palette.text.primary,
-        fontWeight: 300,
-        fontFamily: "var(--font-poppins)",
-        position: "relative",
-        display: "inline-flex",
-        alignItems: "center",
+        ...TYPEWRITER_STYLES.root,
         // Yanıp sönen imleç efekti
         "&::after": {
-          content: '"_"',
-          position: "relative",
-          marginLeft: "2px",
-          top: "4px",
+          ...TYPEWRITER_STYLES.cursor,
           animation: isWaiting ? "blink 1s infinite" : "none",
           opacity: isWaiting ? undefined : 1,
           color: theme.palette.primary.main,
-          fontSize: "inherit",
-          lineHeight: 1,
-          fontWeight: "normal",
-          display: "inline-block",
-          transform: "translateY(2px)",
         },
         // İmleç animasyonu
-        "@keyframes blink": {
-          "0%": {
-            opacity: 0,
-          },
-          "50%": {
-            opacity: 1,
-          },
-          "100%": {
-            opacity: 0,
-          },
-        },
+        "@keyframes blink": TYPEWRITER_STYLES.blinkAnimation,
       }}
     >
       {currentText}
