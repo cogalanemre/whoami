@@ -45,9 +45,9 @@ import { memo } from "react";
 import { Education } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
-import { EDUCATION_CARD_STYLES } from "@/theme/MUIThemeProvider";
+import { EDUCATION_CARD_STYLES } from "@/theme/theme";
 
 /**
  * Eğitim Kartı Props Interface

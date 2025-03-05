@@ -1,8 +1,6 @@
 "use client";
 
-import { ThemeProvider, createTheme } from "@mui/material";
-import { useThemeContext } from "@/context/ThemeContext";
-import { ReactNode } from "react";
+import { ThemeOptions } from "@mui/material/styles";
 import config from "@/config/config.json";
 
 // Sabit tema değerleri
@@ -552,123 +550,118 @@ const TYPOGRAPHY_STYLES = {
   },
 } as const;
 
-interface MUIThemeProviderProps {
-  children: ReactNode;
-}
-
-export default function MUIThemeProvider({ children }: MUIThemeProviderProps) {
-  const { isDarkMode } = useThemeContext();
-
-  const theme = createTheme({
-    // Tema paleti
-    palette: {
-      mode: isDarkMode ? "dark" : "light",
-      primary: {
-        main: config.theme.color,
-      },
-      ...COMMON_COLORS,
-      background: {
-        default: isDarkMode ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
-        paper: isDarkMode ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
-      },
-      text: {
-        primary: isDarkMode ? COMMON_COLORS.text.dark.primary : COMMON_COLORS.text.light.primary,
-        secondary: isDarkMode ? COMMON_COLORS.text.dark.secondary : COMMON_COLORS.text.light.secondary,
-        disabled: isDarkMode ? COMMON_COLORS.text.dark.disabled : COMMON_COLORS.text.light.disabled,
-      },
-      divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
+/**
+ * Tema oluşturma fonksiyonu
+ * @param isDarkMode - Karanlık mod durumu
+ * @returns Tema konfigürasyonu
+ */
+export const theme = (isDarkMode: boolean): ThemeOptions => ({
+  // Tema paleti
+  palette: {
+    mode: isDarkMode ? "dark" : "light",
+    primary: {
+      main: config.theme.color,
     },
-    // Bileşen özelleştirmeleri
-    components: {
-      // Kart bileşeni özelleştirmeleri
-      MuiCard: {
-        styleOverrides: {
-          root: {
-            '&&': {
-              ...CARD_STYLES,
-              '& .MuiCardHeader-root': {
-                ...CARD_HEADER_STYLES,
+    ...COMMON_COLORS,
+    background: {
+      default: isDarkMode ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
+      paper: isDarkMode ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
+    },
+    text: {
+      primary: isDarkMode ? COMMON_COLORS.text.dark.primary : COMMON_COLORS.text.light.primary,
+      secondary: isDarkMode ? COMMON_COLORS.text.dark.secondary : COMMON_COLORS.text.light.secondary,
+      disabled: isDarkMode ? COMMON_COLORS.text.dark.disabled : COMMON_COLORS.text.light.disabled,
+    },
+    divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
+  },
+  // Bileşen özelleştirmeleri
+  components: {
+    // Kart bileşeni özelleştirmeleri
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&&': {
+            ...CARD_STYLES,
+            '& .MuiCardHeader-root': {
+              ...CARD_HEADER_STYLES,
+            },
+            '& .MuiCardContent-root': {
+              ...CARD_CONTENT_STYLES,
+              '&.blog-content': {
+                ...BLOG_CONTENT_STYLES,
               },
-              '& .MuiCardContent-root': {
-                ...CARD_CONTENT_STYLES,
-                '&.blog-content': {
-                  ...BLOG_CONTENT_STYLES,
-                },
-              },
-              '& .MuiCardActions-root': {
-                ...CARD_ACTIONS_STYLES,
-                '&.message-actions, &.blog-actions': {
-                  ...CARD_ACTIONS_STYLES
-                }
-              },
+            },
+            '& .MuiCardActions-root': {
+              ...CARD_ACTIONS_STYLES,
+              '&.message-actions, &.blog-actions': {
+                ...CARD_ACTIONS_STYLES
+              }
             },
           },
         },
-        defaultProps: {
-          elevation: 0,
-          variant: 'outlined',
+      },
+      defaultProps: {
+        elevation: 0,
+        variant: 'outlined',
+      },
+    },
+    // TextField bileşeni özelleştirmeleri
+    MuiTextField: {
+      defaultProps: {
+        fullWidth: true,
+        variant: "standard",
+      },
+      styleOverrides: {
+        root: INPUT_STYLES.root,
+      },
+    },
+    // Input bileşeni özelleştirmeleri
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          ...BASE_INPUT_STYLES,
+          ...UNDERLINE_STYLES,
         },
       },
-      // TextField bileşeni özelleştirmeleri
-      MuiTextField: {
-        defaultProps: {
-          fullWidth: true,
-          variant: "standard",
-        },
-        styleOverrides: {
-          root: INPUT_STYLES.root,
-        },
-      },
-      // Input bileşeni özelleştirmeleri
-      MuiInput: {
-        styleOverrides: {
-          root: {
-            ...BASE_INPUT_STYLES,
-            ...UNDERLINE_STYLES,
+    },
+    // InputLabel bileşeni özelleştirmeleri
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: 'text.secondary',
+          '&.Mui-focused': {
+            color: 'primary.main',
           },
         },
       },
-      // InputLabel bileşeni özelleştirmeleri
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
+    },
+    // InputBase bileşeni özelleştirmeleri
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          ...BASE_INPUT_STYLES,
+          color: 'text.primary',
+          padding: '8px 0',
+          '&::placeholder': {
             color: 'text.secondary',
-            '&.Mui-focused': {
-              color: 'primary.main',
-            },
+            opacity: 0.5,
           },
         },
-      },
-      // InputBase bileşeni özelleştirmeleri
-      MuiInputBase: {
-        styleOverrides: {
-          input: {
-            ...BASE_INPUT_STYLES,
-            color: 'text.primary',
-            padding: '8px 0',
-            '&::placeholder': {
-              color: 'text.secondary',
-              opacity: 0.5,
-            },
-          },
-          multiline: {
-            padding: '8px 0',
-          },
+        multiline: {
+          padding: '8px 0',
         },
-      },
-      // Chip bileşeni özelleştirmeleri
-      MuiChip: {
-        defaultProps: {
-          variant: "outlined",
-          size: "small",
-        },
-        styleOverrides: CHIP_STYLES,
-      },
-      MuiTypography: {
-        styleOverrides: TYPOGRAPHY_STYLES,
       },
     },
-  });
-
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-} 
+    // Chip bileşeni özelleştirmeleri
+    MuiChip: {
+      defaultProps: {
+        variant: "outlined",
+        size: "small",
+      },
+      styleOverrides: CHIP_STYLES,
+    },
+    MuiTypography: {
+      styleOverrides: TYPOGRAPHY_STYLES,
+    },
+  },
+}); 

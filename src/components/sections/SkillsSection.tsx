@@ -6,7 +6,7 @@ import {
   calculateTotalMonths,
 } from "@/utils/dateUtils";
 import { Code } from "@mui/icons-material";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
 interface SkillsSectionProps {

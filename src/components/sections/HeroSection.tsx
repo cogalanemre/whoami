@@ -1,8 +1,8 @@
 import { Box, Stack, Typography, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import { Hero } from "@/types";
-import Typewriter from "@/components/atoms/typography/Typewriter";
-import SocialMediaButtons from "@/components/molecules/buttons/SocialMediaButtons";
+import Typewriter from "@/components/common/Typewriter";
+import SocialMediaButtons from "@/components/common/SocialMediaButtons";
 import { memo } from "react";
 
 const MotionBox = motion(Box);

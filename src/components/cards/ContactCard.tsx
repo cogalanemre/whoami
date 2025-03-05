@@ -8,12 +8,26 @@
  * - Hover animasyonları
  * - Tema renk entegrasyonu
  * - Erişilebilirlik özellikleri
+ * - Çoklu dil desteği
  */
 
 import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { memo } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
+import resumeData from "@/config/resume.json";
+
+interface Location {
+  tr: string;
+  en: string;
+}
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  location: Location;
+}
 
 /**
  * İletişim Bilgileri Kartı Bileşeni
@@ -21,30 +35,37 @@ import { memo } from "react";
  * @returns {JSX.Element} İletişim bilgileri kartı
  */
 function ContactCard() {
+  const { t, locale } = useTranslation();
+  const contactInfo: ContactInfo = {
+    email: resumeData.contact.email,
+    phone: resumeData.contact.phone,
+    location: resumeData.contact.location
+  };
+
   return (
-    <Card
-      elevation={0}
-      variant="outlined"
-    >
+    <Card>
       <CardHeader
-        title="İletişim Bilgileri"
+        title={t("sections.contact")}
       />
-      <CardContent className="contact-info-content">
-        <Box className="section">
+      <CardContent>
+        <Box className="contact-info">
           <InfoWithIcon
             icon={Email}
-            text="emre.cogalan@gmail.com"
+            text={contactInfo.email}
             fontSize="1rem"
+            aria-label={t("contact.form.email")}
           />
           <InfoWithIcon
             icon={Phone}
-            text="+90 (532) 162-7626"
+            text={contactInfo.phone}
             fontSize="1rem"
+            aria-label={t("contact.form.phone")}
           />
           <InfoWithIcon
             icon={LocationOn}
-            text="İstanbul, Türkiye"
+            text={contactInfo.location[locale]}
             fontSize="1rem"
+            aria-label={t("contact.info")}
           />
         </Box>
       </CardContent>

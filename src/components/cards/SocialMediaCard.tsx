@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
 import { IconType } from "react-icons";

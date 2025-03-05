@@ -8,10 +8,10 @@ import {
 import { ContactPhone } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
-import ContactCard from "@/components/molecules/cards/ContactCard";
-import SocialMediaCard from "@/components/molecules/cards/SocialMediaCard";
-import MessageCard from "@/components/molecules/cards/MessageCard";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import ContactCard from "@/components/cards/ContactCard";
+import SocialMediaCard from "@/components/cards/SocialMediaCard";
+import MessageCard from "@/components/cards/MessageCard";
+import SectionTitle from "@/components/common/SectionTitle";
 
 interface FormData {
   name: string;

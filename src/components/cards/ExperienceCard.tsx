@@ -45,11 +45,11 @@ import {
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { LocationOn, CalendarToday, Work, AccessTime } from "@mui/icons-material";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
-import { EXPERIENCE_CARD_STYLES } from "@/theme/MUIThemeProvider";
+import { EXPERIENCE_CARD_STYLES } from "@/theme/theme";
 
 /**
  * Çalışma Modeli Enum

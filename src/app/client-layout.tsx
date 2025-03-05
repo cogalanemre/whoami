@@ -14,11 +14,11 @@ import { Suspense, useMemo, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SelectedSkillProvider } from "@/context/SelectedSkillContext";
-import MUIThemeProvider from "@/theme/MUIThemeProvider";
-import ThemeSwitcher from "@/components/atoms/buttons/ThemeSwitcher";
-import LanguageSwitcher from "@/components/atoms/buttons/LanguageSwitcher";
-import ErrorFallback from "@/components/atoms/feedback/ErrorFallback";
-import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
+import AppThemeProvider from "@/theme/ThemeProvider";
+import ThemeSwitcher from "@/components/common/ThemeSwitcher";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import ErrorFallback from "@/components/common/ErrorFallback";
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
 import config from "@/config/config.json";
 import { UI_CONSTANTS } from "@/constants";
 
@@ -51,7 +51,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <ThemeProvider>
-        <MUIThemeProvider>
+        <AppThemeProvider>
           <SelectedSkillProvider>
             <Suspense fallback={
               <LoadingSkeleton 
@@ -62,7 +62,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               <ClientContent>{children}</ClientContent>
             </Suspense>
           </SelectedSkillProvider>
-        </MUIThemeProvider>
+        </AppThemeProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

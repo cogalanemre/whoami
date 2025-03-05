@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Container, Typography } from "@mui/material";
-import LoadingSkeleton from "@/components/atoms/feedback/LoadingSkeleton";
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
 
 /**
  * Test Sayfası

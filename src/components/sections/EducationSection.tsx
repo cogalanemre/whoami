@@ -31,8 +31,8 @@ import { Box, Stack } from "@mui/material";
 import { School } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { Education } from "@/types";
-import EducationCard from "@/components/molecules/cards/EducationCard";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import EducationCard from "@/components/cards/EducationCard";
+import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
 // Framer Motion için Box bileşeni

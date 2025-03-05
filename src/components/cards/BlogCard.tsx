@@ -44,8 +44,8 @@ import { memo } from "react";
 import { BlogPost } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
-import InfoWithIcon from "@/components/atoms/icons/InfoWithIcon";
-import CustomButton from "@/components/atoms/buttons/CustomButton";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
+import CustomButton from "@/components/common/CustomButton";
 
 /**
  * Blog Kartı Props Interface

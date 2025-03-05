@@ -37,7 +37,7 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import { memo } from "react";
-import SocialMediaButton from "@/components/atoms/buttons/SocialMediaButton";
+import SocialMediaButton from "@/components/common/SocialMediaButton";
 import type { SocialMedia } from "@/types";
 
 /**

@@ -27,8 +27,8 @@ import { Box, Grid, Typography } from "@mui/material";
 import { Article } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { BlogPost } from "@/types";
-import BlogCard from "@/components/molecules/cards/BlogCard";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import BlogCard from "@/components/cards/BlogCard";
+import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
 /**

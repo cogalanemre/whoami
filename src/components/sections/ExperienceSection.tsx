@@ -36,10 +36,10 @@ import { Box, Stack } from "@mui/material";
 import { BusinessCenter } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { Experience } from "@/types";
-import ExperienceCard from "@/components/molecules/cards/ExperienceCard";
-import SectionTitle from "@/components/atoms/typography/SectionTitle";
+import ExperienceCard from "@/components/cards/ExperienceCard";
+import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
-import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/MUIThemeProvider";
+import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/theme";
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);

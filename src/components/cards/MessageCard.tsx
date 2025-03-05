@@ -17,7 +17,7 @@ import {
 import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
-import CustomButton from "@/components/atoms/buttons/CustomButton";
+import CustomButton from "@/components/common/CustomButton";
 
 interface FormData {
   name: string;
