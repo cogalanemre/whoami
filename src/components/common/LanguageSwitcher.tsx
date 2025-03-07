@@ -17,10 +17,14 @@ const LanguageSwitch = styled(Switch)(() => ({
     '&.Mui-checked': {
       color: '#fff',
       transform: 'translateX(22px)',
-      '& .MuiSwitch-thumb:before': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-          '#fff',
-        )}" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13z M10 4v1M10 15v1M4 10h1M15 10h1M5.5 5.5l.7.7M13.8 13.8l.7.7M13.8 5.5l-.7.7M5.5 13.8l-.7.7"/></svg>')`,
+      '& .MuiSwitch-thumb': {
+        '&::after': {
+          content: '"EN"',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        },
       },
       '& + .MuiSwitch-track': {
         opacity: 1,
@@ -32,18 +36,19 @@ const LanguageSwitch = styled(Switch)(() => ({
     backgroundColor: '#003892',
     width: 32,
     height: 32,
-    '&::before': {
-      content: "''",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'var(--font-poppins)',
+    fontSize: '13px',
+    fontWeight: 500,
+    color: '#fff',
+    '&::after': {
+      content: '"TR"',
       position: 'absolute',
-      width: '100%',
-      height: '100%',
-      left: 0,
-      top: 0,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-        '#fff',
-      )}" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13z M6 10h8M10 6v8"/></svg>')`,
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
     },
   },
   '& .MuiSwitch-track': {
@@ -78,8 +83,8 @@ export default function LanguageSwitcher() {
     <Box
       sx={{
         position: "fixed",
-        top: { xs: 60, md: 70 },
-        right: { xs: 16, md: 20 },
+        top: 64,
+        right: 20,
         zIndex: 1000,
       }}
     >
