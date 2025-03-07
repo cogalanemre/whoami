@@ -15,6 +15,7 @@ interface HeroSectionProps {
 const heroContainerStyles = {
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
   width: "100%",
   minHeight: {
     xs: "calc(100vh - 96px)",
@@ -26,6 +27,14 @@ const stackStyles = {
   position: "relative",
   pb: { xs: 8, md: 12 },
   width: "100%",
+  maxWidth: "1200px",
+  margin: "0 auto",
+  display: "flex",
+  flexDirection: { xs: "column", md: "row" },
+  justifyContent: { xs: "center", md: "flex-start" },
+  alignItems: "center",
+  gap: { xs: 4, md: 8 },
+  px: { xs: 2, md: 4 },
   "&::after": {
     content: '""',
     position: "absolute",
@@ -42,10 +51,9 @@ const stackStyles = {
 const avatarStyles = {
   width: { xs: 200, sm: 250, md: 300 },
   height: { xs: 200, sm: 250, md: 300 },
-  mx: { xs: "auto", md: 0 },
-  mb: { xs: 4, md: 0 },
   bgcolor: "transparent",
   alignSelf: "center",
+  ml: { md: 8 },
   transition: "all 0.3s ease-in-out",
   "&:hover": {
     transform: "scale(1.02)",
@@ -53,12 +61,11 @@ const avatarStyles = {
 };
 
 const contentBoxStyles = {
-  width: "100%",
-  flex: 1,
   textAlign: { xs: "center", md: "left" },
   position: "relative",
   display: "flex",
   flexDirection: "column",
+  alignItems: { xs: "center", md: "flex-start" },
   gap: 2,
 };
 
@@ -77,6 +84,7 @@ const nameStyles = {
 const typewriterContainerStyles = {
   minHeight: "60px",
   textAlign: { xs: "center", md: "left" },
+  width: "100%",
 };
 
 const socialButtonsContainerStyles = {
@@ -108,9 +116,6 @@ function HeroSection({ hero, locale }: HeroSectionProps) {
         sx={heroContainerStyles}
       >
         <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={{ xs: 4, md: 8 }}
-          alignItems="center"
           sx={stackStyles}
         >
           <Avatar
