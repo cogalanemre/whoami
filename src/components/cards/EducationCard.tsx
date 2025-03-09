@@ -101,7 +101,7 @@ function EducationCard({ education }: EducationCardProps) {
           </Avatar>
         }
         title={
-          <Typography variant="h6" component="h3" sx={EDUCATION_CARD_STYLES.schoolName}>
+          <Typography variant="h3" component="h3" sx={EDUCATION_CARD_STYLES.schoolName}>
             {educationTranslations.school}
           </Typography>
         }
@@ -109,7 +109,7 @@ function EducationCard({ education }: EducationCardProps) {
           <Box>
             {educationTranslations.department && (
               <Typography
-                variant="subtitle1"
+                variant="h4"
                 component="h4"
                 sx={EDUCATION_CARD_STYLES.department}
               >

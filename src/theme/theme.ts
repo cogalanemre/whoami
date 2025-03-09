@@ -397,13 +397,8 @@ export const EXPERIENCE_CARD_STYLES = {
 export const EDUCATION_CARD_STYLES = {
   ...COMMON_PROFILE_CARD_STYLES,
   schoolName: {
-    color: "primary.main",
-    mb: 1,
-    fontWeight: "bold",
-    textAlign: { xs: "center", md: "left" },
   },
   department: {
-    color: "text.secondary",
     mb: 2,
     textAlign: { xs: "center", md: "left" },
   },
