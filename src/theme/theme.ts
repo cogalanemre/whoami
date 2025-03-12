@@ -204,122 +204,6 @@ const DESIGN_TOKENS = {
 } as const;
 
 /**
- * Ortak Kart Stilleri
- * Tüm kart türleri için temel stiller
- */
-const BASE_CARD_STYLES = {
-  ...DESIGN_TOKENS.BORDER.STYLES.card.default,
-  bgcolor: 'background.paper',
-  borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CARD,
-  position: "relative" as const,
-  height: "100%",
-  transition: COMMON_TRANSITIONS.default,
-  '&:hover': {
-    ...COMMON_TRANSITIONS.hover,
-    ...DESIGN_TOKENS.BORDER.STYLES.card.hover,
-    boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.default}`,
-  },
-} as const;
-
-/**
- * Ortak Kart Bileşen Stilleri
- * Header, Content ve Actions için ortak stiller
- */
-const CARD_COMPONENT_STYLES = {
-  header: {
-    padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
-    backdropFilter: 'blur(4px)',
-    borderBottom: '0.5px solid',
-    borderColor: COMMON_COLORS.border.default,
-    '& .MuiCardHeader-title': {
-      color: 'primary.main',
-      fontWeight: 600,
-      fontSize: '1.1rem',
-      lineHeight: 1.3,
-      transition: COMMON_TRANSITIONS.fast,
-      display: '-webkit-box',
-      WebkitLineClamp: 2,
-      WebkitBoxOrient: 'vertical',
-      overflow: 'hidden',
-    },
-    '& .MuiCardHeader-subheader': {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 2,
-      marginTop: 1,
-    },
-  },
-  content: {
-    padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
-    display: "flex",
-    flexDirection: "column",
-    gap: 4,
-    '& .section': {
-      display: "flex",
-      flexDirection: "column",
-      gap: 2,
-    },
-  },
-  actions: {
-    padding: DESIGN_TOKENS.SPACING.CARD.PADDING,
-    paddingTop: 0,
-    justifyContent: 'flex-end',
-    '& .MuiButton-root': {
-      minWidth: 'auto',
-    }
-  },
-} as const;
-
-/**
- * Ortak Deneyim ve Eğitim Kartı Stilleri
- */
-const COMMON_PROFILE_CARD_STYLES = {
-  card: {
-    background: "background.paper",
-    position: "relative",
-    transition: COMMON_TRANSITIONS.default,
-  },
-  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
-  metaContainer: {
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    gap: { xs: 1, md: 3 },
-    alignItems: { xs: "flex-start", md: "center" },
-  },
-} as const;
-
-/**
- * Blog içerik stilleri
- * Blog kartlarında kullanılan özel stiller
- */
-const BLOG_CONTENT_STYLES = {
-  '& .blog-title': {
-    color: 'primary.main',
-    fontWeight: 600,
-    fontSize: '1.1rem',
-    lineHeight: 1.3,
-    textDecoration: 'none',
-    display: '-webkit-box',
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-  },
-  '& .blog-meta': {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 2,
-  },
-  '& .blog-description': {
-    fontSize: '0.9rem',
-    color: 'text.primary',
-    display: '-webkit-box',
-    WebkitLineClamp: 5,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-  }
-} as const;
-
-/**
  * Section stilleri
  * Tüm section'larda kullanılan ortak stiller
  */
@@ -356,7 +240,18 @@ export const MOTION_STYLES = {
  * ExperienceCard bileşeni için ortak stiller
  */
 export const EXPERIENCE_CARD_STYLES = {
-  ...COMMON_PROFILE_CARD_STYLES,
+  card: {
+    background: "background.paper",
+    position: "relative",
+    transition: COMMON_TRANSITIONS.default,
+  },
+  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
+  metaContainer: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    gap: { xs: 1, md: 3 },
+    alignItems: { xs: "flex-start", md: "center" },
+  },
   cardHighlighted: {
     border: "1px solid",
     borderColor: "primary.main",
@@ -395,7 +290,18 @@ export const EXPERIENCE_CARD_STYLES = {
  * EducationCard bileşeni için ortak stiller
  */
 export const EDUCATION_CARD_STYLES = {
-  ...COMMON_PROFILE_CARD_STYLES,
+  card: {
+    background: "background.paper",
+    position: "relative",
+    transition: COMMON_TRANSITIONS.default,
+  },
+  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
+  metaContainer: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    gap: { xs: 1, md: 3 },
+    alignItems: { xs: "flex-start", md: "center" },
+  },
   schoolName: {
   },
   department: {
@@ -405,192 +311,94 @@ export const EDUCATION_CARD_STYLES = {
 } as const;
 
 /**
- * Ortak Input Stilleri
- */
-const BASE_INPUT_STYLES = {
-  transition: COMMON_TRANSITIONS.fast,
-  borderRadius: DESIGN_TOKENS.BORDER.RADIUS.INPUT,
-  ...DESIGN_TOKENS.TYPOGRAPHY.BODY,
-} as const;
-
-/**
- * Alt çizgi stilleri
- * Standard variant input'lar için alt çizgi stilleri
- */
-const UNDERLINE_STYLES = {
-  '&::before': DESIGN_TOKENS.BORDER.STYLES.input.underline,
-  '&::after': {
-    ...DESIGN_TOKENS.BORDER.STYLES.input.underline,
-    ...DESIGN_TOKENS.BORDER.STYLES.input.focused,
-  },
-  '&:hover:not(.Mui-disabled)::before': {
-    ...DESIGN_TOKENS.BORDER.STYLES.input.underline,
-    borderColor: DESIGN_TOKENS.BORDER.COLORS.hover,
-  },
-  '&.Mui-focused::before': {
-    borderBottom: '1px solid !important',
-    borderColor: 'primary.main !important',
-  },
-};
-
-/**
  * Tema oluşturma fonksiyonu
  * @param isDarkMode - Karanlık mod durumu
  * @returns Tema konfigürasyonu
  */
-export const theme = (isDarkMode: boolean): ThemeOptions => ({
-  // Tema paleti
+const theme: ThemeOptions = {
   palette: {
-    mode: isDarkMode ? "dark" : "light",
+    mode: config.theme.mode,
     primary: {
-      main: config.theme.color,
+      main: config.theme.primaryColor,
     },
-    ...COMMON_COLORS,
+    secondary: COMMON_COLORS.secondary,
+    error: COMMON_COLORS.error,
+    warning: COMMON_COLORS.warning,
+    info: COMMON_COLORS.info,
+    success: COMMON_COLORS.success,
+    grey: COMMON_COLORS.grey,
     background: {
-      default: isDarkMode ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
-      paper: isDarkMode ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
+      default: config.theme.mode === 'dark' ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
+      paper: config.theme.mode === 'dark' ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
     },
-    text: {
-      primary: isDarkMode ? COMMON_COLORS.text.dark.primary : COMMON_COLORS.text.light.primary,
-      secondary: isDarkMode ? COMMON_COLORS.text.dark.secondary : COMMON_COLORS.text.light.secondary,
-      disabled: isDarkMode ? COMMON_COLORS.text.dark.disabled : COMMON_COLORS.text.light.disabled,
-    },
-    divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
+    text: config.theme.mode === 'dark' ? COMMON_COLORS.text.dark : COMMON_COLORS.text.light,
+    divider: config.theme.mode === 'dark' ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
+    shadow: COMMON_COLORS.shadow,
+    border: COMMON_COLORS.border,
   },
-  // Bileşen özelleştirmeleri
+  typography: {
+    fontFamily: config.theme.fontFamily,
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 700,
+      lineHeight: 1.2,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 600,
+      lineHeight: 1.3,
+    },
+    h3: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+      lineHeight: 1.4,
+    },
+    h4: {
+      fontSize: '1.25rem',
+      fontWeight: 500,
+      lineHeight: 1.4,
+    },
+    body1: {
+      ...DESIGN_TOKENS.TYPOGRAPHY.BODY,
+    },
+    body2: {
+      fontSize: '0.875rem',
+      letterSpacing: '0.25px',
+    },
+  },
+  shape: {
+    borderRadius: parseInt(DESIGN_TOKENS.BORDER.RADIUS.DEFAULT),
+  },
   components: {
-    // Kart bileşeni özelleştirmeleri
-    MuiCard: {
+    MuiButton: {
       styleOverrides: {
         root: {
-          '&&': {
-            ...BASE_CARD_STYLES,
-            '& .MuiCardHeader-root': CARD_COMPONENT_STYLES.header,
-            '& .MuiCardContent-root': {
-              ...CARD_COMPONENT_STYLES.content,
-              '&.blog-content': {
-                ...BLOG_CONTENT_STYLES,
-              },
-            },
-            '& .MuiCardActions-root': CARD_COMPONENT_STYLES.actions,
-          },
-        },
-      },
-      defaultProps: {
-        elevation: 0,
-        variant: 'outlined',
-      },
-    },
-    // TextField bileşeni özelleştirmeleri
-    MuiTextField: {
-      defaultProps: {
-        fullWidth: true,
-        variant: "standard",
-      },
-      styleOverrides: {
-        root: {
-          ...BASE_INPUT_STYLES,
-          ...UNDERLINE_STYLES,
+          textTransform: 'none',
+          borderRadius: DESIGN_TOKENS.BORDER.RADIUS.DEFAULT,
         },
       },
     },
-    // Input bileşeni özelleştirmeleri
-    MuiInput: {
-      styleOverrides: {
-        root: {
-          ...BASE_INPUT_STYLES,
-          ...UNDERLINE_STYLES,
-        },
-      },
-    },
-    // InputLabel bileşeni özelleştirmeleri
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: 'text.secondary',
-          '&.Mui-focused': {
-            color: 'primary.main',
-          },
-        },
-      },
-    },
-    // InputBase bileşeni özelleştirmeleri
-    MuiInputBase: {
-      styleOverrides: {
-        input: {
-          ...BASE_INPUT_STYLES,
-          color: 'text.primary',
-          padding: '8px 0',
-          '&::placeholder': {
-            color: 'text.secondary',
-            opacity: 0.5,
-          },
-        },
-        multiline: {
-          padding: '8px 0',
-        },
-      },
-    },
-    // Chip bileşeni özelleştirmeleri
     MuiChip: {
-      defaultProps: {
-        variant: "outlined",
-        size: "small",
-      },
       styleOverrides: {
         root: {
-          ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
+          ...DESIGN_TOKENS.COMPONENTS.CHIP.default,
           borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
-          transition: DESIGN_TOKENS.TRANSITIONS.DEFAULT,
-          height: 32,
-          ...DESIGN_TOKENS.BORDER.STYLES.chip.default,
-          "&:hover": {
-            ...DESIGN_TOKENS.BORDER.STYLES.chip.hover,
-            transform: "translateY(-4px)",
-            boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.default}`,
-          },
-          "&.MuiChip-colorPrimary": {
-            bgcolor: "primary.main",
-            color: "background.paper",
-            borderColor: "primary.main",
-            boxShadow: `0 4px 20px ${COMMON_COLORS.shadow.primary}`,
-            transform: "translateY(-4px)",
-            "&:hover": {
-              bgcolor: "primary.main",
-              borderColor: "primary.main",
-            },
-          },
-        },
-        label: {
-          color: "text.primary",
-          padding: "0 12px",
-        },
-        clickable: {
-          cursor: "pointer",
-          "&:hover": {
-            bgcolor: "background.paper",
-          },
+          fontSize: DESIGN_TOKENS.TYPOGRAPHY.CHIP.fontSize,
+          fontWeight: DESIGN_TOKENS.TYPOGRAPHY.CHIP.fontWeight,
+          '&.Mui-selected': DESIGN_TOKENS.COMPONENTS.CHIP.selected,
         },
       },
     },
-    MuiTypography: {
+    MuiTextField: {
       styleOverrides: {
-        h3: {
-          fontSize: "1.25rem",
-          fontWeight: 600,
-          marginBottom: "0.5rem",
-          color: "inherit",
-          lineHeight: 1.2,
-        },
-        h4: {
-          fontSize: "1rem",
-          fontWeight: 600,
-          color: "primary.main",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.25rem",
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: DESIGN_TOKENS.BORDER.RADIUS.INPUT,
+          },
         },
       },
     },
   },
-}); 
+};
+
+export default theme; 

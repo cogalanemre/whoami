@@ -17,6 +17,7 @@ import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { memo } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import resumeData from "@/config/resume.json";
+import { cardStyles, cardHeaderStyles, contactInfoStyles } from "./ContactCard.style";
 
 interface Location {
   tr: string;
@@ -43,12 +44,13 @@ function ContactCard() {
   };
 
   return (
-    <Card>
+    <Card sx={cardStyles}>
       <CardHeader
         title={t("sections.contact")}
+        sx={cardHeaderStyles}
       />
       <CardContent>
-        <Box className="contact-info">
+        <Box sx={contactInfoStyles}>
           <InfoWithIcon
             icon={Email}
             text={contactInfo.email}

@@ -46,6 +46,13 @@ import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import CustomButton from "@/components/common/CustomButton";
+import {
+  cardStyles,
+  cardHeaderStyles,
+  blogContentStyles,
+  blogDescriptionStyles,
+  blogActionsStyles,
+} from "./BlogCard.style";
 
 /**
  * Blog Kartı Props Interface
@@ -77,6 +84,7 @@ function BlogCard({ post }: BlogCardProps) {
       component="article"
       role="article"
       aria-label={post.title}
+      sx={cardStyles}
     >
       {/* Kapak Resmi */}
       {post.thumbnail && (
@@ -89,6 +97,7 @@ function BlogCard({ post }: BlogCardProps) {
 
       <CardHeader
         title={post.title}
+        sx={cardHeaderStyles}
         subheader={
           <>
             <InfoWithIcon
@@ -105,18 +114,18 @@ function BlogCard({ post }: BlogCardProps) {
         }
       />
 
-      <CardContent className="blog-content">
+      <CardContent sx={blogContentStyles}>
         {/* Açıklama */}
         <Typography
           variant="body2"
-          className="blog-description"
+          sx={blogDescriptionStyles}
         >
           {post.description}
         </Typography>
       </CardContent>
 
       {/* Devamını Oku Butonu */}
-      <CardActions className="blog-actions">
+      <CardActions sx={blogActionsStyles}>
         <CustomButton
           fullWidth
           endIcon={<ArrowForward fontSize="small" />}

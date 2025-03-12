@@ -3,7 +3,7 @@
 import { ThemeProvider as MUIThemeProvider, createTheme } from "@mui/material";
 import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
-import { theme } from "./theme";
+import theme from "./theme";
 
 interface AppThemeProviderProps {
   children: ReactNode;
@@ -11,8 +11,13 @@ interface AppThemeProviderProps {
 
 export default function AppThemeProvider({ children }: AppThemeProviderProps) {
   const { isDarkMode } = useThemeContext();
-
-  const customTheme = createTheme(theme(isDarkMode));
+  const customTheme = createTheme({
+    ...theme,
+    palette: {
+      ...theme.palette,
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+  });
 
   return <MUIThemeProvider theme={customTheme}>{children}</MUIThemeProvider>;
 } 

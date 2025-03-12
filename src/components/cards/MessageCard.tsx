@@ -18,6 +18,12 @@ import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
 import CustomButton from "@/components/common/CustomButton";
+import {
+  cardStyles,
+  cardHeaderStyles,
+  formContainerStyles,
+  formActionsStyles,
+} from "./MessageCard.style";
 
 interface FormData {
   name: string;
@@ -91,13 +97,15 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
     <Card
       component="form"
       onSubmit={onSubmit}
+      sx={cardStyles}
     >
       <CardHeader
         title={t("contact.sendMessage")}
+        sx={cardHeaderStyles}
       />
 
       {/* Form */}
-      <CardContent className="message-form">
+      <CardContent sx={formContainerStyles}>
         {formFields.map((field) => (
           <TextField
             key={field.name}
@@ -118,7 +126,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       </CardContent>
 
       {/* Submit Button */}
-      <CardActions className="message-actions">
+      <CardActions sx={formActionsStyles}>
         <CustomButton
           type="submit"
           loading={isSubmitting}

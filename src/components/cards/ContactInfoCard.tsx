@@ -14,6 +14,12 @@ import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { memo } from "react";
+import {
+  cardStyles,
+  cardHeaderStyles,
+  contactInfoContentStyles,
+  sectionStyles,
+} from "./ContactInfoCard.style";
 
 /**
  * İletişim Bilgileri Kartı Bileşeni
@@ -25,12 +31,14 @@ function ContactCard() {
     <Card
       elevation={0}
       variant="outlined"
+      sx={cardStyles}
     >
       <CardHeader
         title="İletişim Bilgileri"
+        sx={cardHeaderStyles}
       />
-      <CardContent className="contact-info-content">
-        <Box className="section">
+      <CardContent sx={contactInfoContentStyles}>
+        <Box sx={sectionStyles}>
           <InfoWithIcon
             icon={Email}
             text="emre.cogalan@gmail.com"

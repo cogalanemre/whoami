@@ -18,8 +18,9 @@
     }
   },
   "theme": {
-    "default": "light",
-    "color": "#2497ff"
+    "mode": "light",
+    "primaryColor": "#2497ff",
+    "fontFamily": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
   },
   "language": {
     "default": "en",

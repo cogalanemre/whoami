@@ -49,7 +49,16 @@ import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
-import { EXPERIENCE_CARD_STYLES } from "@/theme/theme";
+import {
+  cardStyles,
+  cardHighlightedStyles,
+  avatarStyles,
+  metaContainerStyles,
+  descriptionContainerStyles,
+  descriptionStyles,
+  skillSectionStyles,
+  skillContainerStyles,
+} from "./ExperienceCard.style";
 
 /**
  * Çalışma Modeli Enum
@@ -143,8 +152,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         ref={ref}
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
-          ...EXPERIENCE_CARD_STYLES.card,
-          ...(isHighlighted && EXPERIENCE_CARD_STYLES.cardHighlighted),
+          ...cardStyles,
+          ...(isHighlighted && cardHighlightedStyles),
         }}
       >
         <CardHeader
@@ -153,7 +162,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               <Avatar
                 src={experience.logo}
                 alt={`${experience.company} logo`}
-                sx={EXPERIENCE_CARD_STYLES.avatar}
+                sx={avatarStyles}
               />
             )
           }
@@ -163,7 +172,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
             </Typography>
           }
           subheader={
-            <Box sx={EXPERIENCE_CARD_STYLES.metaContainer}>
+            <Box sx={metaContainerStyles}>
               <Typography
                 variant="h4"
                 sx={{ color: 'primary.main' }}
@@ -197,13 +206,13 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         />
 
         <CardContent>
-          <Box sx={EXPERIENCE_CARD_STYLES.descriptionContainer}>
+          <Box sx={descriptionContainerStyles}>
             {experienceTranslations.description.map((desc, index) => (
               <Typography 
                 key={index} 
                 variant="body1" 
                 sx={{
-                  ...EXPERIENCE_CARD_STYLES.description,
+                  ...descriptionStyles,
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: 1,
@@ -223,8 +232,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         </CardContent>
 
         <CardActions>
-          <Box sx={EXPERIENCE_CARD_STYLES.skillSection}>
-            <Stack sx={EXPERIENCE_CARD_STYLES.skillContainer}>
+          <Box sx={skillSectionStyles}>
+            <Stack sx={skillContainerStyles}>
               {experience.skillTags.map((skill) => (
                 <Chip
                   key={skill}

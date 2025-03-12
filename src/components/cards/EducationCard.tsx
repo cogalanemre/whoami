@@ -47,7 +47,13 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
-import { EDUCATION_CARD_STYLES } from "@/theme/theme";
+import {
+  cardStyles,
+  avatarStyles,
+  schoolNameStyles,
+  departmentStyles,
+  metaContainerStyles,
+} from "./EducationCard.style";
 
 /**
  * Eğitim Kartı Props Interface
@@ -85,7 +91,7 @@ function EducationCard({ education }: EducationCardProps) {
 
   return (
     <Card
-      sx={EDUCATION_CARD_STYLES.card}
+      sx={cardStyles}
       component="article"
       role="article"
       aria-label={`${educationTranslations.school} - ${t.aria.card}`}
@@ -95,13 +101,13 @@ function EducationCard({ education }: EducationCardProps) {
           <Avatar
             src={education.logo}
             alt={`${educationTranslations.school} ${t.aria.logo}`}
-            sx={EDUCATION_CARD_STYLES.avatar}
+            sx={avatarStyles}
           >
             {!education.logo && <School sx={{ fontSize: 40, color: "primary.main" }} />}
           </Avatar>
         }
         title={
-          <Typography variant="h3" component="h3" sx={EDUCATION_CARD_STYLES.schoolName}>
+          <Typography variant="h3" component="h3" sx={schoolNameStyles}>
             {educationTranslations.school}
           </Typography>
         }
@@ -111,12 +117,12 @@ function EducationCard({ education }: EducationCardProps) {
               <Typography
                 variant="h4"
                 component="h4"
-                sx={EDUCATION_CARD_STYLES.department}
+                sx={departmentStyles}
               >
                 {educationTranslations.department}
               </Typography>
             )}
-            <Box sx={EDUCATION_CARD_STYLES.metaContainer}>
+            <Box sx={metaContainerStyles}>
               <InfoWithIcon
                 icon={LocationOn}
                 text={educationTranslations.location}
