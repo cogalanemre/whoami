@@ -434,29 +434,6 @@ const UNDERLINE_STYLES = {
 };
 
 /**
- * Form stilleri
- * Form içindeki alanların düzeni
- */
-const FORM_STYLES = {
-  display: "flex",
-  flexDirection: "column",
-  '& > .MuiTextField-root:not(:last-child)': {
-    marginBottom: DESIGN_TOKENS.SPACING.CARD.PADDING,
-  }
-};
-
-/**
- * Kart medya stilleri
- * Tüm kart medya bileşenlerinde kullanılan ortak stiller
- */
-const CARD_MEDIA_STYLES = {
-  width: "100%",
-  height: "auto",
-  aspectRatio: "16/9",
-  objectFit: "cover",
-};
-
-/**
  * Tema oluşturma fonksiyonu
  * @param isDarkMode - Karanlık mod durumu
  * @returns Tema konfigürasyonu
