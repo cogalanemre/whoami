@@ -39,7 +39,7 @@ import { Experience } from "@/types";
 import ExperienceCard from "@/components/cards/ExperienceCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
-import { SECTION_STYLES, STACK_STYLES, MOTION_STYLES } from "@/theme/theme";
+import { sectionStyles, stackStyles, motionStyles } from "./ExperienceSection.style";
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);
@@ -70,7 +70,7 @@ function ExperienceSection({
   sectionTitle 
 }: ExperienceSectionProps) {
   return (
-    <Box sx={SECTION_STYLES}>
+    <Box sx={sectionStyles}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={BusinessCenter}
@@ -80,18 +80,18 @@ function ExperienceSection({
 
       {/* Deneyim Kartları Konteyneri */}
       <Box>
-        <Stack sx={STACK_STYLES}>
+        <Stack sx={stackStyles}>
           {/* Deneyim Kartları - Kademeli Animasyon */}
           {experiences.map((experience, index) => (
             <MotionBox
               key={`${experience.company}-${experience.startDate}`}
-              initial={MOTION_STYLES.initial}
-              animate={MOTION_STYLES.animate}
+              initial={motionStyles.initial}
+              animate={motionStyles.animate}
               transition={{ 
-                ...MOTION_STYLES.transition, 
+                ...motionStyles.transition, 
                 delay: index * 0.1
               }}
-              sx={MOTION_STYLES.container}
+              sx={motionStyles.container}
             >
               <ExperienceCard experience={experience} />
             </MotionBox>

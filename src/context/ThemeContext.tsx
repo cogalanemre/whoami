@@ -25,11 +25,11 @@ const getInitialTheme = (): boolean => {
   } catch (error) {
     console.warn("localStorage is not available:", error);
   }
-  return config.theme.default === "dark";
+  return config.theme.mode === "dark";
 };
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(config.theme.default === "dark");
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(config.theme.mode === "dark");
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Sayfa yüklendiğinde flash'ı önle

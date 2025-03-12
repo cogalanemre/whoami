@@ -24,6 +24,7 @@
  */
 
 import { Box, Typography, SvgIconProps } from "@mui/material";
+import { containerStyles, iconStyles, textStyles } from "./InfoWithIcon.style";
 
 /**
  * İkon ile Bilgi Gösterimi Props Interface
@@ -51,32 +52,14 @@ export default function InfoWithIcon({
   fontSize = "1rem",
 }: InfoWithIconProps) {
   return (
-    <Box 
-      sx={{ 
-        display: "flex", 
-        alignItems: "center", 
-        gap: 1.5,
-        py: 0.75,
-      }}
-    >
+    <Box sx={containerStyles}>
       {/* İkon Bileşeni */}
-      <Icon
-        sx={{
-          color: "primary.main",
-          fontSize: "1.2em",
-          transition: "color 0.2s ease-in-out",
-        }}
-      />
+      <Icon sx={iconStyles} />
 
       {/* Metin Bileşeni */}
       <Typography
         variant="body2"
-        sx={{
-          color: "text.secondary",
-          fontSize,
-          letterSpacing: "0.3px",
-          transition: "color 0.2s ease-in-out",
-        }}
+        sx={textStyles(fontSize)}
       >
         {text}
       </Typography>

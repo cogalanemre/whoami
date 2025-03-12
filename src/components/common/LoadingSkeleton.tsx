@@ -30,6 +30,11 @@
 
 import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { memo } from "react";
+import {
+  titleContainerStyles,
+  getTitleSkeletonStyles,
+  getMainSkeletonStyles,
+} from "./LoadingSkeleton.style";
 
 /**
  * Yükleme İskeleti Props Interface
@@ -63,13 +68,11 @@ function LoadingSkeleton({
     <Box>
       {/* Başlık Bölümü (Opsiyonel) */}
       {withTitle && (
-        <Box mb={2}>
+        <Box sx={titleContainerStyles}>
           <Skeleton 
             variant="text" 
             width={200}
-            sx={{
-              bgcolor: theme.palette.background.paper,
-            }}
+            sx={getTitleSkeletonStyles(theme)}
           >
             <Typography variant="h5">{title}</Typography>
           </Skeleton>
@@ -81,19 +84,7 @@ function LoadingSkeleton({
         variant="rectangular"
         height={height}
         animation="wave"
-        sx={{
-          borderRadius: 2,
-          bgcolor: theme.palette.background.paper,
-          // Dalga animasyonu için gradient efekti
-          '&::after': {
-            background: `linear-gradient(
-              90deg, 
-              transparent, 
-              ${theme.palette.primary.main}10, 
-              transparent
-            )`
-          }
-        }}
+        sx={getMainSkeletonStyles(theme)}
       />
     </Box>
   );

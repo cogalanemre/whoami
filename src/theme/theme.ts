@@ -4,7 +4,7 @@ import { ThemeOptions } from "@mui/material/styles";
 import config from "@/config/config.json";
 
 // Sabit tema değerleri
-const COMMON_COLORS = {
+export const COMMON_COLORS = {
   secondary: {
     main: '#9c27b0',
     light: '#ba68c8',
@@ -77,40 +77,17 @@ const COMMON_COLORS = {
 } as const;
 
 /**
- * Ortak Geçiş Stilleri
- * Tüm bileşenlerde kullanılan geçiş efektleri
- */
-const COMMON_TRANSITIONS = {
-  default: "all 0.3s ease-in-out",
-  fast: "all 0.2s ease-in-out",
-  hover: {
-    transform: "translateY(-4px)",
-    boxShadow: (shadow: string) => `0 4px 20px ${shadow}`,
-  },
-} as const;
-
-/**
- * Ortak Border Stilleri
- * Tüm bileşenlerde kullanılan temel border stilleri
- */
-const COMMON_BORDER_STYLES = {
-  default: {
-    border: '0.5px solid',
-    borderColor: COMMON_COLORS.border.default,
-  },
-  hover: {
-    borderColor: COMMON_COLORS.border.hover,
-  },
-} as const;
-
-/**
  * Tasarım Sistem Sabitleri
  * Tüm bileşenlerde kullanılan temel değerler
  */
 const DESIGN_TOKENS = {
   TRANSITIONS: {
-    DEFAULT: COMMON_TRANSITIONS.default,
-    FAST: COMMON_TRANSITIONS.fast,
+    DEFAULT: "all 0.3s ease-in-out",
+    FAST: "all 0.2s ease-in-out",
+    HOVER: {
+      transform: "translateY(-4px)",
+      boxShadow: (shadow: string) => `0 4px 20px ${shadow}`,
+    },
   },
   SPACING: {
     CARD: {
@@ -144,21 +121,31 @@ const DESIGN_TOKENS = {
       disabled: COMMON_COLORS.border.disabled,
     },
     STYLES: {
-      common: COMMON_BORDER_STYLES,
-      card: {
+      common: {
         default: {
-          ...COMMON_BORDER_STYLES.default,
+          border: '0.5px solid',
+          borderColor: COMMON_COLORS.border.default,
         },
         hover: {
-          ...COMMON_BORDER_STYLES.hover,
+          borderColor: COMMON_COLORS.border.hover,
+        },
+      },
+      card: {
+        default: {
+          border: '0.5px solid',
+          borderColor: COMMON_COLORS.border.default,
+        },
+        hover: {
+          borderColor: COMMON_COLORS.border.hover,
         },
       },
       chip: {
         default: {
-          ...COMMON_BORDER_STYLES.default,
+          border: '0.5px solid',
+          borderColor: COMMON_COLORS.border.default,
         },
         hover: {
-          ...COMMON_BORDER_STYLES.hover,
+          borderColor: COMMON_COLORS.border.hover,
         },
       },
       input: {
@@ -236,88 +223,11 @@ export const MOTION_STYLES = {
 } as const;
 
 /**
- * Deneyim Kartı Stilleri
- * ExperienceCard bileşeni için ortak stiller
- */
-export const EXPERIENCE_CARD_STYLES = {
-  card: {
-    background: "background.paper",
-    position: "relative",
-    transition: COMMON_TRANSITIONS.default,
-  },
-  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
-  metaContainer: {
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    gap: { xs: 1, md: 3 },
-    alignItems: { xs: "flex-start", md: "center" },
-  },
-  cardHighlighted: {
-    border: "1px solid",
-    borderColor: "primary.main",
-    boxShadow: (theme) => `0 4px 20px ${theme.palette.primary.main}40`,
-  },
-  position: {
-    color: "primary.main",
-    mb: 1,
-    fontWeight: "bold",
-    textAlign: { xs: "center", md: "left" },
-  },
-  description: {
-    color: "text.secondary",
-  },
-  skillSection: {
-    width: "100%",
-  },
-  skillContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: DESIGN_TOKENS.SPACING.CHIP.GAP,
-  },
-  skillChip: (isSelected: boolean) => ({
-    ...DESIGN_TOKENS.TYPOGRAPHY.CHIP,
-    borderRadius: DESIGN_TOKENS.BORDER.RADIUS.CHIP,
-    transition: COMMON_TRANSITIONS.default,
-    cursor: "pointer",
-    height: 32,
-    ...(isSelected ? DESIGN_TOKENS.COMPONENTS.CHIP.selected : DESIGN_TOKENS.COMPONENTS.CHIP.default),
-  }),
-} as const;
-
-/**
- * Eğitim Kartı Stilleri
- * EducationCard bileşeni için ortak stiller
- */
-export const EDUCATION_CARD_STYLES = {
-  card: {
-    background: "background.paper",
-    position: "relative",
-    transition: COMMON_TRANSITIONS.default,
-  },
-  avatar: DESIGN_TOKENS.COMPONENTS.AVATAR,
-  metaContainer: {
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    gap: { xs: 1, md: 3 },
-    alignItems: { xs: "flex-start", md: "center" },
-  },
-  schoolName: {
-  },
-  department: {
-    mb: 2,
-    textAlign: { xs: "center", md: "left" },
-  },
-} as const;
-
-/**
- * Tema oluşturma fonksiyonu
- * @param isDarkMode - Karanlık mod durumu
- * @returns Tema konfigürasyonu
+ * Tema konfigürasyonu
  */
 const theme: ThemeOptions = {
   palette: {
-    mode: config.theme.mode,
+    mode: 'light',
     primary: {
       main: config.theme.primaryColor,
     },
@@ -328,11 +238,11 @@ const theme: ThemeOptions = {
     success: COMMON_COLORS.success,
     grey: COMMON_COLORS.grey,
     background: {
-      default: config.theme.mode === 'dark' ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
-      paper: config.theme.mode === 'dark' ? COMMON_COLORS.background.dark.paper : COMMON_COLORS.background.light,
+      default: COMMON_COLORS.background.light,
+      paper: COMMON_COLORS.background.light,
     },
-    text: config.theme.mode === 'dark' ? COMMON_COLORS.text.dark : COMMON_COLORS.text.light,
-    divider: config.theme.mode === 'dark' ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
+    text: COMMON_COLORS.text.light,
+    divider: COMMON_COLORS.divider.light,
     shadow: COMMON_COLORS.shadow,
     border: COMMON_COLORS.border,
   },
@@ -399,6 +309,6 @@ const theme: ThemeOptions = {
       },
     },
   },
-};
+} as const;
 
 export default theme; 

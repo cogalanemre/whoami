@@ -34,33 +34,10 @@ import { Education } from "@/types";
 import EducationCard from "@/components/cards/EducationCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
+import { sectionStyles, stackStyles, motionStyles } from "./EducationSection.style";
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);
-
-/**
- * Stil sabitleri
- * Material-UI theme sistem ile uyumlu stil tanımlamaları
- */
-const STYLES = {
-  SECTION: {
-    mt: { xs: 4, sm: 6, md: 8 },
-  },
-  STACK: {
-    spacing: { xs: 4, md: 6 },
-  },
-  MOTION: {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 },
-  },
-  MOTION_CONTAINER: {
-    mb: { xs: 4, md: 6 },
-    "&:last-child": {
-      mb: 0,
-    },
-  },
-} as const;
 
 /**
  * Eğitim Bölümü Props Interface
@@ -82,7 +59,7 @@ interface EducationSectionProps {
  */
 function EducationSection({ education, sectionTitle }: EducationSectionProps) {
   return (
-    <Box sx={STYLES.SECTION}>
+    <Box sx={sectionStyles}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={School}
@@ -91,18 +68,18 @@ function EducationSection({ education, sectionTitle }: EducationSectionProps) {
 
       {/* Eğitim Kartları Konteyneri */}
       <Box>
-        <Stack sx={STYLES.STACK}>
+        <Stack sx={stackStyles}>
           {/* Eğitim Kartları */}
           {education.map((edu, index) => (
             <MotionBox
               key={`${edu.tr.school}-${edu.startDate}`}
-              initial={STYLES.MOTION.initial}
-              animate={STYLES.MOTION.animate}
+              initial={motionStyles.initial}
+              animate={motionStyles.animate}
               transition={{ 
-                ...STYLES.MOTION.transition, 
+                ...motionStyles.transition, 
                 delay: index * 0.1 // Her kart için kademeli animasyon
               }}
-              sx={STYLES.MOTION_CONTAINER}
+              sx={motionStyles.container}
             >
               <EducationCard education={edu} />
             </MotionBox>

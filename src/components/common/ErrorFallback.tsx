@@ -21,6 +21,12 @@
 
 import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "@/hooks/useTranslation";
+import {
+  containerStyles,
+  errorMessageStyles,
+  errorDetailsStyles,
+  retryButtonStyles,
+} from "./ErrorFallback.style";
 
 /**
  * Hata Geri Bildirim Props Interface
@@ -48,23 +54,14 @@ export default function ErrorFallback({
   const { t } = useTranslation();
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        p: 3,
-      }}
-    >
+    <Box sx={containerStyles}>
       {/* Hata Başlığı */}
       <Typography variant="h4" color="error" gutterBottom>
         {t("error.title")}
       </Typography>
 
       {/* Hata Mesajı */}
-      <Typography variant="body1" align="center" sx={{ mb: 2 }}>
+      <Typography variant="body1" align="center" sx={errorMessageStyles}>
         {t("error.message")}
       </Typography>
 
@@ -73,14 +70,7 @@ export default function ErrorFallback({
         <Typography
           variant="body2"
           component="pre"
-          sx={{
-            backgroundColor: "background.paper",
-            p: 2,
-            borderRadius: 1,
-            maxWidth: "100%",
-            overflow: "auto",
-            mb: 2,
-          }}
+          sx={errorDetailsStyles}
         >
           {error.message}
         </Typography>
@@ -91,7 +81,7 @@ export default function ErrorFallback({
         variant="contained"
         color="primary"
         onClick={resetErrorBoundary}
-        sx={{ mt: 2 }}
+        sx={retryButtonStyles}
       >
         {t("error.retry")}
       </Button>

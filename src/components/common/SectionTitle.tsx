@@ -25,6 +25,7 @@
  */
 
 import { Typography, Box, SvgIconProps } from "@mui/material";
+import { containerStyles, titleStyles, iconStyles, subtitleStyles } from "./SectionTitle.style";
 
 /**
  * Bölüm Başlığı Props Interface
@@ -52,42 +53,15 @@ export default function SectionTitle({
   subtitle 
 }: SectionTitleProps) {
   return (
-    <Box sx={{ mb: 6 }}>
+    <Box sx={containerStyles}>
       {/* Ana Başlık Konteyner */}
       <Typography
         variant="h2"
         gutterBottom
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          // Responsive font boyutu
-          fontSize: { 
-            xs: "1.5rem",  // Mobil
-            sm: "1.75rem", // Tablet
-            md: "1.75rem"  // Desktop
-          },
-          position: "relative",
-          // Gradient alt çizgi efekti
-          "&::after": {
-            content: '""',
-            position: "absolute",
-            bottom: -8,
-            left: 0,
-            width: "40px",
-            height: "3px",
-            background: "linear-gradient(90deg, primary.main, transparent)",
-            borderRadius: "4px",
-          },
-        }}
+        sx={titleStyles}
       >
         {/* Başlık İkonu */}
-        <Icon
-          sx={{
-            color: "primary.main",
-            fontSize: "2rem",
-          }}
-        />
+        <Icon sx={iconStyles} />
 
         {/* Başlık Metni */}
         {title}
@@ -97,11 +71,7 @@ export default function SectionTitle({
           <Typography
             component="span"
             variant="h6"
-            sx={{
-              ml: 2,
-              color: "primary.main",
-              fontStyle: "italic",
-            }}
+            sx={subtitleStyles}
           >
             ({subtitle})
           </Typography>
