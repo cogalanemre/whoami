@@ -52,21 +52,22 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
 
-// Kart stilleri
-const cardStyles: SxProps<Theme> = {
-  bgcolor: 'background.paper',
-  borderRadius: '16px',
-  position: "relative",
-  height: "100%",
-  transition: "all 0.3s ease-in-out",
-  border: '0.5px solid',
-  borderColor: 'border.default',
-  '&:hover': {
-    transform: "translateY(-4px)",
-    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
-    borderColor: 'border.hover',
-  },
-};
+const STYLE: {CARD : SxProps<Theme>} = {
+  CARD: {
+    bgcolor: 'background.paper',
+    borderRadius: '16px',
+    position: "relative",
+    height: "100%",
+    transition: "all 0.3s ease-in-out",
+    border: '0.5px solid',
+    borderColor: 'border.default',
+    '&:hover': {
+      transform: "translateY(-4px)",
+      boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+      borderColor: 'border.hover',
+    },
+  }
+}
 
 // Vurgulanmış kart stilleri
 const cardHighlightedStyles: SxProps<Theme> = {
@@ -215,7 +216,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         ref={ref}
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
-          ...cardStyles,
+          ...STYLE.CARD,
           ...(isHighlighted && cardHighlightedStyles),
         }}
       >

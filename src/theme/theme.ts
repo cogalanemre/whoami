@@ -80,7 +80,7 @@ export const COMMON_COLORS = {
  * Tasarım Sistem Sabitleri
  * Tüm bileşenlerde kullanılan temel değerler
  */
-const DESIGN_TOKENS = {
+export const DESIGN_TOKENS = {
   TRANSITIONS: {
     DEFAULT: "all 0.3s ease-in-out",
     FAST: "all 0.2s ease-in-out",
