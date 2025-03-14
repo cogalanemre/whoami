@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeOptions } from "@mui/material/styles";
+import { ThemeOptions, Palette, PaletteOptions } from "@mui/material/styles";
 import config from "@/config/config.json";
 
 // Sabit tema değerleri
@@ -222,6 +222,16 @@ export const MOTION_STYLES = {
   },
 } as const;
 
+// Material-UI tema tiplerini genişletiyoruz
+declare module '@mui/material/styles' {
+  interface Palette {
+    shadow: typeof COMMON_COLORS.shadow
+  }
+  interface PaletteOptions {
+    shadow?: typeof COMMON_COLORS.shadow
+  }
+}
+
 /**
  * Tema konfigürasyonu
  */
@@ -231,6 +241,7 @@ const theme: ThemeOptions = {
     primary: {
       main: config.theme.primaryColor,
     },
+    shadow: COMMON_COLORS.shadow,
   },
 } as const;
 
