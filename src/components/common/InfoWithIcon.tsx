@@ -24,7 +24,27 @@
  */
 
 import { Box, Typography, SvgIconProps } from "@mui/material";
-import { containerStyles, iconStyles, textStyles } from "./InfoWithIcon.style";
+
+// Stil tanımlamaları
+const containerStyles = {
+  display: "flex", 
+  alignItems: "center", 
+  gap: 1.5,
+  py: 0.75,
+} as const;
+
+const iconStyles = {
+  color: "primary.main",
+  fontSize: "1.2em",
+  transition: "color 0.2s ease-in-out",
+} as const;
+
+const textStyles = (fontSize: string) => ({
+  color: "text.secondary",
+  fontSize,
+  letterSpacing: "0.3px",
+  transition: "color 0.2s ease-in-out",
+} as const);
 
 /**
  * İkon ile Bilgi Gösterimi Props Interface

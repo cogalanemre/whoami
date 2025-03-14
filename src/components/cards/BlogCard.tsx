@@ -38,6 +38,8 @@ import {
   CardActions,
   CardHeader,
   Typography,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
 import { memo } from "react";
@@ -46,13 +48,65 @@ import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import CustomButton from "@/components/common/CustomButton";
-import {
-  cardStyles,
-  cardHeaderStyles,
-  blogContentStyles,
-  blogDescriptionStyles,
-  blogActionsStyles,
-} from "./BlogCard.style";
+
+// Stil tanımlamaları
+const cardStyles: SxProps<Theme> = {
+  bgcolor: 'background.paper',
+  borderRadius: '16px',
+  position: "relative",
+  height: "100%",
+  transition: "all 0.3s ease-in-out",
+  border: '0.5px solid',
+  borderColor: 'border.default',
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+    borderColor: 'border.hover',
+  },
+};
+
+const cardHeaderStyles: SxProps<Theme> = {
+  padding: '24px',
+  backdropFilter: 'blur(4px)',
+  borderBottom: '0.5px solid',
+  borderColor: 'border.default',
+  '& .MuiCardHeader-title': {
+    color: 'primary.main',
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    lineHeight: 1.3,
+    transition: "all 0.2s ease-in-out",
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+  },
+  '& .MuiCardHeader-subheader': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 2,
+    marginTop: 1,
+  },
+};
+
+const blogContentStyles: SxProps<Theme> = {
+  p: 3,
+};
+
+const blogDescriptionStyles: SxProps<Theme> = {
+  display: '-webkit-box',
+  WebkitLineClamp: 5,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  fontSize: "0.95rem",
+  letterSpacing: "0.3px",
+  color: "text.primary",
+};
+
+const blogActionsStyles: SxProps<Theme> = {
+  p: 3,
+  pt: 0,
+};
 
 /**
  * Blog Kartı Props Interface

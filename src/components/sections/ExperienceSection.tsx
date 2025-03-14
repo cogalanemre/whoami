@@ -39,7 +39,27 @@ import { Experience } from "@/types";
 import ExperienceCard from "@/components/cards/ExperienceCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
-import { sectionStyles, stackStyles, motionStyles } from "./ExperienceSection.style";
+
+// Stil tanımlamaları
+const sectionStyles = {
+  mt: { xs: 4, sm: 6, md: 8, lg: 10 },
+} as const;
+
+const stackStyles = {
+  spacing: { xs: 4, md: 6 },
+} as const;
+
+const motionStyles = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 },
+  container: {
+    mb: { xs: 4, md: 6 },
+    "&:last-child": {
+      mb: 0,
+    },
+  },
+} as const;
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);

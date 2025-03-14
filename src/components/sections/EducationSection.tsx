@@ -34,7 +34,29 @@ import { Education } from "@/types";
 import EducationCard from "@/components/cards/EducationCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
-import { sectionStyles, stackStyles, motionStyles } from "./EducationSection.style";
+
+// Stil tanımlamaları
+const sectionStyles = {
+  width: "100%",
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  gap: 4,
+  py: 8,
+} as const;
+
+const stackStyles = {
+  width: "100%",
+  gap: 4,
+  alignItems: "flex-start",
+} as const;
+
+const motionStyles = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: "easeOut" },
+  container: { width: "100%" },
+} as const;
 
 // Framer Motion için Box bileşeni
 const MotionBox = motion(Box);

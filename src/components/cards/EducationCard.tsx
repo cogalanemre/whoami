@@ -39,6 +39,8 @@ import {
   Typography,
   Box,
   Avatar,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import { LocationOn, CalendarToday, AccessTime, School } from "@mui/icons-material";
 import { memo } from "react";
@@ -47,13 +49,57 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
-import {
-  cardStyles,
-  avatarStyles,
-  schoolNameStyles,
-  departmentStyles,
-  metaContainerStyles,
-} from "./EducationCard.style";
+
+// Stil tanımlamaları
+const cardStyles: SxProps<Theme> = {
+  bgcolor: 'background.paper',
+  borderRadius: '16px',
+  position: "relative",
+  height: "100%",
+  transition: "all 0.3s ease-in-out",
+  border: '0.5px solid',
+  borderColor: 'border.default',
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+    borderColor: 'border.hover',
+  },
+};
+
+const avatarStyles: SxProps<Theme> = {
+  width: 80,
+  height: 80,
+  bgcolor: "transparent",
+  border: "2px solid",
+  borderColor: 'border.default',
+  display: { xs: "none", md: "block" },
+  "& img": {
+    objectFit: "cover",
+    borderRadius: "50%",
+  },
+};
+
+const schoolNameStyles: SxProps<Theme> = {
+  fontSize: "1.1rem",
+  fontWeight: 600,
+  color: "primary.main",
+  lineHeight: 1.3,
+  marginBottom: 1,
+};
+
+const departmentStyles: SxProps<Theme> = {
+  fontSize: "1rem",
+  fontWeight: 500,
+  color: "text.primary",
+  marginBottom: 1,
+};
+
+const metaContainerStyles: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 1,
+  mt: 1,
+};
 
 /**
  * Eğitim Kartı Props Interface

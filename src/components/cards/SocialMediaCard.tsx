@@ -17,6 +17,8 @@ import {
   CardContent,
   CardHeader,
   Box,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -24,6 +26,55 @@ import InfoWithIcon from "@/components/common/InfoWithIcon";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
 import { IconType } from "react-icons";
+
+// Kart stilleri
+const cardStyles: SxProps<Theme> = {
+  bgcolor: 'background.paper',
+  borderRadius: '16px',
+  position: "relative",
+  height: "100%",
+  transition: "all 0.3s ease-in-out",
+  border: '0.5px solid',
+  borderColor: 'border.default',
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+    borderColor: 'border.hover',
+  },
+};
+
+// Kart başlık stilleri
+const cardHeaderStyles: SxProps<Theme> = {
+  padding: '24px',
+  backdropFilter: 'blur(4px)',
+  borderBottom: '0.5px solid',
+  borderColor: 'border.default',
+  '& .MuiCardHeader-title': {
+    color: 'primary.main',
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    lineHeight: 1.3,
+    transition: "all 0.2s ease-in-out",
+  },
+};
+
+// Sosyal medya içerik konteynır stilleri
+const socialContentStyles: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
+  p: 3,
+};
+
+// Sosyal medya bağlantı stilleri
+const socialLinkStyles: SxProps<Theme> = {
+  textDecoration: 'none',
+  color: 'text.primary',
+  transition: 'all 0.2s ease-in-out',
+  '&:hover': {
+    color: 'primary.main',
+  },
+};
 
 interface SocialLink {
   url: string;
@@ -56,13 +107,14 @@ function SocialMediaCard() {
   };
 
   return (
-    <Card>
+    <Card sx={cardStyles}>
       <CardHeader
         title={t("sections.social")}
+        sx={cardHeaderStyles}
       />
 
       {/* Sosyal Medya Bağlantıları */}
-      <CardContent className="social-content">
+      <CardContent sx={socialContentStyles}>
         {Object.entries(socialLinks).map(([key, { url, icon }]) => (
           url && (
             <Box
@@ -71,7 +123,7 @@ function SocialMediaCard() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link"
+              sx={socialLinkStyles}
             >
               <InfoWithIcon
                 icon={icon}

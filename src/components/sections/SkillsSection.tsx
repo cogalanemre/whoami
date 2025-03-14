@@ -1,4 +1,4 @@
-import { Box, Chip, Stack, useTheme } from "@mui/material";
+import { Box, Chip, Stack, useTheme, Theme } from "@mui/material";
 import { Experience } from "@/types";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import {
@@ -8,7 +8,29 @@ import {
 import { Code } from "@mui/icons-material";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
-import { sectionStyles, stackStyles, getChipStyles } from "./SkillsSection.style";
+
+// Stil tanımlamaları
+const sectionStyles = {
+  mt: 4,
+} as const;
+
+const stackStyles = {
+  gap: 1,
+  direction: "row",
+  flexWrap: "wrap",
+} as const;
+
+// Chip stilleri için yardımcı fonksiyon
+const getChipStyles = (isSelected: boolean, theme: Theme) => ({
+  bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
+  color: isSelected ? theme.palette.background.paper : theme.palette.primary.main,
+  border: `1px solid ${theme.palette.primary.main}`,
+  cursor: "pointer",
+  "&:hover": {
+    bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
+    opacity: 0.9,
+  },
+});
 
 interface SkillsSectionProps {
   experiences: Experience[];

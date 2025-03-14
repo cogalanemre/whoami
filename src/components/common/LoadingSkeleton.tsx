@@ -28,13 +28,8 @@
 
 'use client';
 
-import { Box, Skeleton, Typography, useTheme } from "@mui/material";
+import { Box, Skeleton, Typography, useTheme, Theme } from "@mui/material";
 import { memo } from "react";
-import {
-  titleContainerStyles,
-  getTitleSkeletonStyles,
-  getMainSkeletonStyles,
-} from "./LoadingSkeleton.style";
 
 /**
  * Yükleme İskeleti Props Interface
@@ -49,6 +44,29 @@ interface LoadingSkeletonProps {
   title?: string;
   withTitle?: boolean;
 }
+
+// Stil tanımlamaları
+const titleContainerStyles = {
+  mb: 2,
+} as const;
+
+const getTitleSkeletonStyles = (theme: Theme) => ({
+  bgcolor: theme.palette.background.paper,
+});
+
+const getMainSkeletonStyles = (theme: Theme) => ({
+  borderRadius: 2,
+  bgcolor: theme.palette.background.paper,
+  // Dalga animasyonu için gradient efekti
+  '&::after': {
+    background: `linear-gradient(
+      90deg, 
+      transparent, 
+      ${theme.palette.primary.main}10, 
+      transparent
+    )`
+  }
+});
 
 /**
  * Yükleme İskeleti Bileşeni

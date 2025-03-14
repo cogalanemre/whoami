@@ -41,6 +41,8 @@ import {
   Chip,
   Avatar,
   Box,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import type { Experience } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
@@ -49,16 +51,77 @@ import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
-import {
-  cardStyles,
-  cardHighlightedStyles,
-  avatarStyles,
-  metaContainerStyles,
-  descriptionContainerStyles,
-  descriptionStyles,
-  skillSectionStyles,
-  skillContainerStyles,
-} from "./ExperienceCard.style";
+
+// Kart stilleri
+const cardStyles: SxProps<Theme> = {
+  bgcolor: 'background.paper',
+  borderRadius: '16px',
+  position: "relative",
+  height: "100%",
+  transition: "all 0.3s ease-in-out",
+  border: '0.5px solid',
+  borderColor: 'border.default',
+  '&:hover': {
+    transform: "translateY(-4px)",
+    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+    borderColor: 'border.hover',
+  },
+};
+
+// Vurgulanmış kart stilleri
+const cardHighlightedStyles: SxProps<Theme> = {
+  borderColor: 'primary.main',
+  boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.primary}`,
+};
+
+// Avatar stilleri
+const avatarStyles: SxProps<Theme> = {
+  width: 80,
+  height: 80,
+  bgcolor: "transparent",
+  border: "2px solid",
+  borderColor: 'border.default',
+  display: { xs: "none", md: "block" },
+  "& img": {
+    objectFit: "cover",
+    borderRadius: "50%",
+  },
+};
+
+// Meta bilgiler konteynır stilleri
+const metaContainerStyles: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 1,
+  mt: 1,
+};
+
+// Açıklama konteynır stilleri
+const descriptionContainerStyles: SxProps<Theme> = {
+  mt: 2,
+};
+
+// Açıklama metni stilleri
+const descriptionStyles: SxProps<Theme> = {
+  fontSize: "0.95rem",
+  letterSpacing: "0.3px",
+  color: "text.primary",
+};
+
+// Yetenekler bölümü stilleri
+const skillSectionStyles: SxProps<Theme> = {
+  width: "100%",
+  p: 2,
+  pt: 0,
+};
+
+// Yetenekler konteynır stilleri
+const skillContainerStyles: SxProps<Theme> = {
+  direction: "row",
+  spacing: 1,
+  flexWrap: "wrap",
+  gap: 1,
+};
 
 /**
  * Çalışma Modeli Enum
