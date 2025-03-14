@@ -52,7 +52,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
 
-const STYLE: {CARD : SxProps<Theme>} = {
+const STYLE = {
   CARD: {
     bgcolor: 'background.paper',
     borderRadius: '16px',
@@ -63,17 +63,17 @@ const STYLE: {CARD : SxProps<Theme>} = {
     borderColor: 'border.default',
     '&:hover': {
       transform: "translateY(-4px)",
-      boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
+      boxShadow: (theme: Theme) => `0 4px 20px ${theme.palette.shadow?.default}`,
       borderColor: 'border.hover',
     },
-  }
-}
+  },
+} as const;
 
 // Vurgulanmış kart stilleri
-const cardHighlightedStyles: SxProps<Theme> = {
+const cardHighlightedStyles = {
   borderColor: 'primary.main',
-  boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.primary}`,
-};
+  boxShadow: (theme: Theme) => `0 4px 20px ${theme.palette.shadow?.primary}`,
+} as const;
 
 // Avatar stilleri
 const avatarStyles: SxProps<Theme> = {
