@@ -50,7 +50,18 @@ const en: TranslationType = {
   },
   experience: {
     current: "Present",
-    fullTime: "Full Time"
+    fullTime: "Full Time",
+    workingModel: {
+      hybrid: "Hybrid",
+      remote: "Remote",
+      office: "Office"
+    },
+    employmentType: {
+      fullTime: "Full Time",
+      partTime: "Part Time",
+      contract: "Contract",
+      freelance: "Freelance"
+    }
   },
   skills: {
     showAll: "Show All Skills",

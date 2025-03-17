@@ -51,7 +51,18 @@ export const translationSchema = z.object({
   }),
   experience: z.object({
     current: z.string(),
-    fullTime: z.string()
+    fullTime: z.string(),
+    workingModel: z.object({
+      hybrid: z.string(),
+      remote: z.string(),
+      office: z.string()
+    }),
+    employmentType: z.object({
+      fullTime: z.string(),
+      partTime: z.string(),
+      contract: z.string(),
+      freelance: z.string()
+    })
   }),
   skills: z.object({
     showAll: z.string(),

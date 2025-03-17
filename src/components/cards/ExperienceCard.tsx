@@ -120,13 +120,11 @@ const skillContainerStyles: SxProps<Theme> = {
 /**
  * Çalışma Modeli Enum
  */
-/*
 enum WorkingModel {
   Hybrid = 1,
   Remote = 2,
   Office = 3,
 }
-*/
 
 /**
  * İstihdam Türü Enum
@@ -139,42 +137,6 @@ enum EmploymentType {
 }
 
 /**
- * Çalışma modelini metne çevirir
- */
-/*
-const getWorkingModelText = (workingModel: number, locale: string): string => {
-  switch (workingModel) {
-    case WorkingModel.Hybrid:
-      return locale === "tr" ? "Hibrit" : "Hybrid";
-    case WorkingModel.Remote:
-      return locale === "tr" ? "Uzaktan" : "Remote";
-    case WorkingModel.Office:
-      return locale === "tr" ? "Ofisten" : "Office";
-    default:
-      return "";
-  }
-};
-*/
-
-/**
- * İstihdam türünü metne çevirir
- */
-const getEmploymentTypeText = (employmentType: number, locale: string): string => {
-  switch (employmentType) {
-    case EmploymentType.FullTime:
-      return locale === "tr" ? "Tam Zamanlı" : "Full Time";
-    case EmploymentType.PartTime:
-      return locale === "tr" ? "Yarı Zamanlı" : "Part Time";
-    case EmploymentType.Contract:
-      return locale === "tr" ? "Sözleşmeli" : "Contract";
-    case EmploymentType.Freelance:
-      return locale === "tr" ? "Serbest" : "Freelance";
-    default:
-      return "";
-  }
-};
-
-/**
  * Deneyim Kartı Props Interface
  * 
  * @interface ExperienceCardProps
@@ -182,6 +144,8 @@ const getEmploymentTypeText = (employmentType: number, locale: string): string =
  */
 interface ExperienceCardProps {
   experience: Experience;
+  sx?: SxProps<Theme>;
+  locale?: "tr" | "en";
 }
 
 /**
@@ -192,14 +156,44 @@ interface ExperienceCardProps {
  * @returns {JSX.Element} Deneyim kartı
  */
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
-  function ExperienceCard({ experience }, ref) {
-    const { locale } = useTranslation();
+  function ExperienceCard({ experience, sx, locale }, ref) {
+    const { t, locale: defaultLocale } = useTranslation();
+    const actualLocale = locale || defaultLocale;
 
-    const experienceTranslations = locale === "tr" ? experience.tr : experience.en;
+    // Çalışma modeli ve istihdam türü çevirilerini burada alıyoruz
+    const workingModelText = (() => {
+      switch (experience.workingModel) {
+        case WorkingModel.Hybrid:
+          return t("experience.workingModel.hybrid");
+        case WorkingModel.Remote:
+          return t("experience.workingModel.remote");
+        case WorkingModel.Office:
+          return t("experience.workingModel.office");
+        default:
+          return "";
+      }
+    })();
+
+    const employmentTypeText = (() => {
+      switch (experience.employmentType) {
+        case EmploymentType.FullTime:
+          return t("experience.employmentType.fullTime");
+        case EmploymentType.PartTime:
+          return t("experience.employmentType.partTime");
+        case EmploymentType.Contract:
+          return t("experience.employmentType.contract");
+        case EmploymentType.Freelance:
+          return t("experience.employmentType.freelance");
+        default:
+          return "";
+      }
+    })();
+
+    const experienceTranslations = actualLocale === "tr" ? experience.tr : experience.en;
     const duration = calculateDuration(
       experience.startDate,
       experience.endDate ? experience.endDate : new Date().toISOString(),
-      locale
+      actualLocale
     );
 
     return (
@@ -208,6 +202,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
           ...STYLE.CARD,
+          ...sx,
         }}
       >
         <CardHeader
@@ -239,6 +234,11 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 fontSize="0.875rem"
               />
               <InfoWithIcon
+                icon={Work}
+                text={workingModelText}
+                fontSize="0.875rem"
+              />
+              <InfoWithIcon
                 icon={CalendarToday}
                 text={`${formatDate(experience.startDate)} - ${
                   experience.endDate ? formatDate(experience.endDate) : "Present"
@@ -252,7 +252,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               />
               <InfoWithIcon
                 icon={Work}
-                text={getEmploymentTypeText(experience.employmentType, locale)}
+                text={employmentTypeText}
                 fontSize="0.875rem"
               />
             </Box>

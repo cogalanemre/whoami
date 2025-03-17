@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider as MUIThemeProvider, createTheme } from "@mui/material";
+import { ThemeProvider as MUIThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { useThemeContext } from "@/context/ThemeContext";
 import { ReactNode } from "react";
 import theme, { COMMON_COLORS } from "./theme";
@@ -23,9 +23,22 @@ export default function AppThemeProvider({ children }: AppThemeProviderProps) {
       text: isDarkMode ? COMMON_COLORS.text.dark : COMMON_COLORS.text.light,
       divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
       shadow: COMMON_COLORS.shadow,
-      border: COMMON_COLORS.border,
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            backgroundColor: isDarkMode ? COMMON_COLORS.background.dark.default : COMMON_COLORS.background.light,
+          },
+        },
+      },
     },
   });
 
-  return <MUIThemeProvider theme={customTheme}>{children}</MUIThemeProvider>;
+  return (
+    <MUIThemeProvider theme={customTheme}>
+      <CssBaseline />
+      {children}
+    </MUIThemeProvider>
+  );
 } 

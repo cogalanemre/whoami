@@ -50,8 +50,8 @@ export const COMMON_COLORS = {
   background: {
     light: '#ffffff',
     dark: {
-      default: '#0B1018',
-      paper: '#121418',
+      default: '#0C1018',
+      paper: '#060607',
     },
   },
   text: {

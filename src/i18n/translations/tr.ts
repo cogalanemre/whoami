@@ -51,7 +51,18 @@ const tr: TranslationType = {
   },
   experience: {
     current: "Günümüz",
-    fullTime: "Tam Zamanlı"
+    fullTime: "Tam Zamanlı",
+    workingModel: {
+      hybrid: "Hibrit",
+      remote: "Uzaktan",
+      office: "Ofisten"
+    },
+    employmentType: {
+      fullTime: "Tam Zamanlı",
+      partTime: "Yarı Zamanlı",
+      contract: "Sözleşmeli",
+      freelance: "Serbest"
+    }
   },
   skills: {
     showAll: "Tüm Yetenekleri Göster",
