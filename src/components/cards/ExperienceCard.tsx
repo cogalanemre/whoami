@@ -49,7 +49,6 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { LocationOn, CalendarToday, Work, AccessTime } from "@mui/icons-material";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import { forwardRef } from "react";
 
 const STYLE = {
@@ -67,12 +66,6 @@ const STYLE = {
       borderColor: 'border.hover',
     },
   },
-} as const;
-
-// Vurgulanmış kart stilleri
-const cardHighlightedStyles = {
-  borderColor: 'primary.main',
-  boxShadow: (theme: Theme) => `0 4px 20px ${theme.palette.shadow?.primary}`,
 } as const;
 
 // Avatar stilleri
@@ -201,9 +194,7 @@ interface ExperienceCardProps {
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
   function ExperienceCard({ experience }, ref) {
     const { locale } = useTranslation();
-    const { selectedSkill, setSelectedSkill } = useSelectedSkill();
 
-    const isHighlighted = selectedSkill && experience.skillTags.includes(selectedSkill);
     const experienceTranslations = locale === "tr" ? experience.tr : experience.en;
     const duration = calculateDuration(
       experience.startDate,
@@ -217,7 +208,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
           ...STYLE.CARD,
-          ...(isHighlighted && cardHighlightedStyles),
         }}
       >
         <CardHeader
@@ -295,19 +285,16 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
           </Box>
         </CardContent>
 
-        <CardActions>
-          <Box sx={skillSectionStyles}>
-            <Stack sx={skillContainerStyles}>
-              {experience.skillTags.map((skill) => (
-                <Chip
-                  key={skill}
-                  label={skill}
-                  color={skill === selectedSkill ? "primary" : undefined}
-                  onClick={() => setSelectedSkill(skill === selectedSkill ? null : skill)}
-                />
-              ))}
-            </Stack>
-          </Box>
+        <CardActions sx={skillSectionStyles}>
+          <Stack sx={skillContainerStyles}>
+            {experience.skillTags.map((skill) => (
+              <Chip
+                key={skill}
+                label={skill}
+                size="small"
+              />
+            ))}
+          </Stack>
         </CardActions>
       </Card>
     );

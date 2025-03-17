@@ -1,6 +1,5 @@
 import { Box, Chip, Stack, useTheme, Theme } from "@mui/material";
 import { Experience } from "@/types";
-import { useSelectedSkill } from "@/context/SelectedSkillContext";
 import {
   calculateSkillDuration,
   calculateTotalMonths,
@@ -21,13 +20,11 @@ const stackStyles = {
 } as const;
 
 // Chip stilleri için yardımcı fonksiyon
-const getChipStyles = (isSelected: boolean, theme: Theme) => ({
-  bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
-  color: isSelected ? theme.palette.background.paper : theme.palette.primary.main,
+const getChipStyles = (theme: Theme) => ({
+  bgcolor: theme.palette.background.paper,
+  color: theme.palette.primary.main,
   border: `1px solid ${theme.palette.primary.main}`,
-  cursor: "pointer",
   "&:hover": {
-    bgcolor: isSelected ? theme.palette.primary.main : theme.palette.background.paper,
     opacity: 0.9,
   },
 });
@@ -41,7 +38,7 @@ interface SkillsSectionProps {
  * Yetenekler Section Bileşeni
  * 
  * Kullanıcının sahip olduğu yetenekleri ve bu yeteneklerdeki deneyim sürelerini
- * yüzdelik olarak gösteren bölüm. Tıklanabilir etiketler ile filtreleme yapılabilir.
+ * yüzdelik olarak gösteren bölüm.
  * 
  * @param {Experience[]} experiences - Deneyim listesi
  * @param {string} title - Bölüm başlığı
@@ -49,43 +46,6 @@ interface SkillsSectionProps {
  */
 function SkillsSection({ experiences, title }: SkillsSectionProps) {
   const theme = useTheme();
-  const { selectedSkill, setSelectedSkill } = useSelectedSkill();
-
-  // Yetenek tıklama işleyicisi
-  const handleSkillClick = (skillTag: string) => {
-    if (selectedSkill === skillTag) {
-      setSelectedSkill(null);
-      return;
-    }
-
-    setSelectedSkill(skillTag);
-    scrollToFirstMatchingExperience(skillTag);
-  };
-
-  // İlgili deneyime scroll yapma
-  const scrollToFirstMatchingExperience = (skillTag: string) => {
-    const firstMatchingExperience = experiences.find((exp) =>
-      exp.skillTags.includes(skillTag)
-    );
-
-    if (firstMatchingExperience) {
-      const experienceElement = document.getElementById(
-        `experience-${firstMatchingExperience.company
-          .toLowerCase()
-          .replace(/\s+/g, "-")}`
-      );
-
-      if (experienceElement) {
-        const yOffset = -100;
-        const y =
-          experienceElement.getBoundingClientRect().top +
-          window.pageYOffset +
-          yOffset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  };
 
   // Tüm yetenekleri ve sürelerini hesapla
   const skillDurationsMap = calculateSkillDuration(experiences);
@@ -108,8 +68,7 @@ function SkillsSection({ experiences, title }: SkillsSectionProps) {
           <Chip
             key={skillTag}
             label={`${skillTag} (${Math.round((duration / totalMonths) * 100)}%)`}
-            onClick={() => handleSkillClick(skillTag)}
-            sx={getChipStyles(selectedSkill === skillTag, theme)}
+            sx={getChipStyles(theme)}
           />
         ))}
       </Stack>
