@@ -95,7 +95,7 @@ const STYLE = {
     letterSpacing: "0.3px",
     color: "text.primary",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     gap: 1,
     mt: 1,
     alignItems: 'flex-start',
@@ -103,7 +103,9 @@ const STYLE = {
       mb: 1
     },
     '& > span': {
-      color: 'primary.main'
+      color: 'primary.main',
+      flexShrink: 0,
+      mt: 0.5
     }
   },
 } as const;
