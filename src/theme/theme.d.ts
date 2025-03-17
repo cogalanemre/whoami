@@ -7,11 +7,6 @@ declare module '@mui/material/styles' {
       default: string;
       primary: string;
     };
-    border: {
-      default: string;
-      hover: string;
-      disabled: string;
-    };
   }
 
   interface Palette extends CustomPaletteOptions {

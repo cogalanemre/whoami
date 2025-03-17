@@ -59,31 +59,54 @@ const STYLE = {
     height: "100%",
     transition: "all 0.3s ease-in-out",
     border: '0.5px solid',
-    borderColor: 'border',
+    borderColor: 'grey.800',
+  },
+  AVATAR: {
+    width: 80,
+    height: 80,
+    bgcolor: "transparent",
+    border: '0.5px solid',
+    borderColor: 'grey.800',
+    display: { xs: "none", md: "block" },
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
+    },
+  },
+  TITLE: {
+    fontSize: '1.8rem',
+    fontWeight: 'bold',
+  },
+  SUBTITLE: {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    color: 'primary.main',
+  },
+  META: {
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    gap: { xs: 1, sm: 2 },
+    mt: 1,
+    flexWrap: "wrap",
+    alignItems: "center",
+  },
+  CARDCONTENT: {
+    fontSize: "0.95rem",
+    letterSpacing: "0.3px",
+    color: "text.primary",
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+    mt: 1,
+    alignItems: 'flex-start',
+    '&:not(:last-child)': {
+      mb: 1
+    },
+    '& > span': {
+      color: 'primary.main'
+    }
   },
 } as const;
-
-// Avatar stilleri
-const avatarStyles: SxProps<Theme> = {
-  width: 80,
-  height: 80,
-  bgcolor: "transparent",
-  border: "2px solid",
-  borderColor: 'border.default',
-  display: { xs: "none", md: "block" },
-  "& img": {
-    objectFit: "cover",
-    borderRadius: "50%",
-  },
-};
-
-// Meta bilgiler konteynır stilleri
-const metaContainerStyles: SxProps<Theme> = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  mt: 1,
-};
 
 // Açıklama konteynır stilleri
 const descriptionContainerStyles: SxProps<Theme> = {
@@ -205,20 +228,20 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               <Avatar
                 src={experience.logo}
                 alt={`${experience.company} logo`}
-                sx={avatarStyles}
+                sx={{...STYLE.AVATAR}}
               />
             )
           }
           title={
-            <Typography variant="h3">
+            <Typography variant="h3" sx={{...STYLE.TITLE}}>
               {experienceTranslations.position}
             </Typography>
           }
           subheader={
-            <Box sx={metaContainerStyles}>
+            <Box sx={{...STYLE.META}}>
               <Typography
                 variant="h4"
-                sx={{ color: 'primary.main' }}
+                sx={{ ...STYLE.SUBTITLE }}
               >
                 {experience.company}
               </Typography>
@@ -260,16 +283,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 key={index} 
                 variant="body1" 
                 sx={{
-                  ...descriptionStyles,
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: 1,
-                  '&:not(:last-child)': {
-                    mb: 1
-                  },
-                  '& > span': {
-                    color: 'primary.main'
-                  }
+                  ...STYLE.CARDCONTENT,
                 }}
               >
                 <span>•</span>
