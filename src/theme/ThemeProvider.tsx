@@ -23,6 +23,7 @@ export default function AppThemeProvider({ children }: AppThemeProviderProps) {
       text: isDarkMode ? COMMON_COLORS.text.dark : COMMON_COLORS.text.light,
       divider: isDarkMode ? COMMON_COLORS.divider.dark : COMMON_COLORS.divider.light,
       shadow: COMMON_COLORS.shadow,
+      border: isDarkMode ? COMMON_COLORS.border : COMMON_COLORS.border,
     },
     components: {
       MuiCssBaseline: {

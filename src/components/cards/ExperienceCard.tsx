@@ -59,12 +59,7 @@ const STYLE = {
     height: "100%",
     transition: "all 0.3s ease-in-out",
     border: '0.5px solid',
-    borderColor: 'border.default',
-    '&:hover': {
-      transform: "translateY(-4px)",
-      boxShadow: (theme: Theme) => `0 4px 20px ${theme.palette.shadow?.default}`,
-      borderColor: 'border.hover',
-    },
+    borderColor: 'border',
   },
 } as const;
 

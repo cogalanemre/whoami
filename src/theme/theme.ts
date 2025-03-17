@@ -42,11 +42,7 @@ export const COMMON_COLORS = {
     800: '#424242',
     900: '#212121',
   },
-  border: {
-    default: 'rgba(128, 128, 128, 0.2)',
-    hover: 'rgba(128, 128, 128, 0.4)',
-    disabled: 'rgba(128, 128, 128, 0.1)',
-  },
+  border: 'rgba(128, 128, 128, 0.2)',
   background: {
     light: {
       default: '#ffffff',
