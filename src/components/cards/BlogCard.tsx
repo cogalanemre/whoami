@@ -60,7 +60,6 @@ const cardStyles: SxProps<Theme> = {
   borderColor: 'border.default',
   '&:hover': {
     transform: "translateY(-4px)",
-    boxShadow: (theme) => `0 4px 20px ${theme.palette.shadow.default}`,
     borderColor: 'border.hover',
   },
 };

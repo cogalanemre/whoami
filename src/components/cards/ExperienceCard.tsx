@@ -108,33 +108,24 @@ const STYLE = {
       mt: 0.5
     }
   },
+  CARDACTIONS: {
+    width: "100%",
+    p: 2,
+    pt: 0,
+  },
+  CHIP: {
+    fontSize: "0.875rem",
+    color: "text.main",
+    bgcolor: "background.paper",
+    border: '0.5px solid',
+    borderColor: 'grey.800',
+    borderRadius: '8px',
+  },
 } as const;
 
 // Açıklama konteynır stilleri
 const descriptionContainerStyles: SxProps<Theme> = {
   mt: 2,
-};
-
-// Açıklama metni stilleri
-const descriptionStyles: SxProps<Theme> = {
-  fontSize: "0.95rem",
-  letterSpacing: "0.3px",
-  color: "text.primary",
-};
-
-// Yetenekler bölümü stilleri
-const skillSectionStyles: SxProps<Theme> = {
-  width: "100%",
-  p: 2,
-  pt: 0,
-};
-
-// Yetenekler konteynır stilleri
-const skillContainerStyles: SxProps<Theme> = {
-  direction: "row",
-  spacing: 1,
-  flexWrap: "wrap",
-  gap: 1,
 };
 
 /**
@@ -295,13 +286,13 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
           </Box>
         </CardContent>
 
-        <CardActions sx={skillSectionStyles}>
-          <Stack sx={skillContainerStyles}>
+        <CardActions sx={{...STYLE.CARDACTIONS}}>
+          <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
             {experience.skillTags.map((skill) => (
               <Chip
                 key={skill}
                 label={skill}
-                size="small"
+                sx={{...STYLE.CHIP}}
               />
             ))}
           </Stack>
