@@ -156,7 +156,7 @@ interface ExperienceCardProps {
  * @returns {JSX.Element} Deneyim kartı
  */
 const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
-  function ExperienceCard({ experience, sx, locale }, ref) {
+  function ExperienceCard({ experience, locale }, ref) {
     const { t, locale: defaultLocale } = useTranslation();
     const actualLocale = locale || defaultLocale;
 
@@ -202,7 +202,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
           ...STYLE.CARD,
-          ...sx,
         }}
       >
         <CardHeader

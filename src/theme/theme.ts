@@ -48,7 +48,10 @@ export const COMMON_COLORS = {
     disabled: 'rgba(128, 128, 128, 0.1)',
   },
   background: {
-    light: '#ffffff',
+    light: {
+      default: '#ffffff',
+      paper: '#f5f5f5',
+    },
     dark: {
       default: '#0C1018',
       paper: '#060607',
