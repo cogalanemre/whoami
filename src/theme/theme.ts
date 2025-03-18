@@ -8,7 +8,7 @@ export const COMMON_COLORS = {
   background: {
     light: {
       default: '#F7F8FC',
-      paper: '#ffffff',
+      paper: '#FDFDFD',
     },
     dark: {
       default: '#0C1018',
@@ -46,6 +46,7 @@ export const THEME_STYLE = {
     position: "relative",
     height: "100%",
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+    p: 2,
   },
   CHIP: {
     ...BORDER,
