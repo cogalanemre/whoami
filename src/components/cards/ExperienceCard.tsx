@@ -50,16 +50,16 @@ import { LocationOn, CalendarToday, Work, AccessTime } from "@mui/icons-material
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { useTranslation } from "@/hooks/useTranslation";
 import { forwardRef } from "react";
+import { THEME_STYLE } from "@/theme/theme";
 
 const STYLE = {
   CARD: {
+    ...THEME_STYLE.CARD,
     bgcolor: 'background.paper',
     borderRadius: '16px',
     position: "relative",
     height: "100%",
     transition: "all 0.3s ease-in-out",
-    border: '0.5px solid',
-    borderColor: 'grey.800',
   },
   AVATAR: {
     width: 80,

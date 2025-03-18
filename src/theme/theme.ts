@@ -5,11 +5,6 @@ import config from "@/config/config.json";
 
 // Sabit tema değerleri
 export const COMMON_COLORS = {
-  secondary: {
-    main: '#9c27b0',
-    light: '#ba68c8',
-    dark: '#7b1fa2',
-  },
   background: {
     light: {
       default: '#F7F8FC',
@@ -36,8 +31,18 @@ export const COMMON_COLORS = {
     light: 'rgba(0, 0, 0, 0.12)',
     dark: 'rgba(255, 255, 255, 0.12)',
   },
+  border: {
+    light: 'rgba(0, 0, 0, 0.12)',
+    dark: 'rgba(255, 255, 255, 0.12)',
+  },
 } as const;
 
+export const THEME_STYLE = {
+  CARD: {
+    border: '0.5px solid',
+    borderColor: COMMON_COLORS.border.light,
+  },
+} as const;
 
 /**
  * Tema konfigürasyonu
