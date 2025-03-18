@@ -33,23 +33,29 @@ export const COMMON_COLORS = {
   },
 } as const;
 
+const BORDER = {
+  border: '0.5px solid',
+  borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300',
+} as const;
+
 export const THEME_STYLE = {
   CARD: {
-    border: '0.5px solid',
+    ...BORDER,
     bgcolor: 'background.paper',
     borderRadius: '16px',
     position: "relative",
     height: "100%",
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
-    borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.400',
   },
   CHIP: {
+    ...BORDER,
     fontSize: "0.875rem",
     color: "text.main",
     bgcolor: "background.paper",
-    border: '0.5px solid',
-    borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.400',
     borderRadius: '8px',
+  },
+  BORDER: {
+    ...BORDER,
   }
 } as const;
 

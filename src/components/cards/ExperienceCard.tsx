@@ -44,11 +44,14 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
-import type { Experience } from "@/types";
-import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { LocationOn, CalendarToday, Work, AccessTime } from "@mui/icons-material";
-import InfoWithIcon from "@/components/common/InfoWithIcon";
+import { memo } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Experience } from "@/types/experience";
+import InfoWithIcon from "@/components/common/InfoWithIcon";
+import { CalendarMonth, LocationOn, WorkOutline } from "@mui/icons-material";
+import { WorkingModel, EmploymentType } from "@/types/experience";
+import { formatDate, calculateDuration } from "@/utils/dateUtils";
+import { CalendarToday, AccessTime } from "@mui/icons-material";
 import { forwardRef } from "react";
 import { THEME_STYLE } from "@/theme/theme";
 
@@ -57,11 +60,10 @@ const STYLE = {
     ...THEME_STYLE.CARD,
   },
   AVATAR: {
+    ...THEME_STYLE.BORDER,
     width: 80,
     height: 80,
     bgcolor: "transparent",
-    border: '0.5px solid',
-    borderColor: 'grey.800',
     display: { xs: "none", md: "block" },
     "& img": {
       objectFit: "cover",
@@ -85,7 +87,7 @@ const STYLE = {
     flexWrap: "wrap",
     alignItems: "center",
   },
-  CARDCONTENT: {
+  CARDCONTENT_TEXT: {
     fontSize: "0.95rem",
     letterSpacing: "0.3px",
     color: "text.primary",
@@ -111,31 +113,10 @@ const STYLE = {
   CHIP: {
     ...THEME_STYLE.CHIP,
   },
+  CARDCONTENT: {
+    mt: 2,
+  },
 } as const;
-
-// Açıklama konteynır stilleri
-const descriptionContainerStyles: SxProps<Theme> = {
-  mt: 2,
-};
-
-/**
- * Çalışma Modeli Enum
- */
-enum WorkingModel {
-  Hybrid = 1,
-  Remote = 2,
-  Office = 3,
-}
-
-/**
- * İstihdam Türü Enum
- */
-enum EmploymentType {
-  FullTime = 1,
-  PartTime = 2,
-  Contract = 3,
-  Freelance = 4,
-}
 
 /**
  * Deneyim Kartı Props Interface
@@ -235,7 +216,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 fontSize="0.875rem"
               />
               <InfoWithIcon
-                icon={Work}
+                icon={WorkOutline}
                 text={workingModelText}
                 fontSize="0.875rem"
               />
@@ -252,7 +233,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 fontSize="0.875rem"
               />
               <InfoWithIcon
-                icon={Work}
+                icon={WorkOutline}
                 text={employmentTypeText}
                 fontSize="0.875rem"
               />
@@ -260,21 +241,19 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
           }
         />
 
-        <CardContent>
-          <Box sx={descriptionContainerStyles}>
+        <CardContent sx={{...STYLE.CARDCONTENT}}>  
             {experienceTranslations.description.map((desc, index) => (
               <Typography 
                 key={index} 
                 variant="body1" 
                 sx={{
-                  ...STYLE.CARDCONTENT,
+                  ...STYLE.CARDCONTENT_TEXT,
                 }}
               >
                 <span>•</span>
                 {desc}
               </Typography>
             ))}
-          </Box>
         </CardContent>
 
         <CardActions sx={{...STYLE.CARDACTIONS}}>
@@ -294,4 +273,4 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
 );
 
 // Gereksiz render'ları önlemek için memo kullan
-export default ExperienceCard; 
+export default memo(ExperienceCard); 
