@@ -55,11 +55,6 @@ import { THEME_STYLE } from "@/theme/theme";
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
-    bgcolor: 'background.paper',
-    borderRadius: '16px',
-    position: "relative",
-    height: "100%",
-    transition: "all 0.3s ease-in-out",
   },
   AVATAR: {
     width: 80,

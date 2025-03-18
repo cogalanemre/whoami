@@ -40,6 +40,10 @@ export const COMMON_COLORS = {
 export const THEME_STYLE = {
   CARD: {
     border: '0.5px solid',
+    bgcolor: 'background.paper',
+    borderRadius: '16px',
+    position: "relative",
+    height: "100%",
     borderColor: COMMON_COLORS.border.light,
   },
 } as const;
