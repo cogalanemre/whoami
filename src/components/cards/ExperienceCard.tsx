@@ -69,11 +69,11 @@ const STYLE = {
     },
   },
   TITLE: {
-    fontSize: '1.8rem',
+    fontSize: '1.2rem',
     fontWeight: 'bold',
   },
   SUBTITLE: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
     fontWeight: 'bold',
     color: 'primary.main',
   },
@@ -109,12 +109,7 @@ const STYLE = {
     pt: 0,
   },
   CHIP: {
-    fontSize: "0.875rem",
-    color: "text.main",
-    bgcolor: "background.paper",
-    border: '0.5px solid',
-    borderColor: 'grey.800',
-    borderRadius: '8px',
+    ...THEME_STYLE.CHIP,
   },
 } as const;
 
@@ -208,6 +203,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         id={`experience-${experience.company.toLowerCase().replace(/\s+/g, "-")}`}
         sx={{
           ...STYLE.CARD,
+          borderColor: (theme) => STYLE.CARD.borderColor(theme),
         }}
       >
         <CardHeader

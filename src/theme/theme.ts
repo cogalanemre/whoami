@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeOptions } from "@mui/material/styles";
+import { ThemeOptions, Theme } from "@mui/material/styles";
 import config from "@/config/config.json";
 
 // Sabit tema değerleri
@@ -31,10 +31,6 @@ export const COMMON_COLORS = {
     light: 'rgba(0, 0, 0, 0.12)',
     dark: 'rgba(255, 255, 255, 0.12)',
   },
-  border: {
-    light: 'rgba(0, 0, 0, 0.12)',
-    dark: 'rgba(255, 255, 255, 0.12)',
-  },
 } as const;
 
 export const THEME_STYLE = {
@@ -44,8 +40,17 @@ export const THEME_STYLE = {
     borderRadius: '16px',
     position: "relative",
     height: "100%",
-    borderColor: COMMON_COLORS.border.light,
+    boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+    borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.400',
   },
+  CHIP: {
+    fontSize: "0.875rem",
+    color: "text.main",
+    bgcolor: "background.paper",
+    border: '0.5px solid',
+    borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.400',
+    borderRadius: '8px',
+  }
 } as const;
 
 /**
