@@ -48,10 +48,9 @@ import { memo } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Experience } from "@/types/experience";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
-import { CalendarMonth, LocationOn, WorkOutline } from "@mui/icons-material";
+import { LocationOnOutlined, WorkOutline, CalendarToday, AccessTime, WorkHistoryOutlined } from "@mui/icons-material";
 import { WorkingModel, EmploymentType } from "@/types/experience";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { CalendarToday, AccessTime } from "@mui/icons-material";
 import { forwardRef } from "react";
 import { THEME_STYLE } from "@/theme/theme";
 
@@ -211,7 +210,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 {experience.company}
               </Typography>
               <InfoWithIcon
-                icon={LocationOn}
+                icon={LocationOnOutlined}
                 text={experienceTranslations.location}
                 fontSize="0.875rem"
               />
@@ -233,7 +232,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
                 fontSize="0.875rem"
               />
               <InfoWithIcon
-                icon={WorkOutline}
+                icon={WorkHistoryOutlined}
                 text={employmentTypeText}
                 fontSize="0.875rem"
               />
