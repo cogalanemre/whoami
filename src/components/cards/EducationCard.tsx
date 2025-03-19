@@ -49,49 +49,34 @@ import { formatDate, calculateDuration } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { getTranslation } from "@/i18n/utils";
+import { THEME_STYLE } from "@/theme/theme";
 
-// Stil tanımlamaları
-const cardStyles: SxProps<Theme> = {
-  bgcolor: 'background.paper',
-  borderRadius: '16px',
-  position: "relative",
-  height: "100%",
-  transition: "all 0.3s ease-in-out",
-  border: '0.5px solid',
-  borderColor: 'border.default',
-  '&:hover': {
-    transform: "translateY(-4px)",
-    borderColor: 'border.hover',
+const STYLE = {
+  CARD: {
+    ...THEME_STYLE.CARD,
+  },  
+  AVATAR: {
+    ...THEME_STYLE.AVATAR,
   },
-};
-
-const avatarStyles: SxProps<Theme> = {
-  width: 80,
-  height: 80,
-  bgcolor: "transparent",
-  border: "2px solid",
-  borderColor: 'border.default',
-  display: { xs: "none", md: "block" },
-  "& img": {
-    objectFit: "cover",
-    borderRadius: "50%",
+  TITLE: {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
   },
-};
+  SUBTITLE: {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    color: 'primary.main',
+  },
+  META: {
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    gap: { xs: 1, sm: 2 },
+    mt: 1,
+    flexWrap: "wrap",
+    alignItems: "center",
+  },
 
-const schoolNameStyles: SxProps<Theme> = {
-  fontSize: "1.1rem",
-  fontWeight: 600,
-  color: "primary.main",
-  lineHeight: 1.3,
-  marginBottom: 1,
-};
-
-const departmentStyles: SxProps<Theme> = {
-  fontSize: "1rem",
-  fontWeight: 500,
-  color: "text.primary",
-  marginBottom: 1,
-};
+} as const;
 
 const metaContainerStyles: SxProps<Theme> = {
   display: "flex",
@@ -136,7 +121,7 @@ function EducationCard({ education }: EducationCardProps) {
 
   return (
     <Card
-      sx={cardStyles}
+      sx={STYLE.CARD}
       component="article"
       role="article"
       aria-label={`${educationTranslations.school} - ${t.aria.card}`}
@@ -146,28 +131,24 @@ function EducationCard({ education }: EducationCardProps) {
           <Avatar
             src={education.logo}
             alt={`${educationTranslations.school} ${t.aria.logo}`}
-            sx={avatarStyles}
+            sx={STYLE.AVATAR}
           >
             {!education.logo && <School sx={{ fontSize: 40, color: "primary.main" }} />}
           </Avatar>
         }
         title={
-          <Typography variant="h3" component="h3" sx={schoolNameStyles}>
-            {educationTranslations.school}
+          <Typography variant="h3" sx={STYLE.TITLE}>
+            {educationTranslations.department}
           </Typography>
         }
         subheader={
-          <Box>
-            {educationTranslations.department && (
+          <Box sx={STYLE.META}>
               <Typography
                 variant="h4"
-                component="h4"
-                sx={departmentStyles}
+                sx={STYLE.SUBTITLE}
               >
-                {educationTranslations.department}
+                {educationTranslations.school}
               </Typography>
-            )}
-            <Box sx={metaContainerStyles}>
               <InfoWithIcon
                 icon={LocationOn}
                 text={educationTranslations.location}
@@ -185,7 +166,6 @@ function EducationCard({ education }: EducationCardProps) {
                 fontSize="0.875rem"
                 aria-label={t.aria.duration}
               />
-            </Box>
           </Box>
         }
       />

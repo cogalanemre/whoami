@@ -46,6 +46,19 @@ export const THEME_STYLE = {
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
     p: 2,
   },
+  AVATAR: {
+    ...BORDER,
+    width: 80,
+    height: 80,
+    bgcolor: "transparent",
+    display: { xs: "none", md: "flex" },
+    alignItems: 'center',
+    justifyContent: 'center',
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
+    },
+  },
   CHIP: {
     ...BORDER,
     fontSize: "0.875rem",
