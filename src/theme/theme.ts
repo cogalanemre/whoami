@@ -12,7 +12,7 @@ export const COMMON_COLORS = {
     },
     dark: {
       default: '#0C1018',
-      paper: '#000000',
+      paper: '#060607',
     },
   },
   text: {
