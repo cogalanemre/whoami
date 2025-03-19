@@ -39,10 +39,8 @@ import {
   Typography,
   Box,
   Avatar,
-  SxProps,
-  Theme,
 } from "@mui/material";
-import { LocationOn, CalendarToday, AccessTime, School } from "@mui/icons-material";
+import { LocationOnOutlined, CalendarToday, AccessTime, School } from "@mui/icons-material";
 import { memo } from "react";
 import { Education } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
@@ -77,13 +75,6 @@ const STYLE = {
   },
 
 } as const;
-
-const metaContainerStyles: SxProps<Theme> = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  mt: 1,
-};
 
 /**
  * Eğitim Kartı Props Interface
@@ -150,7 +141,7 @@ function EducationCard({ education }: EducationCardProps) {
                 {educationTranslations.school}
               </Typography>
               <InfoWithIcon
-                icon={LocationOn}
+                icon={LocationOnOutlined}
                 text={educationTranslations.location}
                 fontSize="0.875rem"
               />
