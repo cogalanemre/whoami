@@ -7,29 +7,27 @@ import config from "@/config/config.json";
 export const COMMON_COLORS = {
   background: {
     light: {
-      default: '#F7F8FC',
-      paper: '#FDFDFD',
+      default: '#F5F5F5',
+      paper: '#FFFFFF',
     },
     dark: {
       default: '#0C1018',
-      paper: '#060607',
+      paper: '#000000',
     },
   },
   text: {
     light: {
-      primary: 'rgba(0, 0, 0, 0.87)',
-      secondary: 'rgba(0, 0, 0, 0.6)',
-      disabled: 'rgba(0, 0, 0, 0.38)',
+      primary: '#212121',
+      secondary: '#616161',
     },
     dark: {
       primary: '#ffffff',
       secondary: 'rgba(255, 255, 255, 0.7)',
-      disabled: 'rgba(255, 255, 255, 0.5)',
     },
   },
   divider: {
-    light: 'rgba(0, 0, 0, 0.12)',
-    dark: 'rgba(255, 255, 255, 0.12)',
+    light: 'grey.300',
+    dark: 'grey.900',
   },
 } as const;
 
