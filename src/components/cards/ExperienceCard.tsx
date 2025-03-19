@@ -86,22 +86,20 @@ const STYLE = {
     flexWrap: "wrap",
     alignItems: "center",
   },
-  CARDCONTENT_TEXT: {
+  CARDCONTENT: {
     fontSize: "0.95rem",
     letterSpacing: "0.3px",
     color: "text.primary",
     display: "flex",
     flexDirection: "row",
     gap: 1,
-    mt: 1,
     alignItems: 'flex-start',
-    '&:not(:last-child)': {
-      mb: 1
-    },
     '& > span': {
       color: 'primary.main',
       flexShrink: 0,
-      mt: 0.5
+      fontSize: '1rem',
+      lineHeight: 1,
+      mt: 0.2
     }
   },
   CARDACTIONS: {
@@ -111,9 +109,6 @@ const STYLE = {
   },
   CHIP: {
     ...THEME_STYLE.CHIP,
-  },
-  CARDCONTENT: {
-    mt: 2,
   },
 } as const;
 
@@ -240,13 +235,13 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
           }
         />
 
-        <CardContent sx={{...STYLE.CARDCONTENT}}>  
+        <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>  
             {experienceTranslations.description.map((desc, index) => (
               <Typography 
                 key={index} 
                 variant="body1" 
                 sx={{
-                  ...STYLE.CARDCONTENT_TEXT,
+                  ...STYLE.CARDCONTENT,
                 }}
               >
                 <span>•</span>
