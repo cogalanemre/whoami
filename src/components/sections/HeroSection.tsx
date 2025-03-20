@@ -36,10 +36,6 @@ const STYLE = {
     bgcolor: "transparent",
     alignSelf: "center",
     ml: { md: 8 },
-    transition: "transform 0.3s ease-in-out",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
   },
   STACK: {
     position: "relative",

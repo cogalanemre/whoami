@@ -2,11 +2,10 @@
  * Eğitim Bölümü Bileşeni
  * 
  * Kullanıcının eğitim geçmişini kronolojik sırayla gösteren bölüm.
- * Her eğitim için ayrı bir kart oluşturur ve animasyonlu bir şekilde gösterir.
+ * Her eğitim için ayrı bir kart oluşturur.
  * 
  * Özellikler:
  * - Responsive tasarım
- * - Framer Motion animasyonları
  * - Kronolojik sıralama
  * - Memo optimizasyonu
  * - Material-UI entegrasyonu
@@ -29,37 +28,24 @@
 
 import { Box, Stack } from "@mui/material";
 import { School } from "@mui/icons-material";
-import { motion } from "framer-motion";
 import { Education } from "@/types";
 import EducationCard from "@/components/cards/EducationCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
-// Stil tanımlamaları
-const sectionStyles = {
-  width: "100%",
-  minHeight: "100vh",
-  display: "flex",
-  flexDirection: "column",
-  gap: 4,
-  py: 8,
+const STYLES = {
+  SECTION: {
+    mt: 5,
+  },
+  STACK: {
+  },
+  BOX: {
+    mb: 3,
+    "&:last-child": {
+      mb: 0,
+    },
+  },
 } as const;
-
-const stackStyles = {
-  width: "100%",
-  gap: 4,
-  alignItems: "flex-start",
-} as const;
-
-const motionStyles = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, ease: "easeOut" },
-  container: { width: "100%" },
-} as const;
-
-// Framer Motion için Box bileşeni
-const MotionBox = motion(Box);
 
 /**
  * Eğitim Bölümü Props Interface
@@ -81,7 +67,7 @@ interface EducationSectionProps {
  */
 function EducationSection({ education, sectionTitle }: EducationSectionProps) {
   return (
-    <Box sx={sectionStyles}>
+    <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={School}
@@ -90,21 +76,15 @@ function EducationSection({ education, sectionTitle }: EducationSectionProps) {
 
       {/* Eğitim Kartları Konteyneri */}
       <Box>
-        <Stack sx={stackStyles}>
+        <Stack sx={STYLES.STACK}>
           {/* Eğitim Kartları */}
-          {education.map((edu, index) => (
-            <MotionBox
+          {education.map((edu) => (
+            <Box
               key={`${edu.tr.school}-${edu.startDate}`}
-              initial={motionStyles.initial}
-              animate={motionStyles.animate}
-              transition={{ 
-                ...motionStyles.transition, 
-                delay: index * 0.1 // Her kart için kademeli animasyon
-              }}
-              sx={motionStyles.container}
+              sx={STYLES.BOX}
             >
               <EducationCard education={edu} />
-            </MotionBox>
+            </Box>
           ))}
         </Stack>
       </Box>

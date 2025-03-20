@@ -2,14 +2,10 @@
  * Deneyim Bölümü Bileşeni
  * 
  * Kullanıcının iş deneyimlerini kronolojik sırayla gösteren bölüm.
- * Her deneyim için ayrı bir kart oluşturur ve animasyonlu bir şekilde gösterir.
+ * Her deneyim için ayrı bir kart oluşturur.
  * 
  * Özellikler:
  * - Responsive tasarım (xs, sm, md, lg breakpoint'leri için özel spacing)
- * - Framer Motion animasyonları
- *   - Fade in ve slide up efekti
- *   - Kademeli kart animasyonları (her kart 0.1s gecikmeli)
- *   - Smooth geçişler (0.5s duration)
  * - Kronolojik sıralama
  * - Toplam deneyim süresi gösterimi
  * - Material-UI tema entegrasyonu
@@ -34,35 +30,25 @@
 
 import { Box, Stack } from "@mui/material";
 import { BusinessCenter } from "@mui/icons-material";
-import { motion } from "framer-motion";
 import { Experience } from "@/types";
 import ExperienceCard from "@/components/cards/ExperienceCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
-// Stil tanımlamaları
-const sectionStyles = {
-  mt: { xs: 4, sm: 6, md: 8, lg: 10 },
-} as const;
-
-const stackStyles = {
-  spacing: { xs: 4, md: 6 },
-} as const;
-
-const motionStyles = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-  container: {
+const STYLES = {
+  SECTION: {
+    mt: { xs: 4, sm: 6, md: 8, lg: 10 },
+  },
+  STACK: {
+    spacing: { xs: 4, md: 6 },
+  },
+  BOX: {
     mb: { xs: 4, md: 6 },
     "&:last-child": {
       mb: 0,
     },
   },
 } as const;
-
-// Framer Motion için Box bileşeni
-const MotionBox = motion(Box);
 
 /**
  * Deneyim Bölümü Props Interface
@@ -90,7 +76,7 @@ function ExperienceSection({
   sectionTitle 
 }: ExperienceSectionProps) {
   return (
-    <Box sx={sectionStyles}>
+    <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={BusinessCenter}
@@ -100,21 +86,15 @@ function ExperienceSection({
 
       {/* Deneyim Kartları Konteyneri */}
       <Box>
-        <Stack sx={stackStyles}>
-          {/* Deneyim Kartları - Kademeli Animasyon */}
-          {experiences.map((experience, index) => (
-            <MotionBox
+        <Stack sx={STYLES.STACK}>
+          {/* Deneyim Kartları */}
+          {experiences.map((experience) => (
+            <Box
               key={`${experience.company}-${experience.startDate}`}
-              initial={motionStyles.initial}
-              animate={motionStyles.animate}
-              transition={{ 
-                ...motionStyles.transition, 
-                delay: index * 0.1
-              }}
-              sx={motionStyles.container}
+              sx={STYLES.BOX}
             >
               <ExperienceCard experience={experience} />
-            </MotionBox>
+            </Box>
           ))}
         </Stack>
       </Box>
