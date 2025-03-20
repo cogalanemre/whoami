@@ -57,21 +57,13 @@ const STYLE = {
     ...THEME_STYLE.AVATAR,
   },
   TITLE: {
-    fontSize: '1.2rem',
-    fontWeight: 'bold',
+    ...THEME_STYLE.TITLE,
   },
   SUBTITLE: {
-    fontSize: '1rem',
-    fontWeight: 'bold',
-    color: 'primary.main',
+    ...THEME_STYLE.SUBTITLE,
   },
   META: {
-    display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
-    gap: { xs: 1, sm: 2 },
-    mt: 1,
-    flexWrap: "wrap",
-    alignItems: "center",
+    ...THEME_STYLE.META,
   },
 
 } as const;

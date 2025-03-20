@@ -38,8 +38,7 @@ import {
   CardActions,
   CardHeader,
   Typography,
-  SxProps,
-  Theme,
+  Box,
 } from "@mui/material";
 import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
 import { memo } from "react";
@@ -48,64 +47,40 @@ import { formatDate } from "@/utils/dateUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import CustomButton from "@/components/common/CustomButton";
+import { THEME_STYLE } from "@/theme/theme";
 
-// Stil tanımlamaları
-const cardStyles: SxProps<Theme> = {
-  bgcolor: 'background.paper',
-  borderRadius: '16px',
-  position: "relative",
-  height: "100%",
-  transition: "all 0.3s ease-in-out",
-  border: '0.5px solid',
-  borderColor: 'border.default',
-  '&:hover': {
-    transform: "translateY(-4px)",
-    borderColor: 'border.hover',
+const STYLE = {
+  CARD: {
+    ...THEME_STYLE.CARD,
+    p: 0,
+  },  
+  CARD_HEADER: {
+    ...THEME_STYLE.BORDER,
   },
-};
-
-const cardHeaderStyles: SxProps<Theme> = {
-  padding: '24px',
-  backdropFilter: 'blur(4px)',
-  borderBottom: '0.5px solid',
-  borderColor: 'border.default',
-  '& .MuiCardHeader-title': {
-    color: 'primary.main',
-    fontWeight: 600,
-    fontSize: '1.1rem',
-    lineHeight: 1.3,
-    transition: "all 0.2s ease-in-out",
+  TITLE: {
+    ...THEME_STYLE.TITLE,
+  },
+  META: {
+    ...THEME_STYLE.META,
+  },
+  CARD_CONTENT: {
+    p: 2,
+  },
+  DESCRIPTION: {
     display: '-webkit-box',
-    WebkitLineClamp: 2,
+    WebkitLineClamp: 5,
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden',
+    fontSize: "0.95rem",
+    letterSpacing: "0.3px",
+    color: "text.primary",
+    textAlign: 'justify',
   },
-  '& .MuiCardHeader-subheader': {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 2,
-    marginTop: 1,
+  CARD_ACTIONS: {
+    p: 3,
+    pt: 0,
   },
-};
-
-const blogContentStyles: SxProps<Theme> = {
-  p: 3,
-};
-
-const blogDescriptionStyles: SxProps<Theme> = {
-  display: '-webkit-box',
-  WebkitLineClamp: 5,
-  WebkitBoxOrient: 'vertical',
-  overflow: 'hidden',
-  fontSize: "0.95rem",
-  letterSpacing: "0.3px",
-  color: "text.primary",
-};
-
-const blogActionsStyles: SxProps<Theme> = {
-  p: 3,
-  pt: 0,
-};
+} as const;
 
 /**
  * Blog Kartı Props Interface
@@ -137,7 +112,7 @@ function BlogCard({ post }: BlogCardProps) {
       component="article"
       role="article"
       aria-label={post.title}
-      sx={cardStyles}
+      sx={STYLE.CARD}
     >
       {/* Kapak Resmi */}
       {post.thumbnail && (
@@ -149,10 +124,14 @@ function BlogCard({ post }: BlogCardProps) {
       )}
 
       <CardHeader
-        title={post.title}
-        sx={cardHeaderStyles}
+        sx={STYLE.CARD_HEADER}
+        title={
+          <Typography variant="h3" sx={{...STYLE.TITLE}}>
+            {post.title}
+          </Typography>
+        }
         subheader={
-          <>
+          <Box sx={STYLE.META}>
             <InfoWithIcon
               icon={AccessTime}
               text={readingTimeText}
@@ -163,22 +142,22 @@ function BlogCard({ post }: BlogCardProps) {
               text={publishDateText}
               fontSize="0.875rem"
             />
-          </>
+          </Box>
         }
       />
 
-      <CardContent sx={blogContentStyles}>
+      <CardContent sx={STYLE.CARD_CONTENT}>
         {/* Açıklama */}
         <Typography
           variant="body2"
-          sx={blogDescriptionStyles}
+          sx={{ ...STYLE.DESCRIPTION}}
         >
           {post.description}
         </Typography>
       </CardContent>
 
       {/* Devamını Oku Butonu */}
-      <CardActions sx={blogActionsStyles}>
+      <CardActions sx={STYLE.CARD_ACTIONS}>
         <CustomButton
           fullWidth
           endIcon={<ArrowForward fontSize="small" />}

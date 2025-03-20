@@ -68,7 +68,24 @@ export const THEME_STYLE = {
   },
   BORDER: {
     ...BORDER,
-  }
+  },
+  TITLE: {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+  },
+  SUBTITLE: {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    color: 'primary.main',
+  },
+  META: {
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    gap: { xs: 1, sm: 2 },
+    mt: 1,
+    flexWrap: "wrap",
+    alignItems: "center",
+  },
 } as const;
 
 /**
