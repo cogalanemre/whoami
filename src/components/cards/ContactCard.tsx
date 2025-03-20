@@ -11,7 +11,7 @@
  * - Çoklu dil desteği
  */
 
-import { Box, Card, CardContent, CardHeader, SxProps, Theme, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { memo } from "react";
