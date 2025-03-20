@@ -8,7 +8,6 @@
  */
 
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
-import "../globals.css";
 import ClientLayout from "../client-layout";
 import type { Viewport, Metadata } from "next";
 

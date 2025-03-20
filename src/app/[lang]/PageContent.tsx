@@ -11,14 +11,12 @@ import type { BlogPost, Hero } from "@/types";
 import config from "@/config/config.json";
 import resumeData from "@/config/resume.json";
 import { memo } from "react";
-import LoadingSkeleton from "@/components/common/LoadingSkeleton";
 import { UI_CONSTANTS } from "@/constants";
 import { getTranslation } from "@/i18n/utils";
 
 /**
  * Dinamik olarak yüklenen bölümler
  * Code splitting ve lazy loading için Next.js dynamic import kullanılıyor
- * Her bölüm için özel yükleme durumu gösteriliyor
  * 
  * SSR (Server Side Rendering) Stratejisi:
  * - ssr: true -> Bileşen sunucu tarafında render edilir, SEO için önemlidir
@@ -31,7 +29,6 @@ import { getTranslation } from "@/i18n/utils";
  * SSR aktif: SEO için önemli içerik
  */
 const DynamicHeroSection = dynamic(() => import("@/components/sections/HeroSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.HERO} withTitle={false} />,
   ssr: true, // SEO için kritik içerik
 });
 
@@ -41,7 +38,6 @@ const DynamicHeroSection = dynamic(() => import("@/components/sections/HeroSecti
  * SSR aktif: SEO için önemli içerik
  */
 const DynamicExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Experience" />,
   ssr: true, // SEO için kritik içerik
 });
 
@@ -51,7 +47,6 @@ const DynamicExperienceSection = dynamic(() => import("@/components/sections/Exp
  * SSR aktif: SEO için önemli içerik
  */
 const DynamicSkillsSection = dynamic(() => import("@/components/sections/SkillsSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Skills" />,
   ssr: true, // SEO için kritik içerik
 });
 
@@ -61,7 +56,6 @@ const DynamicSkillsSection = dynamic(() => import("@/components/sections/SkillsS
  * SSR aktif: SEO için önemli içerik
  */
 const DynamicEducationSection = dynamic(() => import("@/components/sections/EducationSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Education" />,
   ssr: true, // SEO için kritik içerik
 });
 
@@ -71,7 +65,6 @@ const DynamicEducationSection = dynamic(() => import("@/components/sections/Educ
  * SSR aktif: SEO için önemli içerik
  */
 const DynamicBlogSection = dynamic(() => import("@/components/sections/BlogSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.SECTION} title="Blog" />,
   ssr: true, // SEO için kritik içerik
 });
 
@@ -85,7 +78,6 @@ const DynamicBlogSection = dynamic(() => import("@/components/sections/BlogSecti
  * 4. EmailJS gibi client-side servisleri kullanıyor
  */
 const DynamicContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
-  loading: () => <LoadingSkeleton height={UI_CONSTANTS.COMPONENTS.SKELETON.HEIGHT.CONTACT} title="Contact" />,
   ssr: false, // Client-side only rendering
 });
 
