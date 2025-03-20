@@ -11,7 +11,7 @@ import ContactCard from "@/components/cards/ContactCard";
 import SocialMediaCard from "@/components/cards/SocialMediaCard";
 import MessageCard from "@/components/cards/MessageCard";
 import SectionTitle from "@/components/common/SectionTitle";
-
+import { THEME_STYLE } from "@/theme/theme";
 interface FormData {
   name: string;
   email: string;
@@ -27,7 +27,7 @@ interface SnackbarState {
 
 const STYLES = {
   SECTION: {
-    py: 8,
+    ...THEME_STYLE.SECTION,
   },
   CONTAINER: {
     display: "flex",

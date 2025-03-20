@@ -89,6 +89,10 @@ export const THEME_STYLE = {
     ...BORDER,
     p: 3,
   },
+  SECTION: {
+    component: "section",
+    py: 8,
+  },
 } as const;
 
 /**

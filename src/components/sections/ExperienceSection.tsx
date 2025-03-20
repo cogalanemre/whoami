@@ -34,10 +34,11 @@ import { Experience } from "@/types";
 import ExperienceCard from "@/components/cards/ExperienceCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
+import { THEME_STYLE } from "@/theme/theme";
 
 const STYLES = {
   SECTION: {
-    mt: { xs: 4, sm: 6, md: 8, lg: 10 },
+    ...THEME_STYLE.SECTION,
   },
   STACK: {
     spacing: { xs: 4, md: 6 },

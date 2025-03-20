@@ -28,6 +28,7 @@ import { BlogPost } from "@/types";
 import BlogCard from "@/components/cards/BlogCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
+import { THEME_STYLE } from "@/theme/theme";
 
 /**
  * Blog Bölümü Props Interface
@@ -53,12 +54,11 @@ interface BlogSectionProps {
  */
 const STYLES = {
   SECTION: {
-    mt: 5,
+    ...THEME_STYLE.SECTION,
   },
   CONTAINER: {
     display: 'flex',
     flexWrap: 'wrap',
-    mx: -2,
     width: 'calc(100% + 32px)',
   },
   ITEM: {
@@ -67,7 +67,7 @@ const STYLES = {
       sm: '50%',
       md: '33.333%'
     },
-    p: 2,
+    mr: 4,
   },
   MESSAGE: {
     width: '100%',

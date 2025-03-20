@@ -32,10 +32,11 @@ import { Education } from "@/types";
 import EducationCard from "@/components/cards/EducationCard";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
+import { THEME_STYLE } from "@/theme/theme";
 
 const STYLES = {
   SECTION: {
-    mt: 5,
+    ...THEME_STYLE.SECTION,
   },
   STACK: {
   },
