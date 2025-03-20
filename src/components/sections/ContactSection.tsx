@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  Grid,
   Snackbar,
   Alert,
 } from "@mui/material";
@@ -26,17 +25,24 @@ interface SnackbarState {
   severity: "success" | "error";
 }
 
-// Section container stilleri
-const sectionStyles = {
-  component: "section",
-  py: 8,
-};
-
-// Grid container stilleri
-const gridContainerStyles = {
-  display: "flex",
-  justifyContent: "space-between",
-};
+const STYLES = {
+  SECTION: {
+    py: 8,
+  },
+  CONTAINER: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: { xs: "column", md: "row" },
+  },
+  SIDE_BOX: {
+    width: { xs: "100%", md: "48%" },
+  },
+  LEFT_CONTENT: {
+    display: "flex",
+    flexDirection: "column",
+    gap: { xs: 4, md: 8 },
+  },
+} as const;
 
 /**
  * İletişim Section Bileşeni
@@ -108,38 +114,38 @@ function ContactSection() {
   };
 
   return (
-    <Box sx={sectionStyles}>
+    <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
         icon={ContactPhone}
         title={t("sections.contact")}
       />
 
-      <Grid container sx={gridContainerStyles}>
+      <Box sx={STYLES.CONTAINER}>
         {/* Sol Taraf: İletişim Bilgileri ve Sosyal Medya */}
-        <Grid item xs={12} md={5.8}>
-          <Grid container spacing={{ xs: 4, md: 8 }}>
+        <Box sx={STYLES.SIDE_BOX}>
+          <Box sx={STYLES.LEFT_CONTENT}>
             {/* İletişim Bilgileri */}
-            <Grid item xs={12}>
+            <Box>
               <ContactCard />
-            </Grid>
+            </Box>
 
             {/* Sosyal Medya Bağlantıları */}
-            <Grid item xs={12}>
+            <Box>
               <SocialMediaCard />
-            </Grid>
-          </Grid>
-        </Grid>
+            </Box>
+          </Box>
+        </Box>
 
         {/* Sağ Taraf: İletişim Formu */}
-        <Grid item xs={12} md={5.8}>
+        <Box sx={STYLES.SIDE_BOX}>
           <MessageCard
             formData={formData}
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* Bildirim Snackbar'ı */}
       <Snackbar
