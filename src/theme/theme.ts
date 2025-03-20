@@ -12,7 +12,7 @@ export const COMMON_COLORS = {
     },
     dark: {
       default: '#0C1018',
-      paper: '#060607',
+      paper: '#121213',
     },
   },
   text: {
@@ -44,6 +44,7 @@ export const THEME_STYLE = {
     position: "relative",
     height: "100%",
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+    backgroundImage: 'none',
   },
   AVATAR: {
     ...BORDER,
@@ -64,6 +65,19 @@ export const THEME_STYLE = {
     color: "text.main",
     bgcolor: "background.paper",
     borderRadius: '8px',
+    transition: 'all 0.2s ease-in-out',
+    cursor: 'pointer',
+    '&:hover': {
+      transform: 'translateY(-2px)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      bgcolor: "background.paper",
+       borderColor: 'primary.main'
+    },
+    '&.selected': {
+      bgcolor: 'primary.main',
+      color: 'white',
+      borderColor: 'primary.main'
+    }
   },
   BORDER: {
     ...BORDER,

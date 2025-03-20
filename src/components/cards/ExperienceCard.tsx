@@ -93,6 +93,7 @@ const STYLE = {
   },
   CHIP: {
     ...THEME_STYLE.CHIP,
+
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
@@ -244,6 +245,11 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
               <Chip
                 key={skill}
                 label={skill}
+                onClick={() => {
+                  const element = document.querySelector(`[data-skill="${skill}"]`);
+                  element?.classList.toggle('selected');
+                }}
+                data-skill={skill}
                 sx={{...STYLE.CHIP}}
               />
             ))}
