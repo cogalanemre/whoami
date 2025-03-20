@@ -13,57 +13,36 @@ import {
   CardHeader,
   CardActions,
   TextField,
-  SxProps,
-  Theme,
+  Typography,
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
 import CustomButton from "@/components/common/CustomButton";
+import { THEME_STYLE } from "@/theme/theme";
 
-// Kart stilleri
-const cardStyles: SxProps<Theme> = {
-  bgcolor: 'background.paper',
-  borderRadius: '16px',
-  position: "relative",
-  height: "100%",
-  transition: "all 0.3s ease-in-out",
-  border: '0.5px solid',
-  borderColor: 'border.default',
-  '&:hover': {
-    transform: "translateY(-4px)",
-    borderColor: 'border.hover',
+const STYLE = {
+  CARD: {
+    ...THEME_STYLE.CARD,
+    p: 0,
+  },  
+  CARD_HEADER: {
+    ...THEME_STYLE.CARD_HEADER,
   },
-};
-
-// Kart başlık stilleri
-const cardHeaderStyles: SxProps<Theme> = {
-  padding: '24px',
-  backdropFilter: 'blur(4px)',
-  borderBottom: '0.5px solid',
-  borderColor: 'border.default',
-  '& .MuiCardHeader-title': {
-    color: 'primary.main',
-    fontWeight: 600,
-    fontSize: '1.1rem',
-    lineHeight: 1.3,
-    transition: "all 0.2s ease-in-out",
+  TITLE: {
+    ...THEME_STYLE.TITLE,
   },
-};
-
-// Form konteynır stilleri
-const formContainerStyles: SxProps<Theme> = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 2,
-  p: 3,
-};
-
-// Form aksiyon konteynır stilleri
-const formActionsStyles: SxProps<Theme> = {
-  padding: 3,
-  pt: 0,
-};
+  CARD_CONTENT: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    p: 3,
+  },
+  CARD_ACTIONS: {
+    p: 3,
+    pt: 0,
+  },
+} as const;
 
 interface FormData {
   name: string;
@@ -137,15 +116,19 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
     <Card
       component="form"
       onSubmit={onSubmit}
-      sx={cardStyles}
+      sx={STYLE.CARD}
     >
       <CardHeader
-        title={t("contact.sendMessage")}
-        sx={cardHeaderStyles}
+        title={
+          <Typography variant="h3" sx={{...STYLE.TITLE}}>
+            {t("contact.sendMessage")}
+          </Typography>
+        }       
+        sx={STYLE.CARD_HEADER}
       />
 
       {/* Form */}
-      <CardContent sx={formContainerStyles}>
+      <CardContent sx={STYLE.CARD_CONTENT}>
         {formFields.map((field) => (
           <TextField
             key={field.name}
@@ -166,7 +149,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       </CardContent>
 
       {/* Submit Button */}
-      <CardActions sx={formActionsStyles}>
+      <CardActions sx={STYLE.CARD_ACTIONS}>
         <CustomButton
           type="submit"
           loading={isSubmitting}

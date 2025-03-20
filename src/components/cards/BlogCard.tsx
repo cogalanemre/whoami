@@ -55,7 +55,8 @@ const STYLE = {
     p: 0,
   },  
   CARD_HEADER: {
-    ...THEME_STYLE.BORDER,
+    ...THEME_STYLE.CARD_HEADER,
+    p: 2,
   },
   TITLE: {
     ...THEME_STYLE.TITLE,

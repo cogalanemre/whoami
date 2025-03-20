@@ -65,7 +65,9 @@ const STYLE = {
   META: {
     ...THEME_STYLE.META,
   },
-
+  CARD_HEADER: {
+    ...THEME_STYLE.CARD_HEADER,
+  },
 } as const;
 
 /**
@@ -110,6 +112,7 @@ function EducationCard({ education }: EducationCardProps) {
       aria-label={`${educationTranslations.school} - ${t.aria.card}`}
     >
       <CardHeader
+        sx={STYLE.CARD_HEADER}
         avatar={
           <Avatar
             src={education.logo}

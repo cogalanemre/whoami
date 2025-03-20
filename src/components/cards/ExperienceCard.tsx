@@ -94,6 +94,9 @@ const STYLE = {
   CHIP: {
     ...THEME_STYLE.CHIP,
   },
+  CARD_HEADER: {
+    ...THEME_STYLE.CARD_HEADER,
+  },
 } as const;
 
 /**
@@ -166,6 +169,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(
         }}
       >
         <CardHeader
+          sx={STYLE.CARD_HEADER}
           avatar={
             experience.logo && (
               <Avatar

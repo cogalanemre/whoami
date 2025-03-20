@@ -44,7 +44,6 @@ export const THEME_STYLE = {
     position: "relative",
     height: "100%",
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
-    p: 2,
   },
   AVATAR: {
     ...BORDER,
@@ -85,6 +84,10 @@ export const THEME_STYLE = {
     mt: 1,
     flexWrap: "wrap",
     alignItems: "center",
+  },
+  CARD_HEADER: {
+    ...BORDER,
+    p: 3,
   },
 } as const;
 
