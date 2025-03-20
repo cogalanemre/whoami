@@ -5,15 +5,16 @@ import Typewriter from "@/components/common/Typewriter";
 import SocialMediaButtons from "@/components/common/SocialMediaButtons";
 import { memo } from "react";
 
-// Stil tanımlamaları
-const heroContainerStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "100%",
-  minHeight: {
-    xs: "calc(100vh - 96px)",
-    md: "calc(100vh - 128px)",
+const STYLE = {
+  HERO_CONTAINER: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    minHeight: {
+      xs: "calc(100vh - 96px)",
+      md: "calc(100vh - 128px)",
+    },
   },
 } as const;
 
@@ -110,11 +111,8 @@ function HeroSection({ hero, locale }: HeroSectionProps) {
 
   return (
     <>
-      <MotionBox
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        sx={heroContainerStyles}
+      <Box
+        sx={STYLE.HERO_CONTAINER}
       >
         <Stack sx={stackStyles}>
           <Avatar
@@ -137,7 +135,7 @@ function HeroSection({ hero, locale }: HeroSectionProps) {
             </Box>
           </Box>
         </Stack>
-      </MotionBox>
+      </Box>
       <Box sx={socialButtonsContainerStyles}>
         <SocialMediaButtons socialMedia={hero.socialMedia} />
       </Box>

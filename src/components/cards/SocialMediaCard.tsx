@@ -17,8 +17,6 @@ import {
   CardContent,
   CardHeader,
   Box,
-  SxProps,
-  Theme,
 } from "@mui/material";
 import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
