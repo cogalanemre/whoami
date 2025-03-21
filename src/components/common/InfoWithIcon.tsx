@@ -23,24 +23,29 @@
  * ```
  */
 
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { IconType } from 'react-icons';
 
 // Stil tanımlamaları
-const containerStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 1.5,
-  py: 0.75,
-} as const;
-
-const textStyles = (fontSize: string) =>
-  ({
+const STYLE = {
+  CONTAINER: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 1.5,
+    py: 0.75,
+  },
+  ICON_WRAPPER: {
+    color: 'primary.main',
+    fontSize: '1.2em',
+    transition: 'color 0.2s ease-in-out',
+  },
+  TEXT: (fontSize: string) => ({
     color: 'text.secondary',
     fontSize,
     letterSpacing: '0.3px',
     transition: 'color 0.2s ease-in-out',
-  }) as const;
+  }),
+} as const;
 
 /**
  * İkon ile Bilgi Gösterimi Props Interface
@@ -63,21 +68,15 @@ interface InfoWithIconProps {
  * @returns {JSX.Element} İkon ve metin içeren bilgi gösterimi
  */
 export default function InfoWithIcon({ icon: Icon, text, fontSize = '1rem' }: InfoWithIconProps) {
-  const theme = useTheme();
-
-  const iconStyles = {
-    fontSize: '1.2em',
-    transition: 'color 0.2s ease-in-out',
-    color: theme.palette.primary.main,
-  };
-
   return (
-    <Box sx={containerStyles}>
+    <Box sx={STYLE.CONTAINER}>
       {/* İkon Bileşeni */}
-      <Icon style={iconStyles} />
+      <Box sx={STYLE.ICON_WRAPPER}>
+        <Icon />
+      </Box>
 
       {/* Metin Bileşeni */}
-      <Typography variant="body2" sx={textStyles(fontSize)}>
+      <Typography variant="body2" sx={STYLE.TEXT(fontSize)}>
         {text}
       </Typography>
     </Box>

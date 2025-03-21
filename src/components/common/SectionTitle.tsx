@@ -24,7 +24,8 @@
  * ```
  */
 
-import { Typography, Box, SvgIconProps } from '@mui/material';
+import { Typography, Box } from '@mui/material';
+import { IconType } from 'react-icons';
 
 const STYLE = {
   CONTAINER: {
@@ -41,20 +42,9 @@ const STYLE = {
       md: '1.75rem', // Desktop
     },
     position: 'relative',
-    // Gradient alt çizgi efekti
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      bottom: -8,
-      left: 0,
-      width: '40px',
-      height: '3px',
-      background: 'linear-gradient(90deg, primary.main, transparent)',
-      borderRadius: '4px',
-    },
   },
   ICON: {
-    color: 'primary.main',
+    color: (theme) => theme.palette.primary.main,
     fontSize: '2rem',
   },
   SUBTITLE: {
@@ -68,12 +58,12 @@ const STYLE = {
  * Bölüm Başlığı Props Interface
  *
  * @interface SectionTitleProps
- * @property {React.ComponentType<SvgIconProps>} icon - Başlık yanında gösterilecek Material-UI ikonu
+ * @property {IconType} icon - Gösterilecek Font Awesome ikonu
  * @property {string} title - Başlık metni
  * @property {string} [subtitle] - Alt başlık metni (opsiyonel)
  */
 interface SectionTitleProps {
-  icon: React.ComponentType<SvgIconProps>;
+  icon: IconType;
   title: string;
   subtitle?: string;
 }
@@ -87,19 +77,23 @@ interface SectionTitleProps {
 export default function SectionTitle({ icon: Icon, title, subtitle }: SectionTitleProps) {
   return (
     <Box sx={STYLE.CONTAINER}>
-      {/* Başlık İkonu */}
-      <Icon sx={STYLE.ICON} />
-      {/* Ana Başlık Konteyner */}
-      <Typography variant="h2" gutterBottom sx={STYLE.TITLE}>
-        {/* Başlık Metni */}
-        {title}
-      </Typography>
-      {/* Opsiyonel Alt Başlık */}
-      {subtitle && (
-        <Typography component="span" variant="h6" sx={STYLE.SUBTITLE}>
-          ({subtitle})
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        {/* Başlık İkonu */}
+        <Box sx={{ color: 'primary.main', fontSize: '2rem' }}>
+          <Icon />
+        </Box>
+        {/* Ana Başlık Konteyner */}
+        <Typography variant="h2" gutterBottom sx={STYLE.TITLE}>
+          {/* Başlık Metni */}
+          {title}
         </Typography>
-      )}
+        {/* Opsiyonel Alt Başlık */}
+        {subtitle && (
+          <Typography component="span" variant="h6" sx={STYLE.SUBTITLE}>
+            ({subtitle})
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 }
