@@ -2,7 +2,7 @@
  * İkon ile Bilgi Gösterimi Bileşeni
  * 
  * Bir ikon ve yanında metin içeren bilgi gösterimi komponenti.
- * Material-UI bileşenlerini kullanarak ikon ve metin kombinasyonu oluşturur.
+ * Font Awesome ikonlarını kullanarak ikon ve metin kombinasyonu oluşturur.
  * Özellikler:
  * - Özelleştirilebilir ikon
  * - Tema renkleriyle uyumlu tasarım
@@ -13,17 +13,18 @@
  * @component
  * @example
  * ```tsx
- * import { LocationOn } from '@mui/icons-material';
+ * import { FaEnvelope } from 'react-icons/fa';
  * 
  * <InfoWithIcon
- *   icon={LocationOn}
- *   text="İstanbul, Türkiye"
+ *   icon={FaEnvelope}
+ *   text="ornek@email.com"
  *   fontSize="0.875rem"
  * />
  * ```
  */
 
-import { Box, Typography, SvgIconProps } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
+import { IconType } from "react-icons";
 
 // Stil tanımlamaları
 const containerStyles = {
@@ -31,12 +32,6 @@ const containerStyles = {
   alignItems: "center", 
   gap: 1.5,
   py: 0.75,
-} as const;
-
-const iconStyles = {
-  color: "primary.main", 
-  fontSize: "1.2em",
-  transition: "color 0.2s ease-in-out",
 } as const;
 
 const textStyles = (fontSize: string) => ({
@@ -50,12 +45,12 @@ const textStyles = (fontSize: string) => ({
  * İkon ile Bilgi Gösterimi Props Interface
  * 
  * @interface InfoWithIconProps
- * @property {React.ComponentType<SvgIconProps>} icon - Gösterilecek Material-UI ikonu
+ * @property {IconType} icon - Gösterilecek Font Awesome ikonu
  * @property {string} text - İkonun yanında gösterilecek metin
  * @property {string} [fontSize="1rem"] - Metin boyutu (opsiyonel, varsayılan: 1rem)
  */
 interface InfoWithIconProps {
-  icon: React.ComponentType<SvgIconProps>;
+  icon: IconType;
   text: string;
   fontSize?: string;
 }
@@ -71,10 +66,18 @@ export default function InfoWithIcon({
   text,
   fontSize = "1rem",
 }: InfoWithIconProps) {
+  const theme = useTheme();
+  
+  const iconStyles = {
+    fontSize: "1.2em",
+    transition: "color 0.2s ease-in-out",
+    color: theme.palette.primary.main,
+  };
+
   return (
     <Box sx={containerStyles}>
       {/* İkon Bileşeni */}
-      <Icon sx={iconStyles} />
+      <Icon style={iconStyles} />
 
       {/* Metin Bileşeni */}
       <Typography

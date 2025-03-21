@@ -12,7 +12,7 @@
  */
 
 import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { Email, Phone, LocationOn } from "@mui/icons-material";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import InfoWithIcon from "@/components/common/InfoWithIcon";
 import { memo } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -74,19 +74,19 @@ function ContactCard() {
       <CardContent>
         <Box sx={STYLE.CARD_CONTENT}>
           <InfoWithIcon
-            icon={Email}
+            icon={FaEnvelope}
             text={contactInfo.email}
             fontSize="1rem"
             aria-label={t("contact.form.email")}
           />
           <InfoWithIcon
-            icon={Phone}
+            icon={FaPhone}
             text={contactInfo.phone}
             fontSize="1rem"
             aria-label={t("contact.form.phone")}
           />
           <InfoWithIcon
-            icon={LocationOn}
+            icon={FaMapMarkerAlt}
             text={contactInfo.location[locale]}
             fontSize="1rem"
             aria-label={t("contact.info")}

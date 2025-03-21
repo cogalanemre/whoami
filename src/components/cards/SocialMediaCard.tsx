@@ -30,6 +30,7 @@ import { THEME_STYLE } from "@/theme/theme";
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
+    p: 0,
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
@@ -38,16 +39,7 @@ const STYLE = {
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
-    p: 3,
-  },
-  CARD_CONTENT_ITEM: {
-    textDecoration: "none",
-    color: "none",
-    "&:hover": {
-      textDecoration: "none",
-      color: "none"
-    },
-  },
+  },  
   TITLE: {
     ...THEME_STYLE.TITLE,
   },
@@ -95,29 +87,19 @@ function SocialMediaCard() {
         />
 
       {/* Sosyal Medya Bağlantıları */}
-      <CardContent sx={STYLE.CARD_CONTENT}>
-        {Object.entries(socialLinks).map(([key, { url, icon }]) => (
-          url && (
-            <Box
-              key={key}
-              component="a"
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "block"
-              }}
-            >
+      <CardContent>
+        <Box sx={STYLE.CARD_CONTENT}>
+          {Object.entries(socialLinks).map(([key, { url, icon }]) => (
+            url && (
               <InfoWithIcon
+                key={key}
                 icon={icon}
                 text={url.replace("https://", "")}
                 fontSize="1rem"
               />
-            </Box>
-          )
-        ))}
+            )
+          ))}
+        </Box>
       </CardContent>
     </Card>
   );
