@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ThemeOptions, Theme } from "@mui/material/styles";
-import config from "@/config/config.json";
+import { ThemeOptions, Theme } from '@mui/material/styles';
+import config from '@/config/config.json';
 
 // Sabit tema değerleri
 export const COMMON_COLORS = {
@@ -33,7 +33,7 @@ export const COMMON_COLORS = {
 
 const BORDER = {
   border: '0.5px solid',
-  borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300',
+  borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300'),
 } as const;
 
 export const THEME_STYLE = {
@@ -41,8 +41,8 @@ export const THEME_STYLE = {
     ...BORDER,
     bgcolor: 'background.paper',
     borderRadius: '16px',
-    position: "relative",
-    height: "100%",
+    position: 'relative',
+    height: '100%',
     boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
     backgroundImage: 'none',
   },
@@ -50,34 +50,34 @@ export const THEME_STYLE = {
     ...BORDER,
     width: 80,
     height: 80,
-    bgcolor: "transparent",
-    display: { xs: "none", md: "flex" },
+    bgcolor: 'transparent',
+    display: { xs: 'none', md: 'flex' },
     alignItems: 'center',
     justifyContent: 'center',
-    "& img": {
-      objectFit: "cover",
-      borderRadius: "50%",
+    '& img': {
+      objectFit: 'cover',
+      borderRadius: '50%',
     },
   },
   CHIP: {
     ...BORDER,
-    fontSize: "0.875rem",
-    color: "text.main",
-    bgcolor: "background.paper",
+    fontSize: '0.875rem',
+    color: 'text.main',
+    bgcolor: 'background.paper',
     borderRadius: '8px',
     transition: 'all 0.2s ease-in-out',
     cursor: 'pointer',
     '&:hover': {
       transform: 'translateY(-2px)',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-      bgcolor: "background.paper",
-       borderColor: 'primary.main'
+      bgcolor: 'background.paper',
+      borderColor: 'primary.main',
     },
     '&.selected': {
       bgcolor: 'primary.main',
       color: 'white',
-      borderColor: 'primary.main'
-    }
+      borderColor: 'primary.main',
+    },
   },
   BORDER: {
     ...BORDER,
@@ -92,19 +92,19 @@ export const THEME_STYLE = {
     color: 'primary.main',
   },
   META: {
-    display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
     gap: { xs: 1, sm: 2 },
     mt: 1,
-    flexWrap: "wrap",
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
   CARD_HEADER: {
     ...BORDER,
     p: 3,
   },
   SECTION: {
-    component: "section",
+    component: 'section',
     py: 5,
   },
 } as const;
@@ -121,4 +121,4 @@ const theme: ThemeOptions = {
   },
 } as const;
 
-export default theme; 
+export default theme;

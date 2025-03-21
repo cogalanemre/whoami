@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         hostname: 'miro.medium.com',
         port: '',
         pathname: '/**',
-      }
+      },
     ],
   },
 };

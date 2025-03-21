@@ -1,6 +1,6 @@
 /**
  * Blog Bölümü Bileşeni
- * 
+ *
  * Medium'dan çekilen blog yazılarını grid yapısında gösteren bölüm.
  * Özellikler:
  * - Responsive flex yapısı
@@ -8,7 +8,7 @@
  * - Boş durum kontrolü
  * - Memo optimizasyonu
  * - Özelleştirilebilir metinler
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -22,17 +22,17 @@
  * ```
  */
 
-import { Box, Typography } from "@mui/material";
-import { FaNewspaper } from "react-icons/fa";
-import { BlogPost } from "@/types";
-import BlogCard from "@/components/cards/BlogCard";
-import SectionTitle from "@/components/common/SectionTitle";
-import { memo } from "react";
-import { THEME_STYLE } from "@/theme/theme";
+import { Box, Typography } from '@mui/material';
+import { FaNewspaper } from 'react-icons/fa';
+import { BlogPost } from '@/types';
+import BlogCard from '@/components/cards/BlogCard';
+import SectionTitle from '@/components/common/SectionTitle';
+import { memo } from 'react';
+import { THEME_STYLE } from '@/theme/theme';
 
 /**
  * Blog Bölümü Props Interface
- * 
+ *
  * @interface BlogSectionProps
  * @property {BlogPost[]} blogPosts - Blog yazıları listesi
  * @property {boolean} loading - Yükleme durumu
@@ -65,49 +65,44 @@ const STYLES = {
     width: {
       xs: '100%',
       sm: '50%',
-      md: '33.333%'
+      md: '33.333%',
     },
     mr: 4,
   },
   MESSAGE: {
     width: '100%',
     textAlign: 'center',
-  }
+  },
 } as const;
 
 /**
  * Blog Bölümü Bileşeni
- * 
+ *
  * @param {BlogSectionProps} props - Bileşen props'ları
  * @returns {JSX.Element} Blog bölümü
  */
-function BlogSection({ 
+function BlogSection({
   blogPosts,
   loading,
   sectionTitle,
   loadingText,
-  noPostsText
+  noPostsText,
 }: BlogSectionProps) {
   return (
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
-      <SectionTitle
-        icon={FaNewspaper}
-        title={sectionTitle}
-      />
+      <SectionTitle icon={FaNewspaper} title={sectionTitle} />
 
       {/* Blog Kartları Container */}
       <Box sx={STYLES.CONTAINER}>
         {/* Yükleme Durumu */}
         {loading ? (
           <Box sx={STYLES.MESSAGE}>
-            <Typography>
-              {loadingText}
-            </Typography>
+            <Typography>{loadingText}</Typography>
           </Box>
         ) : blogPosts.length > 0 ? (
           // Blog Kartları
-          blogPosts.map((post) => (
+          blogPosts.map(post => (
             <Box sx={STYLES.ITEM} key={post.link}>
               <BlogCard post={post} />
             </Box>
@@ -115,9 +110,7 @@ function BlogSection({
         ) : (
           // Boş Durum
           <Box sx={STYLES.MESSAGE}>
-            <Typography>
-              {noPostsText}
-            </Typography>
+            <Typography>{noPostsText}</Typography>
           </Box>
         )}
       </Box>
@@ -126,4 +119,4 @@ function BlogSection({
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(BlogSection); 
+export default memo(BlogSection);

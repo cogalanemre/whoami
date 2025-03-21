@@ -7,7 +7,7 @@ export const UI_CONSTANTS = {
       FAST: 0.2,
       NORMAL: 0.3,
       SLOW: 0.8,
-    }
+    },
   },
   LAYOUT: {
     PAGE_PADDING: {
@@ -16,21 +16,21 @@ export const UI_CONSTANTS = {
     },
     CONTAINER: {
       MAX_WIDTH: {
-        MOBILE: "100%",
-        TABLET: "90%",
-        DESKTOP: "85%"
+        MOBILE: '100%',
+        TABLET: '90%',
+        DESKTOP: '85%',
       },
       PADDING: {
         XS: 2,
         SM: 3,
-        MD: 4
+        MD: 4,
       },
       SPACING: {
         XS: 4,
         SM: 6,
-        MD: 8
-      }
-    }
+        MD: 8,
+      },
+    },
   },
   COMPONENTS: {
     AVATAR: {
@@ -47,10 +47,10 @@ export const UI_CONSTANTS = {
       HEIGHT: {
         HERO: 400,
         SECTION: 300,
-        CONTACT: 250
-      }
-    }
-  }
+        CONTACT: 250,
+      },
+    },
+  },
 } as const;
 
 // Form ayarları
@@ -68,10 +68,11 @@ export const API_CONFIG = {
 // Güvenlik ayarları
 export const SECURITY_CONFIG = {
   CORS_OPTIONS: {
-    origin: process.env.NODE_ENV === 'production' 
-      ? config.security.cors.origins.production 
-      : config.security.cors.origins.development,
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? config.security.cors.origins.production
+        : config.security.cors.origins.development,
     methods: config.security.cors.methods,
     credentials: config.security.cors.credentials,
   },
-} as const; 
+} as const;

@@ -9,8 +9,8 @@ export const localeConfigs: Record<string, LocaleConfig> = {
     numberFormat: {
       currency: 'TRY',
       decimal: ',',
-      thousand: '.'
-    }
+      thousand: '.',
+    },
   },
   en: {
     code: 'en',
@@ -20,10 +20,10 @@ export const localeConfigs: Record<string, LocaleConfig> = {
     numberFormat: {
       currency: 'USD',
       decimal: '.',
-      thousand: ','
-    }
-  }
+      thousand: ',',
+    },
+  },
 } as const;
 
 export const defaultLocale = 'tr';
-export const supportedLocales = Object.keys(localeConfigs) as Array<keyof typeof localeConfigs>; 
+export const supportedLocales = Object.keys(localeConfigs) as Array<keyof typeof localeConfigs>;

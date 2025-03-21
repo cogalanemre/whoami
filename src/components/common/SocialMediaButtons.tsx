@@ -1,16 +1,16 @@
 /**
  * Sosyal Medya Butonları Bileşeni
- * 
+ *
  * Kullanıcının sosyal medya bağlantılarını gösteren buton grubu.
  * Her platform için özel ikon ve bağlantı içerir.
- * 
+ *
  * Özellikler:
  * - Responsive tasarım
  * - Dinamik buton oluşturma
  * - Platform bazlı özel davranış (mail için mailto:)
  * - Güvenli link açma (noopener, noreferrer)
  * - Boş/geçersiz bağlantıları otomatik filtreleme
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -24,7 +24,7 @@
  * ```
  */
 
-import { Stack } from "@mui/material";
+import { Stack } from '@mui/material';
 import {
   FaGithub,
   FaLinkedinIn,
@@ -35,10 +35,10 @@ import {
   FaMediumM,
   FaEnvelope,
   FaGlobe,
-} from "react-icons/fa";
-import { memo } from "react";
-import SocialMediaButton from "@/components/common/SocialMediaButton";
-import type { SocialMedia } from "@/types";
+} from 'react-icons/fa';
+import { memo } from 'react';
+import SocialMediaButton from '@/components/common/SocialMediaButton';
+import type { SocialMedia } from '@/types';
 
 /**
  * Platform bazlı ikon eşleştirmeleri
@@ -58,7 +58,7 @@ const SOCIAL_MEDIA_ICONS = {
 
 /**
  * Sosyal Medya Butonları Props Interface
- * 
+ *
  * @interface SocialMediaButtonsProps
  * @property {Partial<SocialMedia>} socialMedia - Sosyal medya bağlantıları
  */
@@ -68,20 +68,19 @@ interface SocialMediaButtonsProps {
 
 /**
  * Sosyal Medya Butonları Bileşeni
- * 
+ *
  * @param {SocialMediaButtonsProps} props - Bileşen props'ları
  * @returns {JSX.Element | null} Sosyal medya butonları grubu veya null
  */
 function SocialMediaButtons({ socialMedia }: SocialMediaButtonsProps) {
   // Geçerli bağlantıları filtrele
-  const availableSocialMedia = Object.entries(socialMedia)
-    .filter(([platform, value]) => {
-      // Mail için özel kontrol (boş string olmamalı)
-      if (platform === 'mail') {
-        return value && value.trim() !== '';
-      }
-      return value;
-    });
+  const availableSocialMedia = Object.entries(socialMedia).filter(([platform, value]) => {
+    // Mail için özel kontrol (boş string olmamalı)
+    if (platform === 'mail') {
+      return value && value.trim() !== '';
+    }
+    return value;
+  });
 
   // Hiç bağlantı yoksa null döndür
   if (availableSocialMedia.length === 0) {
@@ -89,18 +88,18 @@ function SocialMediaButtons({ socialMedia }: SocialMediaButtonsProps) {
   }
 
   return (
-    <Stack 
-      direction="row" 
-      spacing={3} 
-      sx={{ 
+    <Stack
+      direction="row"
+      spacing={3}
+      sx={{
         mb: 4,
         // Responsive aralık
         '& > *': {
           transition: 'transform 0.2s ease-in-out',
           '&:hover': {
             transform: 'translateY(-2px)',
-          }
-        }
+          },
+        },
       }}
     >
       {availableSocialMedia.map(([platform, url]) => {
@@ -126,4 +125,4 @@ function SocialMediaButtons({ socialMedia }: SocialMediaButtonsProps) {
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(SocialMediaButtons); 
+export default memo(SocialMediaButtons);

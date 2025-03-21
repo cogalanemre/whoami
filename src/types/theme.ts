@@ -3,4 +3,4 @@ export interface ThemeColors {
   surface: string;
   secondary: string;
   primary: string;
-} 
+}

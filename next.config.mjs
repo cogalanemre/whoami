@@ -4,9 +4,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["cdn-images-1.medium.com"],
+    domains: ['cdn-images-1.medium.com'],
   },
   transpilePackages: ['@mui/material', '@mui/system'],
 };
 
-export default nextConfig; 
+export default nextConfig;

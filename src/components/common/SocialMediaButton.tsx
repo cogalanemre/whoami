@@ -1,17 +1,17 @@
 /**
  * Sosyal Medya Buton Bileşeni
- * 
+ *
  * Sosyal medya bağlantıları için özelleştirilmiş, animasyonlu ikonlu buton.
  * Material-UI IconButton bileşenini temel alır ve ek özellikler ekler:
  * - Özel kenarlık ve bulanıklık efekti
  * - Hover durumunda yukarı hareket animasyonu
  * - Özelleştirilebilir ikon ve bağlantı özellikleri
- * 
+ *
  * @component
  * @example
  * ```tsx
  * import { FaGithub } from 'react-icons/fa';
- * 
+ *
  * <SocialMediaButton
  *   icon={FaGithub}
  *   href="https://github.com/username"
@@ -21,12 +21,12 @@
  * ```
  */
 
-import { IconButton, IconButtonProps } from "@mui/material";
-import { IconType } from "react-icons";
+import { IconButton, IconButtonProps } from '@mui/material';
+import { IconType } from 'react-icons';
 
 /**
  * Sosyal Medya Buton Props Interface
- * 
+ *
  * @interface SocialMediaButtonProps
  * @extends {Omit<IconButtonProps, 'children'>} - IconButton'dan children prop'u hariç tüm özellikleri alır
  * @property {IconType} icon - React-icons kütüphanesinden bir ikon komponenti
@@ -43,34 +43,30 @@ interface SocialMediaButtonProps extends Omit<IconButtonProps, 'children'> {
 
 // Stil tanımlamaları
 const socialMediaButtonStyles = {
-  border: "2px solid",
-  borderColor: "primary.main",
-  backdropFilter: "blur(4px)",
-  "& > svg": {
-    fontSize: "1.5rem",
+  border: '2px solid',
+  borderColor: 'primary.main',
+  backdropFilter: 'blur(4px)',
+  '& > svg': {
+    fontSize: '1.5rem',
   },
-  "&:hover": {
-    transform: "translateY(-2px)",
-    transition: "all 0.2s ease-in-out",
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    transition: 'all 0.2s ease-in-out',
   },
 } as const;
 
-export default function SocialMediaButton({ 
-  icon: Icon, 
-  sx,
-  ...props 
-}: SocialMediaButtonProps) {
+export default function SocialMediaButton({ icon: Icon, sx, ...props }: SocialMediaButtonProps) {
   return (
     <IconButton
       color="primary"
       size="large"
       sx={{
         ...socialMediaButtonStyles,
-        ...sx
+        ...sx,
       }}
       {...props}
     >
       <Icon />
     </IconButton>
   );
-} 
+}

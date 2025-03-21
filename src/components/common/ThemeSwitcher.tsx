@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Box } from "@mui/material";
-import { useThemeContext } from "@/context/ThemeContext";
-import MaterialUISwitch from "./MaterialUISwitch";
+import { Box } from '@mui/material';
+import { useThemeContext } from '@/context/ThemeContext';
+import MaterialUISwitch from './MaterialUISwitch';
 
 /**
  * Tema Değiştirici Bileşeni
- * 
+ *
  * Açık/koyu tema geçişini sağlayan animasyonlu switch buton.
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -21,16 +21,13 @@ export default function ThemeSwitcher() {
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: 'fixed',
         top: 20,
         right: 20,
         zIndex: 1000,
       }}
     >
-      <MaterialUISwitch
-        checked={isDarkMode}
-        onChange={toggleTheme}
-      />
+      <MaterialUISwitch checked={isDarkMode} onChange={toggleTheme} />
     </Box>
   );
-} 
+}

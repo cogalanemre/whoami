@@ -20,29 +20,32 @@ export function useTranslation() {
   const locale = (params?.lang as LocaleCode) || defaultLocale;
   const config = getLocaleConfig(locale);
 
-  const t = useCallback((
-    key: TranslationKey,
-    params?: TranslationParams
-  ) => {
-    return getTranslation(key, locale, params);
-  }, [locale]);
+  const t = useCallback(
+    (key: TranslationKey, params?: TranslationParams) => {
+      return getTranslation(key, locale, params);
+    },
+    [locale]
+  );
 
-  const formatDateFn = useCallback((date: Date) => {
-    return formatDate(date, locale);
-  }, [locale]);
+  const formatDateFn = useCallback(
+    (date: Date) => {
+      return formatDate(date, locale);
+    },
+    [locale]
+  );
 
-  const formatNumberFn = useCallback((
-    num: number,
-    options?: Intl.NumberFormatOptions
-  ) => {
-    return formatNumber(num, locale, options);
-  }, [locale]);
+  const formatNumberFn = useCallback(
+    (num: number, options?: Intl.NumberFormatOptions) => {
+      return formatNumber(num, locale, options);
+    },
+    [locale]
+  );
 
   return {
     t,
     locale,
     formatDate: formatDateFn,
     formatNumber: formatNumberFn,
-    config
+    config,
   };
-} 
+}

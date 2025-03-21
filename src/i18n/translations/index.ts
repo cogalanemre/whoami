@@ -4,7 +4,7 @@ import en from './en';
 
 const translations: Record<string, TranslationType> = {
   tr,
-  en
+  en,
 };
 
-export default translations; 
+export default translations;

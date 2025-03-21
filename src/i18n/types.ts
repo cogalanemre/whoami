@@ -22,4 +22,4 @@ export interface TranslationParams {
   [key: string]: string | number | PluralForms | undefined;
   plural?: PluralForms;
   count?: number;
-} 
+}

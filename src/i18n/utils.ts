@@ -21,7 +21,7 @@ export function getTranslation(
 ): string {
   // Anahtarı nokta notasyonuna göre böl
   const keys = key.split('.');
-  
+
   // İlk önce verilen dilde çeviriyi bul
   let value = keys.reduce<NestedValue>((obj, k) => {
     if (typeof obj === 'object' && obj !== null) {
@@ -29,7 +29,7 @@ export function getTranslation(
     }
     return '';
   }, translations[locale] as NestedValue);
-  
+
   // Eğer çeviri bulunamadıysa fallback dilde ara
   if ((!value || value === '') && locale !== fallbackLocale) {
     value = keys.reduce<NestedValue>((obj, k) => {
@@ -39,7 +39,7 @@ export function getTranslation(
       return '';
     }, translations[fallbackLocale] as NestedValue);
   }
-  
+
   // Hala bulunamadıysa anahtarı döndür
   if (!value || typeof value !== 'string') return key;
 
@@ -52,15 +52,12 @@ export function getTranslation(
     }
 
     // Diğer parametreleri değiştir
-    value = Object.entries(params).reduce(
-      (str, [paramKey, paramValue]) => {
-        if (paramKey !== 'plural') {
-          return str.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
-        }
-        return str;
-      },
-      value
-    );
+    value = Object.entries(params).reduce((str, [paramKey, paramValue]) => {
+      if (paramKey !== 'plural') {
+        return str.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
+      }
+      return str;
+    }, value);
   }
 
   return value;
@@ -85,4 +82,4 @@ function getPluralForm(count: number, forms: PluralForms): string {
 
 export function getLocaleConfig(locale: LocaleCode) {
   return localeConfigs[locale];
-} 
+}

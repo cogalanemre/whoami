@@ -28,4 +28,4 @@ export interface Experience {
   skillTags: string[];
   tr: ExperienceTranslation;
   en: ExperienceTranslation;
-} 
+}

@@ -10,4 +10,4 @@ export interface Education {
   logo?: string;
   tr: EducationTranslation;
   en: EducationTranslation;
-} 
+}

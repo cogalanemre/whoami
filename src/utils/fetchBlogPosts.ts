@@ -24,8 +24,8 @@ type CustomItem = Parser.Item & {
 
 const parser: Parser<CustomFeed, CustomItem> = new Parser({
   customFields: {
-    item: ['content:encoded']
-  }
+    item: ['content:encoded'],
+  },
 });
 
 // Ortalama okuma hızı (kelime/dakika)
@@ -50,9 +50,9 @@ function calculateReadingTime(content: string): number {
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   try {
     console.log('Loading blog posts from Medium...');
-    
+
     const feed = await parser.parseURL(config.api.blog.feedUrl);
-    
+
     return feed.items.map(item => {
       // HTML içeriğini temizle
       const cleanContent = item['content:encoded'] || item.content || '';
@@ -63,12 +63,10 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
         description: item.contentSnippet || plainText.substring(0, 200) + '...',
         link: item.link || '',
         pubDate: new Date(item.pubDate || ''),
-        thumbnail: item['content:encoded'] 
-          ? extractThumbnail(item['content:encoded']) 
-          : undefined,
+        thumbnail: item['content:encoded'] ? extractThumbnail(item['content:encoded']) : undefined,
         readingTime: {
-          minutes: calculateReadingTime(cleanContent)
-        }
+          minutes: calculateReadingTime(cleanContent),
+        },
       };
     });
   } catch (error) {
@@ -81,4 +79,4 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
 function extractThumbnail(content: string): string | undefined {
   const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
   return imgMatch ? imgMatch[1] : undefined;
-} 
+}

@@ -1,23 +1,18 @@
 'use client';
 
-import dynamic from "next/dynamic";
-import {
-  Grid,
-  Container,
-  useTheme,
-  useMediaQuery
-} from "@mui/material";
-import type { BlogPost, Hero } from "@/types";
-import config from "@/config/config.json";
-import resumeData from "@/config/resume.json";
-import { memo } from "react";
-import { UI_CONSTANTS } from "@/constants";
-import { getTranslation } from "@/i18n/utils";
+import dynamic from 'next/dynamic';
+import { Grid, Container, useTheme, useMediaQuery } from '@mui/material';
+import type { BlogPost, Hero } from '@/types';
+import config from '@/config/config.json';
+import resumeData from '@/config/resume.json';
+import { memo } from 'react';
+import { UI_CONSTANTS } from '@/constants';
+import { getTranslation } from '@/i18n/utils';
 
 /**
  * Dinamik olarak yüklenen bölümler
  * Code splitting ve lazy loading için Next.js dynamic import kullanılıyor
- * 
+ *
  * SSR (Server Side Rendering) Stratejisi:
  * - ssr: true -> Bileşen sunucu tarafında render edilir, SEO için önemlidir
  * - ssr: false -> Bileşen sadece client tarafında render edilir, form gibi interaktif öğeler için uygundur
@@ -28,7 +23,7 @@ import { getTranslation } from "@/i18n/utils";
  * Kullanıcı bilgileri ve ana başlıkları içerir
  * SSR aktif: SEO için önemli içerik
  */
-const DynamicHeroSection = dynamic(() => import("@/components/sections/HeroSection"), {
+const DynamicHeroSection = dynamic(() => import('@/components/sections/HeroSection'), {
   ssr: true, // SEO için kritik içerik
 });
 
@@ -37,7 +32,7 @@ const DynamicHeroSection = dynamic(() => import("@/components/sections/HeroSecti
  * İş deneyimleri ve toplam deneyim süresini gösterir
  * SSR aktif: SEO için önemli içerik
  */
-const DynamicExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection"), {
+const DynamicExperienceSection = dynamic(() => import('@/components/sections/ExperienceSection'), {
   ssr: true, // SEO için kritik içerik
 });
 
@@ -46,7 +41,7 @@ const DynamicExperienceSection = dynamic(() => import("@/components/sections/Exp
  * Teknik beceriler ve uzmanlık alanlarını listeler
  * SSR aktif: SEO için önemli içerik
  */
-const DynamicSkillsSection = dynamic(() => import("@/components/sections/SkillsSection"), {
+const DynamicSkillsSection = dynamic(() => import('@/components/sections/SkillsSection'), {
   ssr: true, // SEO için kritik içerik
 });
 
@@ -55,7 +50,7 @@ const DynamicSkillsSection = dynamic(() => import("@/components/sections/SkillsS
  * Eğitim geçmişi ve akademik bilgileri gösterir
  * SSR aktif: SEO için önemli içerik
  */
-const DynamicEducationSection = dynamic(() => import("@/components/sections/EducationSection"), {
+const DynamicEducationSection = dynamic(() => import('@/components/sections/EducationSection'), {
   ssr: true, // SEO için kritik içerik
 });
 
@@ -64,7 +59,7 @@ const DynamicEducationSection = dynamic(() => import("@/components/sections/Educ
  * Medium'dan çekilen blog yazılarını listeler
  * SSR aktif: SEO için önemli içerik
  */
-const DynamicBlogSection = dynamic(() => import("@/components/sections/BlogSection"), {
+const DynamicBlogSection = dynamic(() => import('@/components/sections/BlogSection'), {
   ssr: true, // SEO için kritik içerik
 });
 
@@ -77,13 +72,13 @@ const DynamicBlogSection = dynamic(() => import("@/components/sections/BlogSecti
  * 3. Kullanıcı etkileşimi odaklı bir bölüm
  * 4. EmailJS gibi client-side servisleri kullanıyor
  */
-const DynamicContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
+const DynamicContactSection = dynamic(() => import('@/components/sections/ContactSection'), {
   ssr: false, // Client-side only rendering
 });
 
 /**
  * Sayfa içeriği için gerekli prop tipleri
- * 
+ *
  * @interface PageContentProps
  * @property {("tr"|"en")} lang - Aktif dil kodu
  * @property {BlogPost[]} blogPosts - Medium'dan çekilen blog yazıları
@@ -91,7 +86,7 @@ const DynamicContactSection = dynamic(() => import("@/components/sections/Contac
  * @property {Hero} hero - Kullanıcı profil bilgileri
  */
 interface PageContentProps {
-  lang: "tr" | "en";
+  lang: 'tr' | 'en';
   blogPosts: BlogPost[];
   totalExperience: string;
   hero: Hero;
@@ -100,17 +95,12 @@ interface PageContentProps {
 /**
  * Ana sayfa içeriği bileşeni
  * Tüm bölümleri yönetir ve responsive görünümü sağlar
- * 
+ *
  * @component
  * @param {PageContentProps} props - Bileşen props'ları
  * @returns {JSX.Element} Render edilecek sayfa içeriği
  */
-function PageContent({
-  lang,
-  blogPosts,
-  totalExperience,
-  hero,
-}: PageContentProps) {
+function PageContent({ lang, blogPosts, totalExperience, hero }: PageContentProps) {
   /**
    * Material-UI tema ve medya query hook'ları
    * Responsive tasarım için kullanılır
@@ -132,42 +122,45 @@ function PageContent({
     blog: {
       loading: getTranslation('blog.loading', lang),
       noPosts: getTranslation('blog.noPosts', lang),
-    }
+    },
   };
 
   /**
    * Ekran boyutuna göre container genişliğini belirle
    */
-  const containerMaxWidth = isMobile 
+  const containerMaxWidth = isMobile
     ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.MOBILE
-    : isTablet 
-      ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.TABLET 
+    : isTablet
+      ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.TABLET
       : UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.DESKTOP;
 
   return (
     <Container
       component="main"
-      sx={{ 
-        minHeight: "100vh",
+      sx={{
+        minHeight: '100vh',
         maxWidth: containerMaxWidth,
         transition: 'max-width 0.3s ease',
-        py: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
-        px: { xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS, sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM },
+        py: {
+          xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS,
+          md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM,
+        },
+        px: {
+          xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS,
+          sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM,
+        },
       }}
     >
-      <Grid 
-        container 
-        spacing={{ 
-          xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS, 
-          md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD 
+      <Grid
+        container
+        spacing={{
+          xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS,
+          md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD,
         }}
       >
         {/* Hero Section */}
         <Grid item xs={12}>
-          <DynamicHeroSection 
-            hero={hero}
-            locale={lang} 
-          />
+          <DynamicHeroSection hero={hero} locale={lang} />
         </Grid>
 
         {/* Experience Section */}
@@ -184,10 +177,7 @@ function PageContent({
         {/* Skills Section */}
         {config.features.sections.skills && (
           <Grid item xs={12}>
-            <DynamicSkillsSection 
-              experiences={resumeData.experiences}
-              title={t.sections.skills}
-            />
+            <DynamicSkillsSection experiences={resumeData.experiences} title={t.sections.skills} />
           </Grid>
         )}
 
@@ -215,7 +205,8 @@ function PageContent({
         )}
 
         {/* Contact Section */}
-        {(config.features.sections.contact.showContactInfo || config.features.sections.contact.showMessageForm) && (
+        {(config.features.sections.contact.showContactInfo ||
+          config.features.sections.contact.showMessageForm) && (
           <Grid item xs={12}>
             <DynamicContactSection />
           </Grid>
@@ -225,4 +216,4 @@ function PageContent({
   );
 }
 
-export default memo(PageContent); 
+export default memo(PageContent);

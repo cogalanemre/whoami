@@ -1,17 +1,13 @@
-import { useState } from "react";
-import {
-  Box,
-  Snackbar,
-  Alert,
-} from "@mui/material";
-import { FaPhoneAlt } from "react-icons/fa";
-import { useTranslation } from "@/hooks/useTranslation";
-import { memo } from "react";
-import ContactCard from "@/components/cards/ContactCard";
-import SocialMediaCard from "@/components/cards/SocialMediaCard";
-import MessageCard from "@/components/cards/MessageCard";
-import SectionTitle from "@/components/common/SectionTitle";
-import { THEME_STYLE } from "@/theme/theme";
+import { useState } from 'react';
+import { Box, Snackbar, Alert } from '@mui/material';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { useTranslation } from '@/hooks/useTranslation';
+import { memo } from 'react';
+import ContactCard from '@/components/cards/ContactCard';
+import SocialMediaCard from '@/components/cards/SocialMediaCard';
+import MessageCard from '@/components/cards/MessageCard';
+import SectionTitle from '@/components/common/SectionTitle';
+import { THEME_STYLE } from '@/theme/theme';
 interface FormData {
   name: string;
   email: string;
@@ -22,7 +18,7 @@ interface FormData {
 interface SnackbarState {
   open: boolean;
   message: string;
-  severity: "success" | "error";
+  severity: 'success' | 'error';
 }
 
 const STYLES = {
@@ -30,50 +26,50 @@ const STYLES = {
     ...THEME_STYLE.SECTION,
   },
   CONTAINER: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: { xs: "column", md: "row" },
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: { xs: 'column', md: 'row' },
   },
   SIDE_BOX: {
-    width: { xs: "100%", md: "48%" },
+    width: { xs: '100%', md: '48%' },
   },
   LEFT_CONTENT: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     gap: { xs: 4, md: 8 },
   },
 } as const;
 
 /**
  * İletişim Section Bileşeni
- * 
+ *
  * İletişim bilgilerini ve iletişim formunu içeren bölüm.
  * Form gönderimi sonrası başarılı/başarısız durumları Snackbar ile gösterilir.
- * 
+ *
  * @returns {JSX.Element} Contact section bileşeni
  */
 function ContactSection() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
   });
   const [snackbar, setSnackbar] = useState<SnackbarState>({
     open: false,
-    message: "",
-    severity: "success",
+    message: '',
+    severity: 'success',
   });
 
   // Form gönderme işleyicisi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
+      const response = await fetch('/api/contact', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -81,8 +77,8 @@ function ContactSection() {
       if (response.ok) {
         setSnackbar({
           open: true,
-          message: t("contact.success"),
-          severity: "success",
+          message: t('contact.success'),
+          severity: 'success',
         });
         resetForm();
       } else {
@@ -91,8 +87,8 @@ function ContactSection() {
     } catch {
       setSnackbar({
         open: true,
-        message: t("contact.error"),
-        severity: "error",
+        message: t('contact.error'),
+        severity: 'error',
       });
     }
   };
@@ -100,26 +96,23 @@ function ContactSection() {
   // Form alanları değişim işleyicisi
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   // Form sıfırlama
   const resetForm = () => {
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   // Snackbar kapatma işleyicisi
   const handleSnackbarClose = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
+    setSnackbar(prev => ({ ...prev, open: false }));
   };
 
   return (
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
-      <SectionTitle
-        icon={FaPhoneAlt}
-        title={t("sections.contact")}
-      />
+      <SectionTitle icon={FaPhoneAlt} title={t('sections.contact')} />
 
       <Box sx={STYLES.CONTAINER}>
         {/* Sol Taraf: İletişim Bilgileri ve Sosyal Medya */}
@@ -139,25 +132,13 @@ function ContactSection() {
 
         {/* Sağ Taraf: İletişim Formu */}
         <Box sx={STYLES.SIDE_BOX}>
-          <MessageCard
-            formData={formData}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
+          <MessageCard formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
         </Box>
       </Box>
 
       {/* Bildirim Snackbar'ı */}
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity={snackbar.severity}
-          sx={{ width: "100%" }}
-        >
+      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
           {snackbar.message}
         </Alert>
       </Snackbar>
@@ -166,4 +147,4 @@ function ContactSection() {
 }
 
 // Bileşeni memo ile sarmalayarak gereksiz render'ları önlüyoruz
-export default memo(ContactSection); 
+export default memo(ContactSection);

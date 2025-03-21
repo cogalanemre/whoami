@@ -1,6 +1,6 @@
 /**
  * Eğitim Kartı Bileşeni
- * 
+ *
  * Kullanıcının eğitim geçmişini gösteren kart bileşeni.
  * Özellikler:
  * - Okul logosu ve bilgileri
@@ -9,7 +9,7 @@
  * - Hover animasyonları
  * - Tema renk entegrasyonu
  * - Erişilebilirlik özellikleri
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -33,26 +33,20 @@
  * ```
  */
 
-import {
-  Card,
-  CardHeader,
-  Typography,
-  Box,
-  Avatar,
-} from "@mui/material";
-import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaGraduationCap } from "react-icons/fa";
-import { memo } from "react";
-import { Education } from "@/types";
-import { formatDate, calculateDuration } from "@/utils/dateUtils";
-import { useTranslation } from "@/hooks/useTranslation";
-import InfoWithIcon from "@/components/common/InfoWithIcon";
-import { getTranslation } from "@/i18n/utils";
-import { THEME_STYLE } from "@/theme/theme";
+import { Card, CardHeader, Typography, Box, Avatar } from '@mui/material';
+import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaGraduationCap } from 'react-icons/fa';
+import { memo } from 'react';
+import { Education } from '@/types';
+import { formatDate, calculateDuration } from '@/utils/dateUtils';
+import { useTranslation } from '@/hooks/useTranslation';
+import InfoWithIcon from '@/components/common/InfoWithIcon';
+import { getTranslation } from '@/i18n/utils';
+import { THEME_STYLE } from '@/theme/theme';
 
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
-  },  
+  },
   AVATAR: {
     ...THEME_STYLE.AVATAR,
   },
@@ -72,7 +66,7 @@ const STYLE = {
 
 /**
  * Eğitim Kartı Props Interface
- * 
+ *
  * @interface EducationCardProps
  * @property {Education} education - Eğitim bilgileri
  */
@@ -82,7 +76,7 @@ interface EducationCardProps {
 
 /**
  * Eğitim Kartı Bileşeni
- * 
+ *
  * @param {EducationCardProps} props - Bileşen props'ları
  * @returns {JSX.Element} Eğitim kartı
  */
@@ -92,15 +86,15 @@ function EducationCard({ education }: EducationCardProps) {
   // Çevirileri al
   const t = {
     aria: {
-      card: getTranslation("education.aria.card", locale),
-      logo: getTranslation("education.aria.logo", locale),
-      duration: getTranslation("education.aria.duration", locale),
-      dates: getTranslation("education.aria.dates", locale),
+      card: getTranslation('education.aria.card', locale),
+      logo: getTranslation('education.aria.logo', locale),
+      duration: getTranslation('education.aria.duration', locale),
+      dates: getTranslation('education.aria.dates', locale),
     },
   };
 
   // Eğitim bilgilerini dile göre al
-  const educationTranslations = locale === "tr" ? education.tr : education.en;
+  const educationTranslations = locale === 'tr' ? education.tr : education.en;
   const duration = calculateDuration(education.startDate, education.endDate, locale);
   const dateRange = `${formatDate(education.startDate, locale)} - ${formatDate(education.endDate, locale)}`;
 
@@ -129,29 +123,26 @@ function EducationCard({ education }: EducationCardProps) {
         }
         subheader={
           <Box sx={STYLE.META}>
-              <Typography
-                variant="h4"
-                sx={STYLE.SUBTITLE}
-              >
-                {educationTranslations.school}
-              </Typography>
-              <InfoWithIcon
-                icon={FaMapMarkerAlt}
-                text={educationTranslations.location}
-                fontSize="0.875rem"
-              />
-              <InfoWithIcon
-                icon={FaCalendarAlt}
-                text={dateRange}
-                fontSize="0.875rem"
-                aria-label={t.aria.dates}
-              />
-              <InfoWithIcon
-                icon={FaClock}
-                text={duration}
-                fontSize="0.875rem"
-                aria-label={t.aria.duration}
-              />
+            <Typography variant="h4" sx={STYLE.SUBTITLE}>
+              {educationTranslations.school}
+            </Typography>
+            <InfoWithIcon
+              icon={FaMapMarkerAlt}
+              text={educationTranslations.location}
+              fontSize="0.875rem"
+            />
+            <InfoWithIcon
+              icon={FaCalendarAlt}
+              text={dateRange}
+              fontSize="0.875rem"
+              aria-label={t.aria.dates}
+            />
+            <InfoWithIcon
+              icon={FaClock}
+              text={duration}
+              fontSize="0.875rem"
+              aria-label={t.aria.duration}
+            />
           </Box>
         }
       />
@@ -160,4 +151,4 @@ function EducationCard({ education }: EducationCardProps) {
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(EducationCard); 
+export default memo(EducationCard);

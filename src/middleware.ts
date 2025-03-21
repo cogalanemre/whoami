@@ -12,5 +12,5 @@ export function middleware(req: NextRequest) {
 
 // Middleware'in hangi path'lerde çalışacağını belirtiyoruz
 export const config = {
-  matcher: '/'
-}; 
+  matcher: '/',
+};

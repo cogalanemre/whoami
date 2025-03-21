@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useTranslation } from "@/hooks/useTranslation";
-import { Box } from "@mui/material";
+import { useRouter } from 'next/navigation';
+import { useTranslation } from '@/hooks/useTranslation';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
 // Stil tanımlamaları
 const containerStyles = {
-  position: "fixed",
+  position: 'fixed',
   top: 64,
   right: 20,
   zIndex: 1000,
@@ -68,10 +68,10 @@ const LanguageSwitch = styled(Switch)(() => ({
 
 /**
  * Dil Değiştirici Bileşeni
- * 
+ *
  * Diller arasında geçiş yapan modern tasarımlı switch.
  * MaterialUISwitch stilinde özel tasarlanmış bir switch bileşeni.
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -83,16 +83,13 @@ export default function LanguageSwitcher() {
   const { locale } = useTranslation();
 
   const handleLanguageChange = () => {
-    const newLocale = locale === "tr" ? "en" : "tr";
+    const newLocale = locale === 'tr' ? 'en' : 'tr';
     router.push(`/${newLocale}`);
   };
 
   return (
     <Box sx={containerStyles}>
-      <LanguageSwitch
-        checked={locale === "en"}
-        onChange={handleLanguageChange}
-      />
+      <LanguageSwitch checked={locale === 'en'} onChange={handleLanguageChange} />
     </Box>
   );
-} 
+}

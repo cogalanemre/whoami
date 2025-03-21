@@ -16,4 +16,4 @@ export interface SocialMedia {
   website?: string;
   mail?: string;
   medium?: string;
-} 
+}

@@ -1,8 +1,8 @@
 /**
  * İletişim Bilgileri Kartı Bileşeni
- * 
+ *
  * Kullanıcının iletişim bilgilerini (e-posta, telefon, konum) gösteren kart bileşeni.
- * 
+ *
  * Özellikler:
  * - Duyarlı tasarım
  * - Hover animasyonları
@@ -11,19 +11,19 @@
  * - Çoklu dil desteği
  */
 
-import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
-import InfoWithIcon from "@/components/common/InfoWithIcon";
-import { memo } from "react";
-import { useTranslation } from "@/hooks/useTranslation";
-import resumeData from "@/config/resume.json";
-import { THEME_STYLE } from "@/theme/theme";
+import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import InfoWithIcon from '@/components/common/InfoWithIcon';
+import { memo } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
+import resumeData from '@/config/resume.json';
+import { THEME_STYLE } from '@/theme/theme';
 
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
     p: 0,
-  },  
+  },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
   },
@@ -50,7 +50,7 @@ interface ContactInfo {
 
 /**
  * İletişim Bilgileri Kartı Bileşeni
- * 
+ *
  * @returns {JSX.Element} İletişim bilgileri kartı
  */
 function ContactCard() {
@@ -58,17 +58,17 @@ function ContactCard() {
   const contactInfo: ContactInfo = {
     email: resumeData.contact.email,
     phone: resumeData.contact.phone,
-    location: resumeData.contact.location
+    location: resumeData.contact.location,
   };
 
   return (
     <Card sx={STYLE.CARD}>
       <CardHeader
-       title={
-        <Typography variant="h3" sx={{...STYLE.TITLE}}>
-          {t("sections.contact")}
-        </Typography>
-        }       
+        title={
+          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+            {t('sections.contact')}
+          </Typography>
+        }
         sx={STYLE.CARD_HEADER}
       />
       <CardContent>
@@ -77,19 +77,19 @@ function ContactCard() {
             icon={FaEnvelope}
             text={contactInfo.email}
             fontSize="1rem"
-            aria-label={t("contact.form.email")}
+            aria-label={t('contact.form.email')}
           />
           <InfoWithIcon
             icon={FaPhone}
             text={contactInfo.phone}
             fontSize="1rem"
-            aria-label={t("contact.form.phone")}
+            aria-label={t('contact.form.phone')}
           />
           <InfoWithIcon
             icon={FaMapMarkerAlt}
             text={contactInfo.location[locale]}
             fontSize="1rem"
-            aria-label={t("contact.info")}
+            aria-label={t('contact.info')}
           />
         </Box>
       </CardContent>
@@ -98,4 +98,4 @@ function ContactCard() {
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(ContactCard); 
+export default memo(ContactCard);

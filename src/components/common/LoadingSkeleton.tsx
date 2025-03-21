@@ -1,6 +1,6 @@
 /**
  * Yükleme İskeleti Bileşeni
- * 
+ *
  * Sayfa içeriği yüklenirken gösterilen animasyonlu yükleme göstergesi.
  * Material-UI Skeleton bileşenini temel alır ve gelişmiş özellikler ekler:
  * - Özelleştirilebilir yükseklik
@@ -8,32 +8,32 @@
  * - Dalga animasyonu efekti
  * - Responsive tasarım
  * - Tema renkleri ile uyumlu tasarım
- * 
+ *
  * @component
  * @example
  * ```tsx
  * // Başlıklı yükleme iskeleti
- * <LoadingSkeleton 
- *   height={200} 
- *   title="Yükleniyor..." 
+ * <LoadingSkeleton
+ *   height={200}
+ *   title="Yükleniyor..."
  * />
- * 
+ *
  * // Başlıksız yükleme iskeleti
- * <LoadingSkeleton 
- *   height={300} 
- *   withTitle={false} 
+ * <LoadingSkeleton
+ *   height={300}
+ *   withTitle={false}
  * />
  * ```
  */
 
 'use client';
 
-import { Box, Skeleton, Typography, useTheme, Theme } from "@mui/material";
-import { memo } from "react";
+import { Box, Skeleton, Typography, useTheme, Theme } from '@mui/material';
+import { memo } from 'react';
 
 /**
  * Yükleme İskeleti Props Interface
- * 
+ *
  * @interface LoadingSkeletonProps
  * @property {number} height - İskelet yüksekliği (piksel cinsinden)
  * @property {string} [title] - Gösterilecek başlık metni (opsiyonel)
@@ -64,21 +64,17 @@ const getMainSkeletonStyles = (theme: Theme) => ({
       transparent, 
       ${theme.palette.primary.main}10, 
       transparent
-    )`
-  }
+    )`,
+  },
 });
 
 /**
  * Yükleme İskeleti Bileşeni
- * 
+ *
  * @param {LoadingSkeletonProps} props - Bileşen props'ları
  * @returns {JSX.Element} Yükleme iskeleti arayüzü
  */
-function LoadingSkeleton({ 
-  height, 
-  title, 
-  withTitle = true 
-}: LoadingSkeletonProps) {
+function LoadingSkeleton({ height, title, withTitle = true }: LoadingSkeletonProps) {
   // Tema renklerini al
   const theme = useTheme();
 
@@ -87,11 +83,7 @@ function LoadingSkeleton({
       {/* Başlık Bölümü (Opsiyonel) */}
       {withTitle && (
         <Box sx={titleContainerStyles}>
-          <Skeleton 
-            variant="text" 
-            width={200}
-            sx={getTitleSkeletonStyles(theme)}
-          >
+          <Skeleton variant="text" width={200} sx={getTitleSkeletonStyles(theme)}>
             <Typography variant="h5">{title}</Typography>
           </Skeleton>
         </Box>
@@ -109,4 +101,4 @@ function LoadingSkeleton({
 }
 
 // Gereksiz yeniden render'ları önlemek için memo kullan
-export default memo(LoadingSkeleton); 
+export default memo(LoadingSkeleton);

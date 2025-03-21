@@ -1,4 +1,4 @@
-import { SocialMedia } from "./index";
+import { SocialMedia } from './index';
 
 export interface Hero {
   name: string;
@@ -8,4 +8,4 @@ export interface Hero {
     tr: string[];
     en: string[];
   };
-} 
+}
