@@ -23,7 +23,7 @@
  */
 
 import { Box, Typography } from "@mui/material";
-import { Article } from "@mui/icons-material";
+import { FaNewspaper } from "react-icons/fa";
 import { BlogPost } from "@/types";
 import BlogCard from "@/components/cards/BlogCard";
 import SectionTitle from "@/components/common/SectionTitle";
@@ -92,7 +92,7 @@ function BlogSection({
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
-        icon={Article}
+        icon={FaNewspaper}
         title={sectionTitle}
       />
 

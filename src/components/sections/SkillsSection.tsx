@@ -4,7 +4,7 @@ import {
   calculateSkillDuration,
   calculateTotalMonths,
 } from "@/utils/dateUtils";
-import { Code } from "@mui/icons-material";
+import { FaCode } from "react-icons/fa";
 import SectionTitle from "@/components/common/SectionTitle";
 import { memo } from "react";
 
@@ -59,7 +59,7 @@ function SkillsSection({ experiences, title }: SkillsSectionProps) {
   return (
     <Box sx={sectionStyles}>
       <SectionTitle
-        icon={Code}
+        icon={FaCode}
         title={title}
       />
 

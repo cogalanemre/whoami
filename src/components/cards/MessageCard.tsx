@@ -15,7 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Send } from "@mui/icons-material";
+import { FaPaperPlane } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
 import CustomButton from "@/components/common/CustomButton";
@@ -154,7 +154,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
           type="submit"
           loading={isSubmitting}
           fullWidth
-          endIcon={<Send fontSize="small" />}
+          endIcon={<FaPaperPlane size={20} />}
         >
           {t("contact.form.send")}
         </CustomButton>

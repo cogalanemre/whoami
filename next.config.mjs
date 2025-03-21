@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     domains: ["cdn-images-1.medium.com"],
   },
-  transpilePackages: ['@mui/material', '@mui/system', '@mui/icons-material'],
+  transpilePackages: ['@mui/material', '@mui/system'],
 };
 
 export default nextConfig; 

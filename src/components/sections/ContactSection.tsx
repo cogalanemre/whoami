@@ -4,7 +4,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { ContactPhone } from "@mui/icons-material";
+import { FaPhoneAlt } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo } from "react";
 import ContactCard from "@/components/cards/ContactCard";
@@ -117,7 +117,7 @@ function ContactSection() {
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
-        icon={ContactPhone}
+        icon={FaPhoneAlt}
         title={t("sections.contact")}
       />
 

@@ -27,7 +27,7 @@
  */
 
 import { Box, Stack } from "@mui/material";
-import { School } from "@mui/icons-material";
+import { FaGraduationCap } from "react-icons/fa";
 import { Education } from "@/types";
 import EducationCard from "@/components/cards/EducationCard";
 import SectionTitle from "@/components/common/SectionTitle";
@@ -71,7 +71,7 @@ function EducationSection({ education, sectionTitle }: EducationSectionProps) {
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
-        icon={School}
+        icon={FaGraduationCap}
         title={sectionTitle}
       />
 

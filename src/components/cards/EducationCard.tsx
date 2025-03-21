@@ -40,7 +40,7 @@ import {
   Box,
   Avatar,
 } from "@mui/material";
-import { LocationOnOutlined, CalendarToday, AccessTime, School } from "@mui/icons-material";
+import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaGraduationCap } from "react-icons/fa";
 import { memo } from "react";
 import { Education } from "@/types";
 import { formatDate, calculateDuration } from "@/utils/dateUtils";
@@ -119,7 +119,7 @@ function EducationCard({ education }: EducationCardProps) {
             alt={`${educationTranslations.school} ${t.aria.logo}`}
             sx={STYLE.AVATAR}
           >
-            {!education.logo && <School sx={{ fontSize: 40, color: "primary.main" }} />}
+            {!education.logo && <FaGraduationCap size={40} color="primary" />}
           </Avatar>
         }
         title={
@@ -136,18 +136,18 @@ function EducationCard({ education }: EducationCardProps) {
                 {educationTranslations.school}
               </Typography>
               <InfoWithIcon
-                icon={LocationOnOutlined}
+                icon={FaMapMarkerAlt}
                 text={educationTranslations.location}
                 fontSize="0.875rem"
               />
               <InfoWithIcon
-                icon={CalendarToday}
+                icon={FaCalendarAlt}
                 text={dateRange}
                 fontSize="0.875rem"
                 aria-label={t.aria.dates}
               />
               <InfoWithIcon
-                icon={AccessTime}
+                icon={FaClock}
                 text={duration}
                 fontSize="0.875rem"
                 aria-label={t.aria.duration}

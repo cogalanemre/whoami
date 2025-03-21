@@ -29,7 +29,7 @@
  */
 
 import { Box, Stack } from "@mui/material";
-import { BusinessCenter } from "@mui/icons-material";
+import { FaBriefcase } from "react-icons/fa";
 import { Experience } from "@/types";
 import ExperienceCard from "@/components/cards/ExperienceCard";
 import SectionTitle from "@/components/common/SectionTitle";
@@ -80,7 +80,7 @@ function ExperienceSection({
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
       <SectionTitle
-        icon={BusinessCenter}
+        icon={FaBriefcase}
         title={sectionTitle}
         subtitle={totalExperience}
       />

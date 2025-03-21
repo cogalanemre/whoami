@@ -40,7 +40,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { AccessTime, ArrowForward, CalendarToday } from "@mui/icons-material";
+import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import { memo } from "react";
 import { BlogPost } from "@/types";
 import { formatDate } from "@/utils/dateUtils";
@@ -134,12 +134,12 @@ function BlogCard({ post }: BlogCardProps) {
         subheader={
           <Box sx={STYLE.META}>
             <InfoWithIcon
-              icon={AccessTime}
+              icon={FaClock}
               text={readingTimeText}
               fontSize="0.875rem"
             />
             <InfoWithIcon
-              icon={CalendarToday}
+              icon={FaCalendarAlt}
               text={publishDateText}
               fontSize="0.875rem"
             />
@@ -161,7 +161,7 @@ function BlogCard({ post }: BlogCardProps) {
       <CardActions sx={STYLE.CARD_ACTIONS}>
         <CustomButton
           fullWidth
-          endIcon={<ArrowForward fontSize="small" />}
+          endIcon={<FaArrowRight fontSize="small" />}
           href={post.link}
           target="_blank"
           rel="noopener noreferrer"
