@@ -105,7 +105,7 @@ export const THEME_STYLE = {
   },
   SECTION: {
     component: "section",
-    py: 8,
+    py: 5,
   },
 } as const;
 

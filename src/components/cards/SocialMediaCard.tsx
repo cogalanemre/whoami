@@ -17,6 +17,7 @@ import {
   CardContent,
   CardHeader,
   Box,
+  Typography,
 } from "@mui/material";
 import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -38,6 +39,17 @@ const STYLE = {
     flexDirection: 'column',
     gap: 2,
     p: 3,
+  },
+  CARD_CONTENT_ITEM: {
+    textDecoration: "none",
+    color: "none",
+    "&:hover": {
+      textDecoration: "none",
+      color: "none"
+    },
+  },
+  TITLE: {
+    ...THEME_STYLE.TITLE,
   },
 } as const;
 
@@ -74,7 +86,11 @@ function SocialMediaCard() {
   return (
     <Card sx={STYLE.CARD}>
         <CardHeader
-          title={t("sections.social")}
+          title={
+            <Typography variant="h3" sx={{...STYLE.TITLE}}>
+              {t("sections.social")}
+            </Typography>
+          }           
           sx={STYLE.CARD_HEADER}
         />
 
@@ -88,6 +104,11 @@ function SocialMediaCard() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
+              sx={{
+                textDecoration: "none",
+                color: "inherit",
+                display: "block"
+              }}
             >
               <InfoWithIcon
                 icon={icon}

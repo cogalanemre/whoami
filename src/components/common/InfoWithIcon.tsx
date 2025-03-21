@@ -34,7 +34,7 @@ const containerStyles = {
 } as const;
 
 const iconStyles = {
-  color: "primary.main",
+  color: "primary.main", 
   fontSize: "1.2em",
   transition: "color 0.2s ease-in-out",
 } as const;

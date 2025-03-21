@@ -10,16 +10,14 @@
     },
     "titles": {
       "tr": [
-        "Kıdemli Yazılım Mühendisi",
-        "Full Stack Geliştirici",
-        "Yazılım Danışmanı",
-        "Mikroservis Mimarı"
+        "Senior Software Engineer",
+        "Full Stack Developer",
+        "AI Researcher"
       ],
       "en": [
         "Senior Software Engineer",
         "Full Stack Developer",
-        "Software Consultant",
-        "Microservice Architect"
+        "AI Researcher"
       ]
     }
   },
