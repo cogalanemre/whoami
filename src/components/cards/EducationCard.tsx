@@ -61,6 +61,7 @@ const STYLE = {
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
+    border: 'none',
   },
 } as const;
 
