@@ -36,19 +36,21 @@ const STYLE = {
     p: 3,
     pt: 0,
   },
-  TEXT_FIELD: {
-    '& .MuiInputLabel-root': {
-      color: 'inherit',
-    },
-  },
   INPUT: {
     '&:before': {
       ...THEME_STYLE.BORDER_BOTTOM
     },
     '&:after': {
       ...THEME_STYLE.BORDER_BOTTOM
-    }
-  }
+    },
+    '&:hover:not(.Mui-disabled):before': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    },
+    '&.Mui-focused:after': {
+      ...THEME_STYLE.BORDER_BOTTOM,
+      borderColor: 'primary.main',
+    },
+  },
 } as const;
 
 interface FormData {
@@ -149,7 +151,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             rows={field.rows}
             placeholder={t(field.label)}
             variant="standard"
-            sx={STYLE.TEXT_FIELD}
             InputProps={{
               sx: STYLE.INPUT
             }}
