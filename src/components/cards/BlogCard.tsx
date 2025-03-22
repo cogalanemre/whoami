@@ -80,6 +80,9 @@ const STYLE = {
   CARD_ACTIONS: {
     p: 3,
     pt: 0,
+    mt: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
   },
 } as const;
 
@@ -109,7 +112,7 @@ function BlogCard({ post }: BlogCardProps) {
   const publishDateText = formatDate(post.pubDate);
 
   return (
-    <Card component="article" role="article" aria-label={post.title} sx={STYLE.CARD}>
+    <Card component="article" role="article" aria-label={post.title} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
       {/* Kapak Resmi */}
       {post.thumbnail && (
         <CardMedia

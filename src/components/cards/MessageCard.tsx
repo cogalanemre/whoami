@@ -34,6 +34,9 @@ const STYLE = {
   CARD_ACTIONS: {
     p: 3,
     pt: 0,
+    mt: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
   },
   INPUT: {
     '&:before': {
@@ -121,7 +124,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
   ];
 
   return (
-    <Card component="form" onSubmit={onSubmit} sx={STYLE.CARD}>
+    <Card component="form" onSubmit={onSubmit} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
       <CardHeader
         title={
           <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
