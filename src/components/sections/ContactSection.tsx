@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Snackbar, Alert } from '@mui/material';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { FaAddressCard } from 'react-icons/fa';
 import { useTranslation } from '@/hooks/useTranslation';
 import { memo } from 'react';
 import ContactCard from '@/components/cards/ContactCard';
@@ -112,7 +112,7 @@ function ContactSection() {
   return (
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
-      <SectionTitle icon={FaPhoneAlt} title={t('sections.contact')} />
+      <SectionTitle icon={FaAddressCard} title={t('sections.contact')} />
 
       <Box sx={STYLES.CONTAINER}>
         {/* Sol Taraf: İletişim Bilgileri ve Sosyal Medya */}

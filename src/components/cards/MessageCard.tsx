@@ -166,7 +166,7 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
           type="submit"
           loading={isSubmitting}
           fullWidth
-          endIcon={<FaPaperPlane size={20} />}
+          endIcon={<FaPaperPlane fontSize="small" />}
         >
           {t('contact.form.send')}
         </CustomButton>

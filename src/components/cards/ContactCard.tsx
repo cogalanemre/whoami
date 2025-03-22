@@ -66,7 +66,7 @@ function ContactCard() {
       <CardHeader
         title={
           <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
-            {t('sections.contact')}
+            {t('contact.info')}
           </Typography>
         }
         sx={STYLE.CARD_HEADER}

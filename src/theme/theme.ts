@@ -45,6 +45,7 @@ export const THEME_STYLE = {
   AVATAR: {
     border: '0.5px solid',
     borderColor: 'divider',
+    color: 'divider',
     width: 80,
     height: 80,
     bgcolor: 'transparent',
