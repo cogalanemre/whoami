@@ -37,10 +37,14 @@ const STYLE = {
   ICON_WRAPPER: {
     color: 'primary.main',
     fontSize: '1em',
+    display: 'flex',
+    alignItems: 'center',
   },
   TEXT: (fontSize: string) => ({
     color: 'text.secondary',
     fontSize,
+    display: 'flex',
+    alignItems: 'center',
   }),
 } as const;
 
