@@ -43,7 +43,7 @@ const TYPEWRITER_STYLES = {
   root: {
     color: 'text.primary',
     fontWeight: 300,
-    fontFamily: 'var(--font-poppins)',
+    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
     position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',

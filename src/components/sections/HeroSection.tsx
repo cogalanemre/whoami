@@ -72,7 +72,7 @@ const STYLE = {
     fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
     textAlign: ALIGNMENT,
     fontWeight: 'normal',
-    fontFamily: 'var(--font-poppins)',
+    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
     display: 'flex',
     alignItems: 'center',
     gap: 2,

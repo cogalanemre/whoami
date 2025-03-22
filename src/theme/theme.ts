@@ -17,12 +17,12 @@ export const COMMON_COLORS = {
   },
   text: {
     light: {
-      primary: '#212121',
-      secondary: '#616161',
+      primary: '#1A1A1A',
+      secondary: '#4A4A4A',
     },
     dark: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.7)',
+      primary: '#E0E0E0',
+      secondary: '#B0B0B0',
     },
   },
   divider: {
@@ -126,6 +126,18 @@ const theme: ThemeOptions = {
     divider: COMMON_COLORS.divider.light,
     background: COMMON_COLORS.background.light,
     text: COMMON_COLORS.text.light,
+  },
+  typography: {
+    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
+        },
+      },
+    },
   },
 } as const;
 

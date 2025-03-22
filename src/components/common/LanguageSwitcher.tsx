@@ -47,7 +47,7 @@ const LanguageSwitch = styled(Switch)(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'var(--font-poppins)',
+    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
     fontSize: '13px',
     fontWeight: 500,
     color: '#fff',

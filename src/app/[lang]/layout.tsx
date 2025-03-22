@@ -7,39 +7,17 @@
  * @module Layout
  */
 
-import { Geist, Geist_Mono, Poppins } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import ClientLayout from '../client-layout';
 import type { Viewport, Metadata } from 'next';
 
 /**
- * Geist Sans font konfigürasyonu
- * Ana font olarak kullanılır
+ * Nunito font konfigürasyonu
+ * Tüm site için tek font olarak kullanılır
  */
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const nunito = Nunito({
   subsets: ['latin'],
-  display: 'swap',
-});
-
-/**
- * Geist Mono font konfigürasyonu
- * Kod blokları ve teknik içerikler için kullanılır
- */
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-/**
- * Poppins font konfigürasyonu
- * Başlıklar ve özel içerikler için kullanılır
- * Sadece kullanılan kalınlıkları bıraktım
- */
-const poppins = Poppins({
-  variable: '--font-poppins',
-  weight: ['300', '400'],
-  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
@@ -134,7 +112,7 @@ export default async function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full`}
+        className={`${nunito.className} h-full`}
         suppressHydrationWarning
       >
         <ClientLayout>{children}</ClientLayout>
