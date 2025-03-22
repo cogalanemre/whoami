@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeOptions, Theme } from '@mui/material/styles';
+import { ThemeOptions } from '@mui/material/styles';
 import config from '@/config/config.json';
 
 // Sabit tema değerleri
