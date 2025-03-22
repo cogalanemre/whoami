@@ -13,7 +13,6 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { memo } from 'react';
 import CustomButton from '@/components/common/CustomButton';
 import { THEME_STYLE } from '@/theme/theme';
-import { borderLeft, borderRight, borderTop } from '@mui/system';
 
 const STYLE = {
   CARD: {
