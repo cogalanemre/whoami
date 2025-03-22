@@ -13,6 +13,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { memo } from 'react';
 import CustomButton from '@/components/common/CustomButton';
 import { THEME_STYLE } from '@/theme/theme';
+import { borderLeft, borderRight, borderTop } from '@mui/system';
 
 const STYLE = {
   CARD: {
@@ -35,6 +36,19 @@ const STYLE = {
     p: 3,
     pt: 0,
   },
+  TEXT_FIELD: {
+    '& .MuiInputLabel-root': {
+      color: 'inherit',
+    },
+  },
+  INPUT: {
+    '&:before': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    },
+    '&:after': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    }
+  }
 } as const;
 
 interface FormData {
@@ -134,6 +148,11 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             multiline={field.multiline}
             rows={field.rows}
             placeholder={t(field.label)}
+            variant="standard"
+            sx={STYLE.TEXT_FIELD}
+            InputProps={{
+              sx: STYLE.INPUT
+            }}
           />
         ))}
       </CardContent>

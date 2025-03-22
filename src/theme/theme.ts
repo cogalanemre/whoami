@@ -26,28 +26,25 @@ export const COMMON_COLORS = {
     },
   },
   divider: {
-    light: 'grey.300',
-    dark: 'grey.900',
+    light: '#E0E0E0',
+    dark: '#424242',
   },
-} as const;
-
-const BORDER = {
-  border: '0.5px solid',
-  borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300'),
 } as const;
 
 export const THEME_STYLE = {
   CARD: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
     bgcolor: 'background.paper',
     borderRadius: '16px',
     position: 'relative',
     height: '100%',
-    boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+    boxShadow: 'none',
     backgroundImage: 'none',
   },
   AVATAR: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
     width: 80,
     height: 80,
     bgcolor: 'transparent',
@@ -60,7 +57,8 @@ export const THEME_STYLE = {
     },
   },
   CHIP: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
     fontSize: '0.875rem',
     color: 'text.main',
     bgcolor: 'background.paper',
@@ -80,7 +78,12 @@ export const THEME_STYLE = {
     },
   },
   BORDER: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
+  },
+  BORDER_BOTTOM: {
+    borderBottom: '0.5px solid',
+    borderColor: 'divider',
   },
   TITLE: {
     fontSize: '1.2rem',
@@ -100,7 +103,8 @@ export const THEME_STYLE = {
     alignItems: 'center',
   },
   CARD_HEADER: {
-    ...BORDER,
+    borderBottom: '0.5px solid',
+  borderColor: 'divider',
     p: 3,
   },
   SECTION: {
@@ -118,6 +122,9 @@ const theme: ThemeOptions = {
     primary: {
       main: config.theme.primaryColor,
     },
+    divider: COMMON_COLORS.divider.light,
+    background: COMMON_COLORS.background.light,
+    text: COMMON_COLORS.text.light,
   },
 } as const;
 

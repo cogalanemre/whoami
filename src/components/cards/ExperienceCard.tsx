@@ -167,7 +167,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       id={`experience-${experience.company.toLowerCase().replace(/\s+/g, '-')}`}
       sx={{
         ...STYLE.CARD,
-        borderColor: theme => STYLE.CARD.borderColor(theme),
       }}
     >
       <CardHeader

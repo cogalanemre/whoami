@@ -36,14 +36,11 @@ const STYLE = {
   },
   ICON_WRAPPER: {
     color: 'primary.main',
-    fontSize: '1.2em',
-    transition: 'color 0.2s ease-in-out',
+    fontSize: '1em',
   },
   TEXT: (fontSize: string) => ({
     color: 'text.secondary',
     fontSize,
-    letterSpacing: '0.3px',
-    transition: 'color 0.2s ease-in-out',
   }),
 } as const;
 
