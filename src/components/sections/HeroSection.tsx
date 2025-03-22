@@ -56,7 +56,7 @@ const STYLE = {
       left: '50%',
       transform: 'translateX(-50%)',
       width: '80%',
-      height: '2px',
+      height: '0.5px',
       background: theme =>
         `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
     },

@@ -43,7 +43,7 @@ interface SocialMediaButtonProps extends Omit<IconButtonProps, 'children'> {
 
 // Stil tanımlamaları
 const socialMediaButtonStyles = {
-  border: '2px solid',
+  border: '1px solid',
   borderColor: 'primary.main',
   backdropFilter: 'blur(4px)',
   '& > svg': {
