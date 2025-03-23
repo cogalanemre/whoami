@@ -187,12 +187,12 @@
       "tr": {
         "school": "Gazi Anadolu Lisesi",
         "department": "Lise",
-        "location": "Ankara, Türkiye"
+        "location": "Çankırı, Türkiye"
       },
       "en": {
         "school": "Gazi Anatolian High School",
         "department": "High School",
-        "location": "Ankara, Turkey"
+        "location": "Cankiri, Turkey"
       }
     }
   ],
@@ -200,8 +200,8 @@
     "phone": "+90 551 853 5776",
     "email": "comengcogalan@gmail.com",
     "location": {
-      "tr": "İstanbul, Türkiye",
-      "en": "Istanbul, Turkey"
+      "tr": "Ankara, Türkiye",
+      "en": "Ankara, Turkey"
     }
   }
 }

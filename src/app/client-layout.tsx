@@ -11,6 +11,7 @@
 
 import { Box } from '@mui/material';
 import { ErrorBoundary } from 'react-error-boundary';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ThemeProvider } from '@/context/ThemeContext';
 import AppThemeProvider from '@/theme/ThemeProvider';
 import ThemeSwitcher from '@/components/common/ThemeSwitcher';
@@ -54,6 +55,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               {config.features.languageSwitcher && <LanguageSwitcher />}
             </Box>
             {children}
+            <SpeedInsights />
           </Box>
         </AppThemeProvider>
       </ThemeProvider>
