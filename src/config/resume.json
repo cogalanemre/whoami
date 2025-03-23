@@ -22,25 +22,25 @@
       "workingModel": 1,
       "employmentType": 1,
       "tr": {
-        "position": "Kıdemli Yazılım Mühendisi",
+        "position": "Senior Software Engineer",
         "location": "Ataşehir, İstanbul, Türkiye",
         "description": [
-          "C# ve .NET Core kullanarak API'ler geliştirdim",
-          "JavaScript ve DevExtreme ile kullanıcı arayüzleri oluşturdum",
-          "Ödeme kolaylaştırıcı entegrasyonu, kampanya modülü ve doğrudan operatör faturalandırma (DCB) modülü gibi çeşitli projelerde çalıştım",
-          "MSSQL ile veritabanı yönetimi yaptım",
-          "Agile Scrum metodolojisini takip ettim, görev ve proje yönetimi için JIRA kullandım"
+          "Ödeme aracı entegrasyonu, kampanya modülü ve doğrudan taşıyıcı faturalama (DCB) modülü dahil olmak üzere çeşitli projelerde çalıştım.",
+          "C# ve .NET Core kullanarak API'ler geliştirdim.",
+          "JavaScript ve DevExtreme ile kullanıcı arayüzleri oluşturdum.",
+          "Veritabanı yönetimi için MSSQL kullandım.",
+          "Görev ve proje yönetimi için JIRA kullanarak Agile Scrum metodolojisini takip ettim."
         ]
       },
       "en": {
         "position": "Senior Software Engineer",
         "location": "Atasehir, Istanbul, Turkey",
         "description": [
-          "Developed APIs using C# and .NET Core",
-          "Created user interfaces using JavaScript and DevExtreme",
-          "Worked on various projects including payment facilitator integration, campaign module, and direct carrier billing (DCB) module",
-          "Managed databases using MSSQL",
-          "Followed Agile Scrum methodology, used JIRA for task and project management"
+          "Worked on various projects, including payment facilitator integration, campaign module, and direct carrier billing (DCB) module.",
+          "Developed APIs using C# and .NET Core.",
+          "Created user interfaces with JavaScript and DevExtreme.",
+          "Used MSSQL for database management.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
       "skillTags": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
@@ -53,27 +53,29 @@
       "workingModel": 1,
       "employmentType": 1,
       "tr": {
-        "position": "Kıdemli Yazılım Danışmanı",
+        "position": "Senior Software Consultant",
         "location": "Ankara, Türkiye",
         "description": [
-          "Aselsan'da dış kaynaklı Kıdemli Yazılım Danışmanı olarak çalıştım",
-          "Java 8+, Spring ve Hibernate kullanarak mikroservisler geliştirdim",
-          "Kafka kullanarak servisler arası event-driven iletişimi uyguladım",
-          "React kullanarak single-page uygulamalar geliştirdim",
-          "PostgreSQL ile veritabanı yönetimi yaptım",
-          "Servisleri Kubernetes'e deploy ettim"
+          "Aselsan'da outsource Senior Software Consultant olarak çalıştım.",
+          "Java 8+, Spring ve Hibernate kullanarak mikroservisler geliştirdim.",
+          "Event-Driven mimarisine sahip mikroservislerimizi haberleştirmek için Kafka teknolojisinde deneyim kazandım.",
+          "React kullanarak single-page, single-root uygulamalar geliştirdim.",
+          "Database management için PostgreSQL kullandım.",
+          "Servisleri Kubernetes'e deploy ettim.",
+          "Agile Scrum metodolojisini takip ederek, task ve project management için JIRA kullandım."
         ]
       },
       "en": {
         "position": "Senior Software Consultant",
         "location": "Ankara, Turkey",
         "description": [
-          "Worked as an outsourced Senior Software Consultant at Aselsan",
-          "Developed microservices using Java 8+, Spring, and Hibernate",
-          "Implemented event-driven communication between services using Kafka",
-          "Developed single-page applications using React",
-          "Managed databases using PostgreSQL",
-          "Deployed services to Kubernetes"
+          "Worked as an outsourced Senior Software Consultant at Aselsan.",
+          "Developed microservices using Java 8+, Spring, and Hibernate.",
+          "Implemented event-driven communication between services using Kafka.",
+          "Developed single-page, single-root applications using React.",
+          "Used PostgreSQL for database management.",
+          "Deployed services to Kubernetes.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
       "skillTags": ["Java", "Spring", "React", "Kubernetes", "Kafka"]
@@ -86,25 +88,27 @@
       "workingModel": 2,
       "employmentType": 1,
       "tr": {
-        "position": "Yazılım Mühendisi",
+        "position": "Software Engineer",
         "location": "İstanbul, Türkiye",
         "description": [
-          "Vodafone projelerinde dış kaynaklı geliştirici olarak çalıştım",
-          "Java, Spring Boot ve Hibernate kullanarak mikroservisler geliştirdim",
-          "Camunda ve BPMN 2.0 notasyonu kullanarak İş Yönetimi Mikroservisinden sorumlu oldum",
-          "Oracle DB, MongoDB ve Redis ile veri depolama ve önbellekleme yaptım",
-          "Jenkins kullanarak mikroservisleri OpenShift'e deploy ettim"
+          "Vodafone projelerinde outsource developer olarak çalıştım.",
+          "Java, Spring Boot ve Hibernate kullanarak mikroservisler geliştirdim.",
+          "Camunda ve BPMN 2.0 notasyonu kullanarak Business Management Microservice'den sorumluluk aldım.",
+          "Veri depolama ve caching işlemleri için Oracle DB, MongoDB ve Redis ile çalıştım.",
+          "Jenkins kullanarak mikroservisleri OpenShift'e deploy ettim.",
+          "Agile Scrum metodolojisini takip ederek, görev ve proje yönetimi için JIRA kullandım."
         ]
       },
       "en": {
         "position": "Software Engineer",
         "location": "Istanbul, Turkey",
         "description": [
-          "Worked as an outsourced developer for Vodafone projects",
-          "Developed microservices using Java, Spring Boot, and Hibernate",
-          "Responsible for Business Process Management Microservice using Camunda and BPMN 2.0 notation",
-          "Handled data storage and caching with Oracle DB, MongoDB, and Redis",
-          "Deployed microservices to OpenShift using Jenkins"
+          "Worked as an outsourced developer on Vodafone projects.",
+          "Developed microservices using Java, Spring Boot, and Hibernate.",
+          "Took responsibility for the Business Management Microservice, utilizing Camunda and BPMN 2.0 notation.",
+          "Handled data storage and caching with Oracle DB, MongoDB, and Redis.",
+          "Deployed microservices to OpenShift using Jenkins.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
       "skillTags": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
@@ -117,27 +121,29 @@
       "workingModel": 3,
       "employmentType": 1,
       "tr": {
-        "position": "Yazılım Mühendisi",
+        "position": "Software Engineer",
         "location": "Ankara, Türkiye",
         "description": [
-          "Java ve Spring Boot kullanarak mikroservisler geliştirdim",
-          "Şikayetvar'ın altyapısını yeniden geliştirme projesine katıldım",
-          "Elasticsearch kullanarak otomatik tamamlama mikroservisi geliştirdim",
-          "RESTful iletişim ile servisler geliştirdim",
-          "MySQL ile veritabanı yönetimi yaptım",
-          "Jenkins kullanarak mikroservisleri Google Cloud'a deploy ettim"
+          "Java ve Spring Boot kullanarak mikroservisler geliştirdim.",
+          "Şikayetvar'ın altyapısını yeniden geliştirmek amacıyla yürütülen remake projesine katıldım.",
+          "Elasticsearch kullanarak autocomplete mikroservisi oluşturmayı başardım.",
+          "RESTful iletişim protokolüyle servisler geliştirdim.",
+          "Veritabanı yönetimi için MySQL kullandım.",
+          "Jenkins aracılığıyla mikroservisleri Google Cloud'a deploy ettim.",
+          "Agile Kanban modeli çerçevesinde çalıştım.",
+          "GitLab kullanarak görev yönetimi ve sürüm kontrolünü sağladım."
         ]
       },
       "en": {
         "position": "Software Engineer",
         "location": "Ankara, Turkey",
         "description": [
-          "Developed microservices using Java and Spring Boot",
-          "Participated in Sikayetvar's infrastructure redevelopment project",
-          "Developed autocomplete microservice using Elasticsearch",
-          "Built services with RESTful communication",
-          "Managed databases using MySQL",
-          "Deployed microservices to Google Cloud using Jenkins"
+          "Built an autocomplete microservice using Elasticsearch.",
+          "Developed services with RESTful communication.",
+          "Used MySQL for database management.",
+          "Deployed microservices to Google Cloud using Jenkins.",
+          "Worked within an Agile Kanban model.",
+          "Used GitLab for task management and version control."
         ]
       },
       "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
