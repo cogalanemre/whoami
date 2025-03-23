@@ -27,7 +27,7 @@ export const COMMON_COLORS = {
   },
   divider: {
     light: '#E0E0E0',
-    dark: '#424242',
+    dark: '#212121',
   },
 } as const;
 
