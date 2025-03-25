@@ -7,36 +7,32 @@
  * - Hover ve tıklama efektleri
  * - Responsive tasarım
  * - Erişilebilirlik özellikleri
- * - Loading durumu
  */
 
-import { ButtonProps, CircularProgress, Button, styled } from '@mui/material';
+import { ButtonProps, Button, styled } from '@mui/material';
 import { forwardRef } from 'react';
 
 // Props interface'i
-interface CustomButtonProps extends Omit<ButtonProps, 'css'> {
-  loading?: boolean;
-  endIcon?: React.ReactNode;
-  target?: string;
-  rel?: string;
+interface CustomButtonProps extends ButtonProps {
+  // Özel prop'lar buraya eklenebilir
 }
 
 // Styled button bileşeni
 const StyledButton = styled(Button)(({ theme }) => ({
-  borderRadius: '8px',
-  padding: '8px 20px',
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(1, 2.5),
   textTransform: 'none',
   fontSize: '0.95rem',
   fontWeight: 500,
   letterSpacing: '0.3px',
-  transition: 'all 0.2s ease-in-out',
+  transition: 'background-color 0.2s ease-in-out, border-color 0.2s ease-in-out',
   boxShadow: 'none',
   background: 'transparent',
   border: `1px solid ${theme.palette.divider}`,
   color: theme.palette.text.primary,
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: theme.spacing(0.75),
 
   '&:hover': {
     background: theme.palette.action.hover,
@@ -53,9 +49,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
     color: theme.palette.text.disabled,
   },
 
-  // Loading durumunda cursor değişimi
-  '&.loading': {
-    cursor: 'wait',
+  // Klavye odaklanması için stil
+  '&:focus-visible': {
+    outline: `2px solid ${theme.palette.primary.main}`,
+    outlineOffset: 2,
   },
 }));
 
@@ -66,21 +63,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
  * @returns {JSX.Element} Özel buton
  */
 const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(function CustomButton(
-  { children, loading, disabled, className, endIcon, ...props },
+  { children, ...props },
   ref
 ) {
   return (
     <StyledButton
       ref={ref}
-      className={`${className || ''} ${loading ? 'loading' : ''}`}
-      disabled={disabled || loading}
+      tabIndex={0}
       {...props}
     >
-      {loading ? (
-        <CircularProgress size={24} color="inherit" sx={{ mr: children ? 1 : 0 }} />
-      ) : null}
       {children}
-      {!loading && endIcon}
     </StyledButton>
   );
 });

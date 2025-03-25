@@ -164,7 +164,6 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
       <CardActions sx={STYLE.CARD_ACTIONS}>
         <CustomButton
           type="submit"
-          loading={isSubmitting}
           fullWidth
           endIcon={<FaPaperPlane fontSize="small" />}
         >

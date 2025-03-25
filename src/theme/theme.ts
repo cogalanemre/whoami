@@ -3,6 +3,38 @@
 import { ThemeOptions } from '@mui/material/styles';
 import config from '@/config/config.json';
 
+// Tema sabitleri
+export const THEME_CONSTANTS = {
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+  },
+  border: {
+    thin: '0.5px',
+    medium: '1px',
+    thick: '2px',
+  },
+  transition: {
+    fast: '0.2s',
+    medium: '0.3s',
+    slow: '0.5s',
+  },
+  borderRadius: {
+    small: 4,
+    medium: 8,
+    large: 16,
+    round: '50%',
+  },
+  boxShadow: {
+    light: '0 2px 4px rgba(0, 0, 0, 0.05)',
+    medium: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    dark: '0 8px 16px rgba(0, 0, 0, 0.15)',
+  },
+} as const;
+
 // Sabit tema değerleri
 export const COMMON_COLORS = {
   background: {
@@ -105,7 +137,7 @@ export const THEME_STYLE = {
   },
   CARD_HEADER: {
     borderBottom: '0.5px solid',
-  borderColor: 'divider',
+    borderColor: 'divider',
     p: 3,
   },
   SECTION: {
@@ -129,6 +161,9 @@ const theme: ThemeOptions = {
   },
   typography: {
     fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
+  },
+  shape: {
+    borderRadius: 8,
   },
   components: {
     MuiCssBaseline: {
