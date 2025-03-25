@@ -12,11 +12,6 @@
 import { ButtonProps, Button, styled } from '@mui/material';
 import { forwardRef } from 'react';
 
-// Props interface'i
-interface CustomButtonProps extends ButtonProps {
-  // Özel prop'lar buraya eklenebilir
-}
-
 // Styled button bileşeni
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -62,7 +57,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
  * @param {CustomButtonProps} props - Buton props'ları
  * @returns {JSX.Element} Özel buton
  */
-const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(function CustomButton(
+const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(function CustomButton(
   { children, ...props },
   ref
 ) {

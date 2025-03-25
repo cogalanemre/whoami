@@ -85,7 +85,6 @@ interface MessageCardProps {
   formData: FormData;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
-  isSubmitting?: boolean;
 }
 
 /**
@@ -93,7 +92,7 @@ interface MessageCardProps {
  *
  * @returns {JSX.Element} Mesaj kartı
  */
-function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: MessageCardProps) {
+function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
   const { t } = useTranslation();
 
   // Form alanları konfigürasyonu
