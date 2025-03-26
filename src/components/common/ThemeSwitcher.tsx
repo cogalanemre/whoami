@@ -27,7 +27,7 @@ export default function ThemeSwitcher() {
         zIndex: 1000,
       }}
     >
-      <MaterialUISwitch checked={isDarkMode} onChange={toggleTheme} />
+      <MaterialUISwitch checked={isDarkMode} onChange={toggleTheme} type="theme" />
     </Box>
   );
 }
