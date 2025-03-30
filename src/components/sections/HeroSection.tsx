@@ -1,8 +1,9 @@
 import { Box, Stack, Typography, Avatar } from '@mui/material';
 import { Hero } from '@/types';
 import Typewriter from '@/components/common/Typewriter';
-import SocialMediaButtons from '@/components/common/SocialMediaButtons';
+import ActionButtons from '@/components/common/ActionButtons';
 import { memo } from 'react';
+import type { CvFile } from '@/utils/getCvFiles';
 
 const ALIGNMENT = {
   xs: 'center',
@@ -87,6 +88,7 @@ const STYLE = {
   SOCIAL_BUTTONS_CONTAINER: {
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     mt: { xs: -4, md: -6 },
     mb: { xs: 4, md: 6 },
   },
@@ -95,6 +97,7 @@ const STYLE = {
 interface HeroSectionProps {
   hero: Hero;
   locale: 'tr' | 'en';
+  cvFiles: CvFile[];
 }
 
 /**
@@ -105,9 +108,10 @@ interface HeroSectionProps {
  *
  * @param {Hero} hero - Kullanıcı profil bilgileri
  * @param {string} locale - Aktif dil (tr/en)
+ * @param {CvFile[]} cvFiles - CV dosyaları
  * @returns {JSX.Element} Hero section bileşeni
  */
-function HeroSection({ hero, locale }: HeroSectionProps) {
+function HeroSection({ hero, locale, cvFiles }: HeroSectionProps) {
   const titles = hero.titles[locale];
 
   return (
@@ -126,7 +130,7 @@ function HeroSection({ hero, locale }: HeroSectionProps) {
         </Stack>
       </Box>
       <Box sx={STYLE.SOCIAL_BUTTONS_CONTAINER}>
-        <SocialMediaButtons socialMedia={hero.socialMedia} />
+        <ActionButtons socialMedia={hero.socialMedia} cvFiles={cvFiles} locale={locale} />
       </Box>
     </>
   );

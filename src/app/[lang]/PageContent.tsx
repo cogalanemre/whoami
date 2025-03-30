@@ -8,6 +8,7 @@ import resumeData from '@/config/resume.json';
 import { memo } from 'react';
 import { UI_CONSTANTS } from '@/constants';
 import { getTranslation } from '@/i18n/utils';
+import type { CvFile } from '@/utils/getCvFiles';
 
 /**
  * Dinamik olarak yüklenen bölümler
@@ -84,12 +85,14 @@ const DynamicContactSection = dynamic(() => import('@/components/sections/Contac
  * @property {BlogPost[]} blogPosts - Medium'dan çekilen blog yazıları
  * @property {string} totalExperience - Toplam deneyim süresi
  * @property {Hero} hero - Kullanıcı profil bilgileri
+ * @property {CvFile[]} cvFiles - CV dosyaları
  */
 interface PageContentProps {
   lang: 'tr' | 'en';
   blogPosts: BlogPost[];
   totalExperience: string;
   hero: Hero;
+  cvFiles: CvFile[];
 }
 
 /**
@@ -100,7 +103,7 @@ interface PageContentProps {
  * @param {PageContentProps} props - Bileşen props'ları
  * @returns {JSX.Element} Render edilecek sayfa içeriği
  */
-function PageContent({ lang, blogPosts, totalExperience, hero }: PageContentProps) {
+function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageContentProps) {
   /**
    * Material-UI tema ve medya query hook'ları
    * Responsive tasarım için kullanılır
@@ -160,7 +163,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero }: PageContentProp
       >
         {/* Hero Section */}
         <Grid item xs={12}>
-          <DynamicHeroSection hero={hero} locale={lang} />
+          <DynamicHeroSection hero={hero} locale={lang} cvFiles={cvFiles} />
         </Grid>
 
         {/* Experience Section */}

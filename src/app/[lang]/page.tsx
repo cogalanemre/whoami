@@ -14,6 +14,7 @@ import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
 import PageContent from './PageContent';
 import { Metadata } from 'next';
+import { getCvFiles } from '@/utils/getCvFiles';
 
 /**
  * Build zamanında oluşturulan statik veriler
@@ -138,6 +139,7 @@ export default async function Page({ params }: { params: { lang: 'tr' | 'en' } }
 
   const blogPosts = await fetchBlogPosts();
   const hero: Hero = resumeData.hero;
+  const cvFiles = await getCvFiles();
 
   return (
     <PageContent
@@ -145,6 +147,7 @@ export default async function Page({ params }: { params: { lang: 'tr' | 'en' } }
       blogPosts={blogPosts}
       totalExperience={staticData[lang].totalExperience}
       hero={hero}
+      cvFiles={cvFiles}
     />
   );
 }
