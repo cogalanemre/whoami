@@ -65,8 +65,14 @@ const tr: TranslationType = {
     },
   },
   skills: {
-    showAll: 'Tüm Yetenekleri Göster',
+    showAll: 'Tüm Becerileri Göster',
     showLess: 'Daha Az Göster',
+    duration: {
+      year: 'yıl',
+      years: 'yıl',
+      month: 'ay',
+      months: 'ay'
+    }
   },
   error: {
     title: 'Bir Hata Oluştu',

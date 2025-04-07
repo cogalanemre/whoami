@@ -68,6 +68,7 @@ const STYLES = {
       md: '33.333%',
     },
     mr: 4,
+    mb: 3,
   },
   MESSAGE: {
     width: '100%',

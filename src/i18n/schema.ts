@@ -67,6 +67,12 @@ export const translationSchema = z.object({
   skills: z.object({
     showAll: z.string(),
     showLess: z.string(),
+    duration: z.object({
+      year: z.string(),
+      years: z.string(),
+      month: z.string(),
+      months: z.string()
+    })
   }),
   error: z.object({
     title: z.string(),

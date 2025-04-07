@@ -66,6 +66,12 @@ const en: TranslationType = {
   skills: {
     showAll: 'Show All Skills',
     showLess: 'Show Less',
+    duration: {
+      year: 'year',
+      years: 'years',
+      month: 'month',
+      months: 'months'
+    }
   },
   error: {
     title: 'An Error Occurred',

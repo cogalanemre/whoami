@@ -1,30 +1,37 @@
-import { Box, Chip, Stack, useTheme, Theme } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import { Experience } from '@/types';
 import { calculateSkillDuration, calculateTotalMonths } from '@/utils/dateUtils';
 import { FaCode } from 'react-icons/fa';
 import SectionTitle from '@/components/common/SectionTitle';
 import { memo } from 'react';
+import SkillCard from '../cards/SkillCard';
+import { THEME_STYLE } from '@/theme/theme';
 
-// Stil tanımlamaları
-const sectionStyles = {
-  mt: 4,
-} as const;
-
-const stackStyles = {
-  gap: 1,
-  direction: 'row',
-  flexWrap: 'wrap',
-} as const;
-
-// Chip stilleri için yardımcı fonksiyon
-const getChipStyles = (theme: Theme) => ({
-  bgcolor: theme.palette.background.paper,
-  color: theme.palette.primary.main,
-  border: `1px solid ${theme.palette.primary.main}`,
-  '&:hover': {
-    opacity: 0.9,
+/**
+ * Stil sabitleri
+ * Material-UI theme sistem ile uyumlu stil tanımlamaları
+ */
+const STYLES = {
+  SECTION: {
+    ...THEME_STYLE.SECTION,
   },
-});
+  CONTAINER: {
+    width: '100%',
+    gap: 2,
+  },
+  ITEM: {
+    width: {
+      xs: 'calc(100% - 16px)',
+      sm: 'calc(50% - 16px)',
+      md: 'calc(25% - 16px)',
+    },
+    mb: 2,
+  },
+  MESSAGE: {
+    width: '100%',
+    textAlign: 'center',
+  },
+} as const;
 
 interface SkillsSectionProps {
   experiences: Experience[];
@@ -42,7 +49,6 @@ interface SkillsSectionProps {
  * @returns {JSX.Element} Skills section bileşeni
  */
 function SkillsSection({ experiences, title }: SkillsSectionProps) {
-  const theme = useTheme();
 
   // Tüm yetenekleri ve sürelerini hesapla
   const skillDurationsMap = calculateSkillDuration(experiences);
@@ -54,17 +60,31 @@ function SkillsSection({ experiences, title }: SkillsSectionProps) {
   );
 
   return (
-    <Box sx={sectionStyles}>
+    <Box sx={STYLES.SECTION}>
       <SectionTitle icon={FaCode} title={title} />
 
-      <Stack sx={stackStyles}>
-        {sortedSkills.map(([skillTag, duration]) => (
-          <Chip
-            key={skillTag}
-            label={`${skillTag} (${Math.round((duration / totalMonths) * 100)}%)`}
-            sx={getChipStyles(theme)}
-          />
-        ))}
+      <Stack 
+        direction="row" 
+        flexWrap="wrap" 
+        sx={STYLES.CONTAINER}
+      >
+        {sortedSkills.length > 0 ? (
+          // Yetenek Kartları
+          sortedSkills.map(([skillTag, duration]) => (
+            <Box sx={STYLES.ITEM} key={skillTag}>
+              <SkillCard 
+                skillName={skillTag} 
+                duration={duration} 
+                totalMonths={totalMonths} 
+              />
+            </Box>
+          ))
+        ) : (
+          // Boş Durum
+          <Box sx={STYLES.MESSAGE}>
+            <Typography>Henüz yetenek bilgisi bulunmuyor</Typography>
+          </Box>
+        )}
       </Stack>
     </Box>
   );
