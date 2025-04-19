@@ -1,7 +1,7 @@
 {
   "hero": {
     "name": "Emre ÇOĞALAN",
-    "avatar": "/profile.png",
+    "avatar": "/images/profile.png",
     "socialMedia": {
       "github": "https://github.com/cogalanemre",
       "linkedin": "https://www.linkedin.com/in/cogalanemre",
@@ -16,7 +16,7 @@
   "experiences": [
     {
       "company": "Dgpays",
-      "logo": "/dgpays.png",
+      "logo": "/images/dgpays.png",
       "startDate": "2023-01-01",
       "endDate": null,
       "workingModel": 1,
@@ -47,7 +47,7 @@
     },
     {
       "company": "OBSS",
-      "logo": "/obss.webp",
+      "logo": "/images/obss.webp",
       "startDate": "2022-01-01",
       "endDate": "2023-01-01",
       "workingModel": 1,
@@ -82,7 +82,7 @@
     },
     {
       "company": "StreamDelta",
-      "logo": "/streamDelta.jpeg",
+      "logo": "/images/streamDelta.jpeg",
       "startDate": "2021-07-01",
       "endDate": "2021-12-31",
       "workingModel": 2,
@@ -117,7 +117,7 @@
     },
     {
       "company": "Sikayetvar.com",
-      "logo": "/sikayetvar_logo.jpeg",
+      "logo": "/images/sikayetvar_logo.jpeg",
       "startDate": "2018-09-01",
       "endDate": "2020-12-31",
       "workingModel": 3,
@@ -156,7 +156,7 @@
     {
       "startDate": "2014-06-01",
       "endDate": "2018-06-01",
-      "logo": "/sau.jpg",
+      "logo": "/images/sau.jpg",
       "tr": {
         "school": "Sakarya Üniversitesi",
         "department": "Bilgisayar Mühendisliği",
@@ -171,7 +171,7 @@
     {
       "startDate": "2013-06-01",
       "endDate": "2014-06-01",
-      "logo": "/cu.png",
+      "logo": "/images/cu.png",
       "tr": {
         "school": "Çukurova Üniversitesi",
         "department": "İngilizce Hazırlık",
