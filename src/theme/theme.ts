@@ -33,6 +33,55 @@ export const THEME_CONSTANTS = {
     medium: '0 4px 8px rgba(0, 0, 0, 0.1)',
     dark: '0 8px 16px rgba(0, 0, 0, 0.15)',
   },
+  animation: {
+    duration: {
+      fast: 0.2,
+      normal: 0.3,
+      slow: 0.8,
+    },
+  },
+  layout: {
+    pagePadding: {
+      mobile: 2,
+      desktop: 4,
+    },
+    container: {
+      maxWidth: {
+        mobile: '100%',
+        tablet: '90%',
+        desktop: '85%',
+      },
+      padding: {
+        xs: 2,
+        sm: 3,
+        md: 4,
+      },
+      spacing: {
+        xs: 4,
+        sm: 6,
+        md: 8,
+      },
+    },
+  },
+  components: {
+    avatar: {
+      large: 300,
+      medium: 100,
+      small: 60,
+    },
+    borderRadius: {
+      small: 6,
+      medium: 8,
+      large: 12,
+    },
+    skeleton: {
+      height: {
+        hero: 400,
+        section: 300,
+        contact: 250,
+      },
+    },
+  },
 } as const;
 
 // Sabit tema değerleri

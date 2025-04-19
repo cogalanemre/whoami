@@ -14,9 +14,7 @@
  * ```tsx
  * <BlogSection
  *   blogPosts={posts}
- *   loading={false}
  *   sectionTitle="Blog Yazılarım"
- *   loadingText="Yazılar yükleniyor..."
  *   noPostsText="Henüz blog yazısı yok"
  * />
  * ```
@@ -35,16 +33,12 @@ import { THEME_STYLE } from '@/theme/theme';
  *
  * @interface BlogSectionProps
  * @property {BlogPost[]} blogPosts - Blog yazıları listesi
- * @property {boolean} loading - Yükleme durumu
  * @property {string} sectionTitle - Bölüm başlığı
- * @property {string} loadingText - Yükleme durumunda gösterilecek metin
  * @property {string} noPostsText - Blog yazısı olmadığında gösterilecek metin
  */
 interface BlogSectionProps {
   blogPosts: BlogPost[];
-  loading: boolean;
   sectionTitle: string;
-  loadingText: string;
   noPostsText: string;
 }
 
@@ -84,9 +78,7 @@ const STYLES = {
  */
 function BlogSection({
   blogPosts,
-  loading,
   sectionTitle,
-  loadingText,
   noPostsText,
 }: BlogSectionProps) {
   return (
@@ -97,11 +89,7 @@ function BlogSection({
       {/* Blog Kartları Container */}
       <Box sx={STYLES.CONTAINER}>
         {/* Yükleme Durumu */}
-        {loading ? (
-          <Box sx={STYLES.MESSAGE}>
-            <Typography>{loadingText}</Typography>
-          </Box>
-        ) : blogPosts.length > 0 ? (
+        {blogPosts.length > 0 ? (
           // Blog Kartları
           blogPosts.map(post => (
             <Box sx={STYLES.ITEM} key={post.link}>

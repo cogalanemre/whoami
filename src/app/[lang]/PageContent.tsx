@@ -6,7 +6,7 @@ import type { BlogPost, Hero } from '@/types';
 import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
 import { memo } from 'react';
-import { UI_CONSTANTS } from '@/constants';
+import { THEME_CONSTANTS } from '@/theme/theme';
 import { getTranslation } from '@/i18n/utils';
 import type { CvFile } from '@/utils/getCvFiles';
 
@@ -114,7 +114,6 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       blog: getTranslation('sections.blog', lang),
     },
     blog: {
-      loading: getTranslation('blog.loading', lang),
       noPosts: getTranslation('blog.noPosts', lang),
     },
   };
@@ -123,10 +122,10 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
    * Ekran boyutuna göre container genişliğini belirle
    */
   const containerMaxWidth = isMobile
-    ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.MOBILE
+    ? THEME_CONSTANTS.layout.container.maxWidth.mobile
     : isTablet
-      ? UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.TABLET
-      : UI_CONSTANTS.LAYOUT.CONTAINER.MAX_WIDTH.DESKTOP;
+    ? THEME_CONSTANTS.layout.container.maxWidth.tablet
+    : THEME_CONSTANTS.layout.container.maxWidth.desktop;
 
   return (
     <Container
@@ -134,22 +133,25 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       sx={{
         minHeight: '100vh',
         maxWidth: containerMaxWidth,
-        transition: 'max-width 0.3s ease',
         py: {
-          xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS,
-          md: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM,
+          xs: THEME_CONSTANTS.layout.container.padding.xs,
+          md: THEME_CONSTANTS.layout.container.padding.sm,
         },
         px: {
-          xs: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.XS,
-          sm: UI_CONSTANTS.LAYOUT.CONTAINER.PADDING.SM,
+          xs: THEME_CONSTANTS.layout.container.padding.xs,
+          sm: THEME_CONSTANTS.layout.container.padding.sm,
+        },
+        mt: {
+          xs: THEME_CONSTANTS.layout.container.spacing.xs,
+          md: THEME_CONSTANTS.layout.container.spacing.md,
         },
       }}
     >
       <Grid
         container
         spacing={{
-          xs: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.XS,
-          md: UI_CONSTANTS.LAYOUT.CONTAINER.SPACING.MD,
+          xs: THEME_CONSTANTS.layout.container.spacing.xs,
+          md: THEME_CONSTANTS.layout.container.spacing.md,
         }}
       >
         {/* Hero Section */}
@@ -168,13 +170,6 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
           </Grid>
         )}
 
-        {/* Skills Section */}
-        {config.features.sections.skills && (
-          <Grid item xs={12}>
-            <DynamicSkillsSection experiences={resumeData.experiences} title={t.sections.skills} />
-          </Grid>
-        )}
-
         {/* Education Section */}
         {config.features.sections.education && (
           <Grid item xs={12}>
@@ -190,9 +185,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
           <Grid item xs={12}>
             <DynamicBlogSection
               blogPosts={blogPosts}
-              loading={false}
               sectionTitle={t.sections.blog}
-              loadingText={t.blog.loading}
               noPostsText={t.blog.noPosts}
             />
           </Grid>
