@@ -11,6 +11,11 @@ import { Nunito } from 'next/font/google';
 import ClientLayout from '../client-layout';
 import type { Viewport, Metadata } from 'next';
 
+type SupportedLanguages = 'tr' | 'en';
+type LayoutParams = {
+  lang: SupportedLanguages;
+};
+
 /**
  * Nunito font konfigürasyonu
  * Tüm site için tek font olarak kullanılır
@@ -75,7 +80,7 @@ export const viewport: Viewport = {
  * Statik sayfa parametrelerini oluşturur
  * Next.js build zamanında desteklenen diller için rotalar oluşturur
  *
- * @returns {Promise<Array<{lang: string}>>} Desteklenen diller için route parametreleri
+ * @returns {Promise<Array<{lang: SupportedLanguages}>>} Desteklenen diller için route parametreleri
  */
 export async function generateStaticParams() {
   return [{ lang: 'tr' }, { lang: 'en' }];
@@ -87,8 +92,7 @@ export async function generateStaticParams() {
  *
  * @param {Object} props - Bileşen props'ları
  * @param {React.ReactNode} props.children - Alt bileşenler
- * @param {Object} props.params - Route parametreleri
- * @param {string} props.params.lang - Aktif dil kodu (tr/en)
+ * @param {LayoutParams} props.params - Route parametreleri
  * @returns {Promise<JSX.Element>} Layout bileşeni
  */
 export default async function RootLayout({
@@ -96,21 +100,13 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: LayoutParams;
 }) {
-  // Tüm params objesini bekle
-  const resolvedParams = await Promise.resolve(params);
+  // params nesnesini await et
+  const { lang } = await Promise.resolve(params);
 
   return (
-    <html lang={resolvedParams.lang} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon/favicon.ico" sizes="48x48" />
-        <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" />
-        <link rel="icon" href="/favicon/favicon-32x32.png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
+    <html lang={lang} suppressHydrationWarning>
       <body
         className={`${nunito.className} h-full`}
         suppressHydrationWarning
