@@ -11,8 +11,8 @@
       "education": true,
       "blog": true,
       "contact": {
-        "showContactInfo": true,
-        "showMessageForm": true
+        "contactInfo": true,
+        "messageForm": true
       }
     }
   },

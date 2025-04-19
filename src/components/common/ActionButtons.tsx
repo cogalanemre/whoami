@@ -14,7 +14,6 @@ import { memo } from 'react';
 import SocialMediaButton from '@/components/common/SocialMediaButton';
 import DownloadButton from '@/components/common/DownloadButton';
 import type { SocialMedia } from '@/types';
-import type { CvFile } from '@/utils/getCvFiles';
 
 const SOCIAL_MEDIA_ICONS = {
   github: FaGithub,
@@ -39,11 +38,9 @@ const STYLE = {
 
 interface ActionButtonsProps {
   socialMedia: Partial<SocialMedia>;
-  cvFiles: CvFile[];
-  locale: 'tr' | 'en';
 }
 
-function ActionButtons({ socialMedia, cvFiles, locale }: ActionButtonsProps) {
+function ActionButtons({ socialMedia }: ActionButtonsProps) {
   // Geçerli sosyal medya bağlantılarını filtrele
   const availableSocialMedia = Object.entries(socialMedia).filter(([platform, value]) => {
     if (platform === 'mail') {
@@ -74,7 +71,7 @@ function ActionButtons({ socialMedia, cvFiles, locale }: ActionButtonsProps) {
           />
         );
       })}
-      <DownloadButton cvFiles={cvFiles} locale={locale} />
+      <DownloadButton />
     </Stack>
   );
 }

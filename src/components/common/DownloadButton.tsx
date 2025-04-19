@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 import { FaDownload, FaFilePdf } from 'react-icons/fa';
 import { memo, useState } from 'react';
-import type { CvFile } from '@/utils/getCvFiles';
+import { useAppContext } from '@/context/AppContext';
 
 const STYLE = {
   BUTTON: {
@@ -22,12 +22,12 @@ const STYLE = {
   },
 } as const;
 
-interface DownloadButtonProps {
-  cvFiles: CvFile[];
-  locale: 'tr' | 'en';
-}
+// Boş interface yerine Record<string, never> kullanıyoruz
+type DownloadButtonProps = Record<string, never>;
 
-function DownloadButton({ cvFiles, locale }: DownloadButtonProps) {
+function DownloadButton({}: DownloadButtonProps) {
+  // Context'ten lang ve cvFiles değerlerini al
+  const { lang, cvFiles } = useAppContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -57,7 +57,7 @@ function DownloadButton({ cvFiles, locale }: DownloadButtonProps) {
         startIcon={<FaDownload />}
         sx={STYLE.BUTTON}
       >
-        {locale === 'tr' ? 'CV İndir' : 'Download CV'}
+        {lang === 'tr' ? 'CV İndir' : 'Download CV'}
       </Button>
       <Menu
         anchorEl={anchorEl}

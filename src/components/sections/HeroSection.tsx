@@ -3,7 +3,7 @@ import { Hero } from '@/types';
 import Typewriter from '@/components/common/Typewriter';
 import ActionButtons from '@/components/common/ActionButtons';
 import { memo } from 'react';
-import type { CvFile } from '@/utils/getCvFiles';
+import { useAppContext } from '@/context/AppContext';
 
 const ALIGNMENT = {
   xs: 'center',
@@ -96,8 +96,6 @@ const STYLE = {
 
 interface HeroSectionProps {
   hero: Hero;
-  locale: 'tr' | 'en';
-  cvFiles: CvFile[];
 }
 
 /**
@@ -107,12 +105,13 @@ interface HeroSectionProps {
  * sosyal medya bağlantılarını gösteren ana bölüm.
  *
  * @param {Hero} hero - Kullanıcı profil bilgileri
- * @param {string} locale - Aktif dil (tr/en)
- * @param {CvFile[]} cvFiles - CV dosyaları
  * @returns {JSX.Element} Hero section bileşeni
  */
-function HeroSection({ hero, locale, cvFiles }: HeroSectionProps) {
-  const titles = hero.titles[locale];
+function HeroSection({ hero }: HeroSectionProps) {
+  // Context'ten lang değerini al
+  const { lang } = useAppContext();
+
+  const titles = hero.titles[lang];
 
   return (
     <>
@@ -130,7 +129,7 @@ function HeroSection({ hero, locale, cvFiles }: HeroSectionProps) {
         </Stack>
       </Box>
       <Box sx={STYLE.SOCIAL_BUTTONS_CONTAINER}>
-        <ActionButtons socialMedia={hero.socialMedia} cvFiles={cvFiles} locale={locale} />
+        <ActionButtons socialMedia={hero.socialMedia} />
       </Box>
     </>
   );

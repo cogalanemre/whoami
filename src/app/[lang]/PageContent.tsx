@@ -5,10 +5,18 @@ import { Grid, Container, useTheme, useMediaQuery } from '@mui/material';
 import type { BlogPost, Hero } from '@/types';
 import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { THEME_CONSTANTS } from '@/theme/theme';
 import { getTranslation } from '@/i18n/utils';
 import type { CvFile } from '@/utils/getCvFiles';
+import { AppProvider } from '@/context/AppContext';
+
+/**
+ * Bölüm Grid bileşeni
+ * Koşullu render için yardımcı bileşen
+ */
+const SectionGrid = ({ children, condition = true }) => 
+  condition ? <Grid item xs={12}>{children}</Grid> : null;
 
 /**
  * Dinamik olarak yüklenen bölümler
@@ -76,14 +84,14 @@ const DynamicContactSection = dynamic(() => import('@/components/sections/Contac
  * @property {BlogPost[]} blogPosts - Medium'dan çekilen blog yazıları
  * @property {string} totalExperience - Toplam deneyim süresi
  * @property {Hero} hero - Kullanıcı profil bilgileri
- * @property {CvFile[]} cvFiles - CV dosyaları
+ * @property {CvFile[]} cvFiles - Context için gerekli CV dosyaları
  */
 interface PageContentProps {
   lang: 'tr' | 'en';
   blogPosts: BlogPost[];
   totalExperience: string;
   hero: Hero;
-  cvFiles: CvFile[];
+  cvFiles: CvFile[]; // Context için gerekli
 }
 
 /**
@@ -104,9 +112,10 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
 
   /**
-   * i18n çevirilerini al
+   * i18n çevirilerini al ve önbelleğe al
+   * Sadece lang değiştiğinde yeniden hesaplanır
    */
-  const t = {
+  const t = useMemo(() => ({
     sections: {
       experience: getTranslation('sections.experience', lang),
       skills: getTranslation('sections.skills', lang),
@@ -116,7 +125,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
     blog: {
       noPosts: getTranslation('blog.noPosts', lang),
     },
-  };
+  }), [lang]);
 
   /**
    * Ekran boyutuna göre container genişliğini belirle
@@ -127,79 +136,79 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
     ? THEME_CONSTANTS.layout.container.maxWidth.tablet
     : THEME_CONSTANTS.layout.container.maxWidth.desktop;
 
+  /**
+   * İletişim bölümünün gösterilip gösterilmeyeceğini belirler
+   */
+  const shouldShowContactSection = () => 
+    config.features.sections.contact.contactInfo || 
+    config.features.sections.contact.messageForm;
+
   return (
-    <Container
-      component="main"
-      sx={{
-        minHeight: '100vh',
-        maxWidth: containerMaxWidth,
-        py: {
-          xs: THEME_CONSTANTS.layout.container.padding.xs,
-          md: THEME_CONSTANTS.layout.container.padding.sm,
-        },
-        px: {
-          xs: THEME_CONSTANTS.layout.container.padding.xs,
-          sm: THEME_CONSTANTS.layout.container.padding.sm,
-        },
-        mt: {
-          xs: THEME_CONSTANTS.layout.container.spacing.xs,
-          md: THEME_CONSTANTS.layout.container.spacing.md,
-        },
-      }}
-    >
-      <Grid
-        container
-        spacing={{
-          xs: THEME_CONSTANTS.layout.container.spacing.xs,
-          md: THEME_CONSTANTS.layout.container.spacing.md,
+    <AppProvider lang={lang} cvFiles={cvFiles}>
+      <Container
+        component="main"
+        sx={{
+          minHeight: '100vh',
+          maxWidth: containerMaxWidth,
+          py: {
+            xs: THEME_CONSTANTS.layout.container.padding.xs,
+            md: THEME_CONSTANTS.layout.container.padding.sm,
+          },
+          px: {
+            xs: THEME_CONSTANTS.layout.container.padding.xs,
+            sm: THEME_CONSTANTS.layout.container.padding.sm,
+          },
+          mt: {
+            xs: THEME_CONSTANTS.layout.container.spacing.xs,
+            md: THEME_CONSTANTS.layout.container.spacing.md,
+          },
         }}
       >
-        {/* Hero Section */}
-        <Grid item xs={12}>
-          <DynamicHeroSection hero={hero} locale={lang} cvFiles={cvFiles} />
-        </Grid>
+        <Grid
+          container
+          spacing={{
+            xs: THEME_CONSTANTS.layout.container.spacing.xs,
+            md: THEME_CONSTANTS.layout.container.spacing.md,
+          }}
+        >
+          {/* Hero Section */}
+          <SectionGrid>
+            <DynamicHeroSection hero={hero} />
+          </SectionGrid>
 
-        {/* Experience Section */}
-        {config.features.sections.experience && (
-          <Grid item xs={12}>
+          {/* Experience Section */}
+          <SectionGrid condition={config.features.sections.experience}>
             <DynamicExperienceSection
               experiences={resumeData.experiences}
               totalExperience={totalExperience}
               sectionTitle={t.sections.experience}
             />
-          </Grid>
-        )}
+          </SectionGrid>
 
-        {/* Education Section */}
-        {config.features.sections.education && (
-          <Grid item xs={12}>
+          {/* Education Section */}
+          <SectionGrid condition={config.features.sections.education}>
             <DynamicEducationSection
               education={resumeData.education}
               sectionTitle={t.sections.education}
             />
-          </Grid>
-        )}
+          </SectionGrid>
 
-        {/* Blog Section */}
-        {config.features.sections.blog && (
-          <Grid item xs={12}>
+          {/* Blog Section */}
+          <SectionGrid condition={config.features.sections.blog}>
             <DynamicBlogSection
               blogPosts={blogPosts}
               sectionTitle={t.sections.blog}
               noPostsText={t.blog.noPosts}
             />
-          </Grid>
-        )}
+          </SectionGrid>
 
-        {/* Contact Section */}
-        {(config.features.sections.contact.showContactInfo ||
-          config.features.sections.contact.showMessageForm) && (
-          <Grid item xs={12}>
+          {/* Contact Section */}
+          <SectionGrid condition={shouldShowContactSection()}>
             <DynamicContactSection />
-          </Grid>
-        )}
-      </Grid>
-    </Container>
+          </SectionGrid>
+        </Grid>
+      </Container>
+    </AppProvider>
   );
 }
 
