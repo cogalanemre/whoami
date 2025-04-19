@@ -177,7 +177,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
   return (
     <Card
       ref={ref}
-      id={`experience-${experience.company.toLowerCase().replace(/\s+/g, '-')}`}
       sx={{
         ...STYLE.CARD,
       }}
@@ -241,10 +240,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
             <Chip
               key={skill}
               label={skill}
-              onClick={() => {
-                const element = document.querySelector(`[data-skill="${skill}"]`);
-                element?.classList.toggle('selected');
-              }}
               data-skill={skill}
               sx={{ ...STYLE.CHIP }}
             />
