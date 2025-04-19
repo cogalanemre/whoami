@@ -10,7 +10,7 @@ interface MaterialUISwitchProps {
   type?: 'theme' | 'language';
 }
 
-const BaseSwitch = styled(Switch)(({ theme }) => ({
+const BaseSwitch = styled(Switch)(() => ({
   width: 62,
   height: 34,
   padding: 7,
