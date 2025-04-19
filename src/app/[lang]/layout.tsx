@@ -77,16 +77,6 @@ export const viewport: Viewport = {
 };
 
 /**
- * Statik sayfa parametrelerini oluşturur
- * Next.js build zamanında desteklenen diller için rotalar oluşturur
- *
- * @returns {Promise<Array<{lang: SupportedLanguages}>>} Desteklenen diller için route parametreleri
- */
-export async function generateStaticParams() {
-  return [{ lang: 'tr' }, { lang: 'en' }];
-}
-
-/**
  * Root Layout Bileşeni
  * Tüm sayfalar için temel HTML yapısını ve ortak özellikleri sağlar
  *

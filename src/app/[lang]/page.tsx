@@ -19,6 +19,7 @@ import { getCvFiles } from '@/utils/getCvFiles';
 /**
  * Build zamanında oluşturulan statik veriler
  * Her dil için ayrı başlık, açıklama ve toplam deneyim bilgilerini içerir
+ * Seo için metadatalar buradan oluşturulur
  *
  * @type {Record<'tr' | 'en', {
  *   totalExperience: string,
@@ -44,12 +45,9 @@ const staticData = {
  * Desteklenen tüm diller için statik sayfalar oluşturur
  *
  * @returns {Promise<Array<{lang: "tr" | "en"}>>} Desteklenen diller için route parametreleri
- * @see {@link config.language.supported} Desteklenen diller listesi
  */
 export async function generateStaticParams() {
-  return config.language.supported.map(lang => ({
-    lang: lang as 'tr' | 'en',
-  }));
+  return [{ lang: 'tr' }, { lang: 'en' }];
 }
 
 /**

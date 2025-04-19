@@ -21,8 +21,7 @@
     "primaryColor": "#2497ff"
   },
   "language": {
-    "default": "en",
-    "supported": ["tr", "en"]
+    "default": "en"
   },
   "email": {
     "serviceId": "service_0v280wa",
