@@ -38,15 +38,6 @@ const DynamicExperienceSection = dynamic(() => import('@/components/sections/Exp
 });
 
 /**
- * Yetenekler bölümü
- * Teknik beceriler ve uzmanlık alanlarını listeler
- * SSR aktif: SEO için önemli içerik
- */
-const DynamicSkillsSection = dynamic(() => import('@/components/sections/SkillsSection'), {
-  ssr: true, // SEO için kritik içerik
-});
-
-/**
  * Eğitim bölümü
  * Eğitim geçmişi ve akademik bilgileri gösterir
  * SSR aktif: SEO için önemli içerik
