@@ -42,7 +42,7 @@ import {
   Link,
 } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from 'react-icons/fa';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { BlogPost } from '@/types';
 import { formatDate } from '@/utils/dateUtils';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -105,6 +105,7 @@ interface BlogCardProps {
  */
 function BlogCard({ post }: BlogCardProps) {
   const { t } = useTranslation();
+  const styles = useMemo(() => STYLE, []);
 
   // Meta bilgileri oluştur
   const readingTimeText = `${post.readingTime.minutes} ${
@@ -113,7 +114,7 @@ function BlogCard({ post }: BlogCardProps) {
   const publishDateText = formatDate(post.pubDate);
 
   return (
-    <Card component="article" role="article" aria-label={post.title} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
+    <Card component="article" role="article" aria-label={post.title} sx={{ ...styles.CARD, display: 'flex', flexDirection: 'column' }}>
       {/* Kapak Resmi */}
       {post.thumbnail && (
         <CardMedia
@@ -125,29 +126,29 @@ function BlogCard({ post }: BlogCardProps) {
       )}
 
       <CardHeader
-        sx={STYLE.CARD_HEADER}
+        sx={styles.CARD_HEADER}
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...styles.TITLE }}>
             {post.title}
           </Typography>
         }
         subheader={
-          <Box sx={STYLE.META}>
+          <Box sx={styles.META}>
             <InfoWithIcon icon={FaClock} text={readingTimeText} fontSize="0.875rem" />
             <InfoWithIcon icon={FaCalendarAlt} text={publishDateText} fontSize="0.875rem" />
           </Box>
         }
       />
 
-      <CardContent sx={STYLE.CARD_CONTENT}>
+      <CardContent sx={styles.CARD_CONTENT}>
         {/* Açıklama */}
-        <Typography variant="body2" sx={{ ...STYLE.DESCRIPTION }}>
+        <Typography variant="body2" sx={{ ...styles.DESCRIPTION }}>
           {post.description}
         </Typography>
       </CardContent>
 
       {/* Devamını Oku Butonu */}
-      <CardActions sx={STYLE.CARD_ACTIONS}>
+      <CardActions sx={styles.CARD_ACTIONS}>
         <Link 
           href={post.link}
           target="_blank"

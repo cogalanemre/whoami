@@ -14,7 +14,7 @@
 import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import resumeData from '@/config/resume.json';
 import { THEME_STYLE } from '@/theme/theme';
@@ -43,9 +43,9 @@ interface Location {
 }
 
 interface ContactInfo {
-  email: string;
-  phone: string;
-  location: Location;
+  email?: string;
+  phone?: string;
+  location?: Location;
 }
 
 /**
@@ -56,23 +56,25 @@ interface ContactInfo {
 function ContactCard() {
   const { t, locale } = useTranslation();
   const contactInfo: ContactInfo = {
-    email: resumeData.contact.email,
-    phone: resumeData.contact.phone,
-    location: resumeData.contact.location,
+    email: resumeData.contact?.email || '',
+    phone: resumeData.contact?.phone || '',
+    location: resumeData.contact?.location || { tr: '', en: '' },
   };
 
+  const styles = useMemo(() => STYLE, []);
+
   return (
-    <Card sx={STYLE.CARD}>
+    <Card sx={styles.CARD}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...styles.TITLE }}>
             {t('contact.info')}
           </Typography>
         }
-        sx={STYLE.CARD_HEADER}
+        sx={styles.CARD_HEADER}
       />
       <CardContent>
-        <Box sx={STYLE.CARD_CONTENT}>
+        <Box sx={styles.CARD_CONTENT}>
           <InfoWithIcon
             icon={FaEnvelope}
             text={contactInfo.email}
