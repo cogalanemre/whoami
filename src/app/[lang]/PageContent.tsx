@@ -143,33 +143,38 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
     config.features.sections.contact.contactInfo || 
     config.features.sections.contact.messageForm;
 
+  const STYLE = {
+    CONTAINER: {
+      minHeight: '100vh',
+      maxWidth: containerMaxWidth,
+      py: {
+        xs: THEME_CONSTANTS.layout.container.padding.xs,
+        md: THEME_CONSTANTS.layout.container.padding.sm,
+      },
+      px: {
+        xs: THEME_CONSTANTS.layout.container.padding.xs,
+        sm: THEME_CONSTANTS.layout.container.padding.sm,
+      },
+      mt: {
+        xs: THEME_CONSTANTS.layout.container.spacing.xs,
+        md: THEME_CONSTANTS.layout.container.spacing.md,
+      },
+    },
+    SPACING: {
+      xs: THEME_CONSTANTS.layout.container.spacing.xs,
+      md: THEME_CONSTANTS.layout.container.spacing.md,
+    }
+  } as const;
+
   return (
     <AppProvider lang={lang} cvFiles={cvFiles}>
       <Container
         component="main"
-        sx={{
-          minHeight: '100vh',
-          maxWidth: containerMaxWidth,
-          py: {
-            xs: THEME_CONSTANTS.layout.container.padding.xs,
-            md: THEME_CONSTANTS.layout.container.padding.sm,
-          },
-          px: {
-            xs: THEME_CONSTANTS.layout.container.padding.xs,
-            sm: THEME_CONSTANTS.layout.container.padding.sm,
-          },
-          mt: {
-            xs: THEME_CONSTANTS.layout.container.spacing.xs,
-            md: THEME_CONSTANTS.layout.container.spacing.md,
-          },
-        }}
+        sx={STYLE.CONTAINER}
       >
         <Grid
           container
-          spacing={{
-            xs: THEME_CONSTANTS.layout.container.spacing.xs,
-            md: THEME_CONSTANTS.layout.container.spacing.md,
-          }}
+          spacing={STYLE.SPACING}
         >
           {/* Hero Section */}
           <SectionGrid>
