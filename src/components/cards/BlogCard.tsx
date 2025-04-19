@@ -39,6 +39,7 @@ import {
   CardHeader,
   Typography,
   Box,
+  Link,
 } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from 'react-icons/fa';
 import { memo } from 'react';
@@ -119,6 +120,7 @@ function BlogCard({ post }: BlogCardProps) {
           component="img"
           image={post.thumbnail}
           alt={`${post.title} ${t('blog.aria.coverImage')}`}
+          loading="lazy"
         />
       )}
 
@@ -146,16 +148,20 @@ function BlogCard({ post }: BlogCardProps) {
 
       {/* Devamını Oku Butonu */}
       <CardActions sx={STYLE.CARD_ACTIONS}>
-        <CustomButton
-          fullWidth
-          endIcon={<FaArrowRight fontSize="small" />}
+        <Link 
           href={post.link}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`${post.title} - ${t('blog.readMore')}`}
+          style={{ textDecoration: 'none', width: '100%' }}
         >
-          {t('blog.readMore')}
-        </CustomButton>
+          <CustomButton
+            fullWidth
+            endIcon={<FaArrowRight fontSize="small" />}
+            aria-label={`${post.title} - ${t('blog.readMore')}`}
+          >
+            {t('blog.readMore')}
+          </CustomButton>
+        </Link>
       </CardActions>
     </Card>
   );
