@@ -54,51 +54,6 @@ import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { forwardRef } from 'react';
 import { THEME_STYLE } from '@/theme/theme';
 
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-  },
-  AVATAR: {
-    ...THEME_STYLE.AVATAR,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-  SUBTITLE: {
-    ...THEME_STYLE.SUBTITLE,
-  },
-  META: {
-    ...THEME_STYLE.META,
-  },
-  CARDCONTENT: {
-    fontSize: '0.95rem',
-    letterSpacing: '0.3px',
-    color: 'text.primary',
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 1,
-    alignItems: 'flex-start',
-    '& > span': {
-      color: 'primary.main',
-      flexShrink: 0,
-      fontSize: '1rem',
-      lineHeight: 1,
-      mt: 0.2,
-    },
-  },
-  CARDACTIONS: {
-    width: '100%',
-    p: 2,
-    pt: 0,
-  },
-  CHIP: {
-    ...THEME_STYLE.CHIP,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-  },
-} as const;
-
 /**
  * Deneyim Kartı Props Interface
  *
@@ -124,6 +79,52 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
 ) {
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
+
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+    },
+    AVATAR: {
+      ...THEME_STYLE.AVATAR,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+    SUBTITLE: {
+      ...THEME_STYLE.SUBTITLE,
+    },
+    META: {
+      ...THEME_STYLE.META,
+    },
+    CARDCONTENT: {
+      fontSize: '0.95rem',
+      letterSpacing: '0.3px',
+      color: 'text.primary',
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 1,
+      alignItems: 'flex-start',
+      '& > span': {
+        color: 'primary.main',
+        flexShrink: 0,
+        fontSize: '1rem',
+        lineHeight: 1,
+        mt: 0.2,
+      },
+    },
+    CARDACTIONS: {
+      width: '100%',
+      p: 2,
+      pt: 0,
+    },
+    CHIP: {
+      ...THEME_STYLE.CHIP,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+    },
+  }), []);
 
   // Çalışma modeli ve istihdam türü çevirilerini memoize et
   const { workingModelText, employmentTypeText } = useMemo(() => ({
@@ -165,6 +166,14 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
     )
   }), [experience.tr, experience.en, experience.startDate, experience.endDate, actualLocale]);
 
+  // Tarih formatlamasını memoize et
+  const dateRange = useMemo(() => 
+    `${formatDate(experience.startDate)} - ${
+      experience.endDate ? formatDate(experience.endDate) : 'Present'
+    }`,
+    [experience.startDate, experience.endDate]
+  );
+
   return (
     <Card
       ref={ref}
@@ -202,9 +211,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
             <InfoWithIcon icon={FaBriefcase} text={workingModelText} fontSize="0.875rem" />
             <InfoWithIcon
               icon={FaCalendarAlt}
-              text={`${formatDate(experience.startDate)} - ${
-                experience.endDate ? formatDate(experience.endDate) : 'Present'
-              }`}
+              text={dateRange}
               fontSize="0.875rem"
             />
             <InfoWithIcon icon={FaClock} text={duration} fontSize="0.875rem" />

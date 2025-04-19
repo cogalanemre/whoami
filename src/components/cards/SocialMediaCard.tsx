@@ -17,27 +17,9 @@ import { FaMediumM, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { useTranslation } from '@/hooks/useTranslation';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 import resumeData from '@/config/resume.json';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { IconType } from 'react-icons';
 import { THEME_STYLE } from '@/theme/theme';
-
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-    p: 0,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-  },
-  CARD_CONTENT: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-} as const;
 
 interface SocialLink {
   url: string;
@@ -53,8 +35,27 @@ function SocialMediaCard() {
   const { t } = useTranslation();
   const socialMedia = resumeData.hero.socialMedia;
 
-  // Sosyal medya bağlantıları konfigürasyonu
-  const socialLinks: Record<string, SocialLink> = {
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+      p: 0,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+    },
+    CARD_CONTENT: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+  }), []);
+
+  // Sosyal medya bağlantıları konfigürasyonunu memoize et
+  const socialLinks = useMemo<Record<string, SocialLink>>(() => ({
     github: {
       url: socialMedia.github,
       icon: FaGithub,
@@ -67,7 +68,7 @@ function SocialMediaCard() {
       url: socialMedia.medium,
       icon: FaMediumM,
     },
-  };
+  }), [socialMedia.github, socialMedia.linkedin, socialMedia.medium]);
 
   return (
     <Card sx={STYLE.CARD}>

@@ -10,50 +10,9 @@
 import { Card, CardContent, CardHeader, CardActions, TextField, Typography } from '@mui/material';
 import { FaPaperPlane } from 'react-icons/fa';
 import { useTranslation } from '@/hooks/useTranslation';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import CustomButton from '@/components/common/CustomButton';
 import { THEME_STYLE } from '@/theme/theme';
-
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-    p: 0,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-  CARD_CONTENT: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
-    p: 3,
-  },
-  CARD_ACTIONS: {
-    p: 3,
-    pt: 0,
-    mt: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  INPUT: {
-    '&:before': {
-      ...THEME_STYLE.BORDER_BOTTOM
-    },
-    '&:after': {
-      ...THEME_STYLE.BORDER_BOTTOM
-    },
-    '&:hover:not(.Mui-disabled):before': {
-      ...THEME_STYLE.BORDER_BOTTOM
-    },
-    '&.Mui-focused:after': {
-      ...THEME_STYLE.BORDER_BOTTOM,
-      borderColor: 'primary.main',
-    },
-  },
-} as const;
 
 interface FormData {
   name: string;
@@ -95,8 +54,50 @@ interface MessageCardProps {
 function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
   const { t } = useTranslation();
 
-  // Form alanları konfigürasyonu
-  const formFields: FormField[] = [
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+      p: 0,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+    CARD_CONTENT: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2,
+      p: 3,
+    },
+    CARD_ACTIONS: {
+      p: 3,
+      pt: 0,
+      mt: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    INPUT: {
+      '&:before': {
+        ...THEME_STYLE.BORDER_BOTTOM
+      },
+      '&:after': {
+        ...THEME_STYLE.BORDER_BOTTOM
+      },
+      '&:hover:not(.Mui-disabled):before': {
+        ...THEME_STYLE.BORDER_BOTTOM
+      },
+      '&.Mui-focused:after': {
+        ...THEME_STYLE.BORDER_BOTTOM,
+        borderColor: 'primary.main',
+      },
+    },
+  }), []);
+
+  // Form alanları konfigürasyonunu memoize et
+  const formFields = useMemo<FormField[]>(() => [
     {
       name: 'name',
       label: 'contact.form.name',
@@ -120,7 +121,7 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
       multiline: true,
       rows: 4,
     },
-  ];
+  ], []);
 
   return (
     <Card component="form" onSubmit={onSubmit} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
