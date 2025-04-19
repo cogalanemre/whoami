@@ -44,7 +44,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Experience } from '@/types/experience';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
@@ -125,41 +125,45 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
 
-  // Çalışma modeli ve istihdam türü çevirilerini burada alıyoruz
-  const workingModelText = (() => {
-    switch (experience.workingModel) {
-      case WorkingModel.Hybrid:
-        return t('experience.workingModel.hybrid');
-      case WorkingModel.Remote:
-        return t('experience.workingModel.remote');
-      case WorkingModel.Office:
-        return t('experience.workingModel.office');
-      default:
-        return '';
-    }
-  })();
+  // Çalışma modeli ve istihdam türü çevirilerini memoize et
+  const { workingModelText, employmentTypeText } = useMemo(() => ({
+    workingModelText: (() => {
+      switch (experience.workingModel) {
+        case WorkingModel.Hybrid:
+          return t('experience.workingModel.hybrid');
+        case WorkingModel.Remote:
+          return t('experience.workingModel.remote');
+        case WorkingModel.Office:
+          return t('experience.workingModel.office');
+        default:
+          return '';
+      }
+    })(),
+    employmentTypeText: (() => {
+      switch (experience.employmentType) {
+        case EmploymentType.FullTime:
+          return t('experience.employmentType.fullTime');
+        case EmploymentType.PartTime:
+          return t('experience.employmentType.partTime');
+        case EmploymentType.Contract:
+          return t('experience.employmentType.contract');
+        case EmploymentType.Freelance:
+          return t('experience.employmentType.freelance');
+        default:
+          return '';
+      }
+    })()
+  }), [experience.workingModel, experience.employmentType, t]);
 
-  const employmentTypeText = (() => {
-    switch (experience.employmentType) {
-      case EmploymentType.FullTime:
-        return t('experience.employmentType.fullTime');
-      case EmploymentType.PartTime:
-        return t('experience.employmentType.partTime');
-      case EmploymentType.Contract:
-        return t('experience.employmentType.contract');
-      case EmploymentType.Freelance:
-        return t('experience.employmentType.freelance');
-      default:
-        return '';
-    }
-  })();
-
-  const experienceTranslations = actualLocale === 'tr' ? experience.tr : experience.en;
-  const duration = calculateDuration(
-    experience.startDate,
-    experience.endDate ? experience.endDate : new Date().toISOString(),
-    actualLocale
-  );
+  // Deneyim çevirilerini ve süreyi memoize et
+  const { experienceTranslations, duration } = useMemo(() => ({
+    experienceTranslations: actualLocale === 'tr' ? experience.tr : experience.en,
+    duration: calculateDuration(
+      experience.startDate,
+      experience.endDate ? experience.endDate : new Date().toISOString(),
+      actualLocale
+    )
+  }), [experience.tr, experience.en, experience.startDate, experience.endDate, actualLocale]);
 
   return (
     <Card

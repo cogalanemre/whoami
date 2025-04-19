@@ -19,24 +19,6 @@ import { useTranslation } from '@/hooks/useTranslation';
 import resumeData from '@/config/resume.json';
 import { THEME_STYLE } from '@/theme/theme';
 
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-    p: 0,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-  CARD_CONTENT: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
-  },
-} as const;
-
 interface Location {
   tr: string;
   en: string;
@@ -61,20 +43,37 @@ function ContactCard() {
     location: resumeData.contact?.location || { tr: '', en: '' },
   };
 
-  const styles = useMemo(() => STYLE, []);
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+      p: 0,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+    CARD_CONTENT: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2,
+    },
+  }), []);
 
   return (
-    <Card sx={styles.CARD}>
+    <Card sx={STYLE.CARD}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{ ...styles.TITLE }}>
+          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
             {t('contact.info')}
           </Typography>
         }
-        sx={styles.CARD_HEADER}
+        sx={STYLE.CARD_HEADER}
       />
       <CardContent>
-        <Box sx={styles.CARD_CONTENT}>
+        <Box sx={STYLE.CARD_CONTENT}>
           <InfoWithIcon
             icon={FaEnvelope}
             text={contactInfo.email}

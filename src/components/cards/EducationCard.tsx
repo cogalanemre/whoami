@@ -35,35 +35,13 @@
 
 import { Card, CardHeader, Typography, Box, Avatar } from '@mui/material';
 import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaGraduationCap } from 'react-icons/fa';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Education } from '@/types';
 import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { useTranslation } from '@/hooks/useTranslation';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 import { getTranslation } from '@/i18n/utils';
 import { THEME_STYLE } from '@/theme/theme';
-
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-  },
-  AVATAR: {
-    ...THEME_STYLE.AVATAR,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-  SUBTITLE: {
-    ...THEME_STYLE.SUBTITLE,
-  },
-  META: {
-    ...THEME_STYLE.META,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-    border: 'none',
-  },
-} as const;
 
 /**
  * Eğitim Kartı Props Interface
@@ -84,20 +62,50 @@ interface EducationCardProps {
 function EducationCard({ education }: EducationCardProps) {
   const { locale } = useTranslation();
 
-  // Çevirileri al
-  const t = {
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+    },
+    AVATAR: {
+      ...THEME_STYLE.AVATAR,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+    SUBTITLE: {
+      ...THEME_STYLE.SUBTITLE,
+    },
+    META: {
+      ...THEME_STYLE.META,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+      border: 'none',
+    },
+  }), []);
+
+  // Çevirileri memoize et
+  const t = useMemo(() => ({
     aria: {
       card: getTranslation('education.aria.card', locale),
       logo: getTranslation('education.aria.logo', locale),
       duration: getTranslation('education.aria.duration', locale),
       dates: getTranslation('education.aria.dates', locale),
     },
-  };
+  }), [locale]);
 
-  // Eğitim bilgilerini dile göre al
-  const educationTranslations = locale === 'tr' ? education.tr : education.en;
-  const duration = calculateDuration(education.startDate, education.endDate, locale);
-  const dateRange = `${formatDate(education.startDate, locale)} - ${formatDate(education.endDate, locale)}`;
+  // Eğitim çevirilerini memoize et
+  const educationTranslations = useMemo(() => 
+    locale === 'tr' ? education.tr : education.en,
+    [locale, education.tr, education.en]
+  );
+
+  // Tarih hesaplamalarını memoize et
+  const { duration, dateRange } = useMemo(() => ({
+    duration: calculateDuration(education.startDate, education.endDate, locale),
+    dateRange: `${formatDate(education.startDate, locale)} - ${formatDate(education.endDate, locale)}`
+  }), [education.startDate, education.endDate, locale]);
 
   return (
     <Card

@@ -50,43 +50,6 @@ import InfoWithIcon from '@/components/common/InfoWithIcon';
 import CustomButton from '@/components/common/CustomButton';
 import { THEME_STYLE } from '@/theme/theme';
 
-const STYLE = {
-  CARD: {
-    ...THEME_STYLE.CARD,
-    p: 0,
-  },
-  CARD_HEADER: {
-    ...THEME_STYLE.CARD_HEADER,
-    p: 2,
-  },
-  TITLE: {
-    ...THEME_STYLE.TITLE,
-  },
-  META: {
-    ...THEME_STYLE.META,
-  },
-  CARD_CONTENT: {
-    p: 2,
-  },
-  DESCRIPTION: {
-    display: '-webkit-box',
-    WebkitLineClamp: 5,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-    fontSize: '0.95rem',
-    letterSpacing: '0.3px',
-    color: 'text.primary',
-    textAlign: 'justify',
-  },
-  CARD_ACTIONS: {
-    p: 3,
-    pt: 0,
-    mt: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-} as const;
-
 /**
  * Blog Kartı Props Interface
  *
@@ -105,16 +68,55 @@ interface BlogCardProps {
  */
 function BlogCard({ post }: BlogCardProps) {
   const { t } = useTranslation();
-  const styles = useMemo(() => STYLE, []);
 
-  // Meta bilgileri oluştur
-  const readingTimeText = `${post.readingTime.minutes} ${
-    post.readingTime.minutes > 1 ? t('blog.readingTime.minutes') : t('blog.readingTime.minute')
-  }`;
-  const publishDateText = formatDate(post.pubDate);
+  // Stil objelerini memoize et
+  const STYLE = useMemo(() => ({
+    CARD: {
+      ...THEME_STYLE.CARD,
+      p: 0,
+    },
+    CARD_HEADER: {
+      ...THEME_STYLE.CARD_HEADER,
+      p: 2,
+    },
+    TITLE: {
+      ...THEME_STYLE.TITLE,
+    },
+    META: {
+      ...THEME_STYLE.META,
+    },
+    CARD_CONTENT: {
+      p: 2,
+    },
+    DESCRIPTION: {
+      display: '-webkit-box',
+      WebkitLineClamp: 5,
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+      fontSize: '0.95rem',
+      letterSpacing: '0.3px',
+      color: 'text.primary',
+      textAlign: 'justify',
+    },
+    CARD_ACTIONS: {
+      p: 3,
+      pt: 0,
+      mt: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  }), []);
+
+  // Meta bilgilerini memoize et
+  const { readingTimeText, publishDateText } = useMemo(() => ({
+    readingTimeText: `${post.readingTime.minutes} ${
+      post.readingTime.minutes > 1 ? t('blog.readingTime.minutes') : t('blog.readingTime.minute')
+    }`,
+    publishDateText: formatDate(post.pubDate)
+  }), [post.readingTime.minutes, post.pubDate, t]);
 
   return (
-    <Card component="article" role="article" aria-label={post.title} sx={{ ...styles.CARD, display: 'flex', flexDirection: 'column' }}>
+    <Card component="article" role="article" aria-label={post.title} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
       {/* Kapak Resmi */}
       {post.thumbnail && (
         <CardMedia
@@ -126,29 +128,29 @@ function BlogCard({ post }: BlogCardProps) {
       )}
 
       <CardHeader
-        sx={styles.CARD_HEADER}
+        sx={STYLE.CARD_HEADER}
         title={
-          <Typography variant="h3" sx={{ ...styles.TITLE }}>
+          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
             {post.title}
           </Typography>
         }
         subheader={
-          <Box sx={styles.META}>
+          <Box sx={STYLE.META}>
             <InfoWithIcon icon={FaClock} text={readingTimeText} fontSize="0.875rem" />
             <InfoWithIcon icon={FaCalendarAlt} text={publishDateText} fontSize="0.875rem" />
           </Box>
         }
       />
 
-      <CardContent sx={styles.CARD_CONTENT}>
+      <CardContent sx={STYLE.CARD_CONTENT}>
         {/* Açıklama */}
-        <Typography variant="body2" sx={{ ...styles.DESCRIPTION }}>
+        <Typography variant="body2" sx={{ ...STYLE.DESCRIPTION }}>
           {post.description}
         </Typography>
       </CardContent>
 
       {/* Devamını Oku Butonu */}
-      <CardActions sx={styles.CARD_ACTIONS}>
+      <CardActions sx={STYLE.CARD_ACTIONS}>
         <Link 
           href={post.link}
           target="_blank"
