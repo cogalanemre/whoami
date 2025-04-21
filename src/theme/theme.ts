@@ -122,6 +122,25 @@ export const THEME_STYLE = {
     height: '100%',
     boxShadow: 'none',
     backgroundImage: 'none',
+    p: 0,
+  },
+  CARD_CONTENT: {
+    p: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+  },
+  CARD_ACTIONS: {
+    p: 2,
+    pt: 0,
+    mt: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  CARD_HEADER: {
+    borderBottom: '0.5px solid',
+    borderColor: 'divider',
+    p: 2,
   },
   AVATAR: {
     border: '0.5px solid',
@@ -184,14 +203,44 @@ export const THEME_STYLE = {
     flexWrap: 'wrap',
     alignItems: 'center',
   },
-  CARD_HEADER: {
-    borderBottom: '0.5px solid',
-    borderColor: 'divider',
-    p: 3,
-  },
   SECTION: {
     component: 'section',
     py: 5,
+  },
+  TYPOGRAPHY: {
+    BODY: {
+      fontSize: '0.95rem',
+      letterSpacing: '0.3px',
+      color: 'text.primary',
+    },
+    SMALL: {
+      fontSize: '0.875rem',
+      letterSpacing: '0.3px',
+      color: 'text.secondary',
+    },
+    LARGE: {
+      fontSize: '1rem',
+      letterSpacing: '0.3px',
+      color: 'text.primary',
+    },
+  },
+  INPUT: {
+    '&:before': {
+      borderBottom: '0.5px solid',
+      borderColor: 'divider',
+    },
+    '&:after': {
+      borderBottom: '0.5px solid',
+      borderColor: 'divider',
+    },
+    '&:hover:not(.Mui-disabled):before': {
+      borderBottom: '0.5px solid',
+      borderColor: 'divider',
+    },
+    '&.Mui-focused:after': {
+      borderBottom: '0.5px solid',
+      borderColor: 'primary.main',
+    },
   },
 } as const;
 

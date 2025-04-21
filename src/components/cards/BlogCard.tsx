@@ -73,11 +73,9 @@ function BlogCard({ post }: BlogCardProps) {
   const STYLE = useMemo(() => ({
     CARD: {
       ...THEME_STYLE.CARD,
-      p: 0,
     },
     CARD_HEADER: {
       ...THEME_STYLE.CARD_HEADER,
-      p: 2,
     },
     TITLE: {
       ...THEME_STYLE.TITLE,
@@ -86,24 +84,18 @@ function BlogCard({ post }: BlogCardProps) {
       ...THEME_STYLE.META,
     },
     CARD_CONTENT: {
-      p: 2,
+      ...THEME_STYLE.CARD_CONTENT,
     },
     DESCRIPTION: {
+      ...THEME_STYLE.TYPOGRAPHY.BODY,
       display: '-webkit-box',
       WebkitLineClamp: 5,
       WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
-      fontSize: '0.95rem',
-      letterSpacing: '0.3px',
-      color: 'text.primary',
       textAlign: 'justify',
     },
     CARD_ACTIONS: {
-      p: 3,
-      pt: 0,
-      mt: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
+      ...THEME_STYLE.CARD_ACTIONS,
     },
   }), []);
 

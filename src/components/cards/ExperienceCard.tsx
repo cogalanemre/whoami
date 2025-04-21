@@ -98,9 +98,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       ...THEME_STYLE.META,
     },
     CARDCONTENT: {
-      fontSize: '0.95rem',
-      letterSpacing: '0.3px',
-      color: 'text.primary',
+      ...THEME_STYLE.TYPOGRAPHY.BODY,
       display: 'flex',
       flexDirection: 'row',
       gap: 1,
@@ -114,9 +112,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       },
     },
     CARDACTIONS: {
-      width: '100%',
-      p: 2,
-      pt: 0,
+      ...THEME_STYLE.CARD_ACTIONS,
     },
     CHIP: {
       ...THEME_STYLE.CHIP,

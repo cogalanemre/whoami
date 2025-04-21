@@ -58,7 +58,6 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
   const STYLE = useMemo(() => ({
     CARD: {
       ...THEME_STYLE.CARD,
-      p: 0,
     },
     CARD_HEADER: {
       ...THEME_STYLE.CARD_HEADER,
@@ -67,32 +66,13 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
       ...THEME_STYLE.TITLE,
     },
     CARD_CONTENT: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2,
-      p: 3,
+      ...THEME_STYLE.CARD_CONTENT,
     },
     CARD_ACTIONS: {
-      p: 3,
-      pt: 0,
-      mt: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
+      ...THEME_STYLE.CARD_ACTIONS,
     },
     INPUT: {
-      '&:before': {
-        ...THEME_STYLE.BORDER_BOTTOM
-      },
-      '&:after': {
-        ...THEME_STYLE.BORDER_BOTTOM
-      },
-      '&:hover:not(.Mui-disabled):before': {
-        ...THEME_STYLE.BORDER_BOTTOM
-      },
-      '&.Mui-focused:after': {
-        ...THEME_STYLE.BORDER_BOTTOM,
-        borderColor: 'primary.main',
-      },
+      ...THEME_STYLE.INPUT,
     },
   }), []);
 

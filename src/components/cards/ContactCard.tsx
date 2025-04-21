@@ -47,7 +47,6 @@ function ContactCard() {
   const STYLE = useMemo(() => ({
     CARD: {
       ...THEME_STYLE.CARD,
-      p: 0,
     },
     CARD_HEADER: {
       ...THEME_STYLE.CARD_HEADER,
@@ -56,9 +55,7 @@ function ContactCard() {
       ...THEME_STYLE.TITLE,
     },
     CARD_CONTENT: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2,
+      ...THEME_STYLE.CARD_CONTENT,
     },
   }), []);
 
