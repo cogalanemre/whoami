@@ -10,7 +10,7 @@ import {
   FaEnvelope,
   FaGlobe,
 } from 'react-icons/fa';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import SocialMediaButton from '@/components/common/SocialMediaButton';
 import DownloadButton from '@/components/common/DownloadButton';
 import type { SocialMedia } from '@/types';
@@ -27,6 +27,8 @@ const SOCIAL_MEDIA_ICONS = {
   medium: FaMediumM,
 } as const;
 
+type SocialMediaPlatform = keyof typeof SOCIAL_MEDIA_ICONS;
+
 const STYLE = {
   CONTAINER: {
     display: 'flex',
@@ -36,18 +38,45 @@ const STYLE = {
   },
 } as const;
 
-interface ActionButtonsProps {
-  socialMedia: Partial<SocialMedia>;
-}
-
-function ActionButtons({ socialMedia }: ActionButtonsProps) {
-  // Geçerli sosyal medya bağlantılarını filtrele
-  const availableSocialMedia = Object.entries(socialMedia).filter(([platform, value]) => {
+const filterAvailableSocialMedia = (socialMedia: Partial<SocialMedia>) => 
+  Object.entries(socialMedia).filter(([platform, value]) => {
     if (platform === 'mail') {
       return value && value.trim() !== '';
     }
     return value;
   });
+
+const createSocialMediaButton = (platform: string, url: string) => {
+  const icon = SOCIAL_MEDIA_ICONS[platform as SocialMediaPlatform];
+  if (!icon || !url) return null;
+
+  const href = platform === 'mail' ? `mailto:${url}` : url;
+
+  return (
+    <SocialMediaButton
+      key={platform}
+      icon={icon}
+      href={href}
+      target={platform === 'mail' ? undefined : '_blank'}
+      rel={platform === 'mail' ? undefined : 'noopener noreferrer'}
+    />
+  );
+};
+
+interface ActionButtonsProps {
+  socialMedia: Partial<SocialMedia>;
+}
+
+function ActionButtons({ socialMedia }: ActionButtonsProps) {
+  const availableSocialMedia = useMemo(() => 
+    filterAvailableSocialMedia(socialMedia),
+    [socialMedia]
+  );
+
+  const socialMediaButtons = useMemo(() => 
+    availableSocialMedia.map(([platform, url]) => createSocialMediaButton(platform, url)),
+    [availableSocialMedia]
+  );
 
   return (
     <Stack
@@ -55,22 +84,7 @@ function ActionButtons({ socialMedia }: ActionButtonsProps) {
       spacing={3}
       sx={STYLE.CONTAINER}
     >
-      {availableSocialMedia.map(([platform, url]) => {
-        const icon = SOCIAL_MEDIA_ICONS[platform as keyof typeof SOCIAL_MEDIA_ICONS];
-        if (!icon || !url) return null;
-
-        const href = platform === 'mail' ? `mailto:${url}` : url;
-
-        return (
-          <SocialMediaButton
-            key={platform}
-            icon={icon}
-            href={href}
-            target={platform === 'mail' ? undefined : '_blank'}
-            rel={platform === 'mail' ? undefined : 'noopener noreferrer'}
-          />
-        );
-      })}
+      {socialMediaButtons}
       <DownloadButton />
     </Stack>
   );
