@@ -17,7 +17,7 @@ import InfoWithIcon from '@/components/common/InfoWithIcon';
 import { memo, useMemo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import resumeData from '@/config/resume.json';
-import { THEME_STYLE } from '@/theme/theme';
+import { CONTACT_CARD_STYLES } from '@/styles/cards/contactCard.styles';
 
 interface Location {
   tr: string;
@@ -43,34 +43,18 @@ function ContactCard() {
     location: resumeData.contact?.location || { tr: '', en: '' },
   };
 
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-    CARD_CONTENT: {
-      ...THEME_STYLE.CARD_CONTENT,
-    },
-  }), []);
-
   return (
-    <Card sx={STYLE.CARD}>
+    <Card sx={CONTACT_CARD_STYLES.CARD}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...CONTACT_CARD_STYLES.TITLE }}>
             {t('contact.info')}
           </Typography>
         }
-        sx={STYLE.CARD_HEADER}
+        sx={CONTACT_CARD_STYLES.CARD_HEADER}
       />
       <CardContent>
-        <Box sx={STYLE.CARD_CONTENT}>
+        <Box sx={CONTACT_CARD_STYLES.CARD_CONTENT}>
           <InfoWithIcon
             icon={FaEnvelope}
             text={contactInfo.email}

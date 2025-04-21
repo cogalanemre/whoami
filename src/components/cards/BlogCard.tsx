@@ -48,7 +48,7 @@ import { formatDate } from '@/utils/dateUtils';
 import { useTranslation } from '@/hooks/useTranslation';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 import CustomButton from '@/components/common/CustomButton';
-import { THEME_STYLE } from '@/theme/theme';
+import { BLOG_CARD_STYLES } from '@/styles/cards/blogCard.styles';
 
 /**
  * Blog Kartı Props Interface
@@ -69,36 +69,6 @@ interface BlogCardProps {
 function BlogCard({ post }: BlogCardProps) {
   const { t } = useTranslation();
 
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-    META: {
-      ...THEME_STYLE.META,
-    },
-    CARD_CONTENT: {
-      ...THEME_STYLE.CARD_CONTENT,
-    },
-    DESCRIPTION: {
-      ...THEME_STYLE.TYPOGRAPHY.BODY,
-      display: '-webkit-box',
-      WebkitLineClamp: 5,
-      WebkitBoxOrient: 'vertical',
-      overflow: 'hidden',
-      textAlign: 'justify',
-    },
-    CARD_ACTIONS: {
-      ...THEME_STYLE.CARD_ACTIONS,
-    },
-  }), []);
-
   // Meta bilgilerini memoize et
   const { readingTimeText, publishDateText } = useMemo(() => ({
     readingTimeText: `${post.readingTime.minutes} ${
@@ -108,7 +78,7 @@ function BlogCard({ post }: BlogCardProps) {
   }), [post.readingTime.minutes, post.pubDate, t]);
 
   return (
-    <Card component="article" role="article" aria-label={post.title} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
+    <Card component="article" role="article" aria-label={post.title} sx={{ ...BLOG_CARD_STYLES.CARD, display: 'flex', flexDirection: 'column' }}>
       {/* Kapak Resmi */}
       {post.thumbnail && (
         <CardMedia
@@ -120,29 +90,29 @@ function BlogCard({ post }: BlogCardProps) {
       )}
 
       <CardHeader
-        sx={STYLE.CARD_HEADER}
+        sx={BLOG_CARD_STYLES.CARD_HEADER}
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...BLOG_CARD_STYLES.TITLE }}>
             {post.title}
           </Typography>
         }
         subheader={
-          <Box sx={STYLE.META}>
+          <Box sx={BLOG_CARD_STYLES.META}>
             <InfoWithIcon icon={FaClock} text={readingTimeText} fontSize="0.875rem" />
             <InfoWithIcon icon={FaCalendarAlt} text={publishDateText} fontSize="0.875rem" />
           </Box>
         }
       />
 
-      <CardContent sx={STYLE.CARD_CONTENT}>
+      <CardContent sx={BLOG_CARD_STYLES.CARD_CONTENT}>
         {/* Açıklama */}
-        <Typography variant="body2" sx={{ ...STYLE.DESCRIPTION }}>
+        <Typography variant="body2" sx={{ ...BLOG_CARD_STYLES.DESCRIPTION }}>
           {post.description}
         </Typography>
       </CardContent>
 
       {/* Devamını Oku Butonu */}
-      <CardActions sx={STYLE.CARD_ACTIONS}>
+      <CardActions sx={BLOG_CARD_STYLES.CARD_ACTIONS}>
         <Link 
           href={post.link}
           target="_blank"

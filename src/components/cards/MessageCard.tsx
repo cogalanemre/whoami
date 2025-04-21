@@ -12,7 +12,7 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { useTranslation } from '@/hooks/useTranslation';
 import { memo, useMemo } from 'react';
 import CustomButton from '@/components/common/CustomButton';
-import { THEME_STYLE } from '@/theme/theme';
+import { MESSAGE_CARD_STYLES } from '@/styles/cards/messageCard.styles';
 
 interface FormData {
   name: string;
@@ -54,28 +54,6 @@ interface MessageCardProps {
 function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
   const { t } = useTranslation();
 
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-    CARD_CONTENT: {
-      ...THEME_STYLE.CARD_CONTENT,
-    },
-    CARD_ACTIONS: {
-      ...THEME_STYLE.CARD_ACTIONS,
-    },
-    INPUT: {
-      ...THEME_STYLE.INPUT,
-    },
-  }), []);
-
   // Form alanları konfigürasyonunu memoize et
   const formFields = useMemo<FormField[]>(() => [
     {
@@ -104,18 +82,18 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
   ], []);
 
   return (
-    <Card component="form" onSubmit={onSubmit} sx={{ ...STYLE.CARD, display: 'flex', flexDirection: 'column' }}>
+    <Card component="form" onSubmit={onSubmit} sx={{ ...MESSAGE_CARD_STYLES.CARD, display: 'flex', flexDirection: 'column' }}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...MESSAGE_CARD_STYLES.TITLE }}>
             {t('contact.sendMessage')}
           </Typography>
         }
-        sx={STYLE.CARD_HEADER}
+        sx={MESSAGE_CARD_STYLES.CARD_HEADER}
       />
 
       {/* Form */}
-      <CardContent sx={STYLE.CARD_CONTENT}>
+      <CardContent sx={MESSAGE_CARD_STYLES.CARD_CONTENT}>
         {formFields.map(field => (
           <TextField
             key={field.name}
@@ -134,14 +112,14 @@ function MessageCard({ formData, onChange, onSubmit }: MessageCardProps) {
             placeholder={t(field.label)}
             variant="standard"
             InputProps={{
-              sx: STYLE.INPUT
+              sx: MESSAGE_CARD_STYLES.INPUT
             }}
           />
         ))}
       </CardContent>
 
       {/* Submit Button */}
-      <CardActions sx={STYLE.CARD_ACTIONS}>
+      <CardActions sx={MESSAGE_CARD_STYLES.CARD_ACTIONS}>
         <CustomButton
           type="submit"
           fullWidth

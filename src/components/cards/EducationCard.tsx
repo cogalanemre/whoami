@@ -41,7 +41,7 @@ import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { useTranslation } from '@/hooks/useTranslation';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 import { getTranslation } from '@/i18n/utils';
-import { THEME_STYLE } from '@/theme/theme';
+import { EDUCATION_CARD_STYLES } from '@/styles/cards/educationCard.styles';
 
 /**
  * Eğitim Kartı Props Interface
@@ -61,29 +61,6 @@ interface EducationCardProps {
  */
 function EducationCard({ education }: EducationCardProps) {
   const { locale } = useTranslation();
-
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-    },
-    AVATAR: {
-      ...THEME_STYLE.AVATAR,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-    SUBTITLE: {
-      ...THEME_STYLE.SUBTITLE,
-    },
-    META: {
-      ...THEME_STYLE.META,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-      border: 'none',
-    },
-  }), []);
 
   // Çevirileri memoize et
   const t = useMemo(() => ({
@@ -109,30 +86,30 @@ function EducationCard({ education }: EducationCardProps) {
 
   return (
     <Card
-      sx={STYLE.CARD}
+      sx={EDUCATION_CARD_STYLES.CARD}
       component="article"
       role="article"
       aria-label={`${educationTranslations.school} - ${t.aria.card}`}
     >
       <CardHeader
-        sx={STYLE.CARD_HEADER}
+        sx={EDUCATION_CARD_STYLES.CARD_HEADER}
         avatar={
           <Avatar
             src={education.logo}
             alt={`${educationTranslations.school} ${t.aria.logo}`}
-            sx={STYLE.AVATAR}
+            sx={EDUCATION_CARD_STYLES.AVATAR}
           >
             {!education.logo && <FaGraduationCap size={40} color="primary" />}
           </Avatar>
         }
         title={
-          <Typography variant="h3" sx={STYLE.TITLE}>
+          <Typography variant="h3" sx={EDUCATION_CARD_STYLES.TITLE}>
             {educationTranslations.department}
           </Typography>
         }
         subheader={
-          <Box sx={STYLE.META}>
-            <Typography variant="h4" sx={STYLE.SUBTITLE}>
+          <Box sx={EDUCATION_CARD_STYLES.META}>
+            <Typography variant="h4" sx={EDUCATION_CARD_STYLES.SUBTITLE}>
               {educationTranslations.school}
             </Typography>
             <InfoWithIcon

@@ -19,7 +19,7 @@ import InfoWithIcon from '@/components/common/InfoWithIcon';
 import resumeData from '@/config/resume.json';
 import { memo, useMemo } from 'react';
 import { IconType } from 'react-icons';
-import { THEME_STYLE } from '@/theme/theme';
+import { SOCIAL_MEDIA_CARD_STYLES } from '@/styles/cards/socialMediaCard.styles';
 
 interface SocialLink {
   url: string;
@@ -34,25 +34,6 @@ interface SocialLink {
 function SocialMediaCard() {
   const { t } = useTranslation();
   const socialMedia = resumeData.hero.socialMedia;
-
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-      p: 0,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-    },
-    CARD_CONTENT: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-  }), []);
 
   // Sosyal medya bağlantıları konfigürasyonunu memoize et
   const socialLinks = useMemo<Record<string, SocialLink>>(() => ({
@@ -71,19 +52,19 @@ function SocialMediaCard() {
   }), [socialMedia.github, socialMedia.linkedin, socialMedia.medium]);
 
   return (
-    <Card sx={STYLE.CARD}>
+    <Card sx={SOCIAL_MEDIA_CARD_STYLES.CARD}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...SOCIAL_MEDIA_CARD_STYLES.TITLE }}>
             {t('sections.social')}
           </Typography>
         }
-        sx={STYLE.CARD_HEADER}
+        sx={SOCIAL_MEDIA_CARD_STYLES.CARD_HEADER}
       />
 
       {/* Sosyal Medya Bağlantıları */}
       <CardContent>
-        <Box sx={STYLE.CARD_CONTENT}>
+        <Box sx={SOCIAL_MEDIA_CARD_STYLES.CARD_CONTENT}>
           {Object.entries(socialLinks).map(
             ([key, { url, icon }]) =>
               url && (

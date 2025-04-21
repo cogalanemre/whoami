@@ -52,7 +52,7 @@ import { FaMapMarkerAlt, FaBriefcase, FaCalendarAlt, FaClock, FaHistory } from '
 import { WorkingModel, EmploymentType } from '@/types/experience';
 import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { forwardRef } from 'react';
-import { THEME_STYLE } from '@/theme/theme';
+import { EXPERIENCE_CARD_STYLES } from '@/styles/cards/experienceCard.styles';
 
 /**
  * Deneyim Kartı Props Interface
@@ -79,48 +79,6 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
 ) {
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
-
-  // Stil objelerini memoize et
-  const STYLE = useMemo(() => ({
-    CARD: {
-      ...THEME_STYLE.CARD,
-    },
-    AVATAR: {
-      ...THEME_STYLE.AVATAR,
-    },
-    TITLE: {
-      ...THEME_STYLE.TITLE,
-    },
-    SUBTITLE: {
-      ...THEME_STYLE.SUBTITLE,
-    },
-    META: {
-      ...THEME_STYLE.META,
-    },
-    CARDCONTENT: {
-      ...THEME_STYLE.TYPOGRAPHY.BODY,
-      display: 'flex',
-      flexDirection: 'row',
-      gap: 1,
-      alignItems: 'flex-start',
-      '& > span': {
-        color: 'primary.main',
-        flexShrink: 0,
-        fontSize: '1rem',
-        lineHeight: 1,
-        mt: 0.2,
-      },
-    },
-    CARDACTIONS: {
-      ...THEME_STYLE.CARD_ACTIONS,
-    },
-    CHIP: {
-      ...THEME_STYLE.CHIP,
-    },
-    CARD_HEADER: {
-      ...THEME_STYLE.CARD_HEADER,
-    },
-  }), []);
 
   // Çalışma modeli ve istihdam türü çevirilerini memoize et
   const { workingModelText, employmentTypeText } = useMemo(() => ({
@@ -174,28 +132,28 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
     <Card
       ref={ref}
       sx={{
-        ...STYLE.CARD,
+        ...EXPERIENCE_CARD_STYLES.CARD,
       }}
     >
       <CardHeader
-        sx={STYLE.CARD_HEADER}
+        sx={EXPERIENCE_CARD_STYLES.CARD_HEADER}
         avatar={
           experience.logo && (
             <Avatar
               src={experience.logo}
               alt={`${experience.company} logo`}
-              sx={{ ...STYLE.AVATAR }}
+              sx={{ ...EXPERIENCE_CARD_STYLES.AVATAR }}
             />
           )
         }
         title={
-          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+          <Typography variant="h3" sx={{ ...EXPERIENCE_CARD_STYLES.TITLE }}>
             {experienceTranslations.position}
           </Typography>
         }
         subheader={
-          <Box sx={{ ...STYLE.META }}>
-            <Typography variant="h4" sx={{ ...STYLE.SUBTITLE }}>
+          <Box sx={{ ...EXPERIENCE_CARD_STYLES.META }}>
+            <Typography variant="h4" sx={{ ...EXPERIENCE_CARD_STYLES.SUBTITLE }}>
               {experience.company}
             </Typography>
             <InfoWithIcon
@@ -221,7 +179,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
             key={index}
             variant="body1"
             sx={{
-              ...STYLE.CARDCONTENT,
+              ...EXPERIENCE_CARD_STYLES.CARDCONTENT,
             }}
           >
             <span>•</span>
@@ -230,14 +188,14 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
         ))}
       </CardContent>
 
-      <CardActions sx={{ ...STYLE.CARDACTIONS }}>
+      <CardActions sx={{ ...EXPERIENCE_CARD_STYLES.CARDACTIONS }}>
         <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {experience.skillTags.map(skill => (
             <Chip
               key={skill}
               label={skill}
               data-skill={skill}
-              sx={{ ...STYLE.CHIP }}
+              sx={{ ...EXPERIENCE_CARD_STYLES.CHIP }}
             />
           ))}
         </Stack>
