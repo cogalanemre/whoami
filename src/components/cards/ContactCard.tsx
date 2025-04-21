@@ -14,7 +14,7 @@
 import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import resumeData from '@/config/resume.json';
 import { CONTACT_CARD_STYLES } from '@/styles/cards/contactCard.styles';
@@ -30,6 +30,12 @@ interface ContactInfo {
   location?: Location;
 }
 
+const contactInfo: ContactInfo = {
+  email: resumeData.contact?.email || '',
+  phone: resumeData.contact?.phone || '',
+  location: resumeData.contact?.location || { tr: '', en: '' },
+};
+
 /**
  * İletişim Bilgileri Kartı Bileşeni
  *
@@ -37,11 +43,6 @@ interface ContactInfo {
  */
 function ContactCard() {
   const { t, locale } = useTranslation();
-  const contactInfo: ContactInfo = {
-    email: resumeData.contact?.email || '',
-    phone: resumeData.contact?.phone || '',
-    location: resumeData.contact?.location || { tr: '', en: '' },
-  };
 
   return (
     <Card sx={CONTACT_CARD_STYLES.CARD}>
