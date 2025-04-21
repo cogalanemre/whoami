@@ -231,7 +231,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       </CardContent>
 
       <CardActions sx={{ ...STYLE.CARDACTIONS }}>
-        <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
+        <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {experience.skillTags.map(skill => (
             <Chip
               key={skill}
