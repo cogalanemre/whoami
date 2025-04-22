@@ -9,6 +9,9 @@ const en: TranslationType = {
     skills: 'Skills',
     social: 'Social Media',
   },
+  hero: {
+    downloadCV: 'Download CV',
+  },
   contact: {
     info: 'Contact Information',
     sendMessage: 'Send Message',

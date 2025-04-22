@@ -9,6 +9,9 @@ export const translationSchema = z.object({
     skills: z.string(),
     social: z.string(),
   }),
+  hero: z.object({
+    downloadCV: z.string(),
+  }),
   contact: z.object({
     info: z.string(),
     sendMessage: z.string(),

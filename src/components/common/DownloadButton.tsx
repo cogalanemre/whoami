@@ -2,32 +2,12 @@ import { Button, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/materia
 import { FaDownload, FaFilePdf } from 'react-icons/fa';
 import { memo, useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
+import { useTranslation } from '@/hooks/useTranslation';
+import { DOWNLOAD_BUTTON_STYLES } from '@/styles/common/downloadButton.styles';
 
-const STYLE = {
-  BUTTON: {
-    border: '1px solid',
-    borderColor: 'primary.main',
-    '& > svg': {
-    fontSize: '1.5rem',
-  },
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    transition: 'all 0.2s ease-in-out',
-  },
-  },
-  MENU_ITEM: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1,
-  },
-} as const;
-
-// Boş interface yerine Record<string, never> kullanıyoruz
-type DownloadButtonProps = Record<string, never>;
-
-function DownloadButton({}: DownloadButtonProps) {
-  // Context'ten lang ve cvFiles değerlerini al
-  const { lang, cvFiles } = useAppContext();
+function DownloadButton() {
+  const { t } = useTranslation();
+  const { cvFiles } = useAppContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -55,9 +35,9 @@ function DownloadButton({}: DownloadButtonProps) {
         variant="contained"
         onClick={handleClick}
         startIcon={<FaDownload />}
-        sx={STYLE.BUTTON}
+        sx={DOWNLOAD_BUTTON_STYLES.BUTTON}
       >
-        {lang === 'tr' ? 'CV İndir' : 'Download CV'}
+        {t('hero.downloadCV')}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -76,7 +56,7 @@ function DownloadButton({}: DownloadButtonProps) {
           <MenuItem
             key={cv.file}
             onClick={() => handleDownload(cv.file)}
-            sx={STYLE.MENU_ITEM}
+            sx={DOWNLOAD_BUTTON_STYLES.MENU_ITEM}
           >
             <ListItemIcon>
               <FaFilePdf />
