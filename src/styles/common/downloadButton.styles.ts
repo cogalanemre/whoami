@@ -8,7 +8,12 @@ export const DOWNLOAD_BUTTON_STYLES = {
       backgroundColor: 'primary.main',
     },
   },
+  MENU: {
+    width: 200,
+    mt: 1,
+  },
   MENU_ITEM: {
+    minWidth: 200,
     display: 'flex',
     alignItems: 'center',
     gap: 1,

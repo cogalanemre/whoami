@@ -45,11 +45,14 @@ function DownloadButton() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'center',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left',
+          horizontal: 'center',
+        }}
+        PaperProps={{
+          sx: DOWNLOAD_BUTTON_STYLES.MENU
         }}
       >
         {cvFiles.map((cv) => (
