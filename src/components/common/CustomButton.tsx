@@ -9,67 +9,22 @@
  * - Erişilebilirlik özellikleri
  */
 
-import { ButtonProps, Button, styled } from '@mui/material';
-import { forwardRef } from 'react';
+import { Button, CircularProgress } from '@mui/material';
+import { forwardRef, memo } from 'react';
+import { CUSTOM_BUTTON_STYLES } from '@/styles/common/customButton.styles';
 
-// Styled button bileşeni
-const StyledButton = styled(Button)(({ theme }) => ({
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(1, 2.5),
-  textTransform: 'none',
-  fontSize: '0.95rem',
-  fontWeight: 500,
-  letterSpacing: '0.3px',
-  transition: 'background-color 0.2s ease-in-out, border-color 0.2s ease-in-out',
-  boxShadow: 'none',
-  background: 'transparent',
-  border: `1px solid ${theme.palette.divider}`,
-  color: theme.palette.text.primary,
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(0.75),
+interface CustomButtonProps extends React.ComponentProps<typeof Button> {
+  isLoading?: boolean;
+}
 
-  '&:hover': {
-    background: theme.palette.action.hover,
-    borderColor: theme.palette.text.secondary,
-  },
+const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(
+  function CustomButton({ children, isLoading, ...props }, ref) {
+    return (
+      <Button ref={ref} sx={CUSTOM_BUTTON_STYLES.BUTTON} disabled={isLoading} {...props}>
+        {isLoading ? <CircularProgress size={24} /> : children}
+      </Button>
+    );
+  }
+);
 
-  '&:active': {
-    background: theme.palette.action.selected,
-  },
-
-  '&.Mui-disabled': {
-    background: 'transparent',
-    borderColor: theme.palette.action.disabledBackground,
-    color: theme.palette.text.disabled,
-  },
-
-  // Klavye odaklanması için stil
-  '&:focus-visible': {
-    outline: `2px solid ${theme.palette.primary.main}`,
-    outlineOffset: 2,
-  },
-}));
-
-/**
- * Özel Buton Bileşeni
- *
- * @param {CustomButtonProps} props - Buton props'ları
- * @returns {JSX.Element} Özel buton
- */
-const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(function CustomButton(
-  { children, ...props },
-  ref
-) {
-  return (
-    <StyledButton
-      ref={ref}
-      tabIndex={0}
-      {...props}
-    >
-      {children}
-    </StyledButton>
-  );
-});
-
-export default CustomButton;
+export default memo(CustomButton);
