@@ -21,8 +21,9 @@
  * ```
  */
 
-import { Typography, useTheme } from '@mui/material';
+import { SxProps, Theme, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { STYLE } from '@/styles/common/Typewriter.styles';
 
 /**
  * Daktilo Efekti Props Interface
@@ -35,43 +36,6 @@ interface TypewriterProps {
   texts: string[];
   delay?: number;
 }
-
-/**
- * Typewriter bileşeni için stil sabitleri
- */
-const TYPEWRITER_STYLES = {
-  root: {
-    color: 'text.primary',
-    fontWeight: 300,
-    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
-    position: 'relative',
-    display: 'inline-flex',
-    alignItems: 'center',
-    fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' },
-  },
-  cursor: {
-    content: '"_"',
-    position: 'relative',
-    marginLeft: '2px',
-    top: '4px',
-    fontSize: 'inherit',
-    lineHeight: 1,
-    fontWeight: 'normal',
-    display: 'inline-block',
-    transform: 'translateY(2px)',
-  },
-  blinkAnimation: {
-    '0%': {
-      opacity: 0,
-    },
-    '50%': {
-      opacity: 1,
-    },
-    '100%': {
-      opacity: 0,
-    },
-  },
-} as const;
 
 /**
  * Daktilo Efektli Metin Bileşeni
@@ -124,17 +88,15 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
     <Typography
       variant="body1"
       sx={{
-        ...TYPEWRITER_STYLES.root,
-        // Yanıp sönen imleç efekti
+        ...STYLE.ROOT,
         '&::after': {
-          ...TYPEWRITER_STYLES.cursor,
+          ...STYLE.CURSOR,
           animation: isWaiting ? 'blink 1s infinite' : 'none',
           opacity: isWaiting ? undefined : 1,
           color: theme.palette.primary.main,
         },
-        // İmleç animasyonu
-        '@keyframes blink': TYPEWRITER_STYLES.blinkAnimation,
-      }}
+        '@keyframes blink': STYLE.BLINK_ANIMATION,
+      } as SxProps<Theme>}
     >
       {currentText}
     </Typography>

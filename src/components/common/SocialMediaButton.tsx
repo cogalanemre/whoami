@@ -23,6 +23,7 @@
 
 import { IconButton, IconButtonProps } from '@mui/material';
 import { IconType } from 'react-icons';
+import { STYLE } from '@/styles/common/SocialMediaButton.styles';
 
 /**
  * Sosyal Medya Buton Props Interface
@@ -41,26 +42,13 @@ interface SocialMediaButtonProps extends Omit<IconButtonProps, 'children'> {
   rel?: string;
 }
 
-// Stil tanımlamaları
-const socialMediaButtonStyles = {
-  border: '1px solid',
-  borderColor: 'primary.main',
-  '& > svg': {
-    fontSize: '1.5rem',
-  },
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    transition: 'all 0.2s ease-in-out',
-  },
-} as const;
-
 export default function SocialMediaButton({ icon: Icon, sx, ...props }: SocialMediaButtonProps) {
   return (
     <IconButton
       color="primary"
       size="large"
       sx={{
-        ...socialMediaButtonStyles,
+        ...STYLE.BUTTON,
         ...sx,
       }}
       {...props}

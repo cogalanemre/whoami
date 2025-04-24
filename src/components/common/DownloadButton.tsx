@@ -3,7 +3,7 @@ import { FaDownload, FaFilePdf } from 'react-icons/fa';
 import { memo, useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { useTranslation } from '@/hooks/useTranslation';
-import { DOWNLOAD_BUTTON_STYLES } from '@/styles/common/downloadButton.styles';
+import { DOWNLOAD_BUTTON_STYLES } from '@/styles/common/DownloadButton.styles';
 
 function DownloadButton() {
   const { t } = useTranslation();

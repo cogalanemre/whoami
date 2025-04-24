@@ -25,28 +25,7 @@
 
 import { Box, Typography } from '@mui/material';
 import { IconType } from 'react-icons';
-
-// Stil tanımlamaları
-const STYLE = {
-  CONTAINER: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1.5,
-    py: 0.75,
-  },
-  ICON_WRAPPER: {
-    color: 'primary.main',
-    fontSize: '1em',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  TEXT: (fontSize: string) => ({
-    color: 'text.secondary',
-    fontSize,
-    display: 'flex',
-    alignItems: 'center',
-  }),
-} as const;
+import { STYLE } from '../../styles/common/InfoWithIcon.styles';
 
 /**
  * İkon ile Bilgi Gösterimi Props Interface

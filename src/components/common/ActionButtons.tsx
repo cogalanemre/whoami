@@ -14,6 +14,7 @@ import { memo, useMemo } from 'react';
 import SocialMediaButton from '@/components/common/SocialMediaButton';
 import DownloadButton from '@/components/common/DownloadButton';
 import type { SocialMedia } from '@/types';
+import { STYLE } from '@/styles/common/ActionButtons.styles';
 
 const SOCIAL_MEDIA_ICONS = {
   github: FaGithub,
@@ -29,22 +30,8 @@ const SOCIAL_MEDIA_ICONS = {
 
 type SocialMediaPlatform = keyof typeof SOCIAL_MEDIA_ICONS;
 
-const STYLE = {
-  CONTAINER: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 1,
-  },
-} as const;
-
 const filterAvailableSocialMedia = (socialMedia: Partial<SocialMedia>) => 
-  Object.entries(socialMedia).filter(([platform, value]) => {
-    if (platform === 'mail') {
-      return value && value.trim() !== '';
-    }
-    return value;
-  });
+  Object.entries(socialMedia).filter(([_, value]) => value);
 
 const createSocialMediaButton = (platform: string, url: string) => {
   const icon = SOCIAL_MEDIA_ICONS[platform as SocialMediaPlatform];

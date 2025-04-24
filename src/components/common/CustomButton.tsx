@@ -11,7 +11,7 @@
 
 import { Button, CircularProgress } from '@mui/material';
 import { forwardRef, memo } from 'react';
-import { CUSTOM_BUTTON_STYLES } from '@/styles/common/customButton.styles';
+import { CUSTOM_BUTTON_STYLES } from '@/styles/common/CustomButton.styles';
 
 interface CustomButtonProps extends React.ComponentProps<typeof Button> {
   isLoading?: boolean;

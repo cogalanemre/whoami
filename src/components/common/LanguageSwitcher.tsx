@@ -4,14 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Box } from '@mui/material';
 import MaterialUISwitch from './MaterialUISwitch';
-
-// Stil tanımlamaları
-const containerStyles = {
-  position: 'fixed',
-  top: 64,
-  right: 20,
-  zIndex: 1000,
-} as const;
+import { STYLE } from '@/styles/common/LanguageSwitcher.styles';
 
 /**
  * Dil Değiştirici Bileşeni
@@ -35,7 +28,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <Box sx={containerStyles}>
+    <Box sx={STYLE.CONTAINER}>
       <MaterialUISwitch checked={locale === 'en'} onChange={handleLanguageChange} type="language" />
     </Box>
   );
