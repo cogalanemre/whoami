@@ -1,5 +1,3 @@
-import { SxProps, Theme } from '@mui/material';
-
 const CURSOR_BASE = {
   content: '"_"',
   position: 'relative',
