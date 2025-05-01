@@ -21,9 +21,9 @@
  * ```
  */
 
-import { SxProps, Theme, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { STYLE, getCursorStyle } from '@/styles/common/Typewriter.styles';
+import { STYLE } from '@/styles/common/Typewriter.styles';
 
 /**
  * Daktilo Efekti Props Interface
@@ -81,15 +81,20 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
     }
 
     return () => clearTimeout(timeout);
-  }, [currentText, currentTextIndex, delay, isDeleting, texts]);
+  }, [currentText, currentTextIndex, delay, isDeleting, texts, isWaiting]);
+
+  // Debug için isWaiting değerini kontrol edelim
+  useEffect(() => {
+    console.log('isWaiting changed:', isWaiting);
+  }, [isWaiting]);
 
   return (
     <Typography
       variant="body1"
       sx={{
         ...STYLE.ROOT,
-        '&::after': getCursorStyle(isWaiting),
-      } as SxProps<Theme>}
+        '&::after': isWaiting ? STYLE.CURSOR_WAITING : STYLE.CURSOR_NOT_WAITING,
+      }}
     >
       {currentText}
     </Typography>
