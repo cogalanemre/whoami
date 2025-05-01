@@ -17,7 +17,7 @@ import InfoWithIcon from '@/components/common/InfoWithIcon';
 import { memo } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import resumeData from '@/config/resume.json';
-import { CONTACT_CARD_STYLES } from '@/styles/cards/contactCard.styles';
+import { CONTACT_CARD_STYLES } from '@/styles/cards/ContactCard.styles';
 
 interface Location {
   tr: string;

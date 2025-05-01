@@ -1,11 +1,5 @@
 import { SxProps, Theme } from '@mui/material';
 
-interface BlinkAnimation {
-  '0%': { opacity: number };
-  '50%': { opacity: number };
-  '100%': { opacity: number };
-}
-
 export const STYLE = {
   ROOT: {
     color: 'text.primary',
@@ -15,7 +9,7 @@ export const STYLE = {
     display: 'inline-flex',
     alignItems: 'center',
     fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' },
-  } as SxProps<Theme>,
+  },
   CURSOR: {
     content: '"_"',
     position: 'relative',
@@ -26,16 +20,12 @@ export const STYLE = {
     fontWeight: 'normal',
     display: 'inline-block',
     transform: 'translateY(2px)',
-  } as SxProps<Theme>,
-  BLINK_ANIMATION: {
-    '0%': {
-      opacity: 0,
-    },
-    '50%': {
-      opacity: 1,
-    },
-    '100%': {
-      opacity: 0,
-    },
-  } as BlinkAnimation,
-} as const; 
+    color: 'primary.main',
+  },
+} as const;
+
+export const getCursorStyle = (isWaiting: boolean): SxProps<Theme> => ({
+  ...STYLE.CURSOR,
+  animation: isWaiting ? 'blink 1s infinite' : 'none',
+  opacity: isWaiting ? undefined : 1,
+}); 

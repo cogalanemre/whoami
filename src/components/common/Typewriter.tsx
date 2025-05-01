@@ -23,7 +23,7 @@
 
 import { SxProps, Theme, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { STYLE } from '@/styles/common/Typewriter.styles';
+import { STYLE, getCursorStyle } from '@/styles/common/Typewriter.styles';
 
 /**
  * Daktilo Efekti Props Interface
@@ -49,7 +49,6 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
-  const theme = useTheme();
 
   useEffect(() => {
     const text = texts[currentTextIndex];
@@ -89,13 +88,7 @@ export default function Typewriter({ texts, delay = 150 }: TypewriterProps) {
       variant="body1"
       sx={{
         ...STYLE.ROOT,
-        '&::after': {
-          ...STYLE.CURSOR,
-          animation: isWaiting ? 'blink 1s infinite' : 'none',
-          opacity: isWaiting ? undefined : 1,
-          color: theme.palette.primary.main,
-        },
-        '@keyframes blink': STYLE.BLINK_ANIMATION,
+        '&::after': getCursorStyle(isWaiting),
       } as SxProps<Theme>}
     >
       {currentText}

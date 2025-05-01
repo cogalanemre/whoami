@@ -19,7 +19,7 @@ import InfoWithIcon from '@/components/common/InfoWithIcon';
 import resumeData from '@/config/resume.json';
 import { memo, useMemo } from 'react';
 import { IconType } from 'react-icons';
-import { SOCIAL_MEDIA_CARD_STYLES } from '@/styles/cards/socialMediaCard.styles';
+import { SOCIAL_MEDIA_CARD_STYLES } from '@/styles/cards/SocialMediaCard.styles';
 
 interface SocialLink {
   url: string;
