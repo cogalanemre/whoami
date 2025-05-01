@@ -31,7 +31,7 @@ const SOCIAL_MEDIA_ICONS = {
 type SocialMediaPlatform = keyof typeof SOCIAL_MEDIA_ICONS;
 
 const filterAvailableSocialMedia = (socialMedia: Partial<SocialMedia>) => 
-  Object.entries(socialMedia).filter(([_, value]) => value);
+  Object.entries(socialMedia).filter(([, value]) => value);
 
 const createSocialMediaButton = (platform: string, url: string) => {
   const icon = SOCIAL_MEDIA_ICONS[platform as SocialMediaPlatform];

@@ -21,7 +21,7 @@
  * ```
  */
 
-import { SxProps, Theme, Typography, useTheme } from '@mui/material';
+import { SxProps, Theme, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { STYLE, getCursorStyle } from '@/styles/common/Typewriter.styles';
 

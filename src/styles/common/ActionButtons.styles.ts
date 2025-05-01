@@ -6,5 +6,5 @@ export const STYLE = {
     justifyContent: 'center',
     alignItems: 'center',
     gap: 1,
-  } as SxProps<Theme>,
+  },
 } as const; 

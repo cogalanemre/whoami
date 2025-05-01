@@ -6,5 +6,5 @@ export const STYLE = {
     top: 20,
     right: 20,
     zIndex: 1000,
-  } as SxProps<Theme>,
+  },
 } as const; 
