@@ -48,7 +48,7 @@ import { formatDate } from '@/utils/dateUtils';
 import { useTranslation } from '@/hooks/useTranslation';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 import CustomButton from '@/components/common/CustomButton';
-import { BLOG_CARD_STYLES } from '@/styles/cards/blogCard.styles';
+import { BLOG_CARD_STYLES } from '@/styles/cards/BlogCard.styles';
 
 /**
  * Blog Kartı Props Interface

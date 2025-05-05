@@ -12,7 +12,7 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { useTranslation } from '@/hooks/useTranslation';
 import { memo, useMemo } from 'react';
 import CustomButton from '@/components/common/CustomButton';
-import { MESSAGE_CARD_STYLES } from '@/styles/cards/messageCard.styles';
+import { MESSAGE_CARD_STYLES } from '@/styles/cards/MessageCard.styles';
 
 interface FormData {
   name: string;

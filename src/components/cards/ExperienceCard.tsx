@@ -52,7 +52,7 @@ import { FaMapMarkerAlt, FaBriefcase, FaCalendarAlt, FaClock, FaHistory } from '
 import { WorkingModel, EmploymentType } from '@/types/experience';
 import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { forwardRef } from 'react';
-import { EXPERIENCE_CARD_STYLES } from '@/styles/cards/experienceCard.styles';
+import { EXPERIENCE_CARD_STYLES } from '@/styles/cards/ExperienceCard.styles';
 
 /**
  * Deneyim Kartı Props Interface

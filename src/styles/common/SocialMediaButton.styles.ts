@@ -1,4 +1,3 @@
-import { SxProps, Theme } from '@mui/material';
 
 export const STYLE = {
   BUTTON: {
@@ -11,5 +10,5 @@ export const STYLE = {
       transform: 'translateY(-2px)',
       transition: 'all 0.2s ease-in-out',
     },
-  } as SxProps<Theme>,
+  },
 } as const; 

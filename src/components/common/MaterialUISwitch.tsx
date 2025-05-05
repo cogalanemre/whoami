@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, forwardRef } from 'react';
-import { BaseSwitch, ThemeSwitch, LanguageSwitch } from '@/styles/common/MaterialUISwitch.styles';
+import { ThemeSwitch, LanguageSwitch } from '@/styles/common/MaterialUISwitch.styles';
 
 interface MaterialUISwitchProps {
   checked: boolean;
