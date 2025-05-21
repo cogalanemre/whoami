@@ -32,20 +32,7 @@ import { Education } from '@/types';
 import EducationCard from '@/components/cards/EducationCard';
 import SectionTitle from '@/components/common/SectionTitle';
 import { memo } from 'react';
-import { THEME_STYLE } from '@/theme/theme';
-
-const STYLES = {
-  SECTION: {
-    ...THEME_STYLE.SECTION,
-  },
-  STACK: {},
-  BOX: {
-    mb: 3,
-    '&:last-child': {
-      mb: 0,
-    },
-  },
-} as const;
+import { educationSectionStyles as STYLES } from '@/styles/sections/EducationSection.styles';
 
 /**
  * Eğitim Bölümü Props Interface

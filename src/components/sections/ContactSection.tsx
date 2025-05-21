@@ -7,7 +7,8 @@ import ContactCard from '@/components/cards/ContactCard';
 import SocialMediaCard from '@/components/cards/SocialMediaCard';
 import MessageCard from '@/components/cards/MessageCard';
 import SectionTitle from '@/components/common/SectionTitle';
-import { THEME_STYLE } from '@/theme/theme';
+import { contactSectionStyles as STYLES } from '@/styles/sections/ContactSection.styles';
+
 interface FormData {
   name: string;
   email: string;
@@ -20,25 +21,6 @@ interface SnackbarState {
   message: string;
   severity: 'success' | 'error';
 }
-
-const STYLES = {
-  SECTION: {
-    ...THEME_STYLE.SECTION,
-  },
-  CONTAINER: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: { xs: 'column', md: 'row' },
-  },
-  SIDE_BOX: {
-    width: { xs: '100%', md: '48%' },
-  },
-  LEFT_CONTENT: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: { xs: 4, md: 8 },
-  },
-} as const;
 
 /**
  * İletişim Section Bileşeni

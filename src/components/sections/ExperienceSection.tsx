@@ -34,22 +34,7 @@ import { Experience } from '@/types';
 import ExperienceCard from '@/components/cards/ExperienceCard';
 import SectionTitle from '@/components/common/SectionTitle';
 import { memo } from 'react';
-import { THEME_STYLE } from '@/theme/theme';
-
-const STYLES = {
-  SECTION: {
-    ...THEME_STYLE.SECTION,
-  },
-  STACK: {
-    spacing: { xs: 4, md: 6 },
-  },
-  BOX: {
-    mb: { xs: 4, md: 6 },
-    '&:last-child': {
-      mb: 0,
-    },
-  },
-} as const;
+import { experienceSectionStyles as STYLES } from '@/styles/sections/ExperienceSection.styles';
 
 /**
  * Deneyim Bölümü Props Interface
