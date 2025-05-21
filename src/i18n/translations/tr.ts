@@ -8,6 +8,7 @@ const tr: TranslationType = {
     contact: 'İletişim',
     skills: 'Yetenekler',
     social: 'Sosyal Medya',
+    projects: 'Projeler',
   },
   hero: {
     downloadCV: 'CV İndir',
