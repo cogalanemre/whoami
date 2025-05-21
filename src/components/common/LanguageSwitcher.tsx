@@ -24,7 +24,8 @@ export default function LanguageSwitcher() {
 
   const handleLanguageChange = () => {
     const newLocale = locale === 'tr' ? 'en' : 'tr';
-    router.push(`/${newLocale}`);
+    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    router.push(`/${newLocale}?theme=${currentTheme}`);
   };
 
   return (

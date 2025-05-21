@@ -16,6 +16,7 @@ import AppThemeProvider from '@/theme/ThemeProvider';
 import ThemeSwitcher from '@/components/common/ThemeSwitcher';
 import LanguageSwitcher from '@/components/common/LanguageSwitcher';
 import config from '@/config/config.json';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * Client Layout Props
@@ -40,8 +41,11 @@ interface ClientLayoutProps {
  * @returns {JSX.Element} Layout bileşeni
  */
 export default function ClientLayout({ children }: ClientLayoutProps) {
+  const searchParams = useSearchParams();
+  const themeParam = searchParams.get('theme');
+
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={themeParam as 'dark' | 'light'}>
       <AppThemeProvider>
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Box

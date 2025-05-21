@@ -28,24 +28,24 @@ const getInitialTheme = (): boolean => {
   return config.theme.mode === 'dark';
 };
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(config.theme.mode === 'dark');
+export function ThemeProvider({ children, initialTheme }: { children: ReactNode; initialTheme?: 'dark' | 'light' }) {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(initialTheme ? initialTheme === 'dark' : config.theme.mode === 'dark');
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Sayfa yüklendiğinde flash'ı önle
   useEffect(() => {
-    const initialTheme = getInitialTheme();
-    setIsDarkMode(initialTheme);
+    const initialThemeValue = initialTheme ? initialTheme === 'dark' : getInitialTheme();
+    setIsDarkMode(initialThemeValue);
 
     // HTML'e tema class'ını ekle
     document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(initialTheme ? 'dark' : 'light');
+    document.documentElement.classList.add(initialThemeValue ? 'dark' : 'light');
 
     // Body'ye loaded class'ını ekle
     document.body.classList.add('loaded');
 
     setIsInitialized(true);
-  }, []);
+  }, [initialTheme]);
 
   // Tema değiştiğinde HTML class'ını güncelle
   useEffect(() => {
