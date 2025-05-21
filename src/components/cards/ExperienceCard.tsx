@@ -174,18 +174,19 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       />
 
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-        {experienceTranslations.description.map((desc, index) => (
-          <Typography
-            key={index}
-            variant="body1"
-            sx={{
-              ...EXPERIENCE_CARD_STYLES.CARDCONTENT,
-            }}
-          >
-            <span>•</span>
-            {desc}
-          </Typography>
-        ))}
+        <Box component="ul" sx={EXPERIENCE_CARD_STYLES.LIST}>
+          {experienceTranslations.description.map((desc, index) => (
+            <Box
+              component="li"
+              key={index}
+              sx={{
+                ...EXPERIENCE_CARD_STYLES.CARDCONTENT
+              }}
+            >
+              {desc}
+            </Box>
+          ))}
+        </Box>
       </CardContent>
 
       <CardActions sx={{ ...EXPERIENCE_CARD_STYLES.CARDACTIONS }}>

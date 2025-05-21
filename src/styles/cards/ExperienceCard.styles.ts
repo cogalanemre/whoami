@@ -39,4 +39,20 @@ export const EXPERIENCE_CARD_STYLES = {
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
   },
+  LIST: {
+    listStyle: 'none',
+    paddingLeft: '20px',
+    margin: 0,
+    '& li': {
+      position: 'relative',
+      paddingLeft: '5px',
+      marginBottom: '8px',
+      '&::before': {
+        content: '"•"',
+        color: 'primary.main',
+        position: 'absolute',
+        left: '-15px'
+      }
+    }
+  }
 } as const; 
