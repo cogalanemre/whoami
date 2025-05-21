@@ -1,0 +1,209 @@
+{
+  "hero": {
+    "name": "Emre ÇOĞALAN",
+    "avatar": "/images/profile.png",
+    "socialMedia": {
+      "github": "https://github.com/cogalanemre",
+      "linkedin": "https://www.linkedin.com/in/cogalanemre",
+      "medium": "https://medium.com/@cogalanemre",
+      "mail": "mail@emrecogalan.com"
+    },
+    "titles": {
+      "tr": ["Senior Software Engineer", "Full Stack Developer", "AI Researcher"],
+      "en": ["Senior Software Engineer", "Full Stack Developer", "AI Researcher"]
+    }
+  },
+  "experiences": [
+    {
+      "company": "Dgpays",
+      "logo": "/images/dgpays.png",
+      "startDate": "2023-01-01",
+      "endDate": null,
+      "workingModel": 1,
+      "employmentType": 1,
+      "tr": {
+        "position": "Senior Software Engineer",
+        "location": "Ataşehir, İstanbul, Türkiye",
+        "description": [
+          "Ödeme aracı entegrasyonu, kampanya modülü ve doğrudan taşıyıcı faturalama (DCB) modülü dahil olmak üzere çeşitli projelerde çalıştım.",
+          "C# ve .NET Core kullanarak API'ler geliştirdim.",
+          "JavaScript ve DevExtreme ile kullanıcı arayüzleri oluşturdum.",
+          "Veritabanı yönetimi için MSSQL kullandım.",
+          "Görev ve proje yönetimi için JIRA kullanarak Agile Scrum metodolojisini takip ettim."
+        ]
+      },
+      "en": {
+        "position": "Senior Software Engineer",
+        "location": "Atasehir, Istanbul, Turkey",
+        "description": [
+          "Worked on various projects, including payment facilitator integration, campaign module, and direct carrier billing (DCB) module.",
+          "Developed APIs using C# and .NET Core.",
+          "Created user interfaces with JavaScript and DevExtreme.",
+          "Used MSSQL for database management.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
+        ]
+      },
+      "skillTags": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
+    },
+    {
+      "company": "OBSS",
+      "logo": "/images/obss.webp",
+      "startDate": "2022-01-01",
+      "endDate": "2023-01-01",
+      "workingModel": 1,
+      "employmentType": 1,
+      "tr": {
+        "position": "Senior Software Consultant",
+        "location": "Ankara, Türkiye",
+        "description": [
+          "Aselsan'da outsource Senior Software Consultant olarak çalıştım.",
+          "Java 8+, Spring ve Hibernate kullanarak mikroservisler geliştirdim.",
+          "Event-Driven mimarisine sahip mikroservislerimizi haberleştirmek için Kafka teknolojisinde deneyim kazandım.",
+          "React kullanarak single-page, single-root uygulamalar geliştirdim.",
+          "Database management için PostgreSQL kullandım.",
+          "Servisleri Kubernetes'e deploy ettim.",
+          "Agile Scrum metodolojisini takip ederek, task ve project management için JIRA kullandım."
+        ]
+      },
+      "en": {
+        "position": "Senior Software Consultant",
+        "location": "Ankara, Turkey",
+        "description": [
+          "Worked as an outsourced Senior Software Consultant at Aselsan.",
+          "Developed microservices using Java 8+, Spring, and Hibernate.",
+          "Implemented event-driven communication between services using Kafka.",
+          "Developed single-page, single-root applications using React.",
+          "Used PostgreSQL for database management.",
+          "Deployed services to Kubernetes.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
+        ]
+      },
+      "skillTags": ["Java", "Spring", "React", "Kubernetes", "Kafka"]
+    },
+    {
+      "company": "StreamDelta",
+      "logo": "/images/streamDelta.jpeg",
+      "startDate": "2021-07-01",
+      "endDate": "2021-12-31",
+      "workingModel": 2,
+      "employmentType": 1,
+      "tr": {
+        "position": "Software Engineer",
+        "location": "İstanbul, Türkiye",
+        "description": [
+          "Vodafone projelerinde outsource developer olarak çalıştım.",
+          "Telekominasyon sektörü standartlarını belirleyen TMForum'dan OPEN API sertifikasını aldım.",
+          "Java, Spring Boot ve Hibernate kullanarak mikroservisler geliştirdim.",
+          "Camunda ve BPMN 2.0 notasyonu kullanarak Business Management Microservice'den sorumluluk aldım.",
+          "Veri depolama ve caching işlemleri için Oracle DB, MongoDB ve Redis ile çalıştım.",
+          "Jenkins kullanarak mikroservisleri OpenShift'e deploy ettim.",
+          "Agile Scrum metodolojisini takip ederek, görev ve proje yönetimi için JIRA kullandım."
+        ]
+      },
+      "en": {
+        "position": "Software Engineer",
+        "location": "Istanbul, Turkey",
+        "description": [
+          "Worked as an outsourced developer on Vodafone projects.",
+          "I received the OPEN API certification from TMForum, which sets the standards for the telecommunications sector.",
+          "Developed microservices using Java, Spring Boot, and Hibernate.",
+          "Took responsibility for the Business Management Microservice, utilizing Camunda and BPMN 2.0 notation.",
+          "Handled data storage and caching with Oracle DB, MongoDB, and Redis.",
+          "Deployed microservices to OpenShift using Jenkins.",
+          "Followed the Agile Scrum methodology, using JIRA for task and project management."
+        ]
+      },
+      "skillTags": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
+    },
+    {
+      "company": "Sikayetvar.com",
+      "logo": "/images/sikayetvar_logo.jpeg",
+      "startDate": "2018-09-01",
+      "endDate": "2020-12-31",
+      "workingModel": 3,
+      "employmentType": 1,
+      "tr": {
+        "position": "Software Engineer",
+        "location": "Ankara, Türkiye",
+        "description": [
+          "Java ve Spring Boot kullanarak mikroservisler geliştirdim.",
+          "Şikayetvar'ın altyapısını yeniden geliştirmek amacıyla yürütülen remake projesine katıldım.",
+          "Elasticsearch kullanarak autocomplete mikroservisi oluşturmayı başardım.",
+          "RESTful iletişim protokolüyle servisler geliştirdim.",
+          "Veritabanı yönetimi için MySQL kullandım.",
+          "Jenkins aracılığıyla mikroservisleri Google Cloud'a deploy ettim.",
+          "Agile Kanban modeli çerçevesinde çalıştım.",
+          "GitLab kullanarak görev yönetimi ve sürüm kontrolünü sağladım."
+        ]
+      },
+      "en": {
+        "position": "Software Engineer",
+        "location": "Ankara, Turkey",
+        "description": [
+          "Built an autocomplete microservice using Elasticsearch.",
+          "Developed services with RESTful communication.",
+          "Used MySQL for database management.",
+          "Deployed microservices to Google Cloud using Jenkins.",
+          "Worked within an Agile Kanban model.",
+          "Used GitLab for task management and version control."
+        ]
+      },
+      "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
+    }
+  ],
+
+  "education": [
+    {
+      "startDate": "2014-06-01",
+      "endDate": "2018-06-01",
+      "logo": "/images/sau.jpg",
+      "tr": {
+        "school": "Sakarya Üniversitesi",
+        "department": "Bilgisayar Mühendisliği",
+        "location": "Sakarya, Türkiye"
+      },
+      "en": {
+        "school": "Sakarya University",
+        "department": "Computer Engineering",
+        "location": "Sakarya, Turkey"
+      }
+    },
+    {
+      "startDate": "2013-06-01",
+      "endDate": "2014-06-01",
+      "logo": "/images/cu.png",
+      "tr": {
+        "school": "Çukurova Üniversitesi",
+        "department": "İngilizce Hazırlık",
+        "location": "Adana, Türkiye"
+      },
+      "en": {
+        "school": "Cukurova University",
+        "department": "English Preparatory",
+        "location": "Adana, Turkey"
+      }
+    },
+    {
+      "startDate": "2009-06-01",
+      "endDate": "2013-06-01",
+      "tr": {
+        "school": "Gazi Anadolu Lisesi",
+        "department": "Lise",
+        "location": "Çankırı, Türkiye"
+      },
+      "en": {
+        "school": "Gazi Anatolian High School",
+        "department": "High School",
+        "location": "Cankiri, Turkey"
+      }
+    }
+  ],
+  "contact": {
+    "phone": "+90 551 853 5776",
+    "email": "mail@emrecogalan.com",
+    "location": {
+      "tr": "Ankara, Türkiye",
+      "en": "Ankara, Turkey"
+    }
+  }
+}
