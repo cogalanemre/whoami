@@ -9,9 +9,7 @@ export const SOCIAL_MEDIA_CARD_STYLES = {
     ...THEME_STYLE.CARD_HEADER,
   },
   CARD_CONTENT: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
+    ...THEME_STYLE.CARD_CONTENT,
   },
   TITLE: {
     ...THEME_STYLE.TITLE,
