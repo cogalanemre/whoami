@@ -6,22 +6,6 @@ import { memo } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { heroSectionStyles as STYLE } from '@/styles/sections/HeroSection.styles';
 
-const ALIGNMENT = {
-  xs: 'center',
-  md: 'left',
-} as const;
-
-const AVATAR_SIZES = {
-  xs: 200,
-  sm: 250,
-  md: 300,
-} as const;
-
-const HEADER_HEIGHTS = {
-  xs: 96,
-  md: 128,
-} as const;
-
 interface HeroSectionProps {
   hero: Hero;
 }

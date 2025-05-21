@@ -203,9 +203,8 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
           {/* Project Section */}
           <SectionGrid condition={config.features.sections.projects}>
             <DynamicProjectSection
-              blogPosts={blogPosts}
+              projects={resumeData.projects}
               sectionTitle={t.sections.projects}
-              noPostsText={t.blog.noPosts}
             />
           </SectionGrid>
 

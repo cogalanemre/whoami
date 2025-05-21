@@ -151,7 +151,21 @@
       "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
     }
   ],
-
+  "projects": [
+    {
+      "name": "Whoami",
+      "link": "https://github.com/cogalanemre/whoami",
+      "startDate": "2014-06-01",
+      "endDate": "2025-06-01",
+      "tr": {
+        "description": "Personal website and portfolio"
+      },
+      "en": {
+        "description": "Personal website and portfolio"
+      },
+      "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
+    }
+  ],
   "education": [
     {
       "startDate": "2014-06-01",

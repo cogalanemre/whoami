@@ -1,79 +1,73 @@
 /**
- * Blog Bölümü Bileşeni
+ * Proje Bölümü Bileşeni
  *
- * Medium'dan çekilen blog yazılarını grid yapısında gösteren bölüm.
+ * Kullanıcının projelerini kronolojik sırayla gösteren bölüm.
+ * Her proje için ayrı bir kart oluşturur.
+ *
  * Özellikler:
- * - Responsive flex yapısı
- * - Yükleme durumu gösterimi
- * - Boş durum kontrolü
- * - Memo optimizasyonu
- * - Özelleştirilebilir metinler
+ * - Responsive tasarım (xs, sm, md, lg breakpoint'leri için özel spacing)
+ * - Kronolojik sıralama
+ * - Material-UI tema entegrasyonu
  *
  * @component
  * @example
  * ```tsx
- * <BlogSection
- *   blogPosts={posts}
- *   sectionTitle="Blog Yazılarım"
- *   noPostsText="Henüz blog yazısı yok"
+ * <ProjectSection
+ *   projects={[{
+ *     name: "Proje Adı",
+ *     link: "https://example.com",
+ *     startDate: "2020-01",
+ *     endDate: "2023-01",
+ *     description: "Proje açıklaması",
+ *     skillTags: ["React", "TypeScript"]
+ *   }]}
+ *   sectionTitle="Projeler"
  * />
  * ```
  */
 
-import { Box, Typography } from '@mui/material';
-import { FaNewspaper } from 'react-icons/fa';
-import { BlogPost } from '@/types';
-import BlogCard from '@/components/cards/BlogCard';
+import { Box, Stack } from '@mui/material';
+import { FaCodeBranch } from 'react-icons/fa';
+import { Project } from '@/types';
+import ProjectCard from '@/components/cards/ProjectCard';
 import SectionTitle from '@/components/common/SectionTitle';
 import { memo } from 'react';
-import { blogSectionStyles as STYLES } from '@/styles/sections/BlogSection.styles';
+import { projectSectionStyles as STYLES } from '@/styles/sections/ProjectSection.styles';
 
 /**
- * Blog Bölümü Props Interface
+ * Proje Bölümü Props Interface
  *
- * @interface BlogSectionProps
- * @property {BlogPost[]} blogPosts - Blog yazıları listesi
+ * @interface ProjectSectionProps
+ * @property {Project[]} projects - Proje bilgileri listesi
  * @property {string} sectionTitle - Bölüm başlığı
- * @property {string} noPostsText - Blog yazısı olmadığında gösterilecek metin
  */
-interface BlogSectionProps {
-  blogPosts: BlogPost[];
+interface ProjectSectionProps {
+  projects: Project[];
   sectionTitle: string;
-  noPostsText: string;
 }
 
 /**
- * Blog Bölümü Bileşeni
+ * Proje Bölümü Bileşeni
  *
- * @param {BlogSectionProps} props - Bileşen props'ları
- * @returns {JSX.Element} Blog bölümü
+ * @param {ProjectSectionProps} props - Bileşen props'ları
+ * @returns {JSX.Element} Proje bölümü
  */
-function ProjectSection({
-  blogPosts,
-  sectionTitle,
-  noPostsText,
-}: BlogSectionProps) {
+function ProjectSection({ projects, sectionTitle }: ProjectSectionProps) {
   return (
     <Box sx={STYLES.SECTION}>
       {/* Bölüm Başlığı */}
-      <SectionTitle icon={FaNewspaper} title={sectionTitle} />
+      <SectionTitle icon={FaCodeBranch} title={sectionTitle} />
 
-      {/* Blog Kartları Container */}
-      <Box sx={STYLES.CONTAINER}>
-        {/* Yükleme Durumu */}
-        {blogPosts.length > 0 ? (
-          // Blog Kartları
-          blogPosts.map(post => (
-            <Box sx={STYLES.ITEM} key={post.link}>
-              <BlogCard post={post} />
+      {/* Proje Kartları Konteyneri */}
+      <Box>
+        <Stack sx={STYLES.STACK}>
+          {/* Proje Kartları */}
+          {projects.map(project => (
+            <Box key={`${project.name}-${project.startDate}`} sx={STYLES.BOX}>
+              <ProjectCard project={project} />
             </Box>
-          ))
-        ) : (
-          // Boş Durum
-          <Box sx={STYLES.MESSAGE}>
-            <Typography>{noPostsText}</Typography>
-          </Box>
-        )}
+          ))}
+        </Stack>
       </Box>
     </Box>
   );
