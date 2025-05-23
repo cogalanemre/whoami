@@ -151,7 +151,22 @@
       "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
     }
   ],
-
+  "projects": [
+    {
+      "name": "Whoami",
+      "link": "https://github.com/cogalanemre/whoami",
+      "thumbnail": "/images/whoami.png",
+      "startDate": "2025-04-01",
+      "endDate": null,
+      "tr": {
+        "description": "Whoami, React, Next.js ve Material UI kullanılarak geliştirilen, kişisel CV ve portfolyo sunumuna yönelik modern bir web uygulamasıdır.Çoklu dil desteği, açık/koyu tema seçeneği, SEO uyumluluğu ve yüksek performans gibi özellikler sunar.Açık kaynak kodlu olarak MIT lisansı ile GitHub’da yayımladığım bu projeye katkıda bulunabilir ya da kaynak kodlarını kendi projelerinizde özgürce kullanabilirsiniz."
+      },
+      "en": {
+        "description": "Whoami is a modern web application built with React, Next.js, and Material UI for showcasing personal CVs and portfolios.It offers features such as multi-language support, light/dark theme toggle, SEO friendliness, and high performance.The project is open source and released under the MIT license on GitHub. You are welcome to contribute or freely use the source code in your own projects."
+      },
+      "skillTags": ["Next JS", "React JS", "Meterial UI", "Typescript", "Javascript"]
+    }
+  ],
   "education": [
     {
       "startDate": "2014-06-01",

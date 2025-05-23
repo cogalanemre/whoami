@@ -64,6 +64,15 @@ const DynamicBlogSection = dynamic(() => import('@/components/sections/BlogSecti
 });
 
 /**
+ * Proje bölümü
+ * Projeleri grid yapısında gösterir
+ * SSR aktif: SEO için önemli içerik
+ */
+const DynamicProjectSection = dynamic(() => import('@/components/sections/ProjectSection'), {
+  ssr: true, // SEO için kritik içerik
+});
+
+/**
  * İletişim bölümü
  * İletişim formu ve bilgilerini içerir
  * SSR devre dışı çünkü:
@@ -121,6 +130,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       skills: getTranslation('sections.skills', lang),
       education: getTranslation('sections.education', lang),
       blog: getTranslation('sections.blog', lang),
+      projects: getTranslation('sections.projects', lang),
     },
     blog: {
       noPosts: getTranslation('blog.noPosts', lang),
@@ -187,6 +197,14 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
               experiences={resumeData.experiences}
               totalExperience={totalExperience}
               sectionTitle={t.sections.experience}
+            />
+          </SectionGrid>
+
+          {/* Project Section */}
+          <SectionGrid condition={config.features.sections.projects}>
+            <DynamicProjectSection
+              projects={resumeData.projects}
+              sectionTitle={t.sections.projects}
             />
           </SectionGrid>
 

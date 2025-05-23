@@ -8,6 +8,7 @@ const en: TranslationType = {
     contact: 'Contact',
     skills: 'Skills',
     social: 'Social Media',
+    projects: 'Projects',
   },
   hero: {
     downloadCV: 'Download CV',
