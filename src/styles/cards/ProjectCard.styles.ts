@@ -25,11 +25,6 @@ export const projectCardStyles = {
   },
   DESCRIPTION: {
     ...THEME_STYLE.TYPOGRAPHY.BODY,
-    display: '-webkit-box',
-    WebkitLineClamp: 5,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-    textAlign: 'justify',
     mb: 2,
     flex: 1,
   },

@@ -22,10 +22,10 @@
 
 import { Card, CardContent, Typography, Chip, Stack, CardMedia, CardHeader, Box, CardActions } from '@mui/material';
 import { Project } from '@/types';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate, calculateDuration } from '@/utils/dateUtils';
 import { projectCardStyles as STYLES } from '@/styles/cards/ProjectCard.styles';
 import { useAppContext } from '@/context/AppContext';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
 
 /**
@@ -68,7 +68,8 @@ function ProjectCard({ project }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             variant="h3"
-            sx={STYLES.TITLE}
+            sx={{ ...STYLES.TITLE, color: 'inherit' }}
+            style={{ color: 'inherit', textDecoration: 'none' }}
           >
             {project.name}
           </Typography>
@@ -78,6 +79,11 @@ function ProjectCard({ project }: ProjectCardProps) {
             <InfoWithIcon 
               icon={FaCalendarAlt} 
               text={`${formatDate(project.startDate, lang)} - ${project.endDate ? formatDate(project.endDate, lang) : 'Present'}`} 
+              fontSize="0.875rem" 
+            />
+            <InfoWithIcon 
+              icon={FaClock} 
+              text={calculateDuration(project.startDate, project.endDate || new Date().toISOString(), lang)} 
               fontSize="0.875rem" 
             />
           </Box>
