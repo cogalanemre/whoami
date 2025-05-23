@@ -47,6 +47,12 @@ interface ProjectCardProps {
 function ProjectCard({ project }: ProjectCardProps) {
   const { lang } = useAppContext();
 
+  const handleCardSectionClick = (e: React.MouseEvent) => {
+    // CardActions içindeki tıklamaları engelle
+    if ((e.target as HTMLElement).closest('.no-link')) return;
+    window.open(project.link, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <Card component="article" role="article" aria-label={project.name} sx={{ ...STYLES.CARD, display: 'flex', flexDirection: 'column' }}>
       {/* Proje Görseli */}
@@ -56,6 +62,8 @@ function ProjectCard({ project }: ProjectCardProps) {
           image={project.thumbnail}
           alt={`${project.name} proje görseli`}
           loading="lazy"
+          onClick={handleCardSectionClick}
+          style={{ cursor: 'pointer' }}
         />
       )}
 
@@ -69,7 +77,8 @@ function ProjectCard({ project }: ProjectCardProps) {
             rel="noopener noreferrer"
             variant="h3"
             sx={{ ...STYLES.TITLE, color: 'inherit' }}
-            style={{ color: 'inherit', textDecoration: 'none' }}
+            style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}
+            onClick={e => { e.preventDefault(); handleCardSectionClick(e); }}
           >
             {project.name}
           </Typography>
@@ -88,16 +97,18 @@ function ProjectCard({ project }: ProjectCardProps) {
             />
           </Box>
         }
+        onClick={handleCardSectionClick}
+        style={{ cursor: 'pointer' }}
       />
 
-      <CardContent sx={STYLES.CARD_CONTENT}>
+      <CardContent sx={STYLES.CARD_CONTENT} onClick={handleCardSectionClick} style={{ cursor: 'pointer' }}>
         {/* Proje Açıklaması */}
         <Typography variant="body2" sx={STYLES.DESCRIPTION}>
           {project[lang].description}
         </Typography>
       </CardContent>
 
-      <CardActions sx={STYLES.CARDACTIONS}>
+      <CardActions sx={STYLES.CARDACTIONS} className="no-link">
         <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {project.skillTags.map(tag => (
             <Chip
