@@ -155,6 +155,7 @@
     {
       "name": "Whoami",
       "link": "https://github.com/cogalanemre/whoami",
+      "thumbnail": "/images/whoami.png",
       "startDate": "2014-06-01",
       "endDate": "2025-06-01",
       "tr": {

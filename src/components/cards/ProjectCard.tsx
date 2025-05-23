@@ -20,11 +20,13 @@
  * ```
  */
 
-import { Card, CardContent, Typography, Chip, Stack } from '@mui/material';
+import { Card, CardContent, Typography, Chip, Stack, CardMedia, CardHeader, Box } from '@mui/material';
 import { Project } from '@/types';
 import { formatDate } from '@/utils/dateUtils';
 import { projectCardStyles as STYLES } from '@/styles/cards/ProjectCard.styles';
 import { useAppContext } from '@/context/AppContext';
+import { FaCalendarAlt } from 'react-icons/fa';
+import InfoWithIcon from '@/components/common/InfoWithIcon';
 
 /**
  * Proje Kartı Props Interface
@@ -46,32 +48,50 @@ function ProjectCard({ project }: ProjectCardProps) {
   const { lang } = useAppContext();
 
   return (
-    <Card sx={STYLES.CARD}>
-      <CardContent>
-        {/* Proje Adı ve Link */}
-        <Typography
-          component="a"
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="h6"
-          sx={STYLES.TITLE}
-        >
-          {project.name}
-        </Typography>
+    <Card component="article" role="article" aria-label={project.name} sx={{ ...STYLES.CARD, display: 'flex', flexDirection: 'column' }}>
+      {/* Proje Görseli */}
+      {project.thumbnail && (
+        <CardMedia
+          component="img"
+          image={project.thumbnail}
+          alt={`${project.name} proje görseli`}
+          loading="lazy"
+        />
+      )}
 
-        {/* Tarih Aralığı */}
-        <Typography variant="body2" color="text.secondary" sx={STYLES.DATE}>
-          {formatDate(project.startDate, lang)} - {project.endDate ? formatDate(project.endDate, lang) : 'Present'}
-        </Typography>
+      <CardHeader
+        sx={STYLES.CARD_HEADER}
+        title={
+          <Typography
+            component="a"
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="h3"
+            sx={STYLES.TITLE}
+          >
+            {project.name}
+          </Typography>
+        }
+        subheader={
+          <Box sx={STYLES.META}>
+            <InfoWithIcon 
+              icon={FaCalendarAlt} 
+              text={`${formatDate(project.startDate, lang)} - ${project.endDate ? formatDate(project.endDate, lang) : 'Present'}`} 
+              fontSize="0.875rem" 
+            />
+          </Box>
+        }
+      />
 
+      <CardContent sx={STYLES.CARD_CONTENT}>
         {/* Proje Açıklaması */}
-        <Typography variant="body1" sx={STYLES.DESCRIPTION}>
+        <Typography variant="body2" sx={STYLES.DESCRIPTION}>
           {project[lang].description}
         </Typography>
 
         {/* Teknoloji Etiketleri */}
-        <Stack direction="row" spacing={1} sx={STYLES.TAGS}>
+        <Box sx={STYLES.TAGS}>
           {project.skillTags.map(tag => (
             <Chip
               key={tag}
@@ -80,7 +100,7 @@ function ProjectCard({ project }: ProjectCardProps) {
               sx={STYLES.CHIP}
             />
           ))}
-        </Stack>
+        </Box>
       </CardContent>
     </Card>
   );

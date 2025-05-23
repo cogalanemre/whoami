@@ -1,13 +1,25 @@
-import { SxProps, Theme } from '@mui/material';
+import { THEME_STYLE } from '@/theme/theme';
 
 export const projectSectionStyles = {
   SECTION: {
-    mb: 4,
-  } as SxProps<Theme>,
-  STACK: {
-    gap: 2,
-  } as SxProps<Theme>,
-  BOX: {
+    ...THEME_STYLE.SECTION,
+  },
+  CONTAINER: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: 'calc(100% + 32px)',
+  },
+  ITEM: {
+    width: {
+      xs: '100%',
+      sm: '50%',
+      md: '33.333%',
+    },
+    mr: 4,
+    mb: 3,
+  },
+  MESSAGE: {
     width: '100%',
-  } as SxProps<Theme>,
+    textAlign: 'center',
+  },
 } as const; 

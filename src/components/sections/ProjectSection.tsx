@@ -1,13 +1,13 @@
 /**
  * Proje Bölümü Bileşeni
  *
- * Kullanıcının projelerini kronolojik sırayla gösteren bölüm.
+ * Kullanıcının projelerini grid yapısında gösteren bölüm.
  * Her proje için ayrı bir kart oluşturur.
  *
  * Özellikler:
- * - Responsive tasarım (xs, sm, md, lg breakpoint'leri için özel spacing)
- * - Kronolojik sıralama
+ * - Responsive grid yapısı (xs, sm, md breakpoint'leri için özel genişlikler)
  * - Material-UI tema entegrasyonu
+ * - Memo optimizasyonu
  *
  * @component
  * @example
@@ -26,7 +26,7 @@
  * ```
  */
 
-import { Box, Stack } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { FaCodeBranch } from 'react-icons/fa';
 import { Project } from '@/types';
 import ProjectCard from '@/components/cards/ProjectCard';
@@ -58,16 +58,21 @@ function ProjectSection({ projects, sectionTitle }: ProjectSectionProps) {
       {/* Bölüm Başlığı */}
       <SectionTitle icon={FaCodeBranch} title={sectionTitle} />
 
-      {/* Proje Kartları Konteyneri */}
-      <Box>
-        <Stack sx={STYLES.STACK}>
-          {/* Proje Kartları */}
-          {projects.map(project => (
-            <Box key={`${project.name}-${project.startDate}`} sx={STYLES.BOX}>
+      {/* Proje Kartları Container */}
+      <Box sx={STYLES.CONTAINER}>
+        {/* Proje Kartları */}
+        {projects.length > 0 ? (
+          projects.map(project => (
+            <Box sx={STYLES.ITEM} key={`${project.name}-${project.startDate}`}>
               <ProjectCard project={project} />
             </Box>
-          ))}
-        </Stack>
+          ))
+        ) : (
+          // Boş Durum
+          <Box sx={STYLES.MESSAGE}>
+            <Typography>Henüz proje bulunmuyor.</Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   );

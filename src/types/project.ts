@@ -3,6 +3,7 @@ export interface Project {
   link: string;
   startDate: string;
   endDate: string | null;
+  thumbnail?: string;
   tr: {
     description: string;
   };
