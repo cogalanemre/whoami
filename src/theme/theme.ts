@@ -2,6 +2,7 @@
 
 import { ThemeOptions } from '@mui/material/styles';
 import config from '@/config/config.json';
+import { height } from '@mui/system';
 
 // Tema sabitleri
 export const THEME_CONSTANTS = {
@@ -158,6 +159,7 @@ export const THEME_STYLE = {
     },
   },
   CHIP: {
+    height: 32,
     border: '0.5px solid',
     borderColor: 'divider',
     fontSize: '0.875rem',
@@ -176,6 +178,10 @@ export const THEME_STYLE = {
       bgcolor: 'primary.main',
       color: 'white',
       borderColor: 'primary.main',
+    },
+    '& .MuiChip-label': {
+      paddingLeft: '12px',
+      paddingRight: '12px',
     },
   },
   BORDER: {

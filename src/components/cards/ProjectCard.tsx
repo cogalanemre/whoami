@@ -20,7 +20,7 @@
  * ```
  */
 
-import { Card, CardContent, Typography, Chip, Stack, CardMedia, CardHeader, Box } from '@mui/material';
+import { Card, CardContent, Typography, Chip, Stack, CardMedia, CardHeader, Box, CardActions } from '@mui/material';
 import { Project } from '@/types';
 import { formatDate } from '@/utils/dateUtils';
 import { projectCardStyles as STYLES } from '@/styles/cards/ProjectCard.styles';
@@ -89,9 +89,10 @@ function ProjectCard({ project }: ProjectCardProps) {
         <Typography variant="body2" sx={STYLES.DESCRIPTION}>
           {project[lang].description}
         </Typography>
+      </CardContent>
 
-        {/* Teknoloji Etiketleri */}
-        <Box sx={STYLES.TAGS}>
+      <CardActions sx={STYLES.CARDACTIONS}>
+        <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {project.skillTags.map(tag => (
             <Chip
               key={tag}
@@ -100,8 +101,8 @@ function ProjectCard({ project }: ProjectCardProps) {
               sx={STYLES.CHIP}
             />
           ))}
-        </Box>
-      </CardContent>
+        </Stack>
+      </CardActions>
     </Card>
   );
 }

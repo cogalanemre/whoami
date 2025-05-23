@@ -33,22 +33,14 @@ export const projectCardStyles = {
     mb: 2,
     flex: 1,
   },
-  TAGS: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 1,
-    justifyContent: 'flex-start',
-    mt: 'auto',
-    width: '100%',
-    boxSizing: 'border-box',
-  },
   CHIP: {
     ...THEME_STYLE.CHIP,
-    height: 24,
     '& .MuiChip-label': {
-      px: 1,
-      fontSize: '0.75rem',
+      paddingLeft: '12px',
+      paddingRight: '12px',
     },
-    m: 0,
+  },
+  CARDACTIONS: {
+    ...THEME_STYLE.CARD_ACTIONS,
   },
 } as const; 
