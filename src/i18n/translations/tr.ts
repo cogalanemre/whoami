@@ -9,6 +9,7 @@ const tr: TranslationType = {
     skills: 'Yetenekler',
     social: 'Sosyal Medya',
     projects: 'Projeler',
+    recommendations: 'Tavsiyeler',
   },
   hero: {
     downloadCV: 'CV İndir',
