@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.18",
     "@mui/system": "^5.14.18",
+    "@mui/x-charts": "^8.5.0",
     "@types/dompurify": "^3.0.5",
     "@types/xml2js": "^0.4.14",
     "@vercel/speed-insights": "^1.2.0",

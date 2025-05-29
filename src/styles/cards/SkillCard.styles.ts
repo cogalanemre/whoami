@@ -6,11 +6,7 @@ export const skillCardStyles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    transition: 'transform 0.2s ease-in-out',
-    '&:hover': {
-      transform: 'translateY(-4px)',
-      boxShadow: THEME_STYLE.CARD.boxShadow,
-    },
+    transition: 'none',
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
@@ -19,15 +15,15 @@ export const skillCardStyles = {
     ...THEME_STYLE.TITLE,
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
   },
   CARD_CONTENT: {
     ...THEME_STYLE.CARD_CONTENT,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
+    alignItems: 'flex-start',
+    textAlign: 'left',
     gap: 2,
   },
   CHIP_CONTAINER: {
