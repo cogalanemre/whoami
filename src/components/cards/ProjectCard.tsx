@@ -27,6 +27,7 @@ import { projectCardStyles as STYLES } from '@/styles/cards/ProjectCard.styles';
 import { useAppContext } from '@/context/AppContext';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
+import { useEffect, useState } from 'react';
 
 /**
  * Proje Kartı Props Interface
@@ -47,6 +48,21 @@ interface ProjectCardProps {
 function ProjectCard({ project }: ProjectCardProps) {
   const { lang } = useAppContext();
 
+  // Seçili kartı belirle
+  const [isSelected, setIsSelected] = useState(false);
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === `#project-${project.name.replace(/\s+/g, '')}`) {
+        setIsSelected(true);
+      } else {
+        setIsSelected(false);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, [project.name]);
+
   const handleCardSectionClick = (e: React.MouseEvent) => {
     // CardActions içindeki tıklamaları engelle
     if ((e.target as HTMLElement).closest('.no-link')) return;
@@ -58,6 +74,10 @@ function ProjectCard({ project }: ProjectCardProps) {
       ...STYLES.CARD,
       display: 'flex',
       flexDirection: 'column',
+      borderColor: isSelected ? (theme => theme.palette.primary.main) : STYLES.CARD.borderColor,
+      boxShadow: isSelected ? 4 : STYLES.CARD.boxShadow,
+      transform: isSelected ? 'translateY(-4px)' : 'none',
+      transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
     }}>
       {/* Proje Görseli */}
       {project.thumbnail && (

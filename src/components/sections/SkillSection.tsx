@@ -71,7 +71,7 @@ interface SkillSectionProps {
  * @returns {JSX.Element} Yetenekler bölümü
  */
 function SkillSection({ experiences, projects, sectionTitle }: SkillSectionProps) {
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
 
   // Her yetenek için kullanıldığı yerleri ve süreleri hesapla
   const skillUsage = useMemo(() => {

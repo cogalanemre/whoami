@@ -44,7 +44,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useEffect, useState } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Experience } from '@/types/experience';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
@@ -128,10 +128,31 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
     [experience.startDate, experience.endDate]
   );
 
+  // Seçili kartı belirle
+  const [isSelected, setIsSelected] = useState(false);
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`) {
+        setIsSelected(true);
+      } else {
+        setIsSelected(false);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, [experience.company]);
+
   return (
     <Card
       ref={ref}
-      sx={EXPERIENCE_CARD_STYLES.CARD}
+      sx={{
+        ...EXPERIENCE_CARD_STYLES.CARD,
+        borderColor: isSelected ? (theme => theme.palette.primary.main) : EXPERIENCE_CARD_STYLES.CARD.borderColor,
+        boxShadow: isSelected ? 4 : EXPERIENCE_CARD_STYLES.CARD.boxShadow,
+        transform: isSelected ? 'translateY(-4px)' : 'none',
+        transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
+      }}
     >
       <CardHeader
         sx={EXPERIENCE_CARD_STYLES.CARD_HEADER}
