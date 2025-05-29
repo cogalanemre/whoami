@@ -11,6 +11,7 @@
       "education": true,
       "blog": true,
       "projects": true,
+      "skills": true,
       "recommendations": true,
       "contact": {
         "contactInfo": true,
