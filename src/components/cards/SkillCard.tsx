@@ -253,4 +253,4 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
   );
 }
 
-export default memo(SkillCard); 
+export default memo(SkillCard);   
