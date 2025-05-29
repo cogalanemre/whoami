@@ -73,6 +73,15 @@ const DynamicProjectSection = dynamic(() => import('@/components/sections/Projec
 });
 
 /**
+ * Tavsiye bölümü
+ * Kullanıcının aldığı tavsiyeleri gösterir
+ * SSR aktif: SEO için önemli içerik
+ */
+const DynamicRecommendationSection = dynamic(() => import('@/components/sections/RecommendationSection'), {
+  ssr: true, // SEO için kritik içerik
+});
+
+/**
  * İletişim bölümü
  * İletişim formu ve bilgilerini içerir
  * SSR devre dışı çünkü:
@@ -131,6 +140,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       education: getTranslation('sections.education', lang),
       blog: getTranslation('sections.blog', lang),
       projects: getTranslation('sections.projects', lang),
+      recommendations: getTranslation('sections.recommendations', lang),
     },
     blog: {
       noPosts: getTranslation('blog.noPosts', lang),
@@ -222,6 +232,14 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
               blogPosts={blogPosts}
               sectionTitle={t.sections.blog}
               noPostsText={t.blog.noPosts}
+            />
+          </SectionGrid>
+
+          {/* Recommendation Section */}
+          <SectionGrid condition={config.features.sections.recommendations}>
+            <DynamicRecommendationSection
+              recommendations={resumeData.recommendations}
+              sectionTitle={t.sections.recommendations}
             />
           </SectionGrid>
 

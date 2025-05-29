@@ -159,7 +159,7 @@
       "startDate": "2025-04-01",
       "endDate": null,
       "tr": {
-        "description": "Whoami, React, Next.js ve Material UI kullanılarak geliştirilen, kişisel CV ve portfolyo sunumuna yönelik modern bir web uygulamasıdır.Çoklu dil desteği, açık/koyu tema seçeneği, SEO uyumluluğu ve yüksek performans gibi özellikler sunar.Açık kaynak kodlu olarak MIT lisansı ile GitHub’da yayımladığım bu projeye katkıda bulunabilir ya da kaynak kodlarını kendi projelerinizde özgürce kullanabilirsiniz."
+        "description": "Whoami, React, Next.js ve Material UI kullanılarak geliştirilen, kişisel CV ve portfolyo sunumuna yönelik modern bir web uygulamasıdır.Çoklu dil desteği, açık/koyu tema seçeneği, SEO uyumluluğu ve yüksek performans gibi özellikler sunar.Açık kaynak kodlu olarak MIT lisansı ile GitHub'da yayımladığım bu projeye katkıda bulunabilir ya da kaynak kodlarını kendi projelerinizde özgürce kullanabilirsiniz."
       },
       "en": {
         "description": "Whoami is a modern web application built with React, Next.js, and Material UI for showcasing personal CVs and portfolios.It offers features such as multi-language support, light/dark theme toggle, SEO friendliness, and high performance.The project is open source and released under the MIT license on GitHub. You are welcome to contribute or freely use the source code in your own projects."
@@ -210,6 +210,20 @@
         "school": "Gazi Anatolian High School",
         "department": "High School",
         "location": "Cankiri, Turkey"
+      }
+    }
+  ],
+  "recommendations": [
+    {
+      "recommender": "Yakup Emre KUCUR",
+      "position": "Software Development Manager",
+      "company": "Dgpays",
+      "avatar": "/images/emre-kucur.jpg",
+      "tr": {
+        "content": "Emre, bana bağlı kampanya ekibinin en önemli üyelerindendi. Problemleri hızlı tespit edip, insiyatif alarak çözmesi en çok sevdiğim özelliğidir. Kendisini güncel tutması, araştırmacı olması, bilmediği konuları bile araştırıp öğrenmesi ve sorumlu olduğu modüle her zaman tam destek vermesi, onu her zaman aranan bir developer olmasını sağlayacaktır. Ben kendisi ile çalışmaktan hep memnun kaldım. Umarım ileride tekrar birlikte çalışma şansımız olur."
+      },
+      "en": {
+        "content": "Emre was one of the most important members of the campaign team reporting to me. His ability to identify problems quickly and solve them by taking initiative is what I like the most. Keeping himself up to date, being a researcher, researching and learning even the subjects he does not know, and always providing full support to the module he is responsible for will make him a sought-after developer. I have always been pleased to work with him. I hope we will have the chance to work together again in the future."
       }
     }
   ],
