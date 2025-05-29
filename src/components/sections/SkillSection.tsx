@@ -175,7 +175,7 @@ function SkillSection({ experiences, projects, sectionTitle }: SkillSectionProps
       {/* Yetenekler Grid */}
       <Grid container spacing={2} sx={STYLES.GRID}>
         {uniqueSkills.map(skill => (
-          <Grid item xs={12} sm={6} md={3} key={skill}>
+          <Grid item xs={12} sm={6} md={3} key={skill} id={`skill-${skill.replace(/\s+/g, '')}`}>
             <SkillCard 
               skill={skill} 
               usedIn={skillUsage[skill]}

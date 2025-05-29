@@ -37,7 +37,7 @@ import {
   Box,
   Stack,
 } from '@mui/material';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { skillCardStyles as STYLES } from '@/styles/cards/SkillCard.styles';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
@@ -68,6 +68,21 @@ interface SkillCardProps {
  */
 function SkillCard({ skill, usedIn }: SkillCardProps) {
   const { t } = useTranslation();
+
+  // Seçili kartı belirle
+  const [isSelected, setIsSelected] = useState(false);
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === `#skill-${skill.replace(/\s+/g, '')}`) {
+        setIsSelected(true);
+      } else {
+        setIsSelected(false);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, [skill]);
 
   // Yetenek seviyesini hesapla (deneyim ve proje sürelerine göre)
   const calculateSkillLevel = () => {
@@ -215,7 +230,9 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
               </Typography>
               {usedIn.experiences.map((exp, index) => (
                 <Typography key={exp.name} variant="body2" sx={{ mb: 0.5 }}>
-                  {exp.name} ({exp.duration})
+                  <a href={`#experience-${exp.name.replace(/\s+/g, '')}`} style={{ color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}>
+                    {exp.name}
+                  </a> ({exp.duration})
                 </Typography>
               ))}
             </Box>
@@ -238,7 +255,9 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
               </Typography>
               {usedIn.projects.map((proj, index) => (
                 <Typography key={proj.name} variant="body2" sx={{ mb: 0.5 }}>
-                  {proj.name} ({proj.duration})
+                  <a href={`#project-${proj.name.replace(/\s+/g, '')}`} style={{ color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}>
+                    {proj.name}
+                  </a> ({proj.duration})
                 </Typography>
               ))}
             </Box>

@@ -131,9 +131,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
   return (
     <Card
       ref={ref}
-      sx={{
-        ...EXPERIENCE_CARD_STYLES.CARD,
-      }}
+      sx={EXPERIENCE_CARD_STYLES.CARD}
     >
       <CardHeader
         sx={EXPERIENCE_CARD_STYLES.CARD_HEADER}
@@ -192,12 +190,17 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       <CardActions sx={{ ...EXPERIENCE_CARD_STYLES.CARDACTIONS }}>
         <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {experience.skillTags.map(skill => (
-            <Chip
+            <a
               key={skill}
-              label={skill}
-              data-skill={skill}
-              sx={{ ...EXPERIENCE_CARD_STYLES.CHIP }}
-            />
+              href={`#skill-${skill.replace(/\s+/g, '')}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Chip
+                label={skill}
+                data-skill={skill}
+                sx={{ ...EXPERIENCE_CARD_STYLES.CHIP }}
+              />
+            </a>
           ))}
         </Stack>
       </CardActions>

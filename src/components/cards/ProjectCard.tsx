@@ -54,7 +54,11 @@ function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <Card component="article" role="article" aria-label={project.name} sx={{ ...STYLES.CARD, display: 'flex', flexDirection: 'column' }}>
+    <Card component="article" role="article" aria-label={project.name} sx={{
+      ...STYLES.CARD,
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
       {/* Proje Görseli */}
       {project.thumbnail && (
         <CardMedia
@@ -111,12 +115,17 @@ function ProjectCard({ project }: ProjectCardProps) {
       <CardActions sx={STYLES.CARDACTIONS} className="no-link">
         <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {project.skillTags.map(tag => (
-            <Chip
+            <a
               key={tag}
-              label={tag}
-              size="small"
-              sx={STYLES.CHIP}
-            />
+              href={`#skill-${tag.replace(/\s+/g, '')}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Chip
+                label={tag}
+                size="small"
+                sx={STYLES.CHIP}
+              />
+            </a>
           ))}
         </Stack>
       </CardActions>

@@ -6,7 +6,11 @@ export const skillCardStyles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    transition: 'none',
+    transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
+    borderColor: THEME_STYLE.CARD.borderColor,
+    borderWidth: 1.5,
+    borderStyle: 'solid',
+    boxShadow: 'none',
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,

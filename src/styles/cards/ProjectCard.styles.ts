@@ -3,6 +3,11 @@ import { THEME_STYLE } from '@/theme/theme';
 export const projectCardStyles = {
   CARD: {
     ...THEME_STYLE.CARD,
+    transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
+    borderColor: THEME_STYLE.CARD.borderColor,
+    borderWidth: 1.5,
+    borderStyle: 'solid',
+    boxShadow: 'none',
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
