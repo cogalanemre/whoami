@@ -73,6 +73,15 @@ const DynamicProjectSection = dynamic(() => import('@/components/sections/Projec
 });
 
 /**
+ * Yetenekler bölümü
+ * Kullanıcının yeteneklerini kategorilere göre gösterir
+ * SSR aktif: SEO için önemli içerik
+ */
+const DynamicSkillSection = dynamic(() => import('@/components/sections/SkillSection'), {
+  ssr: true, // SEO için kritik içerik
+});
+
+/**
  * Tavsiye bölümü
  * Kullanıcının aldığı tavsiyeleri gösterir
  * SSR aktif: SEO için önemli içerik
@@ -215,6 +224,15 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
             <DynamicProjectSection
               projects={resumeData.projects}
               sectionTitle={t.sections.projects}
+            />
+          </SectionGrid>
+
+          {/* Skills Section */}
+          <SectionGrid condition={config.features.sections.skills}>
+            <DynamicSkillSection
+              experiences={resumeData.experiences}
+              projects={resumeData.projects}
+              sectionTitle={t.sections.skills}
             />
           </SectionGrid>
 

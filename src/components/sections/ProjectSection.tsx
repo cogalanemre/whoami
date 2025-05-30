@@ -63,7 +63,7 @@ function ProjectSection({ projects, sectionTitle }: ProjectSectionProps) {
         {/* Proje Kartları */}
         {projects.length > 0 ? (
           projects.map(project => (
-            <Box sx={STYLES.ITEM} key={`${project.name}-${project.startDate}`}>
+            <Box sx={STYLES.ITEM} key={`${project.name}-${project.startDate}`} id={`project-${project.name.replace(/\s+/g, '')}`}>
               <ProjectCard project={project} />
             </Box>
           ))

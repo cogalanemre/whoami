@@ -65,7 +65,7 @@ const RecommendationCard = forwardRef<HTMLDivElement, RecommendationCardProps>(f
   { recommendation, locale },
   ref
 ) {
-  const { t, locale: defaultLocale } = useTranslation();
+  const { locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
   const theme = useTheme();
 

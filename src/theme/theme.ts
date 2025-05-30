@@ -2,7 +2,6 @@
 
 import { ThemeOptions } from '@mui/material/styles';
 import config from '@/config/config.json';
-import { height } from '@mui/system';
 
 // Tema sabitleri
 export const THEME_CONSTANTS = {
