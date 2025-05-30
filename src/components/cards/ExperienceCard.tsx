@@ -70,13 +70,9 @@ interface ExperienceCardProps {
  * Deneyim Kartı Bileşeni
  *
  * @param {ExperienceCardProps} props - Bileşen props'ları
- * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref
  * @returns {JSX.Element} Deneyim kartı
  */
-const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function ExperienceCard(
-  { experience, locale },
-  ref
-) {
+const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, locale }) => {
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
 
@@ -165,7 +161,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       sx={{
         ...EXPERIENCE_CARD_STYLES.CARD,
         borderColor: isSelected ? (theme => theme.palette.primary.main) : EXPERIENCE_CARD_STYLES.CARD.borderColor,
-        borderWidth: isSelected ? 1 : 1.5,
+        borderWidth: isSelected ? 1 : 0.5,
         transform: isSelected ? 'translateY(-4px)' : 'none',
         transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
       }}
@@ -244,6 +240,8 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
     </Card>
   );
 });
+
+ExperienceCard.displayName = 'ExperienceCard';
 
 // Gereksiz render'ları önlemek için memo kullan
 export default memo(ExperienceCard);

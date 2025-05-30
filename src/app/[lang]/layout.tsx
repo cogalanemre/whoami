@@ -10,6 +10,7 @@
 import { Nunito } from 'next/font/google';
 import ClientLayout from '../client-layout';
 import type { Viewport, Metadata } from 'next';
+import { Suspense } from 'react';
 
 type SupportedLanguages = 'tr' | 'en';
 type LayoutParams = {
@@ -101,7 +102,9 @@ export default async function RootLayout({
         className={`${nunito.className} h-full`}
         suppressHydrationWarning
       >
-        <ClientLayout>{children}</ClientLayout>
+        <Suspense>
+          <ClientLayout>{children}</ClientLayout>
+        </Suspense>
       </body>
     </html>
   );

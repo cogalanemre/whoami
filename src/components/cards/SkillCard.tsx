@@ -250,7 +250,7 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
               >
                 {t('sections.experience')}
               </Typography>
-              {usedIn.experiences.map((exp, index) => (
+              {usedIn.experiences.map((exp) => (
                 <Typography key={exp.name} variant="body2" sx={{ mb: 0.5 }}>
                   <a href={`#experience-${exp.name.replace(/\s+/g, '')}`} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>
                     {exp.name}
@@ -275,7 +275,7 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
               >
                 {t('sections.projects')}
               </Typography>
-              {usedIn.projects.map((proj, index) => (
+              {usedIn.projects.map((proj) => (
                 <Typography key={proj.name} variant="body2" sx={{ mb: 0.5 }}>
                   <a href={`#project-${proj.name.replace(/\s+/g, '')}`} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>
                     {proj.name}

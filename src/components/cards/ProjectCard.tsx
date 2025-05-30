@@ -91,7 +91,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       display: 'flex',
       flexDirection: 'column',
       borderColor: isSelected ? (theme => theme.palette.primary.main) : STYLES.CARD.borderColor,
-      borderWidth: isSelected ? 1 : 1.5,
+      borderWidth: isSelected ? 1 : 0.5,
       transform: isSelected ? 'translateY(-4px)' : 'none',
       transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
     }}>
