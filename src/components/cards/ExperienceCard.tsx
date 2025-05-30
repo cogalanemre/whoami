@@ -72,7 +72,7 @@ interface ExperienceCardProps {
  * @param {ExperienceCardProps} props - Bileşen props'ları
  * @returns {JSX.Element} Deneyim kartı
  */
-const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, locale }) => {
+const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, locale, sx }, ref) => {
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
 
@@ -157,9 +157,10 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
 
   return (
     <Card
-      ref={cardRef}
+      ref={ref}
       sx={{
         ...EXPERIENCE_CARD_STYLES.CARD,
+        ...sx,
         borderColor: isSelected ? (theme => theme.palette.primary.main) : EXPERIENCE_CARD_STYLES.CARD.borderColor,
         borderWidth: isSelected ? 1 : 0.5,
         transform: isSelected ? 'translateY(-4px)' : 'none',
