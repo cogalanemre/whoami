@@ -74,10 +74,10 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
   const [isSelected, setIsSelected] = useState(false);
   useEffect(() => {
     const checkHash = () => {
-      if (window.location.hash === `#skill-${skill.replace(/\s+/g, '')}`) {
-        setIsSelected(true);
-      } else {
-        setIsSelected(false);
+      const isThisSelected = window.location.hash === `#skill-${skill.replace(/\s+/g, '')}`;
+      setIsSelected(isThisSelected);
+      if (isThisSelected && cardRef.current) {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
     checkHash();

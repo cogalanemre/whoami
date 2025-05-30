@@ -27,7 +27,7 @@ import { projectCardStyles as STYLES } from '@/styles/cards/ProjectCard.styles';
 import { useAppContext } from '@/context/AppContext';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 /**
  * Proje Kartı Props Interface
@@ -50,17 +50,33 @@ function ProjectCard({ project }: ProjectCardProps) {
 
   // Seçili kartı belirle
   const [isSelected, setIsSelected] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const checkHash = () => {
-      if (window.location.hash === `#project-${project.name.replace(/\s+/g, '')}`) {
-        setIsSelected(true);
-      } else {
-        setIsSelected(false);
+      const isThisSelected = window.location.hash === `#project-${project.name.replace(/\s+/g, '')}`;
+      setIsSelected(isThisSelected);
+      if (isThisSelected && cardRef.current) {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
     checkHash();
     window.addEventListener('hashchange', checkHash);
-    return () => window.removeEventListener('hashchange', checkHash);
+
+    // Dışarı tıklanınca seçimi kaldır
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        if (window.location.hash === `#project-${project.name.replace(/\s+/g, '')}`) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+          setIsSelected(false);
+        }
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('hashchange', checkHash);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [project.name]);
 
   const handleCardSectionClick = (e: React.MouseEvent) => {
@@ -70,12 +86,12 @@ function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <Card component="article" role="article" aria-label={project.name} sx={{
+    <Card component="article" role="article" aria-label={project.name} ref={cardRef} sx={{
       ...STYLES.CARD,
       display: 'flex',
       flexDirection: 'column',
       borderColor: isSelected ? (theme => theme.palette.primary.main) : STYLES.CARD.borderColor,
-      borderWidth: isSelected ? 1 : STYLES.CARD.borderWidth,
+      borderWidth: isSelected ? 1 : 1.5,
       transform: isSelected ? 'translateY(-4px)' : 'none',
       transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
     }}>

@@ -44,7 +44,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { memo, useMemo, useEffect, useState } from 'react';
+import { memo, useMemo, useEffect, useState, useRef } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Experience } from '@/types/experience';
 import InfoWithIcon from '@/components/common/InfoWithIcon';
@@ -130,26 +130,42 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
 
   // Seçili kartı belirle
   const [isSelected, setIsSelected] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const checkHash = () => {
-      if (window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`) {
-        setIsSelected(true);
-      } else {
-        setIsSelected(false);
+      const isThisSelected = window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`;
+      setIsSelected(isThisSelected);
+      if (isThisSelected && cardRef.current) {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
     checkHash();
     window.addEventListener('hashchange', checkHash);
-    return () => window.removeEventListener('hashchange', checkHash);
+
+    // Dışarı tıklanınca seçimi kaldır
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        if (window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+          setIsSelected(false);
+        }
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('hashchange', checkHash);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [experience.company]);
 
   return (
     <Card
-      ref={ref}
+      ref={cardRef}
       sx={{
         ...EXPERIENCE_CARD_STYLES.CARD,
         borderColor: isSelected ? (theme => theme.palette.primary.main) : EXPERIENCE_CARD_STYLES.CARD.borderColor,
-        borderWidth: isSelected ? 1 : EXPERIENCE_CARD_STYLES.CARD.borderWidth,
+        borderWidth: isSelected ? 1 : 1.5,
         transform: isSelected ? 'translateY(-4px)' : 'none',
         transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
       }}
