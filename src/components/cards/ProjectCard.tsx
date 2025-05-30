@@ -75,9 +75,9 @@ function ProjectCard({ project }: ProjectCardProps) {
       display: 'flex',
       flexDirection: 'column',
       borderColor: isSelected ? (theme => theme.palette.primary.main) : STYLES.CARD.borderColor,
-      boxShadow: isSelected ? 4 : STYLES.CARD.boxShadow,
+      borderWidth: isSelected ? 1 : STYLES.CARD.borderWidth,
       transform: isSelected ? 'translateY(-4px)' : 'none',
-      transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
+      transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
     }}>
       {/* Proje Görseli */}
       {project.thumbnail && (

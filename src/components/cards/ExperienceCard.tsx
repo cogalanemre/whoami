@@ -149,9 +149,9 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(function 
       sx={{
         ...EXPERIENCE_CARD_STYLES.CARD,
         borderColor: isSelected ? (theme => theme.palette.primary.main) : EXPERIENCE_CARD_STYLES.CARD.borderColor,
-        boxShadow: isSelected ? 4 : EXPERIENCE_CARD_STYLES.CARD.boxShadow,
+        borderWidth: isSelected ? 1 : EXPERIENCE_CARD_STYLES.CARD.borderWidth,
         transform: isSelected ? 'translateY(-4px)' : 'none',
-        transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
+        transition: 'border-color 0.2s, border-width 0.2s, box-shadow 0.2s, transform 0.2s',
       }}
     >
       <CardHeader
