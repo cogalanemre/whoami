@@ -59,11 +59,13 @@ import { EXPERIENCE_CARD_STYLES } from '@/styles/cards/ExperienceCard.styles';
  *
  * @interface ExperienceCardProps
  * @property {Experience} experience - Deneyim bilgileri
+ * @property {string} id - Deneyim kartının benzersiz kimliği
  */
 interface ExperienceCardProps {
   experience: Experience;
   sx?: SxProps<Theme>;
   locale?: 'tr' | 'en';
+  id?: string;
 }
 
 /**
@@ -72,7 +74,7 @@ interface ExperienceCardProps {
  * @param {ExperienceCardProps} props - Bileşen props'ları
  * @returns {JSX.Element} Deneyim kartı
  */
-const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, locale, sx }, ref) => {
+const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, locale, sx, id }, ref) => {
   const { t, locale: defaultLocale } = useTranslation();
   const actualLocale = locale || defaultLocale;
 
@@ -127,9 +129,20 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
   // Seçili kartı belirle
   const [isSelected, setIsSelected] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const combinedRef = (node: HTMLDivElement) => {
+    if (ref) {
+      if (typeof ref === 'function') {
+        ref(node);
+      } else {
+        ref.current = node;
+      }
+    }
+    cardRef.current = node;
+  };
+
   useEffect(() => {
     const checkHash = () => {
-      const isThisSelected = window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`;
+      const isThisSelected = window.location.hash === `#${id}`;
       setIsSelected(isThisSelected);
       if (isThisSelected && cardRef.current) {
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -141,7 +154,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
     // Dışarı tıklanınca seçimi kaldır
     const handleClickOutside = (event: MouseEvent) => {
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-        if (window.location.hash === `#experience-${experience.company.replace(/\s+/g, '')}`) {
+        if (window.location.hash === `#${id}`) {
           history.replaceState(null, '', window.location.pathname + window.location.search);
           setIsSelected(false);
         }
@@ -153,11 +166,12 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
       window.removeEventListener('hashchange', checkHash);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [experience.company]);
+  }, [id]);
 
   return (
     <Card
-      ref={ref}
+      ref={combinedRef}
+      id={id}
       sx={{
         ...EXPERIENCE_CARD_STYLES.CARD,
         ...sx,
