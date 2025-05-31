@@ -67,8 +67,11 @@ function ExperienceSection({ experiences, totalExperience, sectionTitle }: Exper
         <Stack sx={STYLES.STACK}>
           {/* Deneyim Kartları */}
           {experiences.map(experience => (
-            <Box key={`${experience.company}-${experience.startDate}`} sx={STYLES.BOX} id={`experience-${experience.company.replace(/\s+/g, '')}`}>
-              <ExperienceCard experience={experience} />
+            <Box key={`${experience.company}-${experience.startDate}`} sx={STYLES.BOX}>
+              <ExperienceCard 
+                experience={experience} 
+                id={`experience-${experience.company.replace(/\s+/g, '')}`}
+              />
             </Box>
           ))}
         </Stack>

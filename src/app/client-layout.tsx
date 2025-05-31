@@ -17,6 +17,7 @@ import ThemeSwitcher from '@/components/common/ThemeSwitcher';
 import LanguageSwitcher from '@/components/common/LanguageSwitcher';
 import config from '@/config/config.json';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 /**
  * Client Layout Props
@@ -45,19 +46,21 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const themeParam = searchParams.get('theme');
 
   return (
-    <ThemeProvider initialTheme={themeParam as 'dark' | 'light'}>
-      <AppThemeProvider>
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Box
-            sx={{ position: 'fixed', top: 16, right: 16, zIndex: 1000, display: 'flex', gap: 1 }}
-          >
-            {config.features.themeSwitcher && <ThemeSwitcher />}
-            {config.features.languageSwitcher && <LanguageSwitcher />}
+    <Suspense>
+      <ThemeProvider initialTheme={themeParam as 'dark' | 'light'}>
+        <AppThemeProvider>
+          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Box
+              sx={{ position: 'fixed', top: 16, right: 16, zIndex: 1000, display: 'flex', gap: 1 }}
+            >
+              {config.features.themeSwitcher && <ThemeSwitcher />}
+              {config.features.languageSwitcher && <LanguageSwitcher />}
+            </Box>
+            {children}
+            <SpeedInsights />
           </Box>
-          {children}
-          <SpeedInsights />
-        </Box>
-      </AppThemeProvider>
-    </ThemeProvider>
+        </AppThemeProvider>
+      </ThemeProvider>
+    </Suspense>
   );
 }
