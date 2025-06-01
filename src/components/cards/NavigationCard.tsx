@@ -6,7 +6,8 @@ import {
   ListItemButton,
   ListItemIcon,
 } from '@mui/material';
-import { memo } from 'react';
+import { memo, cloneElement, isValidElement } from 'react';
+import { useTheme } from '@mui/material';
 import { skillCardStyles as STYLES } from '@/styles/cards/SkillCard.styles';
 
 interface NavigationCardProps {
@@ -19,6 +20,7 @@ interface NavigationCardProps {
 }
 
 function NavigationCard({ sections, activeSection }: NavigationCardProps) {
+  const theme = useTheme();
   return (
     <Card
       sx={{
@@ -56,16 +58,17 @@ function NavigationCard({ sections, activeSection }: NavigationCardProps) {
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: 0 }}>
-                    {section.icon && typeof section.icon === 'object'
-                      ? (
-                          // react-icons ikonları React element olduğu için style ile geçiyoruz
-                          // @ts-ignore
-                          section.icon.type
-                            ? (
-                                <section.icon.type {...section.icon.props} style={{ color: isActive ? '#1976d2' : undefined, fontSize: isActive ? 28 : 22, fontWeight: 400, transition: 'color 0.2s, font-size 0.2s' }} />
-                              )
-                            : section.icon
-                        )
+                    {isValidElement(section.icon)
+                      ? cloneElement(section.icon, {
+                          style: {
+                            color: isActive ? theme.palette.primary.main : theme.palette.divider,
+                            fontSize: isActive ? 28 : 18,
+                            fontWeight: 400,
+                            filter: 'none',
+                            boxShadow: 'none',
+                            transition: 'color 0.2s, font-size 0.2s',
+                          },
+                        })
                       : section.icon}
                   </ListItemIcon>
                 </ListItemButton>
