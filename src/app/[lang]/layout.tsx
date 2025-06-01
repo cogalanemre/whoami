@@ -8,6 +8,7 @@
  */
 
 import { Nunito } from 'next/font/google';
+import '../globals.css';
 import ClientLayout from '../client-layout';
 import type { Viewport, Metadata } from 'next';
 import { Suspense } from 'react';

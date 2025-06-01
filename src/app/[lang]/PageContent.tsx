@@ -5,11 +5,14 @@ import { Grid, Container, useTheme, useMediaQuery } from '@mui/material';
 import type { BlogPost, Hero } from '@/types';
 import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useEffect, useRef, useState } from 'react';
 import { THEME_CONSTANTS } from '@/theme/theme';
 import { getTranslation } from '@/i18n/utils';
 import type { CvFile } from '@/utils/getCvFiles';
 import { AppProvider } from '@/context/AppContext';
+import NavigationCard from '@/components/cards/NavigationCard';
+import { FaHome, FaBriefcase, FaCodeBranch, FaCode, FaGraduationCap, FaNewspaper, FaAddressCard, FaQuoteLeft } from 'react-icons/fa';
+import { Box } from '@mui/material';
 
 /**
  * Bölüm Grid bileşeni
@@ -150,6 +153,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       blog: getTranslation('sections.blog', lang),
       projects: getTranslation('sections.projects', lang),
       recommendations: getTranslation('sections.recommendations', lang),
+      contact: getTranslation('sections.contact', lang),
     },
     blog: {
       noPosts: getTranslation('blog.noPosts', lang),
@@ -174,99 +178,175 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
 
   const STYLE = {
     CONTAINER: {
+      position: 'relative',
       minHeight: '100vh',
-      maxWidth: containerMaxWidth,
-      py: {
-        xs: THEME_CONSTANTS.layout.container.padding.xs,
-        md: THEME_CONSTANTS.layout.container.padding.sm,
-      },
-      px: {
-        xs: THEME_CONSTANTS.layout.container.padding.xs,
-        sm: THEME_CONSTANTS.layout.container.padding.sm,
-      },
-      mt: {
-        xs: THEME_CONSTANTS.layout.container.spacing.xs,
-        md: THEME_CONSTANTS.layout.container.spacing.md,
-      },
+      py: 4,
+      px: { xs: 2, sm: 3, md: 4 },
+      pl: { xs: 2, sm: 3, md: 4, lg: 12 }, // Reduced left padding for smaller navigation card
     },
-    SPACING: {
-      xs: THEME_CONSTANTS.layout.container.spacing.xs,
-      md: THEME_CONSTANTS.layout.container.spacing.md,
-    }
+    SPACING: { xs: 2, sm: 3, md: 4 },
   } as const;
+
+  const navigationSections = [
+    {
+      id: 'hero',
+      title: t.sections.hero,
+      icon: <FaHome />,
+    },
+    {
+      id: 'experience',
+      title: t.sections.experience,
+      icon: <FaBriefcase />,
+    },
+    {
+      id: 'projects',
+      title: t.sections.projects,
+      icon: <FaCodeBranch />,
+    },
+    {
+      id: 'skills',
+      title: t.sections.skills,
+      icon: <FaCode />,
+    },
+    {
+      id: 'education',
+      title: t.sections.education,
+      icon: <FaGraduationCap />,
+    },
+    {
+      id: 'blog',
+      title: t.sections.blog,
+      icon: <FaNewspaper />,
+    },
+    {
+      id: 'recommendations',
+      title: t.sections.recommendations,
+      icon: <FaQuoteLeft />,
+    },
+    {
+      id: 'contact',
+      title: t.sections.contact,
+      icon: <FaAddressCard />,
+    },
+  ];
+
+  const [activeSection, setActiveSection] = useState('hero');
+  const sectionIds = [
+    'hero',
+    'experience',
+    'projects',
+    'skills',
+    'education',
+    'blog',
+    'recommendations',
+    'contact',
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = 'hero';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 80) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <AppProvider lang={lang} cvFiles={cvFiles}>
-      <Container
-        component="main"
-        sx={STYLE.CONTAINER}
-      >
+      <Box sx={STYLE.CONTAINER}>
+        <NavigationCard sections={navigationSections} activeSection={activeSection} />
         <Grid
           container
           spacing={STYLE.SPACING}
         >
           {/* Hero Section */}
           <SectionGrid>
-            <DynamicHeroSection hero={hero} />
+            <div id="hero">
+              <DynamicHeroSection hero={hero} />
+            </div>
           </SectionGrid>
 
           {/* Experience Section */}
           <SectionGrid condition={config.features.sections.experience}>
-            <DynamicExperienceSection
-              experiences={resumeData.experiences}
-              totalExperience={totalExperience}
-              sectionTitle={t.sections.experience}
-            />
+            <div id="experience">
+              <DynamicExperienceSection
+                experiences={resumeData.experiences}
+                totalExperience={totalExperience}
+                sectionTitle={t.sections.experience}
+              />
+            </div>
           </SectionGrid>
 
           {/* Project Section */}
           <SectionGrid condition={config.features.sections.projects}>
-            <DynamicProjectSection
-              projects={resumeData.projects}
-              sectionTitle={t.sections.projects}
-            />
+            <div id="projects">
+              <DynamicProjectSection
+                projects={resumeData.projects}
+                sectionTitle={t.sections.projects}
+              />
+            </div>
           </SectionGrid>
 
           {/* Skills Section */}
           <SectionGrid condition={config.features.sections.skills}>
-            <DynamicSkillSection
-              experiences={resumeData.experiences}
-              projects={resumeData.projects}
-              sectionTitle={t.sections.skills}
-            />
+            <div id="skills">
+              <DynamicSkillSection
+                experiences={resumeData.experiences}
+                projects={resumeData.projects}
+                sectionTitle={t.sections.skills}
+              />
+            </div>
           </SectionGrid>
 
           {/* Education Section */}
           <SectionGrid condition={config.features.sections.education}>
-            <DynamicEducationSection
-              education={resumeData.education}
-              sectionTitle={t.sections.education}
-            />
+            <div id="education">
+              <DynamicEducationSection
+                education={resumeData.education}
+                sectionTitle={t.sections.education}
+              />
+            </div>
           </SectionGrid>
 
           {/* Blog Section */}
           <SectionGrid condition={config.features.sections.blog}>
-            <DynamicBlogSection
-              blogPosts={blogPosts}
-              sectionTitle={t.sections.blog}
-              noPostsText={t.blog.noPosts}
-            />
+            <div id="blog">
+              <DynamicBlogSection
+                blogPosts={blogPosts}
+                sectionTitle={t.sections.blog}
+                noPostsText={t.blog.noPosts}
+              />
+            </div>
           </SectionGrid>
 
           {/* Recommendation Section */}
           <SectionGrid condition={config.features.sections.recommendations}>
-            <DynamicRecommendationSection
-              recommendations={resumeData.recommendations}
-              sectionTitle={t.sections.recommendations}
-            />
+            <div id="recommendations">
+              <DynamicRecommendationSection
+                recommendations={resumeData.recommendations}
+                sectionTitle={t.sections.recommendations}
+              />
+            </div>
           </SectionGrid>
 
           {/* Contact Section */}
           <SectionGrid condition={shouldShowContactSection()}>
-            <DynamicContactSection />
+            <div id="contact">
+              <DynamicContactSection />
+            </div>
           </SectionGrid>
         </Grid>
-      </Container>
+      </Box>
     </AppProvider>
   );
 }

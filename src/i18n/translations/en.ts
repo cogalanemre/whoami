@@ -9,6 +9,10 @@ const en: TranslationType = {
     skills: 'Skills',
     social: 'Social Media',
     projects: 'Projects',
+    hero: 'Home',
+  },
+  navigation: {
+    title: 'Navigation',
   },
   hero: {
     downloadCV: 'Download CV',
