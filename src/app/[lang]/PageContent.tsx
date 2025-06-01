@@ -5,7 +5,7 @@ import { Grid, Container, useTheme, useMediaQuery } from '@mui/material';
 import type { BlogPost, Hero } from '@/types';
 import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
-import { memo, useMemo, useEffect, useRef, useState } from 'react';
+import { memo, useMemo, useEffect, useState } from 'react';
 import { THEME_CONSTANTS } from '@/theme/theme';
 import { getTranslation } from '@/i18n/utils';
 import type { CvFile } from '@/utils/getCvFiles';
@@ -147,6 +147,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
    */
   const t = useMemo(() => ({
     sections: {
+      hero: getTranslation('sections.hero', lang),
       experience: getTranslation('sections.experience', lang),
       skills: getTranslation('sections.skills', lang),
       education: getTranslation('sections.education', lang),
@@ -159,15 +160,6 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
       noPosts: getTranslation('blog.noPosts', lang),
     },
   }), [lang]);
-
-  /**
-   * Ekran boyutuna göre container genişliğini belirle
-   */
-  const containerMaxWidth = isMobile
-    ? THEME_CONSTANTS.layout.container.maxWidth.mobile
-    : isTablet
-    ? THEME_CONSTANTS.layout.container.maxWidth.tablet
-    : THEME_CONSTANTS.layout.container.maxWidth.desktop;
 
   /**
    * İletişim bölümünün gösterilip gösterilmeyeceğini belirler
@@ -230,8 +222,7 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
     },
   ];
 
-  const [activeSection, setActiveSection] = useState('hero');
-  const sectionIds = [
+  const sectionIds = useMemo(() => [
     'hero',
     'experience',
     'projects',
@@ -240,7 +231,9 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
     'blog',
     'recommendations',
     'contact',
-  ];
+  ], []);
+
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -249,17 +242,17 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 80) {
+          if (rect.top <= 100) {
             current = id;
           }
         }
       }
       setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sectionIds]);
 
   return (
     <AppProvider lang={lang} cvFiles={cvFiles}>
@@ -333,7 +326,10 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
           <SectionGrid condition={config.features.sections.recommendations}>
             <div id="recommendations">
               <DynamicRecommendationSection
-                recommendations={resumeData.recommendations}
+                recommendations={resumeData.recommendations.map(r => ({
+                  date: (r as any).date || '',
+                  ...r
+                }) as any)}
                 sectionTitle={t.sections.recommendations}
               />
             </div>
