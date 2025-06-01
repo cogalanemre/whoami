@@ -16,7 +16,7 @@
   "experiences": [
     {
       "company": "Dgpays",
-      "companyLink": "https://dgpays.com",
+      "companyLink": "https://www.dgpays.com/en/about",
       "logo": "/images/dgpays.png",
       "startDate": "2023-01-01",
       "endDate": null,
@@ -48,8 +48,10 @@
     },
     {
       "company": "OBSS",
-      "companyLink": "https://obss.com.tr",
+      "companyLink": "https://obss.tech/en/about-us/",
       "logo": "/images/obss.webp",
+      "subLogo": "/images/aselsan.jpg",
+      "subLogoLink": "https://www.aselsan.com/en/about-us",
       "startDate": "2022-01-01",
       "endDate": "2023-01-01",
       "workingModel": 1,
@@ -84,8 +86,10 @@
     },
     {
       "company": "StreamDelta",
-      "companyLink": "https://streamdelta.com",
+      "companyLink": "https://streamdelta.com/about.html",
       "logo": "/images/streamDelta.jpeg",
+      "subLogo": "/images/vodafone.png",
+      "subLogoLink": "https://www.vodafone.com.tr/hakkimizda/tarihce",
       "startDate": "2021-07-01",
       "endDate": "2021-12-31",
       "workingModel": 2,
@@ -120,7 +124,7 @@
     },
     {
       "company": "Sikayetvar.com",
-      "companyLink": "https://sikayetvar.com",
+      "companyLink": "https://www.sikayetvar.com/en/",
       "logo": "/images/sikayetvar_logo.jpeg",
       "startDate": "2018-09-01",
       "endDate": "2020-12-31",

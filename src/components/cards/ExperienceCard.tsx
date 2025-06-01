@@ -192,25 +192,115 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
                 rel="noopener noreferrer"
                 style={{ textDecoration: 'none' }}
               >
+                <Box sx={{ position: 'relative' }}>
+                  <Avatar
+                    src={experience.logo}
+                    alt={`${experience.company} logo`}
+                    sx={{ 
+                      ...EXPERIENCE_CARD_STYLES.AVATAR,
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s',
+                      '&:hover': {
+                        transform: 'scale(1.05)'
+                      }
+                    }}
+                  />
+                  {experience.subLogo && (
+                    experience.subLogoLink ? (
+                      <a
+                        href={experience.subLogoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Avatar
+                          src={experience.subLogo}
+                          alt={`${experience.company} sub logo`}
+                          sx={{
+                            ...EXPERIENCE_CARD_STYLES.AVATAR,
+                            position: 'absolute',
+                            bottom: -8,
+                            right: -8,
+                            width: 48,
+                            height: 48,
+                            zIndex: 1,
+                            cursor: 'pointer',
+                            transition: 'transform 0.2s',
+                            '&:hover': {
+                              transform: 'scale(1.05)'
+                            }
+                          }}
+                        />
+                      </a>
+                    ) : (
+                      <Avatar
+                        src={experience.subLogo}
+                        alt={`${experience.company} sub logo`}
+                        sx={{
+                          ...EXPERIENCE_CARD_STYLES.AVATAR,
+                          position: 'absolute',
+                          bottom: -8,
+                          right: -8,
+                          width: 48,
+                          height: 48,
+                          zIndex: 1
+                        }}
+                      />
+                    )
+                  )}
+                </Box>
+              </a>
+            ) : (
+              <Box sx={{ position: 'relative' }}>
                 <Avatar
                   src={experience.logo}
                   alt={`${experience.company} logo`}
-                  sx={{ 
-                    ...EXPERIENCE_CARD_STYLES.AVATAR,
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'scale(1.05)'
-                    }
-                  }}
+                  sx={{ ...EXPERIENCE_CARD_STYLES.AVATAR }}
                 />
-              </a>
-            ) : (
-              <Avatar
-                src={experience.logo}
-                alt={`${experience.company} logo`}
-                sx={{ ...EXPERIENCE_CARD_STYLES.AVATAR }}
-              />
+                {experience.subLogo && (
+                  experience.subLogoLink ? (
+                    <a
+                      href={experience.subLogoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Avatar
+                        src={experience.subLogo}
+                        alt={`${experience.company} sub logo`}
+                        sx={{
+                          ...EXPERIENCE_CARD_STYLES.AVATAR,
+                          position: 'absolute',
+                          bottom: -8,
+                          right: -8,
+                          width: 48,
+                          height: 48,
+                          zIndex: 1,
+                          cursor: 'pointer',
+                          transition: 'transform 0.2s',
+                          '&:hover': {
+                            transform: 'scale(1.05)'
+                          }
+                        }}
+                      />
+                    </a>
+                  ) : (
+                    <Avatar
+                      src={experience.subLogo}
+                      alt={`${experience.company} sub logo`}
+                      sx={{
+                        ...EXPERIENCE_CARD_STYLES.AVATAR,
+                        position: 'absolute',
+                        bottom: -8,
+                        right: -8,
+                        width: 48,
+                        height: 48,
+                        zIndex: 1
+                      }}
+                    />
+                  )
+                )}
+              </Box>
             )
           )
         }

@@ -24,6 +24,8 @@ export interface Experience {
   company: string;
   companyLink?: string;
   logo?: string;
+  subLogo?: string;
+  subLogoLink?: string;
   workingModel: number;
   employmentType: number;
   skillTags: string[];
