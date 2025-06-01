@@ -185,11 +185,33 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
         sx={EXPERIENCE_CARD_STYLES.CARD_HEADER}
         avatar={
           experience.logo && (
-            <Avatar
-              src={experience.logo}
-              alt={`${experience.company} logo`}
-              sx={{ ...EXPERIENCE_CARD_STYLES.AVATAR }}
-            />
+            experience.companyLink ? (
+              <a
+                href={experience.companyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <Avatar
+                  src={experience.logo}
+                  alt={`${experience.company} logo`}
+                  sx={{ 
+                    ...EXPERIENCE_CARD_STYLES.AVATAR,
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'scale(1.05)'
+                    }
+                  }}
+                />
+              </a>
+            ) : (
+              <Avatar
+                src={experience.logo}
+                alt={`${experience.company} logo`}
+                sx={{ ...EXPERIENCE_CARD_STYLES.AVATAR }}
+              />
+            )
           )
         }
         title={
@@ -200,7 +222,18 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
         subheader={
           <Box sx={{ ...EXPERIENCE_CARD_STYLES.META }}>
             <Typography variant="h4" sx={{ ...EXPERIENCE_CARD_STYLES.SUBTITLE }}>
-              {experience.company}
+              {experience.companyLink ? (
+                <a
+                  href={experience.companyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  {experience.company}
+                </a>
+              ) : (
+                experience.company
+              )}
             </Typography>
             <InfoWithIcon
               icon={FaMapMarkerAlt}

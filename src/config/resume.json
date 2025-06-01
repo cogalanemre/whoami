@@ -16,6 +16,7 @@
   "experiences": [
     {
       "company": "Dgpays",
+      "companyLink": "https://dgpays.com",
       "logo": "/images/dgpays.png",
       "startDate": "2023-01-01",
       "endDate": null,
@@ -47,6 +48,7 @@
     },
     {
       "company": "OBSS",
+      "companyLink": "https://obss.com.tr",
       "logo": "/images/obss.webp",
       "startDate": "2022-01-01",
       "endDate": "2023-01-01",
@@ -82,6 +84,7 @@
     },
     {
       "company": "StreamDelta",
+      "companyLink": "https://streamdelta.com",
       "logo": "/images/streamDelta.jpeg",
       "startDate": "2021-07-01",
       "endDate": "2021-12-31",
@@ -117,6 +120,7 @@
     },
     {
       "company": "Sikayetvar.com",
+      "companyLink": "https://sikayetvar.com",
       "logo": "/images/sikayetvar_logo.jpeg",
       "startDate": "2018-09-01",
       "endDate": "2020-12-31",
