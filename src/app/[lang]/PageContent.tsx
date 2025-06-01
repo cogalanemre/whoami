@@ -252,6 +252,12 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
         <Grid
           container
           spacing={STYLE.SPACING}
+          sx={{
+            '& > .MuiGrid-item': {
+              paddingLeft: '0 !important',
+              paddingRight: '0 !important'
+            }
+          }}
         >
           {/* Hero Section */}
           <SectionGrid>
