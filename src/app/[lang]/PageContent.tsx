@@ -1,12 +1,11 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { Grid, Container, useTheme, useMediaQuery } from '@mui/material';
+import { Grid } from '@mui/material';
 import type { BlogPost, Hero } from '@/types';
 import config from '@/config/config.json';
 import resumeData from '@/config/resume.json';
 import { memo, useMemo, useEffect, useState } from 'react';
-import { THEME_CONSTANTS } from '@/theme/theme';
 import { getTranslation } from '@/i18n/utils';
 import type { CvFile } from '@/utils/getCvFiles';
 import { AppProvider } from '@/context/AppContext';
@@ -133,14 +132,6 @@ interface PageContentProps {
  * @returns {JSX.Element} Render edilecek sayfa içeriği
  */
 function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageContentProps) {
-  /**
-   * Material-UI tema ve medya query hook'ları
-   * Responsive tasarım için kullanılır
-   */
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
-
   /**
    * i18n çevirilerini al ve önbelleğe al
    * Sadece lang değiştiğinde yeniden hesaplanır
@@ -328,8 +319,13 @@ function PageContent({ lang, blogPosts, totalExperience, hero, cvFiles }: PageCo
               <DynamicRecommendationSection
                 recommendations={resumeData.recommendations.map(r => ({
                   date: (r as any).date || '',
-                  ...r
-                }) as any)}
+                  recommender: r.recommender,
+                  position: r.position,
+                  company: r.company,
+                  avatar: r.avatar,
+                  tr: r.tr,
+                  en: r.en
+                }))}
                 sectionTitle={t.sections.recommendations}
               />
             </div>
