@@ -10,6 +10,10 @@ const tr: TranslationType = {
     social: 'Sosyal Medya',
     projects: 'Projeler',
     recommendations: 'Tavsiyeler',
+    hero: 'Ana Sayfa',
+  },
+  navigation: {
+    title: 'Navigasyon',
   },
   hero: {
     downloadCV: 'CV İndir',
