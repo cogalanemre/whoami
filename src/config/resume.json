@@ -156,7 +156,7 @@
           "Used GitLab for task management and version control."
         ]
       },
-      "skillTags": ["Java", "Spring Boot", "Hibernate", "Elasticsearch","Microservices", "MySQL", "Google Cloud", "JIRA", "Agile Kanban", "Jenkins"]
+      "skillTags": ["Java", "Spring Boot", "Hibernate", "Elasticsearch","Microservices", "MySQL", "Google Cloud", "GitLab", "Agile Kanban", "Jenkins"]
     }
   ],
   "projects": [
