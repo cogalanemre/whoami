@@ -7,51 +7,53 @@
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-Modern, performans odaklı ve SEO dostu bir kişisel portfolyo uygulaması. Next.js 15, React 19, TypeScript ve Material-UI kullanılarak geliştirilmiştir.
+A modern, performance-focused, and SEO-friendly personal portfolio application. Built with Next.js 15, React 19, TypeScript, and Material-UI.
 
-## 🚀 Özellikler
+## 🚀 Demo
 
-- ⚡️ Next.js 15 ile yüksek performans
-- 🎨 Material-UI ve Tailwind CSS ile modern tasarım
-- 🌍 Çoklu dil desteği (i18n)
-- 📱 Tam responsive tasarım
-- 🔍 SEO optimizasyonu
-- 📊 Vercel Speed Insights entegrasyonu
-- 🎯 TypeScript ile tip güvenliği
-- 📦 RSS feed desteği
-- 🎭 Framer Motion ile animasyonlar
+🌐 [https://www.emrecogalan.com/en](https://www.emrecogalan.com/en)
 
-## 🛠️ Teknolojiler
+## 🚀 Features
+
+- ⚡️ High performance with Next.js 15
+- 🎨 Modern design with Material-UI
+- 🌍 Multi-language support (i18n)
+- 🔍 SEO optimization
+- 📊 Vercel Speed Insights integration
+- 🎯 Type safety with TypeScript
+- ⚙️ Easy customization with `config.json` and `resume.json`
+
+## 🛠️ Technologies
 
 - **Framework:** Next.js 15.1.6
-- **UI Kütüphanesi:** React 19.0.0
-- **Stil:** Material-UI 5.14.18, Tailwind CSS
-- **Dil:** TypeScript 5
-- **Form Yönetimi:** React Hook Form
-- **Validasyon:** Zod
-- **Animasyon:** Framer Motion
-- **Analitik:** Vercel Speed Insights
-- **RSS:** RSS Parser
+- **UI Library:** React 19.0.0
+- **Styling:** Material-UI 5.14.18
+- **Language:** TypeScript 5
+- **Analytics:** Vercel Speed Insights
 
-## 📦 Kurulum
+## 📦 Installation
 
-1. Projeyi klonlayın:
+1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/whoami.git
+git clone https://github.com/cogalanemre/whoami.git
 cd whoami
 ```
 
-2. Bağımlılıkları yükleyin:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Geliştirme sunucusunu başlatın:
+3. Customization:
+   - Configure site settings by editing `src/config/config.json`
+   - Update your resume information by editing `src/config/resume.json`
+
+4. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🏗️ Build
 
@@ -61,27 +63,27 @@ npm run build
 
 ## 🚀 Deployment
 
-Bu proje Vercel'de deploy edilmek üzere hazırlanmıştır. Vercel CLI ile deploy etmek için:
+This project is ready to be deployed on Vercel. To deploy using Vercel CLI:
 
 ```bash
 npm i -g vercel
 vercel
 ```
 
-## 📝 Lisans
+## 📝 License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-1. Bu repository'yi fork edin
-2. Feature branch'i oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'feat: Add some amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📧 İletişim
+## 📧 Contact
 
-Proje Sahibi - [@yourusername](https://github.com/yourusername)
+Project Owner - [@cogalanemre](https://github.com/cogalanemre)
 
-Proje Linki: [https://github.com/yourusername/whoami](https://github.com/yourusername/whoami)
+Project Link: [https://github.com/cogalanemre/whoami](https://github.com/cogalanemre/whoami)
