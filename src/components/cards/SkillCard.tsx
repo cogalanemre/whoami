@@ -105,24 +105,12 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
     // Süreleri aylara çevir
     const convertDurationToMonths = (duration: string): number => {
       if (!duration) return 0;
-      
-      // "2 yıl" veya "6 ay" veya "2 year" veya "6 month" formatındaki string'i parse et
-      const match = duration.match(/(\d+)\s*(yıl|ay|year|month)/i);
-      if (!match) return 0;
-
-      const value = parseInt(match[1]);
-      const unit = match[2].toLowerCase();
-
-      switch (unit) {
-        case 'yıl':
-        case 'year':
-          return value * 12;
-        case 'ay':
-        case 'month':
-          return value;
-        default:
-          return 0;
-      }
+      let total = 0;
+      const yearMatch = duration.match(/(\d+)\s*(yıl|year)/i);
+      const monthMatch = duration.match(/(\d+)\s*(ay|month)/i);
+      if (yearMatch) total += parseInt(yearMatch[1]) * 12;
+      if (monthMatch) total += parseInt(monthMatch[1]);
+      return total;
     };
 
     // Bu yeteneğin kullanıldığı toplam süre
@@ -131,34 +119,12 @@ function SkillCard({ skill, usedIn }: SkillCardProps) {
       ...usedIn.projects.map(proj => convertDurationToMonths(proj.duration))
     ].reduce((sum, months) => sum + months, 0);
 
-    // Tüm deneyimlerin toplam süresi (tüm deneyimler)
-    const totalExperienceDuration = 60; // Örnek: 5 yıl toplam deneyim
-
-    // Projelerin toplam süresi
-    const totalProjectDuration = usedIn.projects
-      .map(proj => convertDurationToMonths(proj.duration))
-      .reduce((sum, months) => sum + months, 0);
-
-    // Toplam süre (deneyim + proje)
-    const totalDuration = totalExperienceDuration + totalProjectDuration;
-
     // Yüzde hesapla
     // Eğer toplam süre 0 ise 0 döndür
-    if (totalDuration === 0) return 0;
+    if (totalSkillDuration === 0) return 0;
 
     // Yetenek süresini toplam süreye böl
-    const percentage = Math.min(Math.round((totalSkillDuration / totalDuration) * 100), 100);
-    
-    console.log('Skill:', skill);
-    console.log('Durations:', {
-      experiences: usedIn.experiences.map(e => ({ name: e.name, duration: e.duration, months: convertDurationToMonths(e.duration) })),
-      projects: usedIn.projects.map(p => ({ name: p.name, duration: p.duration, months: convertDurationToMonths(p.duration) }))
-    });
-    console.log('Total Skill Duration:', totalSkillDuration);
-    console.log('Total Experience Duration:', totalExperienceDuration);
-    console.log('Total Project Duration:', totalProjectDuration);
-    console.log('Total Duration:', totalDuration);
-    console.log('Percentage:', percentage);
+    const percentage = Math.min(Math.round((totalSkillDuration / 60) * 100), 100);
     
     return {
       percentage,
