@@ -44,7 +44,7 @@
           "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
-      "skillTags": ["Jenkins", "CI/CD", "PL/SQL", "JavaScript", "GitLab"]
+      "skillTags": ["C#", "ASP.NET CORE", "MSSQL", "JavaScript", "JIRA", "Agile Scrum", "Jenkins", "PL/SQL", "GitLab"]
     },
     {
       "company": "OBSS",
@@ -82,7 +82,7 @@
           "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
-      "skillTags": ["Java", "Spring", "React JS", "Kubernetes", "Kafka"]
+      "skillTags": ["Java", "Spring Boot", "Hibernate", "React JS", "JavaScript", "Microservices", "Kubernetes", "Kafka", "JIRA", "Agile Scrum", "Jenkins", "PostgreSQL", "TFS"]
     },
     {
       "company": "StreamDelta",
@@ -120,7 +120,7 @@
           "Followed the Agile Scrum methodology, using JIRA for task and project management."
         ]
       },
-      "skillTags": ["Java", "Spring Boot", "Camunda", "MongoDB", "Redis"]
+      "skillTags": ["Java", "Spring Boot", "Hibernate", "Camunda", "MongoDB", "Redis", "Jenkins", "JIRA", "Agile Scrum", "Oracle DB", "Microservices", "OpenShift"]
     },
     {
       "company": "Sikayetvar.com",
@@ -156,7 +156,7 @@
           "Used GitLab for task management and version control."
         ]
       },
-      "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
+      "skillTags": ["Java", "Spring Boot", "Hibernate", "Elasticsearch","Microservices", "MySQL", "Google Cloud", "GitLab", "Agile Kanban", "Jenkins"]
     }
   ],
   "projects": [
@@ -172,7 +172,7 @@
       "en": {
         "description": "Whoami is a modern web application built with React, Next.js, and Material UI for showcasing personal CVs and portfolios.It offers features such as multi-language support, light/dark theme toggle, SEO friendliness, and high performance.The project is open source and released under the MIT license on GitHub. You are welcome to contribute or freely use the source code in your own projects."
       },
-      "skillTags": ["Next JS", "React JS", "Meterial UI", "Typescript", "Javascript"]
+      "skillTags": ["Next JS", "React JS", "Meterial UI", "Typescript", "JavaScript"]
     }
   ],
   "education": [

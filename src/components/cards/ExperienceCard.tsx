@@ -359,7 +359,7 @@ const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experi
       </CardContent>
 
       <CardActions sx={{ ...EXPERIENCE_CARD_STYLES.CARDACTIONS }}>
-        <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
+        <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="flex-start" width="100%">
           {experience.skillTags.map(skill => (
             <a
               key={skill}
